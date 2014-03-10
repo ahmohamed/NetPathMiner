@@ -1,0 +1,21 @@
+\docType{package}
+\name{NetPathMiner-package}
+\alias{NPM}
+\alias{NetPathMiner}
+\alias{NetPathMiner-package}
+\title{General framework for network extraction, path mining.}
+\description{
+NetPathMiner implements a flexible module-based process
+flow for network path mining and visualization, which can
+be fully inte-grated with user-customized functions.
+NetPathMiner supports construction of various types of
+genome scale networks from KGML, SBML and BioPAX formats,
+enabling its utility to most common pathway databases.
+NetPathMiner also provides different visualization
+techniques to facilitate the analysis of even thousands of
+output paths.
+}
+\author{
+Ahmed Mohamed \email{mohamed@kuicr.kyoto-u.ac.jp}
+}
+

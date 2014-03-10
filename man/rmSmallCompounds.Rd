@@ -1,0 +1,50 @@
+\name{rmSmallCompounds}
+\alias{rmSmallCompounds}
+\title{Remove uniquitous compounds from a metabolic network}
+\usage{
+rmSmallCompounds(graph, method = c("remove", "duplicate"),
+  small.comp.ls = NPMdefaults("small.comp.ls"))
+}
+\arguments{
+  \item{graph}{A metabolic network.}
+
+  \item{method}{How to handle small compounds. Either
+  simply delete these vertices \code{"remove"} (default),
+  or make a separate vertex for each reaction they
+  participate in \code{"duplicate"}.}
+
+  \item{small.comp.ls}{A list of small compounds to be
+  used.}
+}
+\value{
+A modified graph, with the small compounds removed or
+duplicated.
+}
+\description{
+This function removes uniquitous compounds (metabolites
+connected to numerous reactions) from a metabolic
+network.These compounds are reaction cofactors and currency
+compounds, such as ATP, CO2, etc. A path through these
+metabolites may not be bioloigcally meaningful. The defualt
+small compound list is derived from Reactome, containing
+keeg.compound, pubchem.compound, ChEBI and CAS identifiers.
+}
+\examples{
+data(ex_sbml)
+    \dontshow{ex_sbml}
+
+    sbml.removed <- rmSmallCompounds(ex_sbml, method="remove")
+    \dontshow{sbml.removed}
+}
+\author{
+Ahmed Mohamed
+}
+\seealso{
+Other Network processing methods:
+\code{\link{expandComplexes}},
+\code{\link{makeGeneNetwork}};
+\code{\link{makeReactionNetwork}};
+\code{\link{simplifyReactionNetwork}};
+\code{\link{vertexDeleteReconnect}}
+}
+

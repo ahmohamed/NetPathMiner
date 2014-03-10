@@ -1,0 +1,77 @@
+\name{plotPaths}
+\alias{plotPaths}
+\title{Plots an annotated igraph object higlighting ranked paths.}
+\usage{
+plotPaths(paths, graph, path.clusters = NULL, col.palette = palette(),
+  layout = layout.auto, ...)
+}
+\arguments{
+  \item{paths}{The result of \code{\link{pathRanker}}.}
+
+  \item{graph}{An annotated igraph object.}
+
+  \item{path.clusters}{The result from
+  \code{\link{pathCluster}} or
+  \code{\link{pathClassifier}}.}
+
+  \item{col.palette}{A color palette, or a palette
+  generating function (ex:
+  \preformatted{col.palette=rainbow}).}
+
+  \item{layout}{Either a graph layout function, or a
+  two-column matrix specifiying vertex coordinates.}
+
+  \item{...}{Additional arguments passed to
+  \code{\link{plotNetwork}}.}
+}
+\value{
+Produces a plot of the network with paths highlighted. If
+paths are computed for several labels (sample categories),
+a plot is created for each label.
+}
+\description{
+This function plots a network highlighting ranked paths. If
+\code{path.clusters} are provided, paths in the same
+cluster are assigned similar colors.
+}
+\examples{
+## Prepare a weighted reaction network.
+	## Conver a metabolic network to a reaction network.
+ data(ex_sbml) # bipartite metabolic network of Carbohydrate metabolism.
+ rgraph <- makeReactionNetwork(ex_sbml, simplify=TRUE)
+
+	## Assign edge weights based on Affymetrix attributes and microarray dataset.
+ # Calculate Pearson's correlation.
+	data(ex_microarray)	# Part of ALL dataset.
+	rgraph <- assignEdgeWeights(microarray = ex_microarray, graph = rgraph,
+		weight.method = "cor", use.attr="miriam.uniprot",
+		y=factor(colnames(ex_microarray)), bootstrap = FALSE)
+
+	## Get ranked paths using probabilistic shortest paths.
+ ranked.p <- pathRanker(rgraph, method="prob.shortest.path",
+					K=20, minPathSize=6)
+
+	## Plot paths.
+	plotPaths(ranked.p, rgraph)
+
+	## Convert paths to binary matrix, build a classifier.
+	ybinpaths <- pathsToBinary(ranked.p)
+	p.class <- pathClassifier(ybinpaths, target.class = "BCR/ABL", M = 3)
+
+ ## Plotting with clusters, on a metabolic graph.
+	plotPaths(ranked.p, ex_sbml, path.clusters=p.class)
+}
+\author{
+Ahmed Mohamed
+}
+\seealso{
+Other Plotting methods: \code{\link{colorVertexByAttr}};
+\code{\link{layoutVertexByAttr}};
+\code{\link{plotAllNetworks}};
+\code{\link{plotClassifierROC}};
+\code{\link{plotClusterMatrix}},
+\code{\link{plotClusterProbs}}, \code{\link{plotClusters}};
+\code{\link{plotCytoscape}}; \code{\link{plotNetwork}};
+\code{\link{plotPathClassifier}}
+}
+

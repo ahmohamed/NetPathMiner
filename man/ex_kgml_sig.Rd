@@ -1,0 +1,13 @@
+\docType{data}
+\name{ex_kgml_sig}
+\alias{ex_kgml_sig}
+\title{Singaling network from KGML example}
+\description{
+An exmaple igraph object representing Ras and chemokine
+signaling pathways in human extracted from KGML files.
+}
+\examples{
+data(ex_kgml_sig)
+plotNetwork(ex_kgml_sig, vertex.color="pathway")
+}
+

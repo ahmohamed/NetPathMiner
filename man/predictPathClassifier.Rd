@@ -1,0 +1,65 @@
+\name{predictPathClassifier}
+\alias{predictPathClassifier}
+\title{Predicts new paths given a pathClassifier model.}
+\usage{
+predictPathClassifier(mix, newdata)
+}
+\arguments{
+  \item{mix}{The result from \code{\link{pathClassifier}}.}
+
+  \item{newdata}{A data.frame containing the new paths to
+  be classified.}
+}
+\value{
+A list with the following elements. \item{h}{The posterior
+probabilities for each HME3M component.}
+\item{posterior.probs}{The posterior probabilities for
+HME3M model to classify the response.} \item{label}{A
+vector indicating the HME3M cluster membership.}
+\item{component}{The HME3M component membership for each
+pathway.} \item{path.probabilities}{The 3M path
+probabilities.} \item{plr.probabilities}{The PLR
+predictions for each component.}
+}
+\description{
+Predicts new paths given a pathClassifier model.
+}
+\examples{
+## Prepare a weighted reaction network.
+	## Conver a metabolic network to a reaction network.
+ data(ex_sbml) # bipartite metabolic network of Carbohydrate metabolism.
+ rgraph <- makeReactionNetwork(ex_sbml, simplify=TRUE)
+
+	## Assign edge weights based on Affymetrix attributes and microarray dataset.
+ # Calculate Pearson's correlation.
+	data(ex_microarray)	# Part of ALL dataset.
+	rgraph <- assignEdgeWeights(microarray = ex_microarray, graph = rgraph,
+		weight.method = "cor", use.attr="miriam.uniprot",
+		y=factor(colnames(ex_microarray)), bootstrap = FALSE)
+
+	## Get ranked paths using probabilistic shortest paths.
+ ranked.p <- pathRanker(rgraph, method="prob.shortest.path",
+					K=20, minPathSize=6)
+
+	## Convert paths to binary matrix.
+	ybinpaths <- pathsToBinary(ranked.p)
+	p.class <- pathClassifier(ybinpaths, target.class = "BCR/ABL", M = 3)
+
+	## Just an example of how to predict cluster membership
+ pclass.pred <- predictPathCluster(p.class, ybinpaths$paths)
+}
+\author{
+Timothy Hancock and Ichigaku Takigawa
+}
+\seealso{
+Other Path clustering & classification methods:
+\code{\link{pathClassifier}}; \code{\link{pathCluster}};
+\code{\link{pathsToBinary}};
+\code{\link{plotClassifierROC}};
+\code{\link{plotClusterMatrix}},
+\code{\link{plotClusterProbs}}, \code{\link{plotClusters}};
+\code{\link{plotPathClassifier}};
+\code{\link{plotPathCluster}};
+\code{\link{predictPathCluster}}
+}
+

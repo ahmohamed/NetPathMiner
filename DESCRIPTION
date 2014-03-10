@@ -1,0 +1,26 @@
+Package: NetPathMiner
+Version: 0.99.0
+Date: 2014 onwards
+Title: NetPathMiner for Biological Network Construction, Path Mining
+        and Visualization
+Author: Ahmed Mohamed <mohamed@kuicr.kyoto-u.ac.jp>, Tim Hancock
+    <timothy.hancock@kuicr.kyoto-u.ac.jp>, Ichigaku Takigawa
+    <takigawa@kuicr.kyoto-u.ac.jp>, Nicolas Wicker <nicolas.wicker@unistra.fr>
+Maintainer: Ahmed Mohamed <mohamed@kuicr.kyoto-u.ac.jp>
+Description: NetPathMiner is a general framework for network path mining using
+    genome-scale networks. It constructs networks from KGML, SBML and BioPAX
+    files, providing three network representations, metabolic, reaction and
+    gene representations. NetPathMiner finds active paths and applies machine
+    learning methods to summarize found paths for easy interpretation. It also
+    provides static and interactive visualizations of networks and paths to aid
+    manual investigation.
+Depends: igraph (>= 0.6)
+Suggests: rBiopaxParser, RCurl, RCytoscape
+License: GPL (>= 2)
+URL: https://github.com/ahmohamed/NetPathMiner
+NeedsCompilation: yes
+SystemRequurements: libxml2, libSBML (>= 5.5)
+biocViews: GraphAndNetwork, Pathways, Network, Clustering,
+        Classification
+Biarch: TRUE
+Packaged: 2014-03-10 09:06:56 UTC; mohamedahmed

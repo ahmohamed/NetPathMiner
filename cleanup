@@ -1,0 +1,22 @@
+#!/bin/sh
+echo "removing boost headers..."
+cd src; rm -rf boost
+
+if test -f kgml_interface.c__;
+	then mv kgml_interface.c__ kgml_interface.cpp; 
+fi;
+
+if test -f sbml_interface.c__;
+	then mv sbml_interface.c__ sbml_interface.cpp; 
+fi;
+
+if test -f sbml_interface.h__;
+	then mv sbml_interface.h__ sbml_interface.h; 
+fi;
+
+echo "restoring Makevars.in file..."
+mv _Makevars.in_ Makevars.in; 
+rm Makevars
+
+echo "removing compiled code..."
+rm *.o

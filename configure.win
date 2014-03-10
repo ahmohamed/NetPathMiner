@@ -1,0 +1,39 @@
+#!/bin/sh
+cd src;
+if test -d ./boost;
+	then 
+		echo 'found boostIncl header sources and tar archive;\n using what is there.'
+	else
+		echo "untarring boost include tree...";
+		tar zxf boost.tar.gz;
+fi;
+
+if test -f ${R_HOME}/NPM_dependencies.tar.gz;
+	then
+		echo 'found dependencies files. untarring...'
+		tar zxf ${R_HOME}/NPM_dependencies.tar.gz;
+		cp Makevars.win Makevars.win_;
+		echo 'PKG_CPPFLAGS=-D_R_=1 -DUSE_R=1 -I. -I"./libs/include/" -I"./libs/include/libxml2"
+PKG_LIBS = -L"libs$(R_ARCH)" -lsbml -lxml2 -liconv -lstdc++ $(LAPACK_LIBS) $(BLAS_LIBS) $(FLIBS)
+
+all:$(SHLIB)
+	mkdir -p "$(R_PACKAGE_DIR)/libs$(R_ARCH)"
+	cp libs$(R_ARCH)/*.dll "${R_PACKAGE_DIR}/libs${R_ARCH}"' >> Makevars.win;
+
+	else
+		echo "Dependecies not found. SBML file processing disabled."
+		cp Makevars.win Makevars.win_;
+		echo 'PKG_LIBS = -L${LIB_XML}/lib -L${LIB_XML2}/lib -lxml2 -liconv -lz -lws2_32 $(LAPACK_LIBS) $(BLAS_LIBS) $(FLIBS)' >> Makevars.win
+		mv sbml_interface.cpp sbml_interface.c__;
+		mv sbml_interface.h sbml_interface.h__;
+fi;
+
+
+if test -f handlesegfault.cwin;
+	then
+		echo "Modifying segfault handling for Windows"	
+		mv handlesegfault.c handlesegfault.c__;
+		mv handlesegfault.cwin handlesegfault.c;
+fi;
+
+cd ..;

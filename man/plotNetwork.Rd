@@ -1,0 +1,61 @@
+\name{plotNetwork}
+\alias{plotNetwork}
+\title{Plots an annotated igraph object.}
+\usage{
+plotNetwork(graph, vertex.color, col.palette = palette(),
+  layout = layout.auto, legend = TRUE, ...)
+}
+\arguments{
+  \item{graph}{An annotated igraph object.}
+
+  \item{vertex.color}{A list of colors for vertices, or an
+  attribute names (ex: "pathway") by which vertices will be
+  colored. Complex attributes, where a vertex belongs to
+  more than one group, are supported. This can also be the
+  output of \code{\link{colorVertexByAttr}}.}
+
+  \item{col.palette}{A color palette, or a palette
+  generating function (ex:
+  \preformatted{col.palette=rainbow}).}
+
+  \item{layout}{Either a graph layout function, or a
+  two-column matrix specifiying vertex coordinates.}
+
+  \item{legend}{Wheter to plot a legend. The legend is only
+  plotted if vertices are colored by attribute values.}
+
+  \item{...}{Additional arguments passed to
+  \code{\link[igraph]{plot.igraph}}.}
+}
+\value{
+Produces a plot of the network.
+}
+\description{
+This function is a wrapper function for
+\code{\link[igraph]{plot.igraph}}, with 2 main additions.
+1. Add the ability to color vertices by their attributes
+(see examples), accompanied by an inofrmative legend. 2.
+Resize vertex.size, edge.arrow.size, label.cex according to
+the plot size and the size of the network.
+}
+\examples{
+data("ex_kgml_sig")
+ plotNetwork(ex_kgml_sig, vertex.color="pathway")
+ plotNetwork(ex_kgml_sig, vertex.color="pathway", col.palette=heat.colors)
+ plotNetwork(ex_kgml_sig, vertex.color="pathway",
+             col.palette=c("red", "green","blue","grey"))
+}
+\author{
+Ahmed Mohamed
+}
+\seealso{
+Other Plotting methods: \code{\link{colorVertexByAttr}};
+\code{\link{layoutVertexByAttr}};
+\code{\link{plotAllNetworks}};
+\code{\link{plotClassifierROC}};
+\code{\link{plotClusterMatrix}},
+\code{\link{plotClusterProbs}}, \code{\link{plotClusters}};
+\code{\link{plotCytoscape}};
+\code{\link{plotPathClassifier}}; \code{\link{plotPaths}}
+}
+
