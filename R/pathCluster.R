@@ -48,11 +48,11 @@
 #' 
 #' 	## Get ranked paths using probabilistic shortest paths.
 #'  ranked.p <- pathRanker(rgraph, method="prob.shortest.path", 
-#' 					K=20, minPathSize=6)
+#' 					K=20, minPathSize=8)
 #' 	
 #' 	## Convert paths to binary matrix. 
 #' 	ybinpaths <- pathsToBinary(ranked.p)
-#' 	p.cluster <- pathCluster(ybinpaths, M=3)
+#' 	p.cluster <- pathCluster(ybinpaths, M=2)
 #' 	plotClusters(ybinpaths, p.cluster)
 #'  
 pathCluster <- function(ybinpaths, M, iter=1000) {
@@ -149,11 +149,11 @@ pathCluster <- function(ybinpaths, M, iter=1000) {
 #' 
 #' 	## Get ranked paths using probabilistic shortest paths.
 #'  ranked.p <- pathRanker(rgraph, method="prob.shortest.path", 
-#' 					K=20, minPathSize=6)
+#' 					K=20, minPathSize=8)
 #' 	
 #' 	## Convert paths to binary matrix. 
 #' 	ybinpaths <- pathsToBinary(ranked.p)
-#' 	p.cluster <- pathCluster(ybinpaths, M=3)
+#' 	p.cluster <- pathCluster(ybinpaths, M=2)
 #' 
 #' 	## just an example of how to predict cluster membership.
 #' 	pclust.pred <- predictPathCluster(p.cluster,ybinpaths$paths)
@@ -217,11 +217,11 @@ predictPathCluster <- function(pfit,newdata) {
 #' 
 #' 	## Get ranked paths using probabilistic shortest paths.
 #'  ranked.p <- pathRanker(rgraph, method="prob.shortest.path", 
-#' 					K=20, minPathSize=6)
+#' 					K=20, minPathSize=8)
 #' 	
 #' 	## Convert paths to binary matrix. 
 #' 	ybinpaths <- pathsToBinary(ranked.p)
-#' 	p.cluster <- pathCluster(ybinpaths, M=3)
+#' 	p.cluster <- pathCluster(ybinpaths, M=2)
 #' 	plotPathCluster(ybinpaths, p.cluster, m=2, tol=0.05)
 #'  
 plotPathCluster <- function(ybinpaths, clusters, m, tol = NULL) {
@@ -377,12 +377,12 @@ plotClusterProbs <- function(clusters, col=rainbow(clusters$params$M)){
 #' 
 #' 	## Get ranked paths using probabilistic shortest paths.
 #'  ranked.p <- pathRanker(rgraph, method="prob.shortest.path", 
-#' 					K=20, minPathSize=6)
+#' 					K=20, minPathSize=8)
 #' 	
 #' 	## Convert paths to binary matrix. 
 #' 	ybinpaths <- pathsToBinary(ranked.p)
-#' 	p.cluster <- pathCluster(ybinpaths, M=3)
-#' 	plotClusters(ybinpaths, p.cluster, col=c("red", "green", "blue") )
+#' 	p.cluster <- pathCluster(ybinpaths, M=2)
+#' 	plotClusters(ybinpaths, p.cluster, col=c("red", "blue") )
 #'  
 plotClusters <- function(ybinpaths, clusters, col,...){
 	if(missing(col)) 

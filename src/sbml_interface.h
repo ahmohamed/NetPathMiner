@@ -1,27 +1,11 @@
+#ifdef HAVE_SBML
 #ifndef __sbml_interface__h_
 #define __sbml_interface__h_
 
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
 #include <sstream>
-#include <iostream>
-#include <algorithm>
-using namespace std;
-
 #include <sbml/SBMLTypes.h>
-
-#include <R.h>
-#include <Rmath.h>
-#include <Rdefines.h>
-#include <Rinternals.h>
-extern "C"{
-#include <handlesegfault.h>
-}
-
-
-extern "C" SEXP readsbmlfile(SEXP FILENAME, SEXP ATTR_TERMS, SEXP VERBOSE);
-extern "C" SEXP readsbml_sign(SEXP FILENAME, SEXP ATTR_TERMS, SEXP VERBOSE);
+#include "handlesegfault.h"
+#include "init.h"
 
 SEXP getReactionList(Model *model, const vector<string> &attr_terms, vector<string> &species, bool verbose);
 SEXP getSpeciesFrame(Model *model, vector<string> species, const vector<string> &attr_terms);
@@ -38,4 +22,5 @@ const char* URL_decode(char* URL);
 bool not_alnum(char c);
 
 #undef length
+#endif
 #endif

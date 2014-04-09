@@ -62,7 +62,6 @@ if(is.loaded("readkgmlfile")){ # This is false if libxml2 wasn't available at in
 
     # Process KGML file as a signaling network
     g <- KGML2igraph(filename, parse.as="signaling", expand.complexes=TRUE)
-    dev.new()
     plotNetwork(g)
 }
 }

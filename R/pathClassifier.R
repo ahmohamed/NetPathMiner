@@ -47,6 +47,9 @@
 pathsToBinary <- function(ypaths) {
   makeBin <- function(pathGenes,allGenes) return(as.numeric(allGenes %in% pathGenes$genes))
 
+  if(length(ypaths$path)==0){
+    stop("ypaths is a an empty list. Please rerun pathRanker with different parameters.")
+  }
   # if there are response labels
   if (!is.null(names(ypaths$paths))) { 
     all.genes <- c()
@@ -56,6 +59,8 @@ pathsToBinary <- function(ypaths) {
     
     resp <- c()
     for (p in 1:length(ypaths$paths)) {
+      if(length(ypaths$paths[[p]])==0) next;
+      
       binpaths <- data.frame(t(sapply(ypaths$paths[[p]],makeBin,allGenes = all.genes)))
       names(binpaths) <- all.genes
 

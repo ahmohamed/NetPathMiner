@@ -8,13 +8,10 @@
 
 #include <deque>
 #include <utility>
-#include <iostream>
 #include <fstream>
-#include <sstream>
 #include <iterator>
-#include <algorithm>
-
 #include <math.h>
+
 
 // boost 1.33.1 required
 #include <boost/graph/graph_utility.hpp>
@@ -24,16 +21,8 @@
 
 #define R_NO_REMAP
 
-extern "C" {
-#include <R.h>
-#include <Rmath.h>
-#include <Rdefines.h>
-#include <Rinternals.h>
-}
-
+#include "init.h"
 #include "hme3m.h"
-
-using namespace std;
 using namespace boost;
 
 //  ****** base graph ******  //
@@ -185,7 +174,7 @@ pair<Graph,VertexPair> R_get_st_graph_from(SEXP nodes, SEXP edges,SEXP edge_weig
 
 SEXP store_path_R(deque<Vertex>& st_path, Graph& g, double p_score);
 
-extern "C" SEXP pathranker(SEXP node_list, SEXP edge_list, SEXP edge_weights, SEXP rk,SEXP minpathsize) 
+SEXP pathranker(SEXP node_list, SEXP edge_list, SEXP edge_weights, SEXP rk,SEXP minpathsize)
 {
   Vertex s,t;
   Graph g;

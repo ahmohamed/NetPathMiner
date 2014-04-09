@@ -35,7 +35,7 @@ fi;
 
 AC_DEFUN([CHECK_XML],[
 	AC_PATH_PROGS(XML_CONFIG, xml2-config)
-	LIBXML_INCDIR=`${XML_CONFIG} --cflags`
+	LIBXML_INCDIR="-DHAVE_XML `${XML_CONFIG} --cflags`"
 	XML_LIBS=`${XML_CONFIG} --libs`
 ])
 
@@ -62,37 +62,33 @@ if ${SBML}
 		if test -n "${SBMLPC}"
 			then
 				echo "libsbml.pc found. Using pkg-config to extract it."				
-				SBML_INCDIR=`${PKG_CONFIG} --cflags ${SBMLPC}`
+				SBML_INCDIR="-DHAVE_SBML `${PKG_CONFIG} --cflags ${SBMLPC}`"
 				SBML_LIBS=`${PKG_CONFIG} --libs ${SBMLPC}`
 			else
 				echo "Couldn't find libsbml.pc. Searching for libsbml in candidate directories."
 				if test -d /usr/include/sbml
-					then SBML_INCDIR="-I/usr/include/"
+					then SBML_INCDIR="-DHAVE_SBML -I/usr/include/"
 					else 
 						if test -d /usr/local/include/sbml
-							then SBML_INCDIR="-I/usr/local/include/"
+							then SBML_INCDIR="-DHAVE_SBML -I/usr/local/include/"
 						fi;
-				fi;
-				CHECK_XML()				
-				SBML_INCDIR="$LIBXML_INCDIR $SBML_INCDIR"
-				SBML_LIBS="$XML_LIBS"
+				fi;				
 		fi;
+		CHECK_XML()               
+        SBML_INCDIR="$LIBXML_INCDIR $SBML_INCDIR"
+        SBML_LIBS="$XML_LIBS"
 		CPPFLAGS="${CPPFLAGS} ${SBML_INCDIR}"
 		PKG_LIBS="${PKG_LIBS} ${SBML_LIBS} -lsbml"
 			
 	else
-		echo 'SBML not found.'; cd src; mv sbml_interface.cpp sbml_interface.c__;
-		mv sbml_interface.h sbml_interface.h__; cd ..;
+		echo 'SBML not found.';
 
 	if ${XML}
 		then
 			echo 'libXML2 found'
-			CHECK_XML()
-			CPPFLAGS="${CPPFLAGS} ${LIBXML_INCDIR}"
-			PKG_LIBS="${PKG_LIBS} ${XML_LIBS} -lxml2"
+			CHECK_XML()			
 		else
-			echo 'XML not found.'; cd src; 
-			mv kgml_interface.cpp kgml_interface.c__;  cd ..;
+			echo 'XML not found.';
 	fi;
 fi;
 
@@ -102,7 +98,6 @@ AC_SUBST(CPPFLAGS)
 AC_SUBST(PKG_LIBS)
 
 AC_OUTPUT(src/Makevars)
-chmod +x cleanup
 
 dnl cleanup after configure
 mv src/Makevars.in src/_Makevars.in_;

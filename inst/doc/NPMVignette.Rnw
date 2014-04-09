@@ -69,7 +69,7 @@ Email: mohamed@kuicr.kyoto-u.ac.jp}}
 \section{Introduction}
 \label{sec:introduction}
 NetPathMiner implements a flexible module-based process flow for network path mining and visualization,
-which can be fully inte-grated with user-customized functions. 
+which can be fully integrated with user-customized functions. 
 It supports construction of various types of genome scale networks from three different pathway 
 file formats, enabling its utility to most common pathway databases. 
 In addition, NetPathMiner provides different visualization techniques to facilitate the analysis of even 
@@ -90,33 +90,57 @@ not available. Please read through the following instructions.
 \subsubsection{Prerequisites for Unix users (Linux and Mac OS)}
 \paragraph{Installing libxml2}
 Make sure your system has library libxml2 installed. In Mac OSX 10.6 or later, libxml2
-are built in. For Linux users also, this is almost always the case. Otherwise install libxml2:
+are built in. For Linux users also, this is almost always the case, however, developing headers
+may be missing. To install libxml2 and the headers:
+
 \begin{verbatim}
     sudo apt-get install libxml2
+    sudo apt-get install libxml2-dev
 \end{verbatim}
 
 \paragraph{Installing libSBML}
 Installing libSBML for Unix users is optional. However, NPM will not be able to process SBML
-files. If you will not use them, you can skip this part. 
+files. If you will not use SBML functions, you can skip this part. 
 
 From the website of libSBML \url{http://sbml.org/Software/libSBML}, you can directly download the
 binaries suitable for your system from ``Download libSBML'' link. You can follow the installation instructions
 on the website.
 
 \subsubsection{Prerequisites for Windows users}
+Since installing libxml2 and libSBML under Windows is challenging, we have prepared all dependencies in 
+a tar file, downloadable from \url{https://github.com/ahmohamed/NPM_dependencies} . Please download the file
+and place in in the home directory of R (type R RHOMEin command prompt to locate it). Unless
+you want to use customized libraries, you can skip the rest of this section.
+
+To use customized libraries, you have to compile them and provide them to R at the time of installation.
+This is not a trivial task, please be sure you really need these custom libraries.
+
 \paragraph{Installing libxml2}
-You can use install.packages() to install this package, but to use it
-in R, you will have to add the file libxml2.dll to a directory in your path.  
-Putting them into the directory which
-contains Rgui.exe and Rterm.exe for this version of R is probably
-best. They will hopefully not interfere with other applications
-that rely on alternate versions. libxml2.dll can be obtained at \url{http://www.zlatkovic.com/pub/libxml/} 
+NetPathMiner expects an enviroment variable \texttt{LIB\_XML} or \texttt{LIB\_XML2} pointing to directory where 
+libxml2 is installed. This directory should have both the compiled library (DLL file) and the header files.
+
+You can download libxml2.dll from \url{http://sourceforge.net/projects/gnuwin/files/libxml/} among other sources.
+Please, place it in a `bin` folder under the installation directory.
+
+You will need also the header files, which can be obtained from NPM\_dependecies.tar file. After extracing it, copy
+the include directory to the installation directory.
+
+Finally, set the \texttt{LIB\_XML2} variable to point to the installation directory, which should now contain dll files inder \texttt{bin} 
+and header files under `include`.
 
 \paragraph{Installing libSBML}
-From the website of libSBML \url{http://sbml.org/Software/libSBML}, you can directly download the
-binaries suitable for your system from ``Download libSBML'' link. You can follow the installation instructions
-on the website.
+Since libSBML is a C++ libraries, it needs to be compiled using GCC compiler. Unforturantely, there is no binary
+version for Windows comipled with GCC. To use libSBML, you need to build it from source.
 
+First, dowload source package from \url{http://sourceforge.net/projects/sbml/files/libsbml/} , extract it. You will
+need also MinGW \url{http://www.mingw.org/} or the 64-bit version \url{http://mingw-w64.sourceforge.net/} depending on your system.
+Add `mingw/bin` to your PATH, by editing eviroment variables.
+
+Second, you need CMake \url{http://www.cmake.org/} . You can follow the instructions at \url{http://sbml.org/Software/libSBML/docs/java-api/libsbml-installation.html#windows-configuring} , however, choose "MinGW Makefiles" instead of "Visual Studio 10".
+
+After finishing the CMake step, use the MinGW's \texttt{make.exe} to compile libSBML. Copy the dependencies you used
+during the compilation to the `bin` directory. Set the enviroment variable \texttt{LIB\_SBML} to point the installation 
+directory, which should now contain dll files inder `bin` and header files under `include`
 
 \subsection{R Package dependencies}
 NPM depends on package igraph to represent network objects. Installing igraph is required for the package 
@@ -171,8 +195,10 @@ to install it right away.
 
 \paragraph{RCytoscape}
 Package RCytoscapeis available on Bioconductor. For installation instructions check 
-out \url{http://www.bioconductor.org/packages/release/bioc/html/RCytoscape.html} or
-call:
+out \url{http://www.bioconductor.org/packages/release/bioc/html/RCytoscape.html}. Please note 
+that RCytoscape requires Cytoscape 2.8 installed with XMLRPC plugin. Cytoscape 3 is not yet 
+supported. After installing Cytoscape, call:
+
 \begin{verbatim}
     source("http://bioconductor.org/biocLite.R")
     biocLite("RCytoscape")
@@ -249,7 +275,7 @@ In NPM, you can do that by:
 <<echo=FALSE, eval=TRUE, results=hide>>=
 file <- file.path(find.package("NetPathMiner"), "extdata", "hsa00860.xml")
 @
-<<echo=TRUE, eval=TRUE, results=hide>>=
+<<echo=TRUE, eval=FALSE, results=hide>>=
 graph <- KGML2igraph(filename = file, parse.as = "signaling")
 
 graph <- KGML2igraph(filename = file, parse.as = "signaling", 
@@ -404,7 +430,7 @@ NetPathMiner provides two methods to accomplish that. First, ``probabilistic.sho
 
 <<echo=TRUE, eval=TRUE>>=
 ranked.p <- pathRanker(rgraph, method = "prob.shortest.path",
-	K = 100, minPathSize = 4)
+	K = 25, minPathSize = 6)
 @
 
 Second, ``value'' method finds paths where the sum of edge weights are significantly higher than random paths of similar length. The distribution of random path scores can be estimated by ``samplePaths'' which uses Metropolis sampling technique. The path sample can be then provided to the path ranking function. If path sample is not provided, random edge sampling is used to estimate the distribution.

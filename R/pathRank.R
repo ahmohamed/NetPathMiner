@@ -97,17 +97,19 @@ extractPathNetwork <- function(paths, graph){
 #' 
 getPathsAsEIDs <- function(paths, graph){
     if(length(paths$y.labels)>1){
-        eids = lapply(paths$paths, getPaths, graph, paths$source.net)            
+        eids <- lapply(paths$paths, getPaths, graph, paths$source.net)            
         names(eids) = paths$y.labels
         
     }else{
-        eids = getPaths(paths$paths, graph, paths$source.net)        
+        eids <- getPaths(paths$paths, graph, paths$source.net)        
     }
     return(eids)
 }        
 
 
 getPaths <- function(paths, graph, source.net){
+    if(length(paths)==0) return(list())
+
     # graph source unknown
     if(is.null(graph$type) || is.null(source.net))
         return(lapply(paths, function(x) E(graph,path=x$genes)))
@@ -138,7 +140,7 @@ getPaths <- function(paths, graph, source.net){
     # It must be MR.graph
     eid <- list()
     for(i in 1:length(paths)){
-        deleted.edges = unlist(lapply(lapply(grep("->",paths[[i]]$compounds),
+        deleted.edges <- unlist(lapply(lapply(grep("->",paths[[i]]$compounds),
                                 function(x) unlist(strsplit(paths[[i]]$compounds[[x]], "->"))), 
                         function(y) mapply(
                                     function(from,to)get.shortest.paths(graph, from, to, mode="out", output="epath"), 
@@ -289,14 +291,23 @@ rankShortestPaths <- function(graph, K=10, minPathSize=1, start, end, normalize 
                 K=K,minpathsize = minPathSize+2)    #add 2 nodes to min path length ("s" & "t")
         
         
+                
         idx <- which(sapply(ps,is.null))        
         if (length(idx)>0) ps <- ps[-idx]
+        if(length(ps)==0){
+            if(ncol(pg$weights) > 1)
+                message("  Warning:Counldn't find paths matching the criteria for ",graph$y.labels[i])
+            else message("  Warning:Counldn't find paths matching the criteria.")
+        }
         
         ps <- ps[order(sapply(ps,"[[", "distance"))] #order paths by distance
         
-        if (ncol(pg$weights) > 1) zret[[i]] <- ps
-        else zret <- ps
+        if (ncol(pg$weights) > 1){
+            zret[[i]] <- ps
+        }else zret <- ps
     }
+    
+    if(length(zret)==0)return(NULL)
     
     if (ncol(pg$weights) > 1) {
         names(zret) <- graph$y.labels
@@ -472,9 +483,12 @@ processNetwork <- function(graph, start, end, scale=c("ecdf", "rescale"), normal
     edge.weights <- do.call("rbind", as.list(E(graph)$edge.weights))
     if(sum(!is.finite(edge.weights))>0){
         warning("Edge weights contain non-finite numbers. Setting them to the minimum edge weight")
-        lapply(1:ncol(edge.weights), function(x) 
-                    edge.weights[,x][!is.finite(edge.weights[,x])] <<- min(edge.weights[,x][is.finite(edge.weights[,x])])
-            )        
+        
+        edge.weights <- apply(edge.weights, 2, 
+                            function(x){
+                                x[ !is.finite(x) ] <- min( x[ is.finite(x) ] )
+                                return(x)
+                            })        
     }
         
     if(scale=="ecdf")

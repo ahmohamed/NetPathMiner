@@ -36,11 +36,11 @@ Predicts new paths given a pathCluster model.
 
 	## Get ranked paths using probabilistic shortest paths.
  ranked.p <- pathRanker(rgraph, method="prob.shortest.path",
-					K=20, minPathSize=6)
+					K=20, minPathSize=8)
 
 	## Convert paths to binary matrix.
 	ybinpaths <- pathsToBinary(ranked.p)
-	p.cluster <- pathCluster(ybinpaths, M=3)
+	p.cluster <- pathCluster(ybinpaths, M=2)
 
 	## just an example of how to predict cluster membership.
 	pclust.pred <- predictPathCluster(p.cluster,ybinpaths$paths)

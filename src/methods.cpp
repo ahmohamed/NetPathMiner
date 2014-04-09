@@ -1,16 +1,6 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <iostream>
-#include <vector>
-#include <algorithm>
-using namespace std;
+#include "init.h"
 
-#include <R.h>
-#include <Rmath.h>
-#include <Rdefines.h>
-#include <Rinternals.h>
 
-double median(double *x, int n);
 template <class T>
 typename vector<T>::size_type elem_pos(vector<T> v, const T &e){
 	return( find(v.begin(), v.end(), e) - v.begin() );
@@ -25,7 +15,26 @@ typename vector<T>::size_type add_elem(vector<T> &v,const T &e){
 	return pos;
 }
 
-extern "C" void corEdgeWeights(double * X,
+int compare (const void * a, const void * b)
+{
+  return ( *(double*)a - *(double*)b );
+}
+double median(double x[], int n) {
+    if(n==0){return(NA_REAL);}
+    if(n==1){return(x[0]);}
+
+
+    qsort(x, n, sizeof(x[0]), compare);
+    if(n%2==0) {
+        // if there is an even number of elements, return mean of the two elements in the middle
+        return((x[n/2] + x[n/2 - 1]) / 2.0);
+    } else {
+        // else return the element in the middle
+        return x[n/2];
+    }
+}
+
+void corEdgeWeights(double * X,
     int * EDGELIST,
     int * SAMEGENE,
     double * WEIGHT,
@@ -85,7 +94,7 @@ extern "C" void corEdgeWeights(double * X,
     }
 }
 
-extern "C" SEXP expand_complexes(SEXP ATTR_LS, SEXP EL, SEXP V, SEXP EXPAND, SEXP MISSING){
+SEXP expand_complexes(SEXP ATTR_LS, SEXP EL, SEXP V, SEXP EXPAND, SEXP MISSING){
 	/* Processing arguments */
 	vector<vector<string> > attr_ls;
 	vector<string> v_name;
@@ -198,23 +207,4 @@ extern "C" SEXP expand_complexes(SEXP ATTR_LS, SEXP EL, SEXP V, SEXP EXPAND, SEX
 	setAttrib(OUT,R_NamesSymbol,NAMES);
 	UNPROTECT(7);
 	return(OUT);
-}
-
-int compare (const void * a, const void * b)
-{
-  return ( *(double*)a - *(double*)b );
-}
-double median(double x[], int n) {
-    if(n==0){return(NA_REAL);}
-    if(n==1){return(x[0]);}
-
-
-    qsort(x, n, sizeof(x[0]), compare);
-    if(n%2==0) {
-        // if there is an even number of elements, return mean of the two elements in the middle
-        return((x[n/2] + x[n/2 - 1]) / 2.0);
-    } else {
-        // else return the element in the middle
-        return x[n/2];
-    }
 }

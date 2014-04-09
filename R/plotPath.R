@@ -277,19 +277,20 @@ layoutVertexByAttr <- function(graph, attr.name, cluster.strength = 1,layout=lay
 colorVertexByAttr <- function(graph, attr.name, col.palette = palette()){
     attr <- getAttribute(graph, attr.name)
     attr <- do.call("rbind", lapply(1:length(attr), 
-                    function(i) cbind(id=i, val=if(length(attr[[i]])==0) NA else attr[[i]] )))
+                    function(i) data.frame(id=i, val=if(length(attr[[i]])==0) NA else attr[[i]] )))
     
-    rownames(attr) <- as.character(attr[,2]) 
-    attr.vals <- na.omit(unique(attr[,2]))
+    attr$val <- as.factor(attr$val)
+    
     if(!is.function(col.palette))
         col.palette <- colorRampPalette(col.palette)
     
-    col <- col.palette(length(attr.vals) + 1)
+    col <- col.palette(nlevels(attr$val) + 1)
+    names(col) <- c(levels(attr$val), "NA_value_color")
+
+    col.vector <- col[attr$val]
+    col.vector[is.na(col.vector)] <- col[["NA_value_color"]] 
     
-    
-    lapply(1:length(attr.vals), function(i) attr[attr[,2]==attr.vals[[i]] ,2] <<- col[[i]])
-    attr[is.na(attr[,2]), 2] <- col[[length(attr.vals) + 1]]
-    return(split(attr[,2], as.numeric(attr[,1])))
+    return( split(col.vector, as.numeric(attr$id)) )
 }
 
 #' Plots an annotated igraph object in Cytoscape.
@@ -335,23 +336,27 @@ plotCytoscape <- function(graph, title, layout=layout.auto,
         V(graph)$color <- vertex.color
     
     nel <- igraph.to.graphNEL(graph)
-    nel <- initEdgeAttribute(nel, "weight", "numeric", 1)
+    nel <- RCytoscape::initEdgeAttribute(nel, "weight", "numeric", 1)
     
     ## Initializing vertex attributes
     v.attrs <- sapply(list.vertex.attributes(graph), function(x) is.numeric(get.vertex.attribute(graph,x)))
-    mapply(function(...) nel<<-initNodeAttribute(nel,...), names(v.attrs), 
-            ifelse(v.attrs, "numeric", "char"), 
-            ifelse(v.attrs, 1, ""))
+    for(i in 1:length(v.attrs)){
+        nel <- RCytoscape::initNodeAttribute(nel, names(v.attrs)[[i]],
+                                ifelse(v.attrs[[i]], "numeric", "char"),
+                                ifelse(v.attrs, 1, ""))
+    }
     
     e.attrs <- sapply(list.edge.attributes(graph), function(x) is.numeric(get.edge.attribute(graph,x)))
-    mapply(function(...) nel<<-initEdgeAttribute(nel,...), names(e.attrs), 
-            ifelse(e.attrs, "numeric", "char"), 
-            ifelse(e.attrs, 1, ""))
+    for(i in 1:length(e.attrs)){
+        nel <- RCytoscape::initEdgeAttribute(nel, names(e.attrs)[[i]],
+                ifelse(e.attrs[[i]], "numeric", "char"),
+                ifelse(e.attrs, 1, ""))
+    }
     
-    cw <- new.CytoscapeWindow (title, graph=nel)
-    displayGraph(cw)
-    setNodePosition(cw, V(graph)$name, layout[,1], layout[,2])
-    redraw(cw)
+    cw <- RCytoscape::new.CytoscapeWindow (title, graph=nel)
+    RCytoscape::displayGraph(cw)
+    RCytoscape::setNodePosition(cw, V(graph)$name, layout[,1], layout[,2])
+    RCytoscape::redraw(cw)
     #v.size
     if(!missing(vertex.size)){
         if(length(vertex.size)==1)
@@ -359,24 +364,24 @@ plotCytoscape <- function(graph, title, layout=layout.auto,
         
         vertex.size <- as.integer(vertex.size)
         if(length(vertex.size) == vcount(graph)){
-            setNodeSizeDirect(cw, as.character(V(graph)$name), vertex.size)
+            RCytoscape::setNodeSizeDirect(cw, as.character(V(graph)$name), vertex.size)
         }else
             warning("Vertex sizes length and number of vertices don't match")
         
     }else if(!is.null(V(graph)$size)){
-        setNodeSizeDirect(cw, as.character(V(graph)$name), as.integer(V(graph)$size))
+        RCytoscape::setNodeSizeDirect(cw, as.character(V(graph)$name), as.integer(V(graph)$size))
     }
     
     #v.label
     if(!missing(vertex.label)){
         vertex.label <- as.character(vertex.label)
         if(length(vertex.label) == vcount(graph)){
-            setNodeLabelDirect(cw, as.character(V(graph)$name), vertex.label)
+            RCytoscape::setNodeLabelDirect(cw, as.character(V(graph)$name), vertex.label)
         }else
             warning("Vertex lebels length and number of vertices don't match")
         
     }else if(!is.null(V(graph)$label)){
-        setNodeLabelDirect(cw, as.character(V(graph)$name),as.character(V(graph)$label))
+        RCytoscape::setNodeLabelDirect(cw, as.character(V(graph)$name),as.character(V(graph)$label))
     }
     
     #v.shape
@@ -391,12 +396,12 @@ plotCytoscape <- function(graph, title, layout=layout.auto,
             vertex.shape <- rep(vertex.shape, vcount(graph))
         
         if(length(vertex.shape) == vcount(graph)){
-            setNodeShapeDirect(cw, as.character(V(graph)$name), vertex.shape)
+            RCytoscape::setNodeShapeDirect(cw, as.character(V(graph)$name), vertex.shape)
         }else
             warning("Vertex shapes length and number of vertices don't match")
         
     }else if(!is.null(V(graph)$shape)){
-        setNodeShapeDirect(cw, as.character(V(graph)$name),igraphShape2Cyto(V(graph)$shape))
+        RCytoscape::setNodeShapeDirect(cw, as.character(V(graph)$name),igraphShape2Cyto(V(graph)$shape))
     }
     
     #v.color
@@ -409,15 +414,15 @@ plotCytoscape <- function(graph, title, layout=layout.auto,
         if(length(vertex.color) == vcount(graph)){
             vertex.color <- split(V(graph)$name, vertex.color)
             names(vertex.color) <- col2hex(names(vertex.color))            
-            lapply(names(vertex.color), function(x) setNodeColorDirect(cw, as.character(vertex.color[[x]]), x))
-        }else
+            lapply(names(vertex.color), function(x) RCytoscape::setNodeColorDirect(cw, as.character(vertex.color[[x]]), x))
+        }else{
             warning("Vertex colors length and number of vertices don't match")
-        
+        }
     }else if(!is.null(V(graph)$color)){
         vertex.color <- split(V(graph)$name, V(graph)$color)
         names(vertex.color) <- col2hex(names(vertex.color))
         
-        lapply(names(vertex.color), function(x) setNodeColorDirect(cw, as.character(vertex.color[[x]]), x))
+        lapply(names(vertex.color), function(x) RCytoscape::setNodeColorDirect(cw, as.character(vertex.color[[x]]), x))
     }
     
     #e.color
@@ -427,16 +432,16 @@ plotCytoscape <- function(graph, title, layout=layout.auto,
             edge.color <- rep(edge.color, ecount(graph))
         
         if(length(edge.color) == ecount(graph)){
-            setEdgeAttributesDirect(cw, "color", "char", cy2.edge.names(cw@graph), edge.color)
-            setEdgeColorRule(cw, "color", unique(edge.color),unique(edge.color), mode="lookup")
+            RCytoscape::setEdgeAttributesDirect(cw, "color", "char", cy2.edge.names(cw@graph), edge.color)
+            RCytoscape::setEdgeColorRule(cw, "color", unique(edge.color),unique(edge.color), mode="lookup")
         }else
             warning("Edge colors length and number of vertices don't match")
         
     }else if(!is.null(E(graph)$color)){
-        setEdgeColorRule(cw, "color", unique(E(graph)$color),unique(col2hex(E(graph)$color)), mode="lookup")
+        RCytoscape::setEdgeColorRule(cw, "color", unique(E(graph)$color),unique(col2hex(E(graph)$color)), mode="lookup")
     }
     
-    redraw(cw)    
+    RCytoscape::redraw(cw)    
     return(cw)
 }
 

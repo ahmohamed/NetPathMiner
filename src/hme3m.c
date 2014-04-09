@@ -1,6 +1,6 @@
 #include "hme3m.h"
 
-extern void hme3m_R(double *Y,
+void hme3m_R(double *Y,
 	double *X,
 	int *M,
 	double *LAMBDA,
@@ -197,7 +197,7 @@ void hme3m(double * Y,
 	return;
 }
 
-extern void pathMix(int *X,
+void pathMix(int *X,
     int *M,
     int *NOBS,
     int *NX,

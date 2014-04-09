@@ -11,7 +11,16 @@
 #include <Rinternals.h>
 
 // Handling Sigfault errors. Prevents the code from exiting R.
-extern void handleKGML();
-extern void handle_segfault_SBML();
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+void handle_segfault_KGML();
+void handle_segfault_SBML();
+
+#ifdef __cplusplus
+}
+#endif
+
 
 #endif

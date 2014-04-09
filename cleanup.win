@@ -3,29 +3,12 @@ cd src;
 echo "removing boost headers..."
 rm -rf boost
 
-if test -f kgml_interface.c__;
-	then mv kgml_interface.c__ kgml_interface.cpp; 
-fi;
-
-if test -f sbml_interface.c__;
-	then mv sbml_interface.c__ sbml_interface.cpp; 
-fi;
-
-if test -f sbml_interface.h__;
-	then mv sbml_interface.h__ sbml_interface.h; 
-fi;
-
 echo "restoring handelsegfault file..."
 
-if test -f handlesegfault.c__;
-	then 
-		mv handlesegfault.c handlesegfault.cwin;
-		mv handlesegfault.c__ handlesegfault.c; 
-fi;
 
-if test -f Makevars.win_;
+if test -f Makevars.win;
 	then 
-		mv Makevars.win_ Makevars.win;
+		rm Makevars.win;
 fi;
 
 

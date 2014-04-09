@@ -98,7 +98,9 @@ setAttribute <- function(graph, attr.name, attr.value){
     if(is.null(attr))
         attr<-rep(list(list()), vcount(graph))    #initialize the attr as lists.
     
-    lapply(1:vcount(graph), function(i) attr[[i]][attr.name] <<- attr.value[i])
+    attr <- mapply(function(attr_, attr_val){
+                        attr_[[attr.name]] <- attr_val; return(attr_);
+                    }, attr, attr.value, SIMPLIFY=FALSE)
     V(graph)$attr <- attr
     return(graph)
 }
@@ -113,8 +115,8 @@ setAttribute <- function(graph, attr.name, attr.value){
 rmAttribute <- function(graph, attr.name){
     if(is.null(V(graph)$attr))
         stop("Graph is not annotated.")
-
-    lapply(1:vcount(graph), function(i) V(graph)$attr[[i]][attr.name] <<- NULL)
+    
+    V(graph)$attr <- lapply(V(graph)$attr, function(x) {x[[attr.name]] <- NULL; return(x);})
     return(graph)
 }
 
@@ -188,7 +190,7 @@ stdAttrNames <- function(graph, return.value=c("matches", "graph")){
 fetchAttribute <- function(graph, organism="Homo sapiens", target.attr, source.attr, bridge.web=NPMdefaults("bridge.web")){
     if(!require(RCurl))
         stop("This function uses RCurl package. Required package not installed.")
-    if(!url.exists(bridge.web))
+    if(!RCurl::url.exists(bridge.web))
         stop("Couldn't access BridgeDB webservice.\nThere may be a internet connection problem, or the server is down.")    
     if(!organism %in% NPMdefaults("bridge.organisms"))
         stop(organism, " is not supported. Here are supported organisms:\n",
@@ -228,7 +230,7 @@ fetchAttribute <- function(graph, organism="Homo sapiens", target.attr, source.a
                         ))
         
         uris = paste(base.urls[i],"/", unique(s.attr[,2]), "?dataSource=", t.code,sep="")
-        query = lapply(getURI(uris, async=TRUE, verbose=TRUE), 
+        query = lapply(RCurl::getURI(uris, async=TRUE, verbose=TRUE), 
                     function(x) if(x!="") as.character(read.table(text=x)$V1) )
         
         s.attr[,2] <- match(s.attr[,2], unique(s.attr[,2]))
@@ -422,7 +424,7 @@ assignEdgeWeights <- function(microarray, graph, use.attr, y, weight.method="com
         # Add missing values.
         if(length(missing)>0){
             missing.val <- ms.func(na.omit(edge.weights[!samegenes,1]))
-            edge.weight <- rbind(edge.weights,cbind(edge.weights=NA, id=missing))            
+            edge.weights <- rbind(edge.weights,cbind(edge.weights=missing.val, id=missing))            
         }
         
         # Complexes
@@ -577,7 +579,10 @@ toGraphNEL<- function(graph, export.attr=""){
     attr.names  <- grep(export.attr, attr.names, value=TRUE)
     
     new.graph <- remove.vertex.attribute(graph, "attr")
-    lapply(attr.names, function(x) new.graph <<- set.vertex.attribute(new.graph, x, value=getAttribute(graph, x)))
+    
+    for(i in attr.names){
+        new.graph <- set.vertex.attribute(new.graph, i, value=getAttribute(graph, i))
+    }
     
     return(igraph.to.graphNEL(new.graph))
 }

@@ -27,7 +27,7 @@ may be missing. To install libxml2 and the headers:
 
 ##### Installing libSBML 
 Installing libSBML for Unix users is optional. However, NetPathMiner will not be able to process SBML
-files. If you will not use them, you can skip this part. 
+files. If you will not use SBML functions, you can skip this part. 
 
 From the website of libSBML http://sbml.org/Software/libSBML, you can directly download the
 binaries suitable for your system from ``Download libSBML'' link. You can follow the installation instructions
@@ -36,7 +36,7 @@ on the website.
 #### Prerequisites for Windows users
 Since installing libxml2 and libSBML under Windows is challenging, we have prepared all dependencies in 
 a tar file, downloadable from https://github.com/ahmohamed/NPM_dependencies . Please download the file
-and place in in the home directory of R (type <code>R HOME</code> in command prompt to locate it). Unless
+and place in in the home directory of R (type <code>R RHOME</code> in command prompt to locate it). Unless
 you want to use customized libraries, you can skip the rest of this section.
 
 To use customized libraries, you have to compile them and provide them to R at the time of installation.
@@ -66,7 +66,7 @@ Add `mingw/bin` to your PATH, by editing eviroment variables.
 Second, you need CMake http://www.cmake.org/ . You can follow the instructions at http://sbml.org/Software/libSBML/docs/java-api/libsbml-installation.html#windows-configuring , however, choose "MinGW Makefiles" instead of "Visual Studio 10".
 
 After finishing the CMake step, use the MinGW's `make.exe` to compile libSBML. Copy the dependencies you used
-during the cimpilation to the `bin` directory. Set the enviroment variable `LIBSBML` to point the installation 
+during the compilation to the `bin` directory. Set the enviroment variable `LIB_SBML` to point the installation 
 directory, which should now contain dll files inder `bin` and header files under `include`
 
 
@@ -95,10 +95,12 @@ To install R package devtools call:
 
 ##### RCurl
 For Unix users, make sure your Linux has library libcurl installed. Check out:
+
 <code>
-    locate libcurl
+    locate libcurl   
     locate curl-config
 </code>
+
 If these are not found (usually the developer version is missing), most Linux
 users will be able to fix this by running:
 <code>
@@ -124,20 +126,22 @@ call:
 to install it right away.
 
 ##### RCytoscape
-Package RCytoscapeis available on Bioconductor. For installation instructions check 
-out http://www.bioconductor.org/packages/release/bioc/html/RCytoscape.html or
-call:
+Package RCytoscape is available on Bioconductor. For installation instructions check 
+out http://www.bioconductor.org/packages/release/bioc/html/RCytoscape.html . Please note 
+that RCytoscape requires Cytoscape 2.8 installed with XMLRPC plugin. Cytoscape 3 is not yet 
+supported. After installing Cytoscape, call:
+
 <code>
-    source("http://bioconductor.org/biocLite.R")
+    source("http://bioconductor.org/biocLite.R")   
     biocLite("RCytoscape")
 </code>
-to install it right away.
+to install RCytoscape.
 
 ### NetPathMiner InstallationS
 If everything went well you will be able to install the NetPathMiner package from GitHub using devtools:
 
 <code>
-    library(devtools)
+    library(devtools)   
     install_github(repo="NetPathMiner", username="ahmohamed")
 </code>
 

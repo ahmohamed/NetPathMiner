@@ -66,7 +66,6 @@ check.file <- function(filename, ext=".xml"){
 #' 
 #'     # Process KGML file as a signaling network
 #'     g <- KGML2igraph(filename, parse.as="signaling", expand.complexes=TRUE)
-#'     dev.new()
 #'     plotNetwork(g)
 #' }
 #' 
@@ -97,13 +96,19 @@ KGML2igraph <- function(filename, parse.as=c("metabolic","signaling"), expand.co
                         function(x) .Call("readkgmlfile", FILENAME = x, VERBOSE=verbose)
             , USE.NAMES=FALSE), recursive=FALSE)
         
-        #Resolve reactions particiapting in multiple pathways
-        dup.rns = lapply(zkgml[duplicated(names(zkgml))], "[[", "miriam.kegg.pathway")
+        dup.zkgml <- duplicated(names(zkgml))
+        dup.rns <- sapply(zkgml[dup.zkgml], "[[", "miriam.kegg.pathway")
+        zkgml <- zkgml[!dup.zkgml] # Remove duplicated reactions.
+        
+        
         if(length(dup.rns)>0){
-            lapply(1:length(dup.rns), 
-                function(x) zkgml[[ names(dup.rns)[x] ]]$miriam.kegg.pathway <<- 
-                            unique( c(zkgml[[ names(dup.rns)[x] ]]$miriam.kegg.pathway, dup.rns[[x]] )
-                ))            
+            dup.rns <- split( unname(dup.rns), names(dup.rns))	# contains pathway info for removed rns.
+            zkgml[names(dup.rns)] <- mapply(
+                                    function(x, dup){
+                                        x$miriam.kegg.pathway <- c(x$miriam.kegg.pathway, dup)
+                                        return(x)
+                                    }, zkgml[names(dup.rns)], dup.rns, 
+                                    SIMPLIFY=FALSE)			
         }
     }
     
@@ -252,14 +257,21 @@ SBML2igraph <- function(filename, parse.as=c("metabolic","signaling"), miriam.at
         names(zsbml) <- c("reactions", "species")
         
         #Resolve reactions and species particiapting in multiple pathways
-        dup.rns = lapply(zsbml$reactions[duplicated(names(zsbml$reactions))], "[[", "pathway")
+        dup.zsbml <- duplicated(names(zsbml$reactions))
+        dup.rns <- sapply(zsbml$reactions[dup.zsbml], "[[", "pathway")
+        zsbml$reactions <- zsbml$reactions[!dup.zsbml] # Remove duplicated reactions.
+        
+        
         if(length(dup.rns)>0){
-            lapply(1:length(dup.rns), 
-                    function(x) zsbml$reactions[[ names(dup.rns)[x] ]]$pathway <<- 
-                                unique( c(zsbml$reactions[[ names(dup.rns)[x] ]]$pathway, dup.rns[[x]] )
-                                ))            
+            dup.rns <- split( unname(dup.rns), names(dup.rns))	# contains pathway info for removed rns.
+            zsbml$reactions[names(dup.rns)] <- mapply(
+                    function(x, dup){
+                        x$pathway <- c(x$pathway, dup)
+                        return(x)
+                    }, zsbml$reactions[names(dup.rns)], dup.rns, 
+                    SIMPLIFY=FALSE)		
         }
-    
+            
         zsbml$species <- zsbml$species[!duplicated(names(zsbml$species))]
     }
     if(verbose) message("SBML files processed successfully")
@@ -384,7 +396,9 @@ biopax2igraph <- function(biopax, parse.as=c("metabolic","signaling"),
     if (!require(rBiopaxParser))
         stop("This functions needs the rBiopaxParser library installed. Check out the installation instructions!")
     if (!("biopax" %in% class(biopax))) 
-        stop("Error: pathway2RegulatoryGraph: parameter biopax has to be of class biopax.")
+        stop("Error: biopax2igraph: parameter biopax has to be of class biopax.")
+    
+    biopax$df <- as.data.frame(biopax$dt)
     if(missing(parse.as) || parse.as=="metabolic"){
         if(biopax$biopaxlevel == 3)
             return(bpMetabolicL3(biopax, verbose))
@@ -400,6 +414,8 @@ biopax2igraph <- function(biopax, parse.as=c("metabolic","signaling"),
 
 bpMetabolicL3 <- function(biopax, verbose){
     if(verbose) message("Processing BioPAX (level 3) object as a metabolic network", appendLF=FALSE) 
+    to.df <- function(dt) return(as.data.frame(dt))
+    
     df <- biopax$df
     df$property = tolower(df$property)
     
@@ -413,9 +429,9 @@ bpMetabolicL3 <- function(biopax, verbose){
     # Metabolic reactions takes only small molecules as substrates/products.
     # The following lines removes any Biochemical reactions with non-small molecules
     #   participants.
-    classes <- listInstances(biopax,lefts[,1])
+    classes <- df[ rBiopaxParser::selectInstances(biopax, lefts[,1], returnValues=FALSE), c("class", "id")]
     sig.reactions <- lefts[match(classes$id, lefts[,1])[classes$class !="SmallMolecule"],2]
-    classes <- listInstances(biopax,rights[,2])
+    classes <- df[ rBiopaxParser::selectInstances(biopax, rights[,2], returnValues=FALSE), c("class", "id")]
     sig.reactions <- unlist(list(sig.reactions, 
                     rights[ match(classes$id, rights[,2])[classes$class !="SmallMolecule"], 1]))
     
@@ -432,13 +448,13 @@ bpMetabolicL3 <- function(biopax, verbose){
         
     XRefs <- bpGetReferences(biopax, V(graph)$name)
     names(XRefs) <- V(graph)$name
-    cat.r <- striph(selectInstances(biopax, class="Catalysis", property="controlled")$property_attr_value)
-    cat.gene <- striph(selectInstances(biopax, class="Catalysis", property="controller")$property_attr_value)
+    cat.r <- striph(to.df(rBiopaxParser::selectInstances(biopax, class="Catalysis", property="controlled"))$property_attr_value)
+    cat.gene <- striph(to.df(rBiopaxParser::selectInstances(biopax, class="Catalysis", property="controller"))$property_attr_value)
     
     gene.xref <- bpGetReferences(biopax, cat.gene)
     names(gene.xref) <- cat.r
-    lapply(names(gene.xref), function(x) XRefs[[x]] <<- c(XRefs[[x]],gene.xref[[x]]))
-    
+    XRefs[names(gene.xref)] <- mapply(c, XRefs[names(gene.xref)], gene.xref, SIMPLIFY=FALSE)
+
     ##############################################################
     # Getting attribute lists (name, compartment, pathway, MIRIAM)
     # For reactions (name, reactants, reactant.stoichiometry, products, product.stoichiomentry,
@@ -448,17 +464,17 @@ bpMetabolicL3 <- function(biopax, verbose){
     attr <- bpGetAnnFromXRef(df, XRefs[V(graph)$name])
     
     # Name attributes
-    v.names <- listInstances(biopax, id=V(graph)$name)
+    v.names <- to.df(rBiopaxParser::listInstances(biopax, id=V(graph)$name))
     v.names <- v.names[match(V(graph)$name, v.names$id), "name"]
     
     # Pathway attributes##########################
     ## Get Pathway name and annotations
-    pw <- listInstances(biopax, class="pathway")
+    pw <- to.df(rBiopaxParser::listInstances(biopax, class="pathway"))
     pwXRef <- bpGetReferences(biopax, pw$id)
     #pw.ann <- bpGetAnnFromXRef(df, pwXRef)
     
     ## Get pathway components (only reactions are returned)
-    pwcomp <- lapply(pw$id, function(x)listPathwayComponents(biopax,x, returnIDonly=TRUE))
+    pwcomp <- lapply(pw$id, function(x)rBiopaxParser::listPathwayComponents(biopax,x, returnIDonly=TRUE))
     pwcomp <- do.call("rbind", lapply(1:length(pwcomp), 
                     function(x)data.frame(id=x, comp=pwcomp[[x]])))
     
@@ -485,7 +501,7 @@ bpMetabolicL3 <- function(biopax, verbose){
     ## while reactions inherit them from their catalysts.
     
     ## Get Compartment name and annotations
-    comp <- listInstances(biopax, class="cellularLocationvocabulary", returnIDonly=TRUE)
+    comp <- rBiopaxParser::listInstances(biopax, class="cellularLocationvocabulary", returnIDonly=TRUE)
     comp.terms <- as.character(bpGetAttrbyID(df, comp, "term")$property_value)
     #compXRef <- bpGetReferences(biopax, comp)
     comp.ann <- bpGetAnnFromXRef(df, bpGetReferences(biopax, comp) )
@@ -512,7 +528,7 @@ bpMetabolicL3 <- function(biopax, verbose){
     ##Products
     products <- split(rights[,2], rights[,1], drop=TRUE)
     ##Genes
-    cat.gene.name <- listInstances(biopax,cat.gene)
+    cat.gene.name <- to.df(rBiopaxParser::listInstances(biopax,cat.gene))
     cat.gene.name <- cat.gene.name[match(cat.gene,cat.gene.name$id),"name"]
     genes <- split(cat.gene.name, cat.r, drop=TRUE)
     
@@ -525,7 +541,9 @@ bpMetabolicL3 <- function(biopax, verbose){
     
     edges <- rbind(lefts,rights)
     edges<- cbind(edges, st=NA)
-    apply(st[,c(1,4,5)], 1, function(x) edges[edges$id==x[[1]] & edges$property_attr_value==x[[2]],"st"] <<-x[[3]])
+    for(i in 1:nrow(st)){
+        edges[ edges[,1]==st[i,4] & edges[,2]==st[i,1], "st"] <- as.character(st[i,5])
+    }
     edges$st <- as.numeric(edges$st)
     
     r.stoic <- split(edges[1:nrow(lefts),3], edges[1:nrow(lefts),2], drop=TRUE)
@@ -594,6 +612,7 @@ bpMetabolicL3 <- function(biopax, verbose){
 
 bpMetabolicL2 <- function(biopax, verbose){
     if(verbose) message("Processing BioPAX (level 2) object as a metabolic network", appendLF=FALSE)
+    to.df <- function(dt) return(as.data.frame(dt))
     
     df <- biopax$df
     df$property = tolower(df$property)
@@ -615,13 +634,13 @@ bpMetabolicL2 <- function(biopax, verbose){
     
     XRefs <- bpGetReferences(biopax, V(graph)$name)
     names(XRefs) <- V(graph)$name
-    cat.r <- striph(selectInstances(biopax, class="Control", property="controlled")$property_attr_value)
-    cat.gene <- striph(selectInstances(biopax, class="Control", property="controller")$property_attr_value)
+    cat.r <- striph(to.df(rBiopaxParser::selectInstances(biopax, class="Control", property="controlled"))$property_attr_value)
+    cat.gene <- striph(to.df(rBiopaxParser::selectInstances(biopax, class="Control", property="controller"))$property_attr_value)
     
     gene.xref <- bpGetReferences(biopax, cat.gene, followProperties="physical-entity")#
     names(gene.xref) <- cat.r
-    lapply(names(gene.xref), function(x) XRefs[[x]] <<- c(XRefs[[x]],gene.xref[[x]]))
-    
+    XRefs[names(gene.xref)] <- mapply(c, XRefs[names(gene.xref)], gene.xref, SIMPLIFY=FALSE)
+
     ##############################################################
     # Getting attribute lists (name, compartment, pathway, MIRIAM)
     # For reactions (name, reactants, reactant.stoichiometry, products, product.stoichiomentry,
@@ -631,17 +650,17 @@ bpMetabolicL2 <- function(biopax, verbose){
     attr <- bpGetAnnFromXRef(df, XRefs[V(graph)$name])
     
     # Name attributes
-    v.names <- listInstances(biopax, id=V(graph)$name)
+    v.names <- to.df(rBiopaxParser::listInstances(biopax, id=V(graph)$name))
     v.names <- v.names[match(V(graph)$name, v.names$id), "name"]
     
     # Pathway attributes##########################
     ## Get Pathway name and annotations
-    pw <- listInstances(biopax, class="pathway")
+    pw <- rBiopaxParser::listInstances(biopax, class="pathway")
     pwXRef <- bpGetReferences(biopax, pw$id)
     #pw.ann <- bpGetAnnFromXRef(df, pwXRef)
     
     ## Get pathway components (only reactions are returned)
-    pwcomp <- lapply(pw$id, function(x)listPathwayComponents(biopax,x, returnIDonly=TRUE))
+    pwcomp <- lapply(pw$id, function(x)rBiopaxParser::listPathwayComponents(biopax,x, returnIDonly=TRUE))
     pwcomp <- do.call("rbind", lapply(1:length(pwcomp), 
                     function(x)data.frame(id=x, comp=pwcomp[[x]])))
     
@@ -668,7 +687,7 @@ bpMetabolicL2 <- function(biopax, verbose){
     ## while reactions inherit them from their catalysts.
     
     ## Get Pathway name and annotations
-    comp <- listInstances(biopax, class="openControlledVocabulary", returnIDonly=TRUE)#
+    comp <- rBiopaxParser::listInstances(biopax, class="openControlledVocabulary", returnIDonly=TRUE)#
     comp.terms <- as.character(bpGetAttrbyID(df, comp, "term")$property_value)
     compXRef <- bpGetReferences(biopax, comp)#
     #comp.ann <- bpGetAnnFromXRef(df, bpGetReferences(biopax, comp) )
@@ -705,7 +724,7 @@ bpMetabolicL2 <- function(biopax, verbose){
     products <- split(rights[,2], rights[,1], drop=TRUE)
     ##Genes ##totally different from level3 function
     cat.gene.ref <- bpGetAttrbyID(df,cat.gene, "physical-entity", "property_attr_value")
-    cat.gene.name <- listInstances(biopax, cat.gene.ref[,3])
+    cat.gene.name <- to.df(rBiopaxParser::listInstances(biopax, cat.gene.ref[,3]))
     cat.gene.ref$name <- cat.gene.name$name[match(striph(cat.gene.ref[,3]), cat.gene.name$id)]
     
     cat.gene.ref <- cat.gene.ref[match(cat.gene,cat.gene.ref$id),"name"]    
@@ -790,6 +809,7 @@ bpMetabolicL2 <- function(biopax, verbose){
 # TODO: edge attributes in signaling networks
 bpSignalingL3 <- function(biopax, expand.complexes=FALSE, inc.sm.molecules=FALSE, verbose=TRUE){
     if(verbose) message("Processing BioPAX (level 3) object as a signaling network", appendLF=FALSE) 
+    to.df <- function(dt) return(as.data.frame(dt))
     df <- biopax$df
     df$property = tolower(df$property)
     
@@ -803,15 +823,15 @@ bpSignalingL3 <- function(biopax, expand.complexes=FALSE, inc.sm.molecules=FALSE
     # Identifying Metabolic and signaling reactions.
     # Metabolic reactions takes only small molecules as substrates/products.
     # Signaling reactions have at least one non-small-molecule participant.  
-    classes.left <- listInstances(biopax,lefts[,1])
+    classes.left <- df[ rBiopaxParser::selectInstances(biopax, lefts[,1], returnValues=FALSE), c("class", "id")]
     sig.reactions <- lefts[match(classes.left$id, lefts[,1])[classes.left$class !="SmallMolecule"],2]
-    classes.right <- listInstances(biopax,rights[,2])
+    classes.right <- df[ rBiopaxParser::selectInstances(biopax, rights[,2], returnValues=FALSE), c("class", "id")]
     sig.reactions <- unlist(list(sig.reactions, 
                     rights[ match(classes.right$id, rights[,2])[classes.right$class !="SmallMolecule"], 1]))
     
     
-    controlled <- striph(selectInstances(biopax, class="Catalysis", property="controlled")$property_attr_value)
-    controller <- striph(selectInstances(biopax, class="Catalysis", property="controller")$property_attr_value)
+    controlled <- striph(to.df(rBiopaxParser::selectInstances(biopax, class="Catalysis", property="controlled"))$property_attr_value)
+    controller <- striph(to.df(rBiopaxParser::selectInstances(biopax, class="Catalysis", property="controller"))$property_attr_value)
     
     
     # Metabolic reactions are represented in signaling networks by their "Controller"
@@ -865,7 +885,7 @@ bpSignalingL3 <- function(biopax, expand.complexes=FALSE, inc.sm.molecules=FALSE
     sig.vertices <- unique(all.sig)
     
     # Combining the signaling reactions with the metabolic one.
-    graph <- graph + vertices(sig.vertices[!sig.vertices %in% V(graph)$name]) + igraph::edges(all.sig) 
+    graph <- graph + vertices(sig.vertices[!sig.vertices %in% V(graph)$name], attr=list(list())) + igraph::edges(all.sig) 
     
     if(expand.complexes){
         comsp <- bpSplitComplex(biopax,V(graph)$name, inc.sm.molecules)
@@ -887,22 +907,22 @@ bpSignalingL3 <- function(biopax, expand.complexes=FALSE, inc.sm.molecules=FALSE
     attr <- bpGetAnnFromXRef(df, XRefs[V(graph)$name])
     
     # Name attributes
-    v.names <- listInstances(biopax, id=V(graph)$name)
+    v.names <- to.df(rBiopaxParser::listInstances(biopax, id=V(graph)$name))
     v.names <- v.names[match(V(graph)$name, v.names$id), "name"]
     
     ## Get Pathway name and annotations
-    pw <- listInstances(biopax, class="pathway")
+    pw <- to.df(rBiopaxParser::listInstances(biopax, class="pathway"))
     pwXRef <- bpGetReferences(biopax, pw$id)
     
     ## Get pathway components (only reactions are returned)
-    pwcomp <- lapply(pw$id, function(x)listPathwayComponents(biopax,x, returnIDonly=FALSE))
+    pwcomp <- lapply(pw$id, function(x) rBiopaxParser::listPathwayComponents(biopax,x, returnIDonly=TRUE))
     pwcomp <- do.call("rbind", lapply(1:length(pwcomp), 
                     function(x)data.frame(id=x, comp=pwcomp[[x]])))
     
     ## Restrict Pathway components to Conversion reactions (Removing PathwayStep, Control).
-    pwcomp <- pwcomp[pwcomp$comp.class %in% c("Conversion", getSubClasses("Conversion", biopaxlevel=3)) ,]
+    pwcomp <- pwcomp[pwcomp$comp %in% rBiopaxParser::listInstances(biopax, class="Conversion", includeSubClasses=TRUE, returnIDonly=TRUE),]
     
-    pwcomp <- split(pwcomp$id, pwcomp$comp.id, drop=TRUE)
+    pwcomp <- split(pwcomp$id, pwcomp$comp, drop=TRUE)
     
     ## Since Conversions (reactions) are no longer present in the network 
     #   (either their controllers or substrate/products are retained), vertices inherit
@@ -922,7 +942,7 @@ bpSignalingL3 <- function(biopax, expand.complexes=FALSE, inc.sm.molecules=FALSE
     
     ## Compartment attributes #######################
     ### Get Compartment name and annotations
-    comp <- listInstances(biopax, class="cellularLocationvocabulary", returnIDonly=TRUE)
+    comp <- rBiopaxParser::listInstances(biopax, class="cellularLocationvocabulary", returnIDonly=TRUE)
     comp.terms <- as.character(bpGetAttrbyID(df, comp, "term")$property_value)
     comp.ann <- bpGetAnnFromXRef(df, bpGetReferences(biopax, comp) )
     
@@ -1005,7 +1025,7 @@ bpSplitComplex<-function (biopax, complexid, inc.sm.molecules)
         return(NULL)
     
     ref = do.call("rbind", lapply( na.omit(names(ref)), function(x) cbind( x, striph(ref[[x]]) ) ) )
-    referenced = listInstances(biopax, id = unique(ref[,2]))
+    referenced = biopax$df[rBiopaxParser::selectInstances(biopax, id = unique(ref[,2]), returnValues=FALSE), c("class", "id")]
     sel = referenced[ tolower(referenced$class) %in% classes, "id"]
     if (length(sel)==0) 
         return(NULL)

@@ -1,25 +1,13 @@
+#ifdef HAVE_XML
 #include <libxml/xmlreader.h>
 #include <libxml/parser.h>
 #include <libxml/tree.h>
 #include <libxml/xpath.h>
 #include <libxml/xpathInternals.h>
-
-#include <string.h>
-#include <string>
 #include <sstream>
-#include <vector>
-#include <iostream>
-#include <algorithm>
-using namespace std;
 
-
-#include <R.h>
-#include <Rmath.h>
-#include <Rdefines.h>
-#include <Rinternals.h>
-extern "C"{
-#include <handlesegfault.h>
-}
+#include "handlesegfault.h"
+#include "init.h"
 
 /* Declaration of functions */
 void readkgml_sign_int(const char* filename, vector<string> &vertices,
@@ -42,8 +30,8 @@ bool elem_in_vector(vector<T> v, T &e);
 
 
 
-extern "C" SEXP readkgmlfile(SEXP FILENAME, SEXP VERBOSE) {
-	handleKGML();
+SEXP readkgmlfile(SEXP FILENAME, SEXP VERBOSE) {
+	handle_segfault_KGML();
 
 	const char *filename = CHAR(STRING_ELT(FILENAME,0));
 	bool verbose = LOGICAL(VERBOSE)[0];
@@ -242,8 +230,8 @@ extern "C" SEXP readkgmlfile(SEXP FILENAME, SEXP VERBOSE) {
     return(REACTIONLIST);
 }
 
-extern "C" SEXP readkgml_sign(SEXP FILENAME, SEXP EXPAND_COMPLEXES, SEXP VERBOSE) {
-	handleKGML();
+SEXP readkgml_sign(SEXP FILENAME, SEXP EXPAND_COMPLEXES, SEXP VERBOSE) {
+	handle_segfault_KGML();
 
 	bool expand_complexes = LOGICAL(EXPAND_COMPLEXES)[0];
 	bool verbose = LOGICAL(VERBOSE)[0];
@@ -689,4 +677,4 @@ std::vector<std::string> split(const std::string &s, char delim) {
     split(s, delim, elems);
     return elems;
 }
-
+#endif

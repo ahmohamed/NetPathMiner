@@ -9,16 +9,14 @@
 #include <deque>
 #include <utility>
 #include <fstream>
-#include <sstream>
-#include <iostream>
 #include <iterator>
-#include <algorithm>
 
-#include <vector>
 //#define MATHLIB_STANDALONE
 #include <math.h>
 #include <float.h>
-#include <string.h>
+
+//init
+#include "init.h"
 
 // boost 1.33.1 required
 #include <boost/graph/graph_utility.hpp>
@@ -28,14 +26,6 @@
 
 #define R_NO_REMAP
 
-extern "C" {
-#include <R.h>
-#include <Rmath.h>
-#include <Rdefines.h>
-#include <Rinternals.h>
-}
-
-using namespace std;
 using namespace boost;
 
 //  ****** base graph ******  //

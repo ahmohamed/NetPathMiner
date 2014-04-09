@@ -1,39 +1,320 @@
 #!/bin/sh
-cd src;
-if test -d ./boost;
-	then 
-		echo 'found boostIncl header sources and tar archive;\n using what is there.'
-	else
-		echo "untarring boost include tree...";
-		tar zxf boost.tar.gz;
+test_xml_function(){
+echo '
+#include <stdio.h>
+#include <libxml/xmlreader.h>
+
+int main(){
+    xmlParseFile("nofile");
+    return 0;
+}
+'>xml_test.cpp
+
+${CPP_COMPILER} -o xml_test.out xml_test.cpp ${pkg_cppflags} ${XML_INCDIR} ${XML_LIBS} ${pkg_libs} >/dev/null 2>&1
+
+echo -n "* testing xmlParseFile in libxml2 ... "
+if test -f xml_test.out
+    then
+        echo "success"
+		pkg_cppflags="${pkg_cppflags} -DHAVE_XML ${XML_INCDIR}"
+		pkg_libs="${XML_LIBS} ${pkg_libs}"
+        HAVE_XML=true
+    else
+        echo "failed"
+		echo -n "** Error Message: "
+		echo `${CPP_COMPILER} -o xml_test.out xml_test.cpp ${pkg_cppflags} ${XML_INCDIR} ${XML_LIBS} ${pkg_libs}`
+		echo "** Although libxml2 headers and binaries were found, compiler failed.
+	This may be due to incomplete headers or corrupt library."
 fi;
 
-if test -f ${R_HOME}/NPM_dependencies.tar.gz;
-	then
-		echo 'found dependencies files. untarring...'
-		tar zxf ${R_HOME}/NPM_dependencies.tar.gz;
-		cp Makevars.win Makevars.win_;
-		echo 'PKG_CPPFLAGS=-D_R_=1 -DUSE_R=1 -I. -I"./libs/include/" -I"./libs/include/libxml2"
+rm xml_test.*
+}
+
+test_sbml_function(){
+echo '
+#include <stdio.h>
+#include <sbml/SBMLTypes.h>
+
+int main(){
+    readSBML("nofile")->getModel();
+    return 0;
+}
+'>sbml_test.cpp
+
+${CPP_COMPILER} -o sbml_test.out sbml_test.cpp ${pkg_cppflags} ${SBML_INCDIR} ${SBML_LIBS} ${pkg_libs} >/dev/null 2>&1
+
+echo -n "* testing readSBML, SBMLDocument::getModel in libSBML ... "
+if test -f sbml_test.out
+    then
+        echo "success"
+		pkg_cppflags="${pkg_cppflags} -DHAVE_SBML ${SBML_INCDIR}"
+		pkg_libs="${SBML_LIBS} ${pkg_libs}"
+        HAVE_SBML=true
+    else
+        echo "failed"
+        echo -n "** Error Message: "
+		echo `${CPP_COMPILER} -o sbml_test.out sbml_test.cpp ${pkg_cppflags} ${SBML_INCDIR} ${SBML_LIBS} ${pkg_libs}`
+		echo "** Although libSBML headers and binaries were found, compiler failed.
+	Please ensure that libSBML is built using GCC compiler."
+	    
+fi;
+
+rm sbml_test.*
+}
+
+makevars_dependencies(){
+echo 'PKG_CPPFLAGS=-DWIN_COMPILE -DHAVE_XML -DHAVE_SBML -I. -I"./libs/include/" -I"./libs/include/libxml2"
 PKG_LIBS = -L"libs$(R_ARCH)" -lsbml -lxml2 -liconv -lstdc++ $(LAPACK_LIBS) $(BLAS_LIBS) $(FLIBS)
 
 all:$(SHLIB)
 	mkdir -p "$(R_PACKAGE_DIR)/libs$(R_ARCH)"
-	cp libs$(R_ARCH)/*.dll "${R_PACKAGE_DIR}/libs${R_ARCH}"' >> Makevars.win;
+	cp libs$(R_ARCH)/*.dll "${R_PACKAGE_DIR}/libs${R_ARCH}"
+'> Makevars.win;
 
-	else
-		echo "Dependecies not found. SBML file processing disabled."
-		cp Makevars.win Makevars.win_;
-		echo 'PKG_LIBS = -L${LIB_XML}/lib -L${LIB_XML2}/lib -lxml2 -liconv -lz -lws2_32 $(LAPACK_LIBS) $(BLAS_LIBS) $(FLIBS)' >> Makevars.win
-		mv sbml_interface.cpp sbml_interface.c__;
-		mv sbml_interface.h sbml_interface.h__;
-fi;
+}
 
+makevars_bioC(){
+pkg_cppflags="-DWIN_COMPILE -I. -I${R_HOME}/include"
+pkg_libs=""
 
-if test -f handlesegfault.cwin;
+if ${HAVE_XML}
 	then
-		echo "Modifying segfault handling for Windows"	
-		mv handlesegfault.c handlesegfault.c__;
-		mv handlesegfault.cwin handlesegfault.c;
+		pkg_cppflags="${pkg_cppflags} -DHAVE_XML -I${LIB_XML2}/\${R_ARCH}/include/libxml2"
+		pkg_libs="-L${LIB_XML2}/\${R_ARCH}/lib -lxml2 -lws2_32 ${pkg_libs}"
 fi;
 
-cd ..;
+if ${HAVE_SBML}
+	then
+		pkg_cppflags="${pkg_cppflags} -DHAVE_SBML -I${LIBSBML_PATH}/\${R_ARCH}/include"
+		pkg_libs="-L${LIBSBML_PATH}/\${R_ARCH}/bin -lsbml ${pkg_libs}"
+fi;
+
+echo "PKG_CPPFLAGS=${pkg_cppflags}
+PKG_LIBS = ${pkg_libs} \$(LAPACK_LIBS) \$(BLAS_LIBS) \$(FLIBS)
+"> Makevars.win;
+
+}
+
+xml_check_header(){
+echo "XML folder";
+echo `find ${lib_xml_location} | tr '\n' ' '`;
+echo -n "* searching for libxml2 headers under ${lib_xml_location} ... ";
+if test -f ${lib_xml_location}/libxml/xmlreader.h
+	then
+		echo "found"
+		XML_INCDIR="-I${lib_xml_location}"
+		return
+fi;
+
+if test -f ${lib_xml_location}/include/libxml/xmlreader.h
+	then
+		echo "found"
+		XML_INCDIR="-I${lib_xml_location}/include"
+		return
+fi;
+
+if test -f ${lib_xml_location}/include/libxml2/libxml/xmlreader.h
+	then
+		echo "found"
+		XML_INCDIR="-I${lib_xml_location}/include/libxml2"
+		return
+fi;
+
+# Search also in sbml installation directory.
+if test -f ${lib_sbml_location}/include/libxml/xmlreader.h
+	then
+		echo "found"
+		XML_INCDIR="-I${lib_sbml_location}/include/"
+		return
+fi;
+
+echo "failed"
+}
+
+sbml_check_header(){
+echo "SBML folder";
+echo `find ${lib_sbml_location} | tr '\n' ' '`;
+echo -n "* searching for libSBML headers under ${lib_sbml_location} ... ";
+if test -f ${lib_sbml_location}/sbml/SBMLTypes.h
+	then
+		echo "found"
+		SBML_INCDIR="-I${lib_sbml_location}"
+		return
+fi;
+
+if test -f ${lib_sbml_location}/include/sbml/SBMLTypes.h
+	then
+		echo "found"
+		SBML_INCDIR="-I${lib_sbml_location}/include"
+		return
+fi;
+
+echo "failed"
+}
+
+xml_check_libs(){
+echo -n "* searching for libxml2 binaries under ${lib_xml_location} ... ";
+if test -f ${lib_xml_location}/bin/*xml*
+	then
+		echo "found"
+		XML_LIBS="-L${lib_xml_location}/bin -lxml2"
+		return
+fi;
+
+if test -f ${lib_xml_location}/lib/*xml*
+	then
+		echo "found"
+		XML_LIBS="-L${lib_xml_location}/lib -lxml2"
+		return
+fi;
+
+echo "failed"
+}
+
+sbml_check_libs(){
+echo -n "* searching for libSBML binaries under ${lib_sbml_location} ... ";
+if test -f ${lib_sbml_location}/bin/*sbml*
+	then
+		echo "found"
+		SBML_LIBS="-L${lib_sbml_location}/bin -lsbml"
+		return
+fi;
+
+if test -f ${lib_sbml_location}/lib/*sbml*
+	then
+		echo "found"
+		SBML_LIBS="-L${lib_sbml_location}/lib -lsbml"
+		return
+fi;
+
+echo "failed"
+}
+CPP_COMPILER=`R CMD config CXX`
+
+cd src;
+echo -n '* searching for boost headers ... '
+if test -d ./boost;
+	then 
+		echo 'found.'
+	else
+		echo "not found. Untarring boost.tar.gz";
+		tar zxf boost.tar.gz;
+fi;
+
+echo -n '* searching for NPM_dependencies file ... '
+if test -f ${R_HOME}/NPM_dependencies.tar.gz;
+	then
+		echo 'found. untarring ...'
+		tar zxf ${R_HOME}/NPM_dependencies.tar.gz;
+		makevars_dependencies;
+		cd ..; exit;
+	else
+	    echo 'not found.'
+fi;
+
+echo "* Searching for libxml2 and libSBML ... "
+pkg_cppflags="-DWIN_COMPILE -I. -I${R_HOME}/include"
+pkg_libs=""
+HAVE_XML=false
+HAVE_SBML=false
+
+if test -n "${LIB_XML2}" && test -n "${LIBSBML_PATH}"
+	then
+		echo "* compiling on Bioconductor machines..."
+		XML_INCDIR="-I${LIB_XML2}/${R_ARCH}/include/libxml2"
+		XML_LIBS="-L${LIB_XML2}/${R_ARCH}/lib -lxml2 -lws2_32"
+		SBML_INCDIR="-I${LIBSBML_PATH}/${R_ARCH}/include"
+		SBML_LIBS="-L${LIBSBML_PATH}/${R_ARCH}/bin -lsbml"
+		test_xml_function;
+		test_sbml_function;
+		makevars_bioC;
+		exit;
+fi;
+
+if test -n "${LIB_XML}"
+	then
+		echo "** LIB_XML variable is defined. Searching for libxml2 there."
+		lib_xml_location="${LIB_XML}"
+fi;
+
+if test -n "${LIB_XML2}"
+	then
+		echo "** LIB_XML2 variable is defined. Searching for libxml2 there."
+		lib_xml_location="${LIB_XML2}"
+fi;
+
+if test -n "${LIB_SBML}"
+	then
+		echo "** LIB_SBML variable is defined. Searching for libSBML there."
+		lib_sbml_location="${LIB_SBML}"
+		
+		if test -d ${LIB_SBML}/win32
+			then
+				lib_sbml_location="${LIB_SBML}/win32"
+		fi;
+		
+		if test -d ${LIB_SBML}/win64
+			then
+				lib_sbml_location="${LIB_SBML}/win64"
+		fi;		
+fi;
+
+if test -n "${LIBSBML_PATH}"
+	then
+		echo "** LIBSBML_PATH variable is defined. Searching for libSBML there."
+		lib_sbml_location="${LIBSBML_PATH}"
+		if test -d ${LIBSBML_PATH}/win32
+			then
+				lib_sbml_location="${LIBSBML_PATH}/win32"
+		fi;
+		
+		if test -d ${LIBSBML_PATH}/win64
+			then
+				lib_sbml_location="${LIBSBML_PATH}/win64"
+		fi;
+fi;
+
+if test -z "${lib_xml_location}"
+	then
+		echo "** Cannot find libxml2. Neither LIB_XML nor LIB_XML2 variables are defined."
+	else
+		xml_check_header;
+		xml_check_libs;
+		if test -n "${XML_INCDIR}" && test -n "${XML_LIBS}"
+			then
+				test_xml_function;
+		fi;
+fi;	
+
+if test -z "${lib_sbml_location}"
+	then
+		echo "** Cannot find libSBML. Neither LIB_SBML nor LIBSBML_PATH variables are defined."
+	else
+		sbml_check_header;
+		sbml_check_libs;
+		if test -n "${SBML_INCDIR}" && test -n "${SBML_LIBS}"
+			then
+				test_sbml_function;
+		fi;
+fi;	
+
+if ${HAVE_XML}
+	then
+	else
+		echo "NOTE: The package failed to find libxml2. KGML file processing disabled."
+fi;
+
+if ${HAVE_SBML}
+	then
+	else
+		echo "NOTE: The package failed to find libSBML. SBML file processing disabled."
+fi;
+
+echo "ifeq \"\${R_ARCH}\" \"${R_ARCH}\"
+PKG_CPPFLAGS=${pkg_cppflags}
+PKG_LIBS=${pkg_libs} \$(LAPACK_LIBS) \$(BLAS_LIBS) \$(FLIBS)
+else
+PKG_CPPFLAGS=-DWIN_COMPILE -I. -I${R_HOME}/include
+PKG_LIBS=\$(LAPACK_LIBS) \$(BLAS_LIBS) \$(FLIBS)
+endif
+">Makevars.win

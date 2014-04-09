@@ -1,3 +1,4 @@
+#ifdef HAVE_SBML
 #include "sbml_interface.h"
 
 template <class T>
@@ -5,7 +6,7 @@ void free_vec(vector<T> &v){
 	vector<T>().swap(v);
 }
 
-extern "C" SEXP readsbmlfile(SEXP FILENAME, SEXP ATTR_TERMS, SEXP VERBOSE) {
+SEXP readsbmlfile(SEXP FILENAME, SEXP ATTR_TERMS, SEXP VERBOSE) {
 	handle_segfault_SBML();
 
 	SEXP SPECIESFRAME, REACTIONLIST, OUT,NAMES;
@@ -324,7 +325,7 @@ SEXP get_species_info(Model *model, const string species, const vector<string> &
 	return(SP);
 }
 
-extern "C" SEXP readsbml_sign(SEXP FILENAME, SEXP ATTR_TERMS, SEXP VERBOSE){
+SEXP readsbml_sign(SEXP FILENAME, SEXP ATTR_TERMS, SEXP VERBOSE){
 	handle_segfault_SBML();
 
 	vector<string> attr_terms;
@@ -550,4 +551,5 @@ size_t add_elem(vector<T> &v,const T &e){
 bool not_alnum(char c){
 	return(!( isalnum(c) || c=='.'));
 }
+#endif
 

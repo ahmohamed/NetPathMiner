@@ -246,7 +246,7 @@ vertexDeleteReconnect <- function(graph, vids, reconnect.threshold=vcount(graph)
     #Get Actual shortest paths for vertices that passed the threshold, to copy edge attributes.
     attr <- NULL
     if(!is.null(copy.attr)){
-        paths <- mapply(function(from, to) get.shortest.paths(graph.sub, from, to, output="both",mode="out")$vpath,
+        paths <- mapply(function(from, to) igraph::get.shortest.paths(graph.sub, from, to, output="both",mode="out")$vpath,
                         new.edges[1,], new.edges[2,])
         
         if(!is.list(copy.attr)) copy.attr <- sapply(list.edge.attributes(graph.sub), function(x)copy.attr)
@@ -374,7 +374,9 @@ expandComplexes <- function(graph, v.attr,
     }
 
     gout <- setAttribute(gout, v.attr, V(gout)$name)
-    lapply(list.edge.attributes(graph), function(x) gout<<-set.edge.attribute(gout, x, value=get.edge.attribute(graph, x)[z$e.parents] ))
+    for(i in list.edge.attributes(graph)){
+        gout <- set.edge.attribute(gout, i, value=get.edge.attribute(graph, i)[z$e.parents] )
+    }
     return(gout);
 }
 

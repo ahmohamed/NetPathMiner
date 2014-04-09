@@ -2905,17 +2905,18 @@ fi
 		if test -n "${SBMLPC}"
 			then
 				echo "libsbml.pc found. Using pkg-config to extract it."
-				SBML_INCDIR=`${PKG_CONFIG} --cflags ${SBMLPC}`
+				SBML_INCDIR="-DHAVE_SBML `${PKG_CONFIG} --cflags ${SBMLPC}`"
 				SBML_LIBS=`${PKG_CONFIG} --libs ${SBMLPC}`
 			else
 				echo "Couldn't find libsbml.pc. Searching for libsbml in candidate directories."
 				if test -d /usr/include/sbml
-					then SBML_INCDIR="-I/usr/include/"
+					then SBML_INCDIR="-DHAVE_SBML -I/usr/include/"
 					else
 						if test -d /usr/local/include/sbml
-							then SBML_INCDIR="-I/usr/local/include/"
+							then SBML_INCDIR="-DHAVE_SBML -I/usr/local/include/"
 						fi;
 				fi;
+		fi;
 
 	for ac_prog in xml2-config
 do
@@ -2962,12 +2963,11 @@ fi
   test -n "$XML_CONFIG" && break
 done
 
-	LIBXML_INCDIR=`${XML_CONFIG} --cflags`
+	LIBXML_INCDIR="-DHAVE_XML `${XML_CONFIG} --cflags`"
 	XML_LIBS=`${XML_CONFIG} --libs`
 
-				SBML_INCDIR="$LIBXML_INCDIR $SBML_INCDIR"
-				SBML_LIBS="$XML_LIBS"
-		fi;
+        SBML_INCDIR="$LIBXML_INCDIR $SBML_INCDIR"
+        SBML_LIBS="$XML_LIBS"
 		CPPFLAGS="${CPPFLAGS} ${SBML_INCDIR}"
 		PKG_LIBS="${PKG_LIBS} ${SBML_LIBS} -lsbml"
 
@@ -3024,11 +3024,9 @@ fi
   test -n "$XML_CONFIG" && break
 done
 
-	LIBXML_INCDIR=`${XML_CONFIG} --cflags`
+	LIBXML_INCDIR="-DHAVE_XML `${XML_CONFIG} --cflags`"
 	XML_LIBS=`${XML_CONFIG} --libs`
 
-			CPPFLAGS="${CPPFLAGS} ${LIBXML_INCDIR}"
-			PKG_LIBS="${PKG_LIBS} ${XML_LIBS} -lxml2"
 		else
 			echo 'XML not found.'; cd src;
 			mv kgml_interface.cpp kgml_interface.c__;  cd ..;
@@ -4208,7 +4206,6 @@ if test -n "$ac_unrecognized_opts" && test "$enable_option_checking" != no; then
 $as_echo "$as_me: WARNING: unrecognized options: $ac_unrecognized_opts" >&2;}
 fi
 
-chmod +x cleanup
 
 mv src/Makevars.in src/_Makevars.in_;
 rm config.*

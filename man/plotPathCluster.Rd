@@ -48,11 +48,11 @@ Plots the structure of specified path found by pathCluster.
 
 	## Get ranked paths using probabilistic shortest paths.
  ranked.p <- pathRanker(rgraph, method="prob.shortest.path",
-					K=20, minPathSize=6)
+					K=20, minPathSize=8)
 
 	## Convert paths to binary matrix.
 	ybinpaths <- pathsToBinary(ranked.p)
-	p.cluster <- pathCluster(ybinpaths, M=3)
+	p.cluster <- pathCluster(ybinpaths, M=2)
 	plotPathCluster(ybinpaths, p.cluster, m=2, tol=0.05)
 }
 \author{
