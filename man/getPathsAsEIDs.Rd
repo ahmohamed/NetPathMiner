@@ -1,0 +1,53 @@
+\name{getPathsAsEIDs}
+\alias{getPathsAsEIDs}
+\title{Convert a ranked path list to edge ids of a graph}
+\usage{
+getPathsAsEIDs(paths, graph)
+}
+\arguments{
+  \item{paths}{The paths extracted by
+  \code{\link{pathRanker}}.}
+
+  \item{graph}{A annotated igraph object.}
+}
+\value{
+A list of edge ids on the provided graph.
+}
+\description{
+Convert a ranked path list to Edge ids of a graph, where
+paths can come from a different representation (for example
+matching path from a reaction network to edges on a
+metabolic network).
+}
+\examples{
+## Prepare a weighted reaction network.
+	## Conver a metabolic network to a reaction network.
+ data(ex_sbml) # bipartite metabolic network of Carbohydrate metabolism.
+ rgraph <- makeReactionNetwork(ex_sbml, simplify=TRUE)
+
+	## Assign edge weights based on Affymetrix attributes and microarray dataset.
+ # Calculate Pearson's correlation.
+	data(ex_microarray)	# Part of ALL dataset.
+	rgraph <- assignEdgeWeights(microarray = ex_microarray, graph = rgraph,
+		weight.method = "cor", use.attr="miriam.uniprot",
+		y=factor(colnames(ex_microarray)), bootstrap = FALSE)
+
+	## Get ranked paths using probabilistic shortest paths.
+ ranked.p <- pathRanker(rgraph, method="prob.shortest.path",
+					K=20, minPathSize=6)
+
+	## Get the edge ids along paths in the reaction graph.
+	path.eids <- getPathsAsEIDs(ranked.p, rgraph)
+
+	## Get the edge ids along paths in the original metabolic graph.
+	path.eids <- getPathsAsEIDs(ranked.p, ex_sbml)
+}
+\author{
+Ahmed Mohamed
+}
+\seealso{
+Other Path ranking methods:
+\code{\link{extractPathNetwork}}; \code{\link{pathRanker}};
+\code{\link{samplePaths}}
+}
+

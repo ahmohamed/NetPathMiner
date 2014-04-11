@@ -1,0 +1,10 @@
+#!/bin/sh
+echo "removing boost headers..."
+cd src; rm -rf boost
+
+echo "restoring Makevars.in file..."
+mv _Makevars.in_ Makevars.in; 
+rm Makevars
+
+echo "removing compiled code..."
+rm *.o

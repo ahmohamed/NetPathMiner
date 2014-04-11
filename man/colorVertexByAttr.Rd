@@ -1,0 +1,43 @@
+\name{colorVertexByAttr}
+\alias{colorVertexByAttr}
+\title{Computes colors for vertices according to their attributes.}
+\usage{
+colorVertexByAttr(graph, attr.name, col.palette = palette())
+}
+\arguments{
+  \item{graph}{An annotated igraph object.}
+
+  \item{attr.name}{The attribute name (ex: "pathway") by
+  which vertices will be colored. Complex attributes, where
+  a vertex belongs to more than one group, are supported.}
+
+  \item{col.palette}{A color palette, or a palette
+  generating function (ex:
+  \preformatted{col.palette=rainbow}).}
+}
+\value{
+A list of colors (in HEX format) for vertices.
+}
+\description{
+This function returns a list of colors for vertices,
+assigned similar colors if they share a common attribute
+(ex: in the same pathway, etc).
+}
+\examples{
+data("ex_kgml_sig")
+  v.colors <- colorVertexByAttr(ex_kgml_sig, "pathway")
+  plotNetwork(ex_kgml_sig, vertex.color=v.colors)
+}
+\author{
+Ahmed Mohamed
+}
+\seealso{
+Other Plotting methods: \code{\link{layoutVertexByAttr}};
+\code{\link{plotAllNetworks}};
+\code{\link{plotClassifierROC}};
+\code{\link{plotClusterMatrix}},
+\code{\link{plotClusterProbs}}, \code{\link{plotClusters}};
+\code{\link{plotCytoscape}}; \code{\link{plotNetwork}};
+\code{\link{plotPathClassifier}}; \code{\link{plotPaths}}
+}
+

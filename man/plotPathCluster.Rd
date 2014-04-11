@@ -1,0 +1,72 @@
+\name{plotPathCluster}
+\alias{plotPathCluster}
+\title{Plots the structure of specified path cluster}
+\usage{
+plotPathCluster(ybinpaths, clusters, m, tol = NULL)
+}
+\arguments{
+  \item{ybinpaths}{The training paths computed by
+  \code{\link{pathsToBinary}}.}
+
+  \item{clusters}{The pathway cluster model trained by
+  \code{\link{pathCluster}} or
+  \code{\link{pathClassifier}}.}
+
+  \item{m}{The path cluster to view.}
+
+  \item{tol}{A tolerance for 3M parameter \code{theta}
+  which is the probability for each edge within each
+  cluster.  If the tolerance is set all edges with a
+  \code{theta} below that tolerance will be removed from
+  the plot.}
+}
+\value{
+Produces a plot of the paths with the path probabilities
+and cluster membership probabilities. \item{Center Plot}{An
+image of all paths the training dataset. Rows are the paths
+and columns are the genes (features) included within each
+path.} \item{Right}{The training set posterior
+probabilities for each path belonging to the current 3M
+component.} \item{Top Bar Plots}{\code{Theta}, The 3M
+component probabilities - indicates the importance of each
+edge to a pathway.}
+}
+\description{
+Plots the structure of specified path found by pathCluster.
+}
+\examples{
+## Prepare a weighted reaction network.
+	## Conver a metabolic network to a reaction network.
+ data(ex_sbml) # bipartite metabolic network of Carbohydrate metabolism.
+ rgraph <- makeReactionNetwork(ex_sbml, simplify=TRUE)
+
+	## Assign edge weights based on Affymetrix attributes and microarray dataset.
+ # Calculate Pearson's correlation.
+	data(ex_microarray)	# Part of ALL dataset.
+	rgraph <- assignEdgeWeights(microarray = ex_microarray, graph = rgraph,
+		weight.method = "cor", use.attr="miriam.uniprot", bootstrap = FALSE)
+
+	## Get ranked paths using probabilistic shortest paths.
+ ranked.p <- pathRanker(rgraph, method="prob.shortest.path",
+					K=20, minPathSize=8)
+
+	## Convert paths to binary matrix.
+	ybinpaths <- pathsToBinary(ranked.p)
+	p.cluster <- pathCluster(ybinpaths, M=2)
+	plotPathCluster(ybinpaths, p.cluster, m=2, tol=0.05)
+}
+\author{
+Timothy Hancock and Ichigaku Takigawa
+}
+\seealso{
+Other Path clustering & classification methods:
+\code{\link{pathClassifier}}; \code{\link{pathCluster}};
+\code{\link{pathsToBinary}};
+\code{\link{plotClassifierROC}};
+\code{\link{plotClusterMatrix}},
+\code{\link{plotClusterProbs}}, \code{\link{plotClusters}};
+\code{\link{plotPathClassifier}};
+\code{\link{predictPathClassifier}};
+\code{\link{predictPathCluster}}
+}
+

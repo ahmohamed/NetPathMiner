@@ -1,0 +1,1635 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<sbml xmlns="http://www.sbml.org/sbml/level2/version4" level="2" version="4">
+  <model id="pathway_189445" name="Metabolism of porphyrins" metaid="metaid_0">
+<notes><p xmlns="http://www.w3.org/1999/xhtml">Porphyrins are heterocyclic macrocycles, consisting of four pyrrole subunits (tetrapyrrole) linked by four methine (=CH) bridges. The extensive conjugated porphyrin macrocycle is chromatic and the name itself, porphyrin, is derived from the Greek word for purple. The aromatic character of porphyrins can be seen by NMR spectroscopy.Porphyrins readily combine with metals by coordinating them in the central cavity. Iron (heme) and magnesium (chlorophyll) are two well known examples although zinc, copper, nickel and cobalt form other known metalcontaining phorphyrins. A porphyrin which has no metal in the cavity is called a free base.Some ironcontaining porphyrins are called hemes (hemecontaining proteins or hemoproteins) and these are found extensively in nature ie. hemoglobin. Hemoglobin is quantitatively the most important hemoprotein. The hemoglobin iron is the transfer site of oxygen and carries it in the blood all round the body for cell respiration. Other examples are cytochromes present in mitochondria and endoplasmic reticulum which takes part in electron transfer events, catalase and peroxidase whic protect the body against the oxidant hydrogen peroxide and tryptophan oxygenase which is present in intermediary metabolism. Hemoproteins are synthesized in all mammalian cells and the major sites are erythropoietic tissue and the liver.The processes by which heme is synthesized, transported, and metabolized are a critical part of human iron metabolism (Severance and Hamze 2009); here the core processes of heme biosynthesis and catabolism have been annotated.</p></notes>
+    <annotation>
+<p xmlns="http://www.w3.org/1999/xhtml">SBML engine: Jsbml</p><sbgn xmlns="http://sbgn.org/libsbgn/0.2"><map language="process description"><glyph class="compartment" id="compartmentVertex_2266150_984845"><label text="sperm flagellum"><bbox h="24.0" w="120.0" x="7926.0" y="495.0"/></label><bbox h="438.0" w="495.0" x="7881.0" y="423.0"/></glyph><glyph class="compartment" id="compartmentVertex_161320_984845"><label text="lysosomal lumen"><bbox h="24.0" w="120.0" x="8242.32" y="2898.0"/></label><bbox h="408.0" w="654.0" x="8190.0" y="2826.0"/></glyph><glyph class="compartment" id="compartmentVertex_114580_984845"><label text="platelet dense tubular network lumen"><bbox h="24.0" w="288.0" x="9717.96" y="753.0"/></label><bbox h="387.0" w="762.0" x="9657.0" y="681.0"/></glyph><glyph class="compartment" id="compartmentVertex_261378_984845"><label text="sarcoplasmic reticulum lumen"><bbox h="24.0" w="224.0" x="9208.8" y="2475.0"/></label><bbox h="453.0" w="660.0" x="9156.0" y="2403.0"/></glyph><glyph class="compartment" id="compartmentVertex_17963_984845"><label text="Golgi lumen"><bbox h="24.0" w="88.0" x="8405.64" y="1773.0"/></label><bbox h="396.0" w="783.0" x="8343.0" y="1701.0"/></glyph><glyph class="compartment" id="compartmentVertex_173031_984845"><label text="late endosome lumen"><bbox h="24.0" w="152.0" x="8295.0" y="2211.0"/></label><bbox h="471.0" w="750.0" x="8235.0" y="2139.0"/></glyph><glyph class="compartment" id="compartmentVertex_5460_984845"><label text="mitochondrial matrix"><bbox h="24.0" w="160.0" x="10436.04" y="2676.0"/></label><bbox h="501.0" w="738.0" x="10377.0" y="2604.0"/></glyph><glyph class="compartment" id="compartmentVertex_17957_984845"><label text="endoplasmic reticulum lumen"><bbox h="24.0" w="216.0" x="9589.2" y="1506.0"/></label><bbox h="732.0" w="765.0" x="9528.0" y="1434.0"/></glyph><glyph class="compartment" id="compartmentVertex_17927_984845"><label text="mitochondrial intermembrane space"><bbox h="24.0" w="264.0" x="10288.8" y="2337.0"/></label><bbox h="888.0" w="1035.0" x="10206.0" y="2265.0"/></glyph><glyph class="compartment" id="compartmentVertex_17957_421392"><label text="endoplasmic reticulum lumen"><bbox h="24.0" w="216.0" x="359.4" y="792.0"/></label><bbox h="855.0" w="1605.0" x="231.0" y="720.0"/></glyph><glyph class="compartment" id="compartmentVertex_171907_984845"><label text="endosome lumen"><bbox h="24.0" w="112.0" x="6345.24" y="1914.0"/></label><bbox h="897.0" w="1728.0" x="6207.0" y="1842.0"/></glyph><glyph class="compartment" id="compartmentVertex_5460_421392"><label text="mitochondrial matrix"><bbox h="24.0" w="160.0" x="2072.4" y="384.0"/></label><bbox h="1638.0" w="1680.0" x="1938.0" y="312.0"/></glyph><glyph class="compartment" id="compartmentVertex_70101_421392"><label text="cytosol"><bbox h="24.0" w="56.0" x="465.48" y="96.33"/></label><bbox h="2811.0" w="4581.0" x="99.0" y="12.0"/></glyph><glyph class="compartment" id="compartmentVertex_70101_984845"><label text="cytosol"><bbox h="24.0" w="56.0" x="5772.0" y="1150.62"/></label><bbox h="2454.0" w="6600.0" x="5244.0" y="1077.0"/></glyph><glyph class="simple chemical" id="entityVertex_7335188"><label text="NADPH"/><bbox h="36.0" w="90.0" x="399.0" y="186.0"/></glyph><glyph class="unspecified entity" id="entityVertex_7335189"><label text="HMOX1"/><bbox h="36.0" w="121.5" x="477.0" y="705.0"/></glyph><glyph class="simple chemical" id="entityVertex_7335190"><label text="NADP"/><bbox h="36.0" w="90.0" x="1182.0" y="606.0"/></glyph><glyph class="simple chemical" id="entityVertex_7335191"><label text="H2O"/><bbox h="36.0" w="90.0" x="609.0" y="312.0"/></glyph><glyph class="unspecified entity" id="entityVertex_7335192"><label text="Biliverdin_reductase"/><bbox h="36.0" w="123.0" x="1332.0" y="393.0"/></glyph><glyph class="simple chemical" id="entityVertex_7335193"><label text="heme"/><bbox h="36.0" w="90.0" x="222.0" y="519.0"/></glyph><glyph class="simple chemical" id="entityVertex_7335194"><label text="CO"/><bbox h="36.0" w="90.0" x="840.0" y="261.0"/></glyph><glyph class="simple chemical" id="entityVertex_7335195"><label text="BIL"/><bbox h="36.0" w="90.0" x="1596.0" y="528.0"/></glyph><glyph class="simple chemical" id="entityVertex_7335196"><label text="Fe2"/><bbox h="36.0" w="90.0" x="933.0" y="387.0"/></glyph><glyph class="simple chemical" id="entityVertex_7335197"><label text="BV"/><bbox h="36.0" w="97.5" x="969.0" y="528.0"/></glyph><glyph class="simple chemical" id="entityVertex_7335198"><label text="BIL"/><bbox h="36.0" w="90.0" x="1608.0" y="948.0"/></glyph><glyph class="simple chemical" id="entityVertex_7335199"><label text="O2"/><bbox h="36.0" w="90.0" x="210.0" y="330.0"/></glyph><glyph class="simple chemical" id="entityVertex_7335200"><label text="CoA_SH"/><bbox h="36.0" w="90.0" x="3048.0" y="477.0"/></glyph><glyph class="simple chemical" id="entityVertex_7335201"><label text="SUCC_CoA"/><bbox h="36.0" w="112.5" x="2043.0" y="519.0"/></glyph><glyph class="simple chemical" id="entityVertex_7335202"><label text="PRIN9"/><bbox h="36.0" w="166.5" x="2088.0" y="1671.0"/></glyph><glyph class="simple chemical" id="entityVertex_7335203"><label text="COPRO3"/><bbox h="41.4" w="112.5" x="4260.0" y="2592.0"/></glyph><glyph class="simple chemical" id="entityVertex_7335204"><label text="URO3"/><bbox h="36.0" w="117.0" x="4257.0" y="2124.0"/></glyph><glyph class="simple chemical" id="entityVertex_7335205"><label text="PRIN9"/><bbox h="36.0" w="166.5" x="1389.0" y="2028.0"/></glyph><glyph class="simple chemical" id="entityVertex_7335206"><label text="Zn2"/><bbox h="36.0" w="90.0" x="4347.0" y="495.0"/></glyph><glyph class="simple chemical" id="entityVertex_7335207"><label text="URO1"/><bbox h="36.0" w="90.0" x="3798.0" y="2166.0"/></glyph><glyph class="simple chemical" id="entityVertex_7335208"><label text="Gly"/><bbox h="36.0" w="90.0" x="2091.0" y="654.0"/></glyph><glyph class="complex" id="entityVertex_7335209"><label text="FECH_homodimer_2Fe"/><bbox h="44.1" w="154.5" x="2667.0" y="1338.0"/><glyph class="annotation" id="entityVertex_7335209_annotation"><label text="Ferrochelatase, 2Iron-2Sulfur Cluster"/><callout target="entityVertex_7335209"><point x="2821.5" y="1382.1"/></callout><bbox h="24.0" w="296.0" x="2837.5" y="1406.1"/></glyph></glyph><glyph class="simple chemical" id="entityVertex_7335210"><label text="COPRO1"/><bbox h="36.0" w="123.0" x="3537.0" y="2457.0"/></glyph><glyph class="macromolecule" id="entityVertex_7335211"><label text="UROS"/><bbox h="36.0" w="190.5" x="4188.0" y="1821.0"/><glyph class="unit of information" id="entityVertex_7335211_mt"><label text="mt:prot"/><bbox h="24.0" w="56.0" x="4204.0" y="1809.0"/></glyph></glyph><glyph class="simple chemical" id="entityVertex_7335212"><label text="HMBL"/><bbox h="36.0" w="109.5" x="3819.0" y="1659.0"/></glyph><glyph class="complex multimer" id="entityVertex_7335213"><label text="UROD_homodimer"/><bbox h="36.0" w="153.0" x="3981.0" y="2310.0"/><glyph class="annotation" id="entityVertex_7335213_annotation"><label text="Uroporphyrinogen III decarboxylase"/><callout target="entityVertex_7335213"><point x="4134.0" y="2346.0"/></callout><bbox h="24.0" w="272.0" x="4150.0" y="2370.0"/></glyph></glyph><glyph class="simple chemical" id="entityVertex_7335214"><label text="PBG"/><bbox h="36.0" w="159.0" x="3750.0" y="1056.0"/></glyph><glyph class="simple chemical" id="entityVertex_7335215"><label text="COPRO3"/><bbox h="36.9" w="121.5" x="3237.0" y="2004.0"/></glyph><glyph class="simple chemical" id="entityVertex_7335216"><label text="CO2"/><bbox h="36.0" w="90.0" x="4071.0" y="2457.0"/></glyph><glyph class="simple chemical" id="entityVertex_7335217"><label text="heme"/><bbox h="36.0" w="90.0" x="2454.0" y="954.0"/></glyph><glyph class="simple chemical" id="entityVertex_7335218"><label text="Fe2"/><bbox h="36.0" w="139.5" x="2556.0" y="1662.0"/></glyph><glyph class="simple chemical" id="entityVertex_7335219"><label text="H+ [mitochondrial ma"/><bbox h="36.0" w="90.0" x="2979.0" y="1056.0"/></glyph><glyph class="simple chemical" id="entityVertex_7335220"><label text="dALA"/><bbox h="38.7" w="90.0" x="3816.0" y="585.0"/></glyph><glyph class="simple chemical" id="entityVertex_7335221"><label text="PPGEN9"/><bbox h="36.0" w="217.5" x="2118.0" y="2028.0"/></glyph><glyph class="unspecified entity" id="entityVertex_7335222"><label text="ALAS_homodimer"/><bbox h="36.0" w="145.5" x="2361.0" y="471.0"/></glyph><glyph class="simple chemical" id="entityVertex_7335223"><label text="NH3"/><bbox h="36.0" w="90.0" x="3711.0" y="1491.0"/></glyph><glyph class="complex" id="entityVertex_7335224"><label text="PPO_homodimer_FAD"/><bbox h="36.0" w="199.5" x="1704.0" y="1881.0"/><glyph class="annotation" id="entityVertex_7335224_annotation"><label text="Protoporphyrinogen oxidase, FAD"/><callout target="entityVertex_7335224"><point x="1903.5" y="1917.0"/></callout><bbox h="24.0" w="248.0" x="1919.5" y="1941.0"/></glyph></glyph><glyph class="simple chemical" id="entityVertex_7335225"><label text="Pb2"/><bbox h="36.0" w="90.0" x="2175.0" y="1368.0"/></glyph><glyph class="simple chemical" id="entityVertex_7335226"><label text="Pb2"/><bbox h="36.0" w="90.0" x="4347.0" y="648.0"/></glyph><glyph class="complex multimer" id="entityVertex_7335227"><label text="CPO_homodimer"/><bbox h="36.0" w="145.5" x="2652.0" y="1860.0"/><glyph class="annotation" id="entityVertex_7335227_annotation"><label text="Coproporphyrinogen III oxidase, mitochondrial"/><callout target="entityVertex_7335227"><point x="2797.5" y="1896.0"/></callout><bbox h="24.0" w="360.0" x="2813.5" y="1920.0"/></glyph></glyph><glyph class="complex" id="entityVertex_7335228"><label text="ALAD_homooctamer"/><bbox h="41.4" w="150.0" x="4056.0" y="771.0"/><glyph class="annotation" id="entityVertex_7335228_annotation"><label text="Zn2+, Delta-aminolevulinic acid dehydratase"/><callout target="entityVertex_7335228"><point x="4206.0" y="812.4"/></callout><bbox h="24.0" w="344.0" x="4222.0" y="836.4"/></glyph></glyph><glyph class="complex" id="entityVertex_7335229"><label text="ALAD_homooctamer"/><bbox h="54.0" w="162.0" x="4038.0" y="270.0"/><glyph class="annotation" id="entityVertex_7335229_annotation"><label text="Zn2+, Pb2+, Delta-aminolevulinic acid dehydratase"/><callout target="entityVertex_7335229"><point x="4200.0" y="324.0"/></callout><bbox h="24.0" w="392.0" x="4216.0" y="348.0"/></glyph></glyph><glyph class="simple chemical" id="entityVertex_7335230"><label text="O2"/><bbox h="36.0" w="90.0" x="2922.0" y="2154.0"/></glyph><glyph class="complex" id="entityVertex_7335231"><label text="Porphobilinogen"/><bbox h="61.2" w="154.5" x="4074.0" y="1212.0"/><glyph class="annotation" id="entityVertex_7335231_annotation"><label text="DIPY, Porphobilinogen deaminase"/><callout target="entityVertex_7335231"><point x="4228.5" y="1273.2"/></callout><bbox h="24.0" w="248.0" x="4244.5" y="1297.2"/></glyph></glyph><glyph class="simple chemical" id="entityVertex_7335232"><label text="CO2"/><bbox h="36.0" w="90.0" x="2598.0" y="2187.0"/></glyph><glyph class="simple chemical" id="entityVertex_7335233"><label text="dALA"/><bbox h="37.8" w="97.5" x="2922.0" y="597.0"/></glyph><glyph class="simple chemical" id="entityVertex_7335234"><label text="CO2"/><bbox h="36.0" w="90.0" x="2898.0" y="396.0"/></glyph><glyph class="simple chemical" id="entityVertex_7335235"><label text="H2O2"/><bbox h="36.0" w="90.0" x="1611.0" y="2169.0"/></glyph><glyph class="simple chemical" id="entityVertex_7335236"><label text="H2O"/><bbox h="36.0" w="90.0" x="3687.0" y="2004.0"/></glyph><glyph class="simple chemical" id="entityVertex_7335237"><label text="H2O"/><bbox h="36.0" w="90.0" x="3933.0" y="1995.0"/></glyph><glyph class="simple chemical" id="entityVertex_7335238"><label text="H2O"/><bbox h="36.0" w="90.0" x="3711.0" y="1167.0"/></glyph><glyph class="simple chemical" id="entityVertex_7335239"><label text="H2O"/><bbox h="36.0" w="90.0" x="4140.0" y="966.0"/></glyph><glyph class="simple chemical" id="entityVertex_7335240"><label text="UDP_GCU"/><bbox h="36.0" w="154.5" x="1386.0" y="1056.0"/></glyph><glyph class="simple chemical" id="entityVertex_7335241"><label text="UDP"/><bbox h="36.0" w="90.0" x="945.0" y="822.0"/></glyph><glyph class="simple chemical" id="entityVertex_7335242"><label text="BMG"/><bbox h="39.6" w="105.0" x="702.0" y="930.0"/></glyph><glyph class="macromolecule" id="entityVertex_7335243"><label text="UGT1A1"/><bbox h="36.0" w="90.0" x="1233.0" y="801.0"/><glyph class="unit of information" id="entityVertex_7335243_mt"><label text="mt:prot"/><bbox h="24.0" w="56.0" x="1249.0" y="789.0"/></glyph></glyph><glyph class="simple chemical" id="entityVertex_7335244"><label text="BDG"/><bbox h="36.0" w="111.0" x="885.0" y="1311.0"/></glyph><glyph class="complex multimer" id="entityVertex_7335245"><label text="Tetrameric_UGT1A1"/><bbox h="36.0" w="136.5" x="978.0" y="1140.0"/><glyph class="annotation" id="entityVertex_7335245_annotation"><label text="UGT1A1"/><callout target="entityVertex_7335245"><point x="1114.5" y="1176.0"/></callout><bbox h="24.0" w="48.0" x="1130.5" y="1200.0"/></glyph></glyph><glyph class="simple chemical" id="entityVertex_7335246"><label text="O2"/><bbox h="36.0" w="90.0" x="2055.0" y="2166.0"/></glyph><glyph class="simple chemical" id="entityVertex_7335247"><label text="H2O2"/><bbox h="36.0" w="90.0" x="2394.0" y="2172.0"/></glyph><glyph class="process" id="reactionVertex_6757542"><bbox h="0.0" w="0.0" x="0.0" y="0.0"/></glyph><glyph class="process" id="reactionVertex_7335248"><bbox h="36.0" w="36.0" x="1680.0" y="684.0"/><port id="reactionVertex_7335248.1" x="1698.0" y="720.0"/></glyph><glyph class="process" id="reactionVertex_7335251"><bbox h="36.0" w="36.0" x="600.0" y="561.0"/><port id="reactionVertex_7335251.1" x="618.0" y="561.0"/><port id="reactionVertex_7335251.2" x="636.0" y="579.0"/><port id="reactionVertex_7335251.3" x="636.0" y="579.0"/><port id="reactionVertex_7335251.4" x="636.0" y="579.0"/><port id="reactionVertex_7335251.5" x="618.0" y="561.0"/></glyph><glyph class="process" id="reactionVertex_7335261"><bbox h="36.0" w="36.0" x="1452.0" y="564.0"/><port id="reactionVertex_7335261.1" x="1488.0" y="582.0"/><port id="reactionVertex_7335261.2" x="1452.0" y="582.0"/></glyph><glyph class="process" id="reactionVertex_7335267"><bbox h="36.0" w="36.0" x="1908.0" y="2073.0"/><port id="reactionVertex_7335267.1" x="1908.0" y="2091.0"/><port id="reactionVertex_7335267.2" x="1908.0" y="2091.0"/></glyph><glyph class="process" id="reactionVertex_7335273"><bbox h="36.0" w="36.0" x="3885.0" y="1866.0"/><port id="reactionVertex_7335273.1" x="3903.0" y="1902.0"/><port id="reactionVertex_7335273.2" x="3903.0" y="1902.0"/></glyph><glyph class="process" id="reactionVertex_7335277"><bbox h="36.0" w="36.0" x="4374.0" y="2355.0"/><port id="reactionVertex_7335277.1" x="4374.0" y="2373.0"/><port id="reactionVertex_7335277.2" x="4392.0" y="2391.0"/></glyph><glyph class="process" id="reactionVertex_7335282"><bbox h="36.0" w="36.0" x="2520.0" y="1413.0"/><port id="reactionVertex_7335282.1" x="2538.0" y="1413.0"/><port id="reactionVertex_7335282.2" x="2556.0" y="1431.0"/></glyph><glyph class="process" id="reactionVertex_7335289"><bbox h="36.0" w="36.0" x="3624.0" y="654.0"/><port id="reactionVertex_7335289.1" x="3660.0" y="672.0"/></glyph><glyph class="process" id="reactionVertex_7335292"><bbox h="36.0" w="36.0" x="3924.0" y="1323.0"/><port id="reactionVertex_7335292.1" x="3942.0" y="1359.0"/><port id="reactionVertex_7335292.2" x="3942.0" y="1359.0"/></glyph><glyph class="process" id="reactionVertex_7335298"><bbox h="36.0" w="36.0" x="2514.0" y="660.0"/><port id="reactionVertex_7335298.1" x="2550.0" y="678.0"/><port id="reactionVertex_7335298.2" x="2550.0" y="678.0"/><port id="reactionVertex_7335298.3" x="2550.0" y="678.0"/></glyph><glyph class="process" id="reactionVertex_7335306"><bbox h="36.0" w="36.0" x="3369.0" y="2661.0"/><port id="reactionVertex_7335306.1" x="3387.0" y="2661.0"/></glyph><glyph class="process" id="reactionVertex_7335309"><bbox h="36.0" w="36.0" x="3891.0" y="2343.0"/><port id="reactionVertex_7335309.1" x="3891.0" y="2361.0"/><port id="reactionVertex_7335309.2" x="3927.0" y="2361.0"/></glyph><glyph class="process" id="reactionVertex_7335314"><bbox h="36.0" w="36.0" x="4095.0" y="1872.0"/><port id="reactionVertex_7335314.1" x="4113.0" y="1908.0"/><port id="reactionVertex_7335314.2" x="4113.0" y="1908.0"/></glyph><glyph class="process" id="reactionVertex_7335319"><bbox h="36.0" w="36.0" x="4200.0" y="633.0"/><port id="reactionVertex_7335319.1" x="4218.0" y="633.0"/><port id="reactionVertex_7335319.2" x="4218.0" y="633.0"/></glyph><glyph class="process" id="reactionVertex_7335324"><bbox h="36.0" w="36.0" x="3912.0" y="840.0"/><port id="reactionVertex_7335324.1" x="3930.0" y="876.0"/><port id="reactionVertex_7335324.2" x="3948.0" y="858.0"/></glyph><glyph class="process" id="reactionVertex_7335329"><bbox h="36.0" w="36.0" x="1548.0" y="1716.0"/><port id="reactionVertex_7335329.1" x="1584.0" y="1734.0"/></glyph><glyph class="process" id="reactionVertex_7335332"><bbox h="36.0" w="36.0" x="2799.0" y="2061.0"/><port id="reactionVertex_7335332.1" x="2799.0" y="2079.0"/><port id="reactionVertex_7335332.2" x="2799.0" y="2079.0"/><port id="reactionVertex_7335332.3" x="2799.0" y="2079.0"/></glyph><glyph class="process" id="reactionVertex_7335339"><bbox h="36.0" w="36.0" x="1317.0" y="990.0"/><port id="reactionVertex_7335339.1" x="1317.0" y="1008.0"/><port id="reactionVertex_7335339.2" x="1317.0" y="1008.0"/></glyph><glyph class="process" id="reactionVertex_7335345"><bbox h="36.0" w="36.0" x="900.0" y="1194.0"/><port id="reactionVertex_7335345.1" x="918.0" y="1230.0"/><port id="reactionVertex_7335345.2" x="918.0" y="1194.0"/></glyph><arc class="consumption" id="edge_7335249" source="entityVertex_7335195" target="reactionVertex_7335248"><start x="1641.0" y="564.0"/><end x="1698.0" y="684.0"/></arc><arc class="production" id="edge_7335250" source="reactionVertex_7335248.1" target="entityVertex_7335198"><start x="1698.0" y="720.0"/><end x="1653.0" y="948.0"/></arc><arc class="consumption" id="edge_7335252" source="entityVertex_7335188" target="reactionVertex_7335251"><start x="489.0" y="204.0"/><end x="618.0" y="561.0"/></arc><arc class="consumption" id="edge_7335253" source="entityVertex_7335199" target="reactionVertex_7335251"><start x="300.0" y="348.0"/><end x="600.0" y="579.0"/></arc><arc class="consumption" id="edge_7335254" source="entityVertex_7335193" target="reactionVertex_7335251"><start x="312.0" y="537.0"/><end x="600.0" y="579.0"/></arc><arc class="production" id="edge_7335255" source="reactionVertex_7335251.1" target="entityVertex_7335194"><start x="618.0" y="561.0"/><end x="840.0" y="279.0"/></arc><arc class="production" id="edge_7335256" source="reactionVertex_7335251.2" target="entityVertex_7335196"><start x="636.0" y="579.0"/><end x="933.0" y="405.0"/></arc><arc class="production" id="edge_7335257" source="reactionVertex_7335251.3" target="entityVertex_7335190"><start x="636.0" y="579.0"/><end x="1182.0" y="624.0"/></arc><arc class="production" id="edge_7335258" source="reactionVertex_7335251.4" target="entityVertex_7335197"><start x="636.0" y="579.0"/><end x="969.0" y="546.0"/></arc><arc class="production" id="edge_7335259" source="reactionVertex_7335251.5" target="entityVertex_7335191"><start x="618.0" y="561.0"/><end x="654.0" y="348.0"/></arc><arc class="catalysis" id="edge_7335260" source="entityVertex_7335189" target="reactionVertex_7335251"><start x="598.5" y="723.0"/><end x="618.0" y="597.0"/></arc><arc class="consumption" id="edge_7335262" source="entityVertex_7335188" target="reactionVertex_7335261"><start x="489.0" y="204.0"/><end x="1452.0" y="582.0"/></arc><arc class="consumption" id="edge_7335263" source="entityVertex_7335197" target="reactionVertex_7335261"><start x="1066.5" y="546.0"/><end x="1452.0" y="582.0"/></arc><arc class="production" id="edge_7335264" source="reactionVertex_7335261.1" target="entityVertex_7335195"><start x="1488.0" y="582.0"/><end x="1596.0" y="546.0"/></arc><arc class="production" id="edge_7335265" source="reactionVertex_7335261.2" target="entityVertex_7335190"><start x="1452.0" y="582.0"/><end x="1272.0" y="624.0"/></arc><arc class="catalysis" id="edge_7335266" source="entityVertex_7335192" target="reactionVertex_7335261"><start x="1455.0" y="411.0"/><end x="1470.0" y="564.0"/></arc><arc class="consumption" id="edge_7335268" source="entityVertex_7335221" target="reactionVertex_7335267"><start x="2118.0" y="2046.0"/><end x="1944.0" y="2091.0"/></arc><arc class="consumption" id="edge_7335269" source="entityVertex_7335246" target="reactionVertex_7335267"><start x="2055.0" y="2184.0"/><end x="1944.0" y="2091.0"/></arc><arc class="production" id="edge_7335270" source="reactionVertex_7335267.1" target="entityVertex_7335205"><start x="1908.0" y="2091.0"/><end x="1555.5" y="2046.0"/></arc><arc class="production" id="edge_7335271" source="reactionVertex_7335267.2" target="entityVertex_7335235"><start x="1908.0" y="2091.0"/><end x="1701.0" y="2187.0"/></arc><arc class="catalysis" id="edge_7335272" source="entityVertex_7335224" target="reactionVertex_7335267"><start x="1903.5" y="1899.0"/><end x="1926.0" y="2073.0"/></arc><arc class="consumption" id="edge_7335274" source="entityVertex_7335212" target="reactionVertex_7335273"><start x="3873.75" y="1695.0"/><end x="3903.0" y="1866.0"/></arc><arc class="production" id="edge_7335275" source="reactionVertex_7335273.1" target="entityVertex_7335207"><start x="3903.0" y="1902.0"/><end x="3843.0" y="2166.0"/></arc><arc class="production" id="edge_7335276" source="reactionVertex_7335273.2" target="entityVertex_7335236"><start x="3903.0" y="1902.0"/><end x="3777.0" y="2022.0"/></arc><arc class="consumption" id="edge_7335278" source="entityVertex_7335204" target="reactionVertex_7335277"><start x="4315.5" y="2160.0"/><end x="4392.0" y="2355.0"/></arc><arc class="production" id="edge_7335279" source="reactionVertex_7335277.1" target="entityVertex_7335216"><start x="4374.0" y="2373.0"/><end x="4161.0" y="2475.0"/></arc><arc class="production" id="edge_7335280" source="reactionVertex_7335277.2" target="entityVertex_7335203"><start x="4392.0" y="2391.0"/><end x="4316.25" y="2592.0"/></arc><arc class="catalysis" id="edge_7335281" source="entityVertex_7335213" target="reactionVertex_7335277"><start x="4134.0" y="2328.0"/><end x="4374.0" y="2373.0"/></arc><arc class="consumption" id="edge_7335283" source="entityVertex_7335202" target="reactionVertex_7335282"><start x="2254.5" y="1689.0"/><end x="2520.0" y="1431.0"/></arc><arc class="consumption" id="edge_7335284" source="entityVertex_7335218" target="reactionVertex_7335282"><start x="2625.75" y="1662.0"/><end x="2538.0" y="1449.0"/></arc><arc class="production" id="edge_7335285" source="reactionVertex_7335282.1" target="entityVertex_7335217"><start x="2538.0" y="1413.0"/><end x="2499.0" y="990.0"/></arc><arc class="production" id="edge_7335286" source="reactionVertex_7335282.2" target="entityVertex_7335219"><start x="2556.0" y="1431.0"/><end x="2979.0" y="1074.0"/></arc><arc class="catalysis" id="edge_7335287" source="entityVertex_7335209" target="reactionVertex_7335282"><start x="2667.0" y="1360.05"/><end x="2556.0" y="1431.0"/></arc><arc class="inhibition" id="edge_7335288" source="entityVertex_7335225" target="reactionVertex_7335282"><start x="2265.0" y="1386.0"/><end x="2520.0" y="1431.0"/></arc><arc class="consumption" id="edge_7335290" source="entityVertex_7335233" target="reactionVertex_7335289"><start x="3019.5" y="615.9"/><end x="3624.0" y="672.0"/></arc><arc class="production" id="edge_7335291" source="reactionVertex_7335289.1" target="entityVertex_7335220"><start x="3660.0" y="672.0"/><end x="3816.0" y="604.35"/></arc><arc class="consumption" id="edge_7335293" source="entityVertex_7335214" target="reactionVertex_7335292"><start x="3909.0" y="1074.0"/><end x="3942.0" y="1323.0"/></arc><arc class="consumption" id="edge_7335294" source="entityVertex_7335238" target="reactionVertex_7335292"><start x="3801.0" y="1185.0"/><end x="3942.0" y="1323.0"/></arc><arc class="production" id="edge_7335295" source="reactionVertex_7335292.1" target="entityVertex_7335223"><start x="3942.0" y="1359.0"/><end x="3801.0" y="1509.0"/></arc><arc class="production" id="edge_7335296" source="reactionVertex_7335292.2" target="entityVertex_7335212"><start x="3942.0" y="1359.0"/><end x="3873.75" y="1659.0"/></arc><arc class="catalysis" id="edge_7335297" source="entityVertex_7335231" target="reactionVertex_7335292"><start x="4074.0" y="1242.6"/><end x="3960.0" y="1341.0"/></arc><arc class="consumption" id="edge_7335299" source="entityVertex_7335201" target="reactionVertex_7335298"><start x="2155.5" y="537.0"/><end x="2514.0" y="678.0"/></arc><arc class="consumption" id="edge_7335300" source="entityVertex_7335208" target="reactionVertex_7335298"><start x="2181.0" y="672.0"/><end x="2514.0" y="678.0"/></arc><arc class="production" id="edge_7335301" source="reactionVertex_7335298.1" target="entityVertex_7335200"><start x="2550.0" y="678.0"/><end x="3048.0" y="495.0"/></arc><arc class="production" id="edge_7335302" source="reactionVertex_7335298.2" target="entityVertex_7335233"><start x="2550.0" y="678.0"/><end x="2922.0" y="615.9"/></arc><arc class="production" id="edge_7335303" source="reactionVertex_7335298.3" target="entityVertex_7335234"><start x="2550.0" y="678.0"/><end x="2898.0" y="414.0"/></arc><arc class="catalysis" id="edge_7335304" source="entityVertex_7335222" target="reactionVertex_7335298"><start x="2506.5" y="489.0"/><end x="2532.0" y="660.0"/></arc><arc class="inhibition" id="edge_7335305" source="entityVertex_7335217" target="reactionVertex_7335298"><start x="2499.0" y="954.0"/><end x="2532.0" y="696.0"/></arc><arc class="consumption" id="edge_7335307" source="entityVertex_7335203" target="reactionVertex_7335306"><start x="4260.0" y="2612.7"/><end x="3405.0" y="2679.0"/></arc><arc class="production" id="edge_7335308" source="reactionVertex_7335306.1" target="entityVertex_7335215"><start x="3387.0" y="2661.0"/><end x="3297.75" y="2040.9"/></arc><arc class="consumption" id="edge_7335310" source="entityVertex_7335207" target="reactionVertex_7335309"><start x="3843.0" y="2202.0"/><end x="3909.0" y="2343.0"/></arc><arc class="production" id="edge_7335311" source="reactionVertex_7335309.1" target="entityVertex_7335210"><start x="3891.0" y="2361.0"/><end x="3660.0" y="2475.0"/></arc><arc class="production" id="edge_7335312" source="reactionVertex_7335309.2" target="entityVertex_7335216"><start x="3927.0" y="2361.0"/><end x="4071.0" y="2475.0"/></arc><arc class="catalysis" id="edge_7335313" source="entityVertex_7335213" target="reactionVertex_7335309"><start x="3981.0" y="2328.0"/><end x="3927.0" y="2361.0"/></arc><arc class="consumption" id="edge_7335315" source="entityVertex_7335212" target="reactionVertex_7335314"><start x="3928.5" y="1677.0"/><end x="4113.0" y="1872.0"/></arc><arc class="production" id="edge_7335316" source="reactionVertex_7335314.1" target="entityVertex_7335204"><start x="4113.0" y="1908.0"/><end x="4257.0" y="2142.0"/></arc><arc class="production" id="edge_7335317" source="reactionVertex_7335314.2" target="entityVertex_7335237"><start x="4113.0" y="1908.0"/><end x="4023.0" y="2013.0"/></arc><arc class="catalysis" id="edge_7335318" source="entityVertex_7335211" target="reactionVertex_7335314"><start x="4188.0" y="1839.0"/><end x="4131.0" y="1890.0"/></arc><arc class="consumption" id="edge_7335320" source="entityVertex_7335228" target="reactionVertex_7335319"><start x="4206.0" y="791.7"/><end x="4218.0" y="669.0"/></arc><arc class="consumption" id="edge_7335321" source="entityVertex_7335226" target="reactionVertex_7335319"><start x="4347.0" y="666.0"/><end x="4236.0" y="651.0"/></arc><arc class="production" id="edge_7335322" source="reactionVertex_7335319.1" target="entityVertex_7335206"><start x="4218.0" y="633.0"/><end x="4347.0" y="513.0"/></arc><arc class="production" id="edge_7335323" source="reactionVertex_7335319.2" target="entityVertex_7335229"><start x="4218.0" y="633.0"/><end x="4119.0" y="324.0"/></arc><arc class="consumption" id="edge_7335325" source="entityVertex_7335220" target="reactionVertex_7335324"><start x="3861.0" y="623.7"/><end x="3930.0" y="840.0"/></arc><arc class="production" id="edge_7335326" source="reactionVertex_7335324.1" target="entityVertex_7335214"><start x="3930.0" y="876.0"/><end x="3909.0" y="1074.0"/></arc><arc class="production" id="edge_7335327" source="reactionVertex_7335324.2" target="entityVertex_7335239"><start x="3948.0" y="858.0"/><end x="4140.0" y="984.0"/></arc><arc class="catalysis" id="edge_7335328" source="entityVertex_7335228" target="reactionVertex_7335324"><start x="4056.0" y="791.7"/><end x="3948.0" y="858.0"/></arc><arc class="consumption" id="edge_7335330" source="entityVertex_7335205" target="reactionVertex_7335329"><start x="1472.25" y="2028.0"/><end x="1566.0" y="1752.0"/></arc><arc class="production" id="edge_7335331" source="reactionVertex_7335329.1" target="entityVertex_7335202"><start x="1584.0" y="1734.0"/><end x="2088.0" y="1689.0"/></arc><arc class="consumption" id="edge_7335333" source="entityVertex_7335215" target="reactionVertex_7335332"><start x="3237.0" y="2022.45"/><end x="2835.0" y="2079.0"/></arc><arc class="consumption" id="edge_7335334" source="entityVertex_7335230" target="reactionVertex_7335332"><start x="2922.0" y="2172.0"/><end x="2835.0" y="2079.0"/></arc><arc class="production" id="edge_7335335" source="reactionVertex_7335332.1" target="entityVertex_7335232"><start x="2799.0" y="2079.0"/><end x="2688.0" y="2205.0"/></arc><arc class="production" id="edge_7335336" source="reactionVertex_7335332.2" target="entityVertex_7335221"><start x="2799.0" y="2079.0"/><end x="2335.5" y="2046.0"/></arc><arc class="production" id="edge_7335337" source="reactionVertex_7335332.3" target="entityVertex_7335247"><start x="2799.0" y="2079.0"/><end x="2484.0" y="2190.0"/></arc><arc class="catalysis" id="edge_7335338" source="entityVertex_7335227" target="reactionVertex_7335332"><start x="2797.5" y="1878.0"/><end x="2817.0" y="2061.0"/></arc><arc class="consumption" id="edge_7335340" source="entityVertex_7335240" target="reactionVertex_7335339"><start x="1386.0" y="1074.0"/><end x="1335.0" y="1026.0"/></arc><arc class="consumption" id="edge_7335341" source="entityVertex_7335198" target="reactionVertex_7335339"><start x="1608.0" y="966.0"/><end x="1353.0" y="1008.0"/></arc><arc class="production" id="edge_7335342" source="reactionVertex_7335339.1" target="entityVertex_7335241"><start x="1317.0" y="1008.0"/><end x="1035.0" y="840.0"/></arc><arc class="production" id="edge_7335343" source="reactionVertex_7335339.2" target="entityVertex_7335242"><start x="1317.0" y="1008.0"/><end x="807.0" y="949.8"/></arc><arc class="catalysis" id="edge_7335344" source="entityVertex_7335243" target="reactionVertex_7335339"><start x="1278.0" y="837.0"/><end x="1335.0" y="990.0"/></arc><arc class="consumption" id="edge_7335346" source="entityVertex_7335240" target="reactionVertex_7335345"><start x="1386.0" y="1074.0"/><end x="936.0" y="1212.0"/></arc><arc class="consumption" id="edge_7335347" source="entityVertex_7335242" target="reactionVertex_7335345"><start x="807.0" y="949.8"/><end x="918.0" y="1194.0"/></arc><arc class="production" id="edge_7335348" source="reactionVertex_7335345.1" target="entityVertex_7335244"><start x="918.0" y="1230.0"/><end x="940.5" y="1311.0"/></arc><arc class="production" id="edge_7335349" source="reactionVertex_7335345.2" target="entityVertex_7335241"><start x="918.0" y="1194.0"/><end x="990.0" y="858.0"/></arc><arc class="catalysis" id="edge_7335350" source="entityVertex_7335245" target="reactionVertex_7335345"><start x="978.0" y="1158.0"/><end x="936.0" y="1212.0"/></arc></map></sbgn>          <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:vCard="http://www.w3.org/2001/vcard-rdf/3.0#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:bqmodel="http://biomodels.net/model-qualifiers/">
+        <rdf:Description rdf:about="#metaid_0">
+          <dc:creator>
+            <rdf:Bag>
+              <rdf:li rdf:parseType="Resource">
+                <vCard:N rdf:parseType="Resource">
+                  <vCard:Family>Jassal</vCard:Family>
+                  <vCard:Given>Bijay</vCard:Given>
+                </vCard:N>
+                <vCard:EMAIL></vCard:EMAIL>
+                <vCard:ORG rdf:parseType="Resource">
+                  <vCard:Orgname>EBI</vCard:Orgname>
+                </vCard:ORG>
+              </rdf:li>
+            </rdf:Bag>
+          </dc:creator>
+          <dcterms:created rdf:parseType="Resource">
+            <dcterms:W3CDTF>2006-12-20T16:41:56Z</dcterms:W3CDTF>
+          </dcterms:created>
+          <dcterms:modified rdf:parseType="Resource">
+            <dcterms:W3CDTF>2007-03-07T02:04:41Z</dcterms:W3CDTF>
+          </dcterms:modified>
+          <dcterms:modified rdf:parseType="Resource">
+            <dcterms:W3CDTF>2007-03-07T03:06:07Z</dcterms:W3CDTF>
+          </dcterms:modified>
+          <dcterms:modified rdf:parseType="Resource">
+            <dcterms:W3CDTF>2007-03-17T00:25:31Z</dcterms:W3CDTF>
+          </dcterms:modified>
+          <dcterms:modified rdf:parseType="Resource">
+            <dcterms:W3CDTF>2007-03-21T01:44:51Z</dcterms:W3CDTF>
+          </dcterms:modified>
+          <dcterms:modified rdf:parseType="Resource">
+            <dcterms:W3CDTF>2007-04-13T16:34:40Z</dcterms:W3CDTF>
+          </dcterms:modified>
+          <dcterms:modified rdf:parseType="Resource">
+            <dcterms:W3CDTF>2007-05-24T06:53:39Z</dcterms:W3CDTF>
+          </dcterms:modified>
+          <dcterms:modified rdf:parseType="Resource">
+            <dcterms:W3CDTF>2009-01-04T23:37:41Z</dcterms:W3CDTF>
+          </dcterms:modified>
+          <dcterms:modified rdf:parseType="Resource">
+            <dcterms:W3CDTF>2009-06-19T17:26:30Z</dcterms:W3CDTF>
+          </dcterms:modified>
+          <dcterms:modified rdf:parseType="Resource">
+            <dcterms:W3CDTF>2013-03-28T11:46:49Z</dcterms:W3CDTF>
+          </dcterms:modified>
+          <dcterms:modified rdf:parseType="Resource">
+            <dcterms:W3CDTF>2013-03-28T11:52:12Z</dcterms:W3CDTF>
+          </dcterms:modified>
+          <dcterms:modified rdf:parseType="Resource">
+            <dcterms:W3CDTF>2013-03-28T11:55:10Z</dcterms:W3CDTF>
+          </dcterms:modified>
+          <dcterms:modified rdf:parseType="Resource">
+            <dcterms:W3CDTF>2013-03-28T11:59:08Z</dcterms:W3CDTF>
+          </dcterms:modified>
+          <dcterms:modified rdf:parseType="Resource">
+            <dcterms:W3CDTF>2013-03-28T12:03:17Z</dcterms:W3CDTF>
+          </dcterms:modified>
+          <dcterms:modified rdf:parseType="Resource">
+            <dcterms:W3CDTF>2013-03-28T12:21:07Z</dcterms:W3CDTF>
+          </dcterms:modified>
+          <dcterms:modified rdf:parseType="Resource">
+            <dcterms:W3CDTF>2013-03-28T13:08:37Z</dcterms:W3CDTF>
+          </dcterms:modified>
+          <dcterms:modified rdf:parseType="Resource">
+            <dcterms:W3CDTF>2013-03-28T14:13:38Z</dcterms:W3CDTF>
+          </dcterms:modified>
+          <dcterms:modified rdf:parseType="Resource">
+            <dcterms:W3CDTF>2013-03-28T15:29:09Z</dcterms:W3CDTF>
+          </dcterms:modified>
+          <dcterms:modified rdf:parseType="Resource">
+            <dcterms:W3CDTF>2013-03-28T17:27:21Z</dcterms:W3CDTF>
+          </dcterms:modified>
+          <dcterms:modified rdf:parseType="Resource">
+            <dcterms:W3CDTF>2013-03-28T19:46:53Z</dcterms:W3CDTF>
+          </dcterms:modified>
+          <dcterms:modified rdf:parseType="Resource">
+            <dcterms:W3CDTF>2013-03-28T21:22:23Z</dcterms:W3CDTF>
+          </dcterms:modified>
+          <dcterms:modified rdf:parseType="Resource">
+            <dcterms:W3CDTF>2013-03-28T22:31:35Z</dcterms:W3CDTF>
+          </dcterms:modified>
+          <dcterms:modified rdf:parseType="Resource">
+            <dcterms:W3CDTF>2013-03-29T00:36:35Z</dcterms:W3CDTF>
+          </dcterms:modified>
+          <dcterms:modified rdf:parseType="Resource">
+            <dcterms:W3CDTF>2013-04-01T04:44:29Z</dcterms:W3CDTF>
+          </dcterms:modified>
+          <dcterms:modified rdf:parseType="Resource">
+            <dcterms:W3CDTF>2013-04-01T06:02:39Z</dcterms:W3CDTF>
+          </dcterms:modified>
+          <dcterms:modified rdf:parseType="Resource">
+            <dcterms:W3CDTF>2013-04-01T06:57:49Z</dcterms:W3CDTF>
+          </dcterms:modified>
+          <dcterms:modified rdf:parseType="Resource">
+            <dcterms:W3CDTF>2013-04-01T08:31:56Z</dcterms:W3CDTF>
+          </dcterms:modified>
+          <dcterms:modified rdf:parseType="Resource">
+            <dcterms:W3CDTF>2013-04-01T08:36:55Z</dcterms:W3CDTF>
+          </dcterms:modified>
+          <dcterms:modified rdf:parseType="Resource">
+            <dcterms:W3CDTF>2013-04-01T08:41:56Z</dcterms:W3CDTF>
+          </dcterms:modified>
+          <dcterms:modified rdf:parseType="Resource">
+            <dcterms:W3CDTF>2013-05-28T06:57:29Z</dcterms:W3CDTF>
+          </dcterms:modified>
+          <bqbiol:is>
+            <rdf:Bag>
+              <rdf:li rdf:resource="urn:miriam:reactome:REACT_9431"/>
+            </rdf:Bag>
+          </bqbiol:is>
+        </rdf:Description>
+      </rdf:RDF>
+    </annotation>
+      <listOfCompartments>
+      <compartment id="compartment_70101" name="cytosol" metaid="metaid_2" sboTerm="SBO:0000290">
+        <annotation>
+          <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/" xmlns:bqmodel="http://biomodels.net/model-qualifiers/">
+            <rdf:Description rdf:about="#metaid_2">
+              <bqbiol:is>
+                <rdf:Bag>
+                  <rdf:li rdf:resource="urn:miriam:obo.go:GO%3A0005829"/>
+                </rdf:Bag>
+              </bqbiol:is>
+            </rdf:Description>
+          </rdf:RDF>
+        </annotation>
+</compartment>
+      <compartment id="compartment_12045" name="endoplasmic reticulum membrane" metaid="metaid_19" sboTerm="SBO:0000290">
+        <annotation>
+          <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/" xmlns:bqmodel="http://biomodels.net/model-qualifiers/">
+            <rdf:Description rdf:about="#metaid_19">
+              <bqbiol:is>
+                <rdf:Bag>
+                  <rdf:li rdf:resource="urn:miriam:obo.go:GO%3A0005789"/>
+                </rdf:Bag>
+              </bqbiol:is>
+            </rdf:Description>
+          </rdf:RDF>
+        </annotation>
+</compartment>
+      <compartment id="compartment_5460" name="mitochondrial matrix" metaid="metaid_32" sboTerm="SBO:0000290">
+        <annotation>
+          <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/" xmlns:bqmodel="http://biomodels.net/model-qualifiers/">
+            <rdf:Description rdf:about="#metaid_32">
+              <bqbiol:is>
+                <rdf:Bag>
+                  <rdf:li rdf:resource="urn:miriam:obo.go:GO%3A0005759"/>
+                </rdf:Bag>
+              </bqbiol:is>
+            </rdf:Description>
+          </rdf:RDF>
+        </annotation>
+</compartment>
+      <compartment id="compartment_17957" name="endoplasmic reticulum lumen" metaid="metaid_46" sboTerm="SBO:0000290">
+        <annotation>
+          <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/" xmlns:bqmodel="http://biomodels.net/model-qualifiers/">
+            <rdf:Description rdf:about="#metaid_46">
+              <bqbiol:is>
+                <rdf:Bag>
+                  <rdf:li rdf:resource="urn:miriam:obo.go:GO%3A0005788"/>
+                </rdf:Bag>
+              </bqbiol:is>
+            </rdf:Description>
+          </rdf:RDF>
+        </annotation>
+</compartment>
+      <compartment id="compartment_17927" name="mitochondrial intermembrane space" metaid="metaid_87" sboTerm="SBO:0000290">
+        <annotation>
+          <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/" xmlns:bqmodel="http://biomodels.net/model-qualifiers/">
+            <rdf:Description rdf:about="#metaid_87">
+              <bqbiol:is>
+                <rdf:Bag>
+                  <rdf:li rdf:resource="urn:miriam:obo.go:GO%3A0005758"/>
+                </rdf:Bag>
+              </bqbiol:is>
+            </rdf:Description>
+          </rdf:RDF>
+        </annotation>
+</compartment>
+    </listOfCompartments>
+    <listOfSpecies>
+      <species id="species_71185" name="heme [cytosol]" metaid="metaid_3" sboTerm="SBO:0000247" compartment="compartment_70101">
+<notes><p xmlns="http://www.w3.org/1999/xhtml">Derived from a Reactome SimpleEntity.  This is a small compound.</p></notes>
+        <annotation>
+          <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/" xmlns:bqmodel="http://biomodels.net/model-qualifiers/">
+            <rdf:Description rdf:about="#metaid_3">
+              <bqbiol:is>
+                <rdf:Bag>
+                  <rdf:li rdf:resource="urn:miriam:reactome:REACT_2784"/>
+                  <rdf:li rdf:resource="urn:miriam:kegg.compound:C00032"/>
+                  <rdf:li rdf:resource="urn:miriam:obo.chebi:CHEBI%3A17627"/>
+                </rdf:Bag>
+              </bqbiol:is>
+            </rdf:Description>
+          </rdf:RDF>
+        </annotation>
+      </species>
+      <species id="species_29364" name="NADPH [cytosol]" metaid="metaid_5" sboTerm="SBO:0000247" compartment="compartment_70101">
+<notes><p xmlns="http://www.w3.org/1999/xhtml">Derived from a Reactome SimpleEntity.  This is a small compound.</p></notes>
+        <annotation>
+          <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/" xmlns:bqmodel="http://biomodels.net/model-qualifiers/">
+            <rdf:Description rdf:about="#metaid_5">
+              <bqbiol:is>
+                <rdf:Bag>
+                  <rdf:li rdf:resource="urn:miriam:reactome:REACT_2991"/>
+                  <rdf:li rdf:resource="urn:miriam:kegg.compound:C00005"/>
+                  <rdf:li rdf:resource="urn:miriam:obo.chebi:CHEBI%3A16474"/>
+                </rdf:Bag>
+              </bqbiol:is>
+            </rdf:Description>
+          </rdf:RDF>
+        </annotation>
+      </species>
+      <species id="species_29368" name="O2 [cytosol]" metaid="metaid_7" sboTerm="SBO:0000247" compartment="compartment_70101">
+<notes><p xmlns="http://www.w3.org/1999/xhtml">Derived from a Reactome SimpleEntity.  This is a small compound.</p></notes>
+        <annotation>
+          <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/" xmlns:bqmodel="http://biomodels.net/model-qualifiers/">
+            <rdf:Description rdf:about="#metaid_7">
+              <bqbiol:is>
+                <rdf:Bag>
+                  <rdf:li rdf:resource="urn:miriam:obo.chebi:CHEBI%3A15379"/>
+                  <rdf:li rdf:resource="urn:miriam:kegg.compound:C00007"/>
+                  <rdf:li rdf:resource="urn:miriam:reactome:REACT_5251"/>
+                </rdf:Bag>
+              </bqbiol:is>
+            </rdf:Description>
+          </rdf:RDF>
+        </annotation>
+      </species>
+      <species id="species_29366" name="NADP+ [cytosol]" metaid="metaid_9" sboTerm="SBO:0000247" compartment="compartment_70101">
+<notes><p xmlns="http://www.w3.org/1999/xhtml">Derived from a Reactome SimpleEntity.  This is a small compound.</p></notes>
+        <annotation>
+          <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/" xmlns:bqmodel="http://biomodels.net/model-qualifiers/">
+            <rdf:Description rdf:about="#metaid_9">
+              <bqbiol:is>
+                <rdf:Bag>
+                  <rdf:li rdf:resource="urn:miriam:reactome:REACT_4609"/>
+                  <rdf:li rdf:resource="urn:miriam:kegg.compound:C00006"/>
+                  <rdf:li rdf:resource="urn:miriam:obo.chebi:CHEBI%3A18009"/>
+                </rdf:Bag>
+              </bqbiol:is>
+            </rdf:Description>
+          </rdf:RDF>
+        </annotation>
+      </species>
+      <species id="species_29356" name="H2O [cytosol]" metaid="metaid_11" sboTerm="SBO:0000247" compartment="compartment_70101">
+<notes><p xmlns="http://www.w3.org/1999/xhtml">Derived from a Reactome SimpleEntity.  This is a small compound.</p></notes>
+        <annotation>
+          <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/" xmlns:bqmodel="http://biomodels.net/model-qualifiers/">
+            <rdf:Description rdf:about="#metaid_11">
+              <bqbiol:is>
+                <rdf:Bag>
+                  <rdf:li rdf:resource="urn:miriam:obo.chebi:CHEBI%3A15377"/>
+                  <rdf:li rdf:resource="urn:miriam:reactome:REACT_3683"/>
+                  <rdf:li rdf:resource="urn:miriam:kegg.compound:C00001"/>
+                </rdf:Bag>
+              </bqbiol:is>
+            </rdf:Description>
+          </rdf:RDF>
+        </annotation>
+      </species>
+      <species id="species_71067" name="Fe2+ [cytosol]" metaid="metaid_13" sboTerm="SBO:0000247" compartment="compartment_70101">
+<notes><p xmlns="http://www.w3.org/1999/xhtml">Derived from a Reactome SimpleEntity.  This is a small compound.</p></notes>
+        <annotation>
+          <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/" xmlns:bqmodel="http://biomodels.net/model-qualifiers/">
+            <rdf:Description rdf:about="#metaid_13">
+              <bqbiol:is>
+                <rdf:Bag>
+                  <rdf:li rdf:resource="urn:miriam:kegg.compound:C00023"/>
+                  <rdf:li rdf:resource="urn:miriam:reactome:REACT_3428"/>
+                  <rdf:li rdf:resource="urn:miriam:obo.chebi:CHEBI%3A18248"/>
+                </rdf:Bag>
+              </bqbiol:is>
+            </rdf:Description>
+          </rdf:RDF>
+        </annotation>
+      </species>
+      <species id="species_189385" name="CO [cytosol]" metaid="metaid_15" sboTerm="SBO:0000247" compartment="compartment_70101">
+<notes><p xmlns="http://www.w3.org/1999/xhtml">Derived from a Reactome SimpleEntity.  This is a small compound.</p></notes>
+        <annotation>
+          <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/" xmlns:bqmodel="http://biomodels.net/model-qualifiers/">
+            <rdf:Description rdf:about="#metaid_15">
+              <bqbiol:is>
+                <rdf:Bag>
+                  <rdf:li rdf:resource="urn:miriam:obo.chebi:CHEBI%3A17245"/>
+                  <rdf:li rdf:resource="urn:miriam:kegg.compound:C00237"/>
+                  <rdf:li rdf:resource="urn:miriam:reactome:REACT_22859"/>
+                </rdf:Bag>
+              </bqbiol:is>
+            </rdf:Description>
+          </rdf:RDF>
+        </annotation>
+      </species>
+      <species id="species_189396" name="BV [cytosol]" metaid="metaid_17" sboTerm="SBO:0000247" compartment="compartment_70101">
+<notes><p xmlns="http://www.w3.org/1999/xhtml">Derived from a Reactome SimpleEntity.  This is a small compound.</p></notes>
+        <annotation>
+          <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/" xmlns:bqmodel="http://biomodels.net/model-qualifiers/">
+            <rdf:Description rdf:about="#metaid_17">
+              <bqbiol:is>
+                <rdf:Bag>
+                  <rdf:li rdf:resource="urn:miriam:reactome:REACT_22969"/>
+                  <rdf:li rdf:resource="urn:miriam:obo.chebi:CHEBI%3A17033"/>
+                  <rdf:li rdf:resource="urn:miriam:kegg.compound:C00500"/>
+                </rdf:Bag>
+              </bqbiol:is>
+            </rdf:Description>
+          </rdf:RDF>
+        </annotation>
+      </species>
+      <species id="species_189382" name="HMOX1/2 [endoplasmic reticulum membrane]" metaid="metaid_20" sboTerm="SBO:0000240" compartment="compartment_12045">
+<notes><p xmlns="http://www.w3.org/1999/xhtml">Derived from a Reactome DefinedSet.  This is a list of alternative entities, any of which can perform the given function.</p></notes>
+        <annotation>
+          <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/" xmlns:bqmodel="http://biomodels.net/model-qualifiers/">
+            <rdf:Description rdf:about="#metaid_20">
+              <bqbiol:is>
+                <rdf:Bag>
+                  <rdf:li rdf:resource="urn:miriam:reactome:REACT_22577"/>
+                </rdf:Bag>
+              </bqbiol:is>
+              <bqbiol:hasPart>
+                <rdf:Bag>
+                  <rdf:li rdf:resource="urn:miriam:uniprot:P09601"/>
+                  <rdf:li rdf:resource="urn:miriam:uniprot:P30519"/>
+                </rdf:Bag>
+              </bqbiol:hasPart>
+            </rdf:Description>
+          </rdf:RDF>
+        </annotation>
+      </species>
+      <species id="species_189407" name="URO3 [cytosol]" metaid="metaid_23" sboTerm="SBO:0000247" compartment="compartment_70101">
+<notes><p xmlns="http://www.w3.org/1999/xhtml">Derived from a Reactome SimpleEntity.  This is a small compound.</p></notes>
+        <annotation>
+          <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/" xmlns:bqmodel="http://biomodels.net/model-qualifiers/">
+            <rdf:Description rdf:about="#metaid_23">
+              <bqbiol:is>
+                <rdf:Bag>
+                  <rdf:li rdf:resource="urn:miriam:obo.chebi:CHEBI%3A15437"/>
+                  <rdf:li rdf:resource="urn:miriam:reactome:REACT_9722"/>
+                  <rdf:li rdf:resource="urn:miriam:kegg.compound:C01051"/>
+                </rdf:Bag>
+              </bqbiol:is>
+            </rdf:Description>
+          </rdf:RDF>
+        </annotation>
+      </species>
+      <species id="species_189455" name="COPRO3 [cytosol]" metaid="metaid_25" sboTerm="SBO:0000247" compartment="compartment_70101">
+<notes><p xmlns="http://www.w3.org/1999/xhtml">Derived from a Reactome SimpleEntity.  This is a small compound.</p></notes>
+        <annotation>
+          <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/" xmlns:bqmodel="http://biomodels.net/model-qualifiers/">
+            <rdf:Description rdf:about="#metaid_25">
+              <bqbiol:is>
+                <rdf:Bag>
+                  <rdf:li rdf:resource="urn:miriam:obo.chebi:CHEBI%3A15439"/>
+                  <rdf:li rdf:resource="urn:miriam:kegg.compound:C03263"/>
+                  <rdf:li rdf:resource="urn:miriam:reactome:REACT_9699"/>
+                </rdf:Bag>
+              </bqbiol:is>
+            </rdf:Description>
+          </rdf:RDF>
+        </annotation>
+      </species>
+      <species id="species_113528" name="CO2 [cytosol]" metaid="metaid_27" sboTerm="SBO:0000247" compartment="compartment_70101">
+<notes><p xmlns="http://www.w3.org/1999/xhtml">Derived from a Reactome SimpleEntity.  This is a small compound.</p></notes>
+        <annotation>
+          <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/" xmlns:bqmodel="http://biomodels.net/model-qualifiers/">
+            <rdf:Description rdf:about="#metaid_27">
+              <bqbiol:is>
+                <rdf:Bag>
+                  <rdf:li rdf:resource="urn:miriam:reactome:REACT_2373"/>
+                  <rdf:li rdf:resource="urn:miriam:obo.chebi:CHEBI%3A16526"/>
+                  <rdf:li rdf:resource="urn:miriam:kegg.compound:C00011"/>
+                </rdf:Bag>
+              </bqbiol:is>
+            </rdf:Description>
+          </rdf:RDF>
+        </annotation>
+      </species>
+      <species id="species_189454" name="UROD homodimer [cytosol]" metaid="metaid_29" sboTerm="SBO:0000253" compartment="compartment_70101">
+<notes><p xmlns="http://www.w3.org/1999/xhtml">Derived from a Reactome Complex.  Here is Reactomes nested structure for this complex: (P06132,P06132)</p></notes>
+        <annotation>
+          <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/" xmlns:bqmodel="http://biomodels.net/model-qualifiers/">
+            <rdf:Description rdf:about="#metaid_29">
+              <bqbiol:is>
+                <rdf:Bag>
+                  <rdf:li rdf:resource="urn:miriam:reactome:REACT_9830"/>
+                </rdf:Bag>
+              </bqbiol:is>
+              <bqbiol:hasPart>
+                <rdf:Bag>
+                  <rdf:li rdf:resource="urn:miriam:uniprot:P06132"/>
+                </rdf:Bag>
+              </bqbiol:hasPart>
+            </rdf:Description>
+          </rdf:RDF>
+        </annotation>
+      </species>
+      <species id="species_70958" name="SUCC-CoA [mitochondrial matrix]" metaid="metaid_33" sboTerm="SBO:0000247" compartment="compartment_5460">
+<notes><p xmlns="http://www.w3.org/1999/xhtml">Derived from a Reactome SimpleEntity.  This is a small compound.</p></notes>
+        <annotation>
+          <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/" xmlns:bqmodel="http://biomodels.net/model-qualifiers/">
+            <rdf:Description rdf:about="#metaid_33">
+              <bqbiol:is>
+                <rdf:Bag>
+                  <rdf:li rdf:resource="urn:miriam:reactome:REACT_2852"/>
+                  <rdf:li rdf:resource="urn:miriam:kegg.compound:C00091"/>
+                  <rdf:li rdf:resource="urn:miriam:obo.chebi:CHEBI%3A15380"/>
+                </rdf:Bag>
+              </bqbiol:is>
+            </rdf:Description>
+          </rdf:RDF>
+        </annotation>
+      </species>
+      <species id="species_159549" name="Gly [mitochondrial matrix]" metaid="metaid_35" sboTerm="SBO:0000247" compartment="compartment_5460">
+<notes><p xmlns="http://www.w3.org/1999/xhtml">Derived from a Reactome SimpleEntity.  This is a small compound.</p></notes>
+        <annotation>
+          <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/" xmlns:bqmodel="http://biomodels.net/model-qualifiers/">
+            <rdf:Description rdf:about="#metaid_35">
+              <bqbiol:is>
+                <rdf:Bag>
+                  <rdf:li rdf:resource="urn:miriam:obo.chebi:CHEBI%3A15428"/>
+                  <rdf:li rdf:resource="urn:miriam:reactome:REACT_7329"/>
+                  <rdf:li rdf:resource="urn:miriam:kegg.compound:C00037"/>
+                </rdf:Bag>
+              </bqbiol:is>
+            </rdf:Description>
+          </rdf:RDF>
+        </annotation>
+      </species>
+      <species id="species_189466" name="dALA [mitochondrial matrix]" metaid="metaid_37" sboTerm="SBO:0000247" compartment="compartment_5460">
+<notes><p xmlns="http://www.w3.org/1999/xhtml">Derived from a Reactome SimpleEntity.  This is a small compound.</p></notes>
+        <annotation>
+          <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/" xmlns:bqmodel="http://biomodels.net/model-qualifiers/">
+            <rdf:Description rdf:about="#metaid_37">
+              <bqbiol:is>
+                <rdf:Bag>
+                  <rdf:li rdf:resource="urn:miriam:obo.chebi:CHEBI%3A17549"/>
+                  <rdf:li rdf:resource="urn:miriam:kegg.compound:C00430"/>
+                  <rdf:li rdf:resource="urn:miriam:reactome:REACT_9638"/>
+                </rdf:Bag>
+              </bqbiol:is>
+            </rdf:Description>
+          </rdf:RDF>
+        </annotation>
+      </species>
+      <species id="species_29374" name="CoA-SH [mitochondrial matrix]" metaid="metaid_39" sboTerm="SBO:0000247" compartment="compartment_5460">
+<notes><p xmlns="http://www.w3.org/1999/xhtml">Derived from a Reactome SimpleEntity.  This is a small compound.</p></notes>
+        <annotation>
+          <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/" xmlns:bqmodel="http://biomodels.net/model-qualifiers/">
+            <rdf:Description rdf:about="#metaid_39">
+              <bqbiol:is>
+                <rdf:Bag>
+                  <rdf:li rdf:resource="urn:miriam:reactome:REACT_3654"/>
+                  <rdf:li rdf:resource="urn:miriam:kegg.compound:C00010"/>
+                  <rdf:li rdf:resource="urn:miriam:obo.chebi:CHEBI%3A15346"/>
+                </rdf:Bag>
+              </bqbiol:is>
+            </rdf:Description>
+          </rdf:RDF>
+        </annotation>
+      </species>
+      <species id="species_29376" name="CO2 [mitochondrial matrix]" metaid="metaid_41" sboTerm="SBO:0000247" compartment="compartment_5460">
+<notes><p xmlns="http://www.w3.org/1999/xhtml">Derived from a Reactome SimpleEntity.  This is a small compound.</p></notes>
+        <annotation>
+          <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/" xmlns:bqmodel="http://biomodels.net/model-qualifiers/">
+            <rdf:Description rdf:about="#metaid_41">
+              <bqbiol:is>
+                <rdf:Bag>
+                  <rdf:li rdf:resource="urn:miriam:obo.chebi:CHEBI%3A16526"/>
+                  <rdf:li rdf:resource="urn:miriam:reactome:REACT_2572"/>
+                  <rdf:li rdf:resource="urn:miriam:kegg.compound:C00011"/>
+                </rdf:Bag>
+              </bqbiol:is>
+            </rdf:Description>
+          </rdf:RDF>
+        </annotation>
+      </species>
+      <species id="species_189429" name="ALAS homodimer [mitochondrial matrix]" metaid="metaid_43" sboTerm="SBO:0000240" compartment="compartment_5460">
+<notes><p xmlns="http://www.w3.org/1999/xhtml">Derived from a Reactome DefinedSet.  This is a list of alternative entities, any of which can perform the given function.</p></notes>
+        <annotation>
+          <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/" xmlns:bqmodel="http://biomodels.net/model-qualifiers/">
+            <rdf:Description rdf:about="#metaid_43">
+              <bqbiol:is>
+                <rdf:Bag>
+                  <rdf:li rdf:resource="urn:miriam:reactome:REACT_9546"/>
+                </rdf:Bag>
+              </bqbiol:is>
+              <bqbiol:hasPart>
+                <rdf:Bag>
+                  <rdf:li rdf:resource="urn:miriam:uniprot:P22557"/>
+                  <rdf:li rdf:resource="urn:miriam:uniprot:P13196"/>
+                </rdf:Bag>
+              </bqbiol:hasPart>
+            </rdf:Description>
+          </rdf:RDF>
+        </annotation>
+      </species>
+      <species id="species_159160" name="BMG [endoplasmic reticulum lumen]" metaid="metaid_47" sboTerm="SBO:0000247" compartment="compartment_17957">
+<notes><p xmlns="http://www.w3.org/1999/xhtml">Derived from a Reactome SimpleEntity.  This is a small compound.</p></notes>
+        <annotation>
+          <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/" xmlns:bqmodel="http://biomodels.net/model-qualifiers/">
+            <rdf:Description rdf:about="#metaid_47">
+              <bqbiol:is>
+                <rdf:Bag>
+                  <rdf:li rdf:resource="urn:miriam:kegg.compound:C03374"/>
+                  <rdf:li rdf:resource="urn:miriam:reactome:REACT_23365"/>
+                  <rdf:li rdf:resource="urn:miriam:obo.chebi:CHEBI%3A16427"/>
+                </rdf:Bag>
+              </bqbiol:is>
+            </rdf:Description>
+          </rdf:RDF>
+        </annotation>
+      </species>
+      <species id="species_174384" name="UDP-GCU [endoplasmic reticulum lumen]" metaid="metaid_49" sboTerm="SBO:0000247" compartment="compartment_17957">
+<notes><p xmlns="http://www.w3.org/1999/xhtml">Derived from a Reactome SimpleEntity.  This is a small compound.</p></notes>
+        <annotation>
+          <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/" xmlns:bqmodel="http://biomodels.net/model-qualifiers/">
+            <rdf:Description rdf:about="#metaid_49">
+              <bqbiol:is>
+                <rdf:Bag>
+                  <rdf:li rdf:resource="urn:miriam:reactome:REACT_7695"/>
+                  <rdf:li rdf:resource="urn:miriam:kegg.compound:C00167"/>
+                  <rdf:li rdf:resource="urn:miriam:obo.chebi:CHEBI%3A17200"/>
+                </rdf:Bag>
+              </bqbiol:is>
+            </rdf:Description>
+          </rdf:RDF>
+        </annotation>
+      </species>
+      <species id="species_159149" name="BDG [endoplasmic reticulum lumen]" metaid="metaid_51" sboTerm="SBO:0000247" compartment="compartment_17957">
+<notes><p xmlns="http://www.w3.org/1999/xhtml">Derived from a Reactome SimpleEntity.  This is a small compound.</p></notes>
+        <annotation>
+          <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/" xmlns:bqmodel="http://biomodels.net/model-qualifiers/">
+            <rdf:Description rdf:about="#metaid_51">
+              <bqbiol:is>
+                <rdf:Bag>
+                  <rdf:li rdf:resource="urn:miriam:obo.chebi:CHEBI%3A18392"/>
+                  <rdf:li rdf:resource="urn:miriam:kegg.compound:C05787"/>
+                  <rdf:li rdf:resource="urn:miriam:reactome:REACT_22897"/>
+                </rdf:Bag>
+              </bqbiol:is>
+            </rdf:Description>
+          </rdf:RDF>
+        </annotation>
+      </species>
+      <species id="species_158602" name="UDP [endoplasmic reticulum lumen]" metaid="metaid_53" sboTerm="SBO:0000247" compartment="compartment_17957">
+<notes><p xmlns="http://www.w3.org/1999/xhtml">Derived from a Reactome SimpleEntity.  This is a small compound.</p></notes>
+        <annotation>
+          <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/" xmlns:bqmodel="http://biomodels.net/model-qualifiers/">
+            <rdf:Description rdf:about="#metaid_53">
+              <bqbiol:is>
+                <rdf:Bag>
+                  <rdf:li rdf:resource="urn:miriam:reactome:REACT_5807"/>
+                  <rdf:li rdf:resource="urn:miriam:kegg.compound:C00015"/>
+                  <rdf:li rdf:resource="urn:miriam:obo.chebi:CHEBI%3A17659"/>
+                </rdf:Bag>
+              </bqbiol:is>
+            </rdf:Description>
+          </rdf:RDF>
+        </annotation>
+      </species>
+      <species id="species_159191" name="Tetrameric UGT1A1 [endoplasmic reticulum membrane]" metaid="metaid_55" sboTerm="SBO:0000253" compartment="compartment_12045">
+<notes><p xmlns="http://www.w3.org/1999/xhtml">Derived from a Reactome Complex.  Here is Reactomes nested structure for this complex: (P22309,P22309,P22309,P22309)</p></notes>
+        <annotation>
+          <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/" xmlns:bqmodel="http://biomodels.net/model-qualifiers/">
+            <rdf:Description rdf:about="#metaid_55">
+              <bqbiol:is>
+                <rdf:Bag>
+                  <rdf:li rdf:resource="urn:miriam:reactome:REACT_22998"/>
+                </rdf:Bag>
+              </bqbiol:is>
+              <bqbiol:hasPart>
+                <rdf:Bag>
+                  <rdf:li rdf:resource="urn:miriam:uniprot:P22309"/>
+                </rdf:Bag>
+              </bqbiol:hasPart>
+            </rdf:Description>
+          </rdf:RDF>
+        </annotation>
+      </species>
+      <species id="species_189464" name="PBG [cytosol]" metaid="metaid_58" sboTerm="SBO:0000247" compartment="compartment_70101">
+<notes><p xmlns="http://www.w3.org/1999/xhtml">Derived from a Reactome SimpleEntity.  This is a small compound.</p></notes>
+        <annotation>
+          <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/" xmlns:bqmodel="http://biomodels.net/model-qualifiers/">
+            <rdf:Description rdf:about="#metaid_58">
+              <bqbiol:is>
+                <rdf:Bag>
+                  <rdf:li rdf:resource="urn:miriam:reactome:REACT_9816"/>
+                  <rdf:li rdf:resource="urn:miriam:obo.chebi:CHEBI%3A17381"/>
+                  <rdf:li rdf:resource="urn:miriam:kegg.compound:C00931"/>
+                </rdf:Bag>
+              </bqbiol:is>
+            </rdf:Description>
+          </rdf:RDF>
+        </annotation>
+      </species>
+      <species id="species_189449" name="HMBL [cytosol]" metaid="metaid_61" sboTerm="SBO:0000247" compartment="compartment_70101">
+<notes><p xmlns="http://www.w3.org/1999/xhtml">Derived from a Reactome SimpleEntity.  This is a small compound.</p></notes>
+        <annotation>
+          <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/" xmlns:bqmodel="http://biomodels.net/model-qualifiers/">
+            <rdf:Description rdf:about="#metaid_61">
+              <bqbiol:is>
+                <rdf:Bag>
+                  <rdf:li rdf:resource="urn:miriam:reactome:REACT_9601"/>
+                  <rdf:li rdf:resource="urn:miriam:kegg.compound:C01024"/>
+                  <rdf:li rdf:resource="urn:miriam:obo.chebi:CHEBI%3A16645"/>
+                </rdf:Bag>
+              </bqbiol:is>
+            </rdf:Description>
+          </rdf:RDF>
+        </annotation>
+      </species>
+      <species id="species_29382" name="NH3 [cytosol]" metaid="metaid_63" sboTerm="SBO:0000247" compartment="compartment_70101">
+<notes><p xmlns="http://www.w3.org/1999/xhtml">Derived from a Reactome SimpleEntity.  This is a small compound.</p></notes>
+        <annotation>
+          <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/" xmlns:bqmodel="http://biomodels.net/model-qualifiers/">
+            <rdf:Description rdf:about="#metaid_63">
+              <bqbiol:is>
+                <rdf:Bag>
+                  <rdf:li rdf:resource="urn:miriam:kegg.compound:C00014"/>
+                  <rdf:li rdf:resource="urn:miriam:obo.chebi:CHEBI%3A16134"/>
+                  <rdf:li rdf:resource="urn:miriam:reactome:REACT_3820"/>
+                </rdf:Bag>
+              </bqbiol:is>
+            </rdf:Description>
+          </rdf:RDF>
+        </annotation>
+      </species>
+      <species id="species_189426" name="Porphobilinogen deaminase (dipyrromethane cofactor) [cytosol]" metaid="metaid_65" sboTerm="SBO:0000253" compartment="compartment_70101">
+<notes><p xmlns="http://www.w3.org/1999/xhtml">Derived from a Reactome Complex.  Here is Reactomes nested structure for this complex: (36319,P08397)</p></notes>
+        <annotation>
+          <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/" xmlns:bqmodel="http://biomodels.net/model-qualifiers/">
+            <rdf:Description rdf:about="#metaid_65">
+              <bqbiol:is>
+                <rdf:Bag>
+                  <rdf:li rdf:resource="urn:miriam:reactome:REACT_9578"/>
+                </rdf:Bag>
+              </bqbiol:is>
+              <bqbiol:hasPart>
+                <rdf:Bag>
+                  <rdf:li rdf:resource="urn:miriam:uniprot:P08397"/>
+                  <rdf:li rdf:resource="urn:miriam:obo.chebi:CHEBI%3A36319"/>
+                </rdf:Bag>
+              </bqbiol:hasPart>
+            </rdf:Description>
+          </rdf:RDF>
+        </annotation>
+      </species>
+      <species id="species_190157" name="URO1 [cytosol]" metaid="metaid_68" sboTerm="SBO:0000247" compartment="compartment_70101">
+<notes><p xmlns="http://www.w3.org/1999/xhtml">Derived from a Reactome SimpleEntity.  This is a small compound.</p></notes>
+        <annotation>
+          <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/" xmlns:bqmodel="http://biomodels.net/model-qualifiers/">
+            <rdf:Description rdf:about="#metaid_68">
+              <bqbiol:is>
+                <rdf:Bag>
+                  <rdf:li rdf:resource="urn:miriam:obo.chebi:CHEBI%3A28766"/>
+                  <rdf:li rdf:resource="urn:miriam:reactome:REACT_9880"/>
+                </rdf:Bag>
+              </bqbiol:is>
+            </rdf:Description>
+          </rdf:RDF>
+        </annotation>
+      </species>
+      <species id="species_190128" name="COPRO1 [cytosol]" metaid="metaid_70" sboTerm="SBO:0000247" compartment="compartment_70101">
+<notes><p xmlns="http://www.w3.org/1999/xhtml">Derived from a Reactome SimpleEntity.  This is a small compound.</p></notes>
+        <annotation>
+          <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/" xmlns:bqmodel="http://biomodels.net/model-qualifiers/">
+            <rdf:Description rdf:about="#metaid_70">
+              <bqbiol:is>
+                <rdf:Bag>
+                  <rdf:li rdf:resource="urn:miriam:reactome:REACT_9818"/>
+                  <rdf:li rdf:resource="urn:miriam:obo.chebi:CHEBI%3A28607"/>
+                </rdf:Bag>
+              </bqbiol:is>
+            </rdf:Description>
+          </rdf:RDF>
+        </annotation>
+      </species>
+      <species id="species_189489" name="dALA [cytosol]" metaid="metaid_75" sboTerm="SBO:0000247" compartment="compartment_70101">
+<notes><p xmlns="http://www.w3.org/1999/xhtml">Derived from a Reactome SimpleEntity.  This is a small compound.</p></notes>
+        <annotation>
+          <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/" xmlns:bqmodel="http://biomodels.net/model-qualifiers/">
+            <rdf:Description rdf:about="#metaid_75">
+              <bqbiol:is>
+                <rdf:Bag>
+                  <rdf:li rdf:resource="urn:miriam:reactome:REACT_9717"/>
+                  <rdf:li rdf:resource="urn:miriam:obo.chebi:CHEBI%3A17549"/>
+                  <rdf:li rdf:resource="urn:miriam:kegg.compound:C00430"/>
+                </rdf:Bag>
+              </bqbiol:is>
+            </rdf:Description>
+          </rdf:RDF>
+        </annotation>
+      </species>
+      <species id="species_189400" name="ALAD homooctamer (Zinc cofactor) [cytosol]" metaid="metaid_79" sboTerm="SBO:0000253" compartment="compartment_70101">
+<notes><p xmlns="http://www.w3.org/1999/xhtml">Derived from a Reactome Complex.  Here is Reactomes nested structure for this complex: (29105,29105,29105,29105,29105,29105,29105,29105,P13716,P13716,P13716,P13716,P13716,P13716,P13716,P13716)</p></notes>
+        <annotation>
+          <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/" xmlns:bqmodel="http://biomodels.net/model-qualifiers/">
+            <rdf:Description rdf:about="#metaid_79">
+              <bqbiol:is>
+                <rdf:Bag>
+                  <rdf:li rdf:resource="urn:miriam:reactome:REACT_9587"/>
+                </rdf:Bag>
+              </bqbiol:is>
+              <bqbiol:hasPart>
+                <rdf:Bag>
+                  <rdf:li rdf:resource="urn:miriam:uniprot:P13716"/>
+                  <rdf:li rdf:resource="urn:miriam:obo.chebi:CHEBI%3A29105"/>
+                  <rdf:li rdf:resource="urn:miriam:kegg.compound:C00038"/>
+                </rdf:Bag>
+              </bqbiol:hasPart>
+            </rdf:Description>
+          </rdf:RDF>
+        </annotation>
+      </species>
+      <species id="species_189386" name="BIL [cytosol]" metaid="metaid_82" sboTerm="SBO:0000247" compartment="compartment_70101">
+<notes><p xmlns="http://www.w3.org/1999/xhtml">Derived from a Reactome SimpleEntity.  This is a small compound.</p></notes>
+        <annotation>
+          <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/" xmlns:bqmodel="http://biomodels.net/model-qualifiers/">
+            <rdf:Description rdf:about="#metaid_82">
+              <bqbiol:is>
+                <rdf:Bag>
+                  <rdf:li rdf:resource="urn:miriam:obo.chebi:CHEBI%3A16990"/>
+                  <rdf:li rdf:resource="urn:miriam:kegg.compound:C00486"/>
+                  <rdf:li rdf:resource="urn:miriam:reactome:REACT_22822"/>
+                </rdf:Bag>
+              </bqbiol:is>
+            </rdf:Description>
+          </rdf:RDF>
+        </annotation>
+      </species>
+      <species id="species_159151" name="BIL [endoplasmic reticulum lumen]" metaid="metaid_84" sboTerm="SBO:0000247" compartment="compartment_17957">
+<notes><p xmlns="http://www.w3.org/1999/xhtml">Derived from a Reactome SimpleEntity.  This is a small compound.</p></notes>
+        <annotation>
+          <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/" xmlns:bqmodel="http://biomodels.net/model-qualifiers/">
+            <rdf:Description rdf:about="#metaid_84">
+              <bqbiol:is>
+                <rdf:Bag>
+                  <rdf:li rdf:resource="urn:miriam:obo.chebi:CHEBI%3A16990"/>
+                  <rdf:li rdf:resource="urn:miriam:kegg.compound:C00486"/>
+                  <rdf:li rdf:resource="urn:miriam:reactome:REACT_22619"/>
+                </rdf:Bag>
+              </bqbiol:is>
+            </rdf:Description>
+          </rdf:RDF>
+        </annotation>
+      </species>
+      <species id="species_189463" name="PRIN9 [mitochondrial intermembrane space]" metaid="metaid_88" sboTerm="SBO:0000247" compartment="compartment_17927">
+<notes><p xmlns="http://www.w3.org/1999/xhtml">Derived from a Reactome SimpleEntity.  This is a small compound.</p></notes>
+        <annotation>
+          <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/" xmlns:bqmodel="http://biomodels.net/model-qualifiers/">
+            <rdf:Description rdf:about="#metaid_88">
+              <bqbiol:is>
+                <rdf:Bag>
+                  <rdf:li rdf:resource="urn:miriam:reactome:REACT_9585"/>
+                  <rdf:li rdf:resource="urn:miriam:kegg.compound:C02191"/>
+                  <rdf:li rdf:resource="urn:miriam:obo.chebi:CHEBI%3A15430"/>
+                </rdf:Bag>
+              </bqbiol:is>
+            </rdf:Description>
+          </rdf:RDF>
+        </annotation>
+      </species>
+      <species id="species_189487" name="PRIN9 [mitochondrial matrix]" metaid="metaid_90" sboTerm="SBO:0000247" compartment="compartment_5460">
+<notes><p xmlns="http://www.w3.org/1999/xhtml">Derived from a Reactome SimpleEntity.  This is a small compound.</p></notes>
+        <annotation>
+          <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/" xmlns:bqmodel="http://biomodels.net/model-qualifiers/">
+            <rdf:Description rdf:about="#metaid_90">
+              <bqbiol:is>
+                <rdf:Bag>
+                  <rdf:li rdf:resource="urn:miriam:kegg.compound:C02191"/>
+                  <rdf:li rdf:resource="urn:miriam:obo.chebi:CHEBI%3A15430"/>
+                  <rdf:li rdf:resource="urn:miriam:reactome:REACT_9665"/>
+                </rdf:Bag>
+              </bqbiol:is>
+            </rdf:Description>
+          </rdf:RDF>
+        </annotation>
+      </species>
+      <species id="species_189430" name="UROS [cytosol]" metaid="metaid_103" sboTerm="SBO:0000297" compartment="compartment_70101">
+<notes><p xmlns="http://www.w3.org/1999/xhtml">Derived from a Reactome EntityWithAccessionedSequence.  This is a protein.</p></notes>
+        <annotation>
+          <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/" xmlns:bqmodel="http://biomodels.net/model-qualifiers/">
+            <rdf:Description rdf:about="#metaid_103">
+              <bqbiol:is>
+                <rdf:Bag>
+                  <rdf:li rdf:resource="urn:miriam:uniprot:P10746"/>
+                  <rdf:li rdf:resource="urn:miriam:reactome:REACT_9767"/>
+                </rdf:Bag>
+              </bqbiol:is>
+            </rdf:Description>
+          </rdf:RDF>
+        </annotation>
+      </species>
+      <species id="species_190173" name="Pb2+ [cytosol]" metaid="metaid_107" sboTerm="SBO:0000247" compartment="compartment_70101">
+<notes><p xmlns="http://www.w3.org/1999/xhtml">Derived from a Reactome SimpleEntity.  This is a small compound.</p></notes>
+        <annotation>
+          <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/" xmlns:bqmodel="http://biomodels.net/model-qualifiers/">
+            <rdf:Description rdf:about="#metaid_107">
+              <bqbiol:is>
+                <rdf:Bag>
+                  <rdf:li rdf:resource="urn:miriam:reactome:REACT_9737"/>
+                  <rdf:li rdf:resource="urn:miriam:obo.chebi:CHEBI%3A27889"/>
+                </rdf:Bag>
+              </bqbiol:is>
+            </rdf:Description>
+          </rdf:RDF>
+        </annotation>
+      </species>
+      <species id="species_190145" name="ALAD homooctamer (Pb and Zn bound) [cytosol]" metaid="metaid_109" sboTerm="SBO:0000253" compartment="compartment_70101">
+<notes><p xmlns="http://www.w3.org/1999/xhtml">Derived from a Reactome Complex.  Here is Reactomes nested structure for this complex: (29105,29105,29105,29105,27889,27889,27889,27889,P13716,P13716,P13716,P13716,P13716,P13716,P13716,P13716)</p></notes>
+        <annotation>
+          <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/" xmlns:bqmodel="http://biomodels.net/model-qualifiers/">
+            <rdf:Description rdf:about="#metaid_109">
+              <bqbiol:is>
+                <rdf:Bag>
+                  <rdf:li rdf:resource="urn:miriam:reactome:REACT_9852"/>
+                </rdf:Bag>
+              </bqbiol:is>
+              <bqbiol:hasPart>
+                <rdf:Bag>
+                  <rdf:li rdf:resource="urn:miriam:uniprot:P13716"/>
+                  <rdf:li rdf:resource="urn:miriam:obo.chebi:CHEBI%3A29105"/>
+                  <rdf:li rdf:resource="urn:miriam:obo.chebi:CHEBI%3A27889"/>
+                  <rdf:li rdf:resource="urn:miriam:kegg.compound:C00038"/>
+                </rdf:Bag>
+              </bqbiol:hasPart>
+            </rdf:Description>
+          </rdf:RDF>
+        </annotation>
+      </species>
+      <species id="species_29426" name="Zn2+ [cytosol]" metaid="metaid_111" sboTerm="SBO:0000247" compartment="compartment_70101">
+<notes><p xmlns="http://www.w3.org/1999/xhtml">Derived from a Reactome SimpleEntity.  This is a small compound.</p></notes>
+        <annotation>
+          <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/" xmlns:bqmodel="http://biomodels.net/model-qualifiers/">
+            <rdf:Description rdf:about="#metaid_111">
+              <bqbiol:is>
+                <rdf:Bag>
+                  <rdf:li rdf:resource="urn:miriam:reactome:REACT_3201"/>
+                  <rdf:li rdf:resource="urn:miriam:obo.chebi:CHEBI%3A29105"/>
+                  <rdf:li rdf:resource="urn:miriam:kegg.compound:C00038"/>
+                </rdf:Bag>
+              </bqbiol:is>
+            </rdf:Description>
+          </rdf:RDF>
+        </annotation>
+      </species>
+      <species id="species_159156" name="UGT1A1 [endoplasmic reticulum membrane]" metaid="metaid_118" sboTerm="SBO:0000297" compartment="compartment_12045">
+<notes><p xmlns="http://www.w3.org/1999/xhtml">Derived from a Reactome EntityWithAccessionedSequence.  This is a protein.</p></notes>
+        <annotation>
+          <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/" xmlns:bqmodel="http://biomodels.net/model-qualifiers/">
+            <rdf:Description rdf:about="#metaid_118">
+              <bqbiol:is>
+                <rdf:Bag>
+                  <rdf:li rdf:resource="urn:miriam:uniprot:P22309"/>
+                  <rdf:li rdf:resource="urn:miriam:reactome:REACT_7010"/>
+                </rdf:Bag>
+              </bqbiol:is>
+            </rdf:Description>
+          </rdf:RDF>
+        </annotation>
+      </species>
+      <species id="species_189411" name="COPRO3 [mitochondrial intermembrane space]" metaid="metaid_121" sboTerm="SBO:0000247" compartment="compartment_17927">
+<notes><p xmlns="http://www.w3.org/1999/xhtml">Derived from a Reactome SimpleEntity.  This is a small compound.</p></notes>
+        <annotation>
+          <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/" xmlns:bqmodel="http://biomodels.net/model-qualifiers/">
+            <rdf:Description rdf:about="#metaid_121">
+              <bqbiol:is>
+                <rdf:Bag>
+                  <rdf:li rdf:resource="urn:miriam:obo.chebi:CHEBI%3A15439"/>
+                  <rdf:li rdf:resource="urn:miriam:reactome:REACT_9897"/>
+                  <rdf:li rdf:resource="urn:miriam:kegg.compound:C03263"/>
+                </rdf:Bag>
+              </bqbiol:is>
+            </rdf:Description>
+          </rdf:RDF>
+        </annotation>
+      </species>
+      <species id="species_189461" name="O2 [mitochondrial intermembrane space]" metaid="metaid_123" sboTerm="SBO:0000247" compartment="compartment_17927">
+<notes><p xmlns="http://www.w3.org/1999/xhtml">Derived from a Reactome SimpleEntity.  This is a small compound.</p></notes>
+        <annotation>
+          <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/" xmlns:bqmodel="http://biomodels.net/model-qualifiers/">
+            <rdf:Description rdf:about="#metaid_123">
+              <bqbiol:is>
+                <rdf:Bag>
+                  <rdf:li rdf:resource="urn:miriam:obo.chebi:CHEBI%3A15379"/>
+                  <rdf:li rdf:resource="urn:miriam:reactome:REACT_9648"/>
+                  <rdf:li rdf:resource="urn:miriam:kegg.compound:C00007"/>
+                </rdf:Bag>
+              </bqbiol:is>
+            </rdf:Description>
+          </rdf:RDF>
+        </annotation>
+      </species>
+      <species id="species_189478" name="PPGEN9 [mitochondrial intermembrane space]" metaid="metaid_125" sboTerm="SBO:0000247" compartment="compartment_17927">
+<notes><p xmlns="http://www.w3.org/1999/xhtml">Derived from a Reactome SimpleEntity.  This is a small compound.</p></notes>
+        <annotation>
+          <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/" xmlns:bqmodel="http://biomodels.net/model-qualifiers/">
+            <rdf:Description rdf:about="#metaid_125">
+              <bqbiol:is>
+                <rdf:Bag>
+                  <rdf:li rdf:resource="urn:miriam:reactome:REACT_9886"/>
+                  <rdf:li rdf:resource="urn:miriam:obo.chebi:CHEBI%3A15435"/>
+                </rdf:Bag>
+              </bqbiol:is>
+            </rdf:Description>
+          </rdf:RDF>
+        </annotation>
+      </species>
+      <species id="species_189481" name="H2O2 [mitochondrial intermembrane space]" metaid="metaid_127" sboTerm="SBO:0000247" compartment="compartment_17927">
+<notes><p xmlns="http://www.w3.org/1999/xhtml">Derived from a Reactome SimpleEntity.  This is a small compound.</p></notes>
+        <annotation>
+          <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/" xmlns:bqmodel="http://biomodels.net/model-qualifiers/">
+            <rdf:Description rdf:about="#metaid_127">
+              <bqbiol:is>
+                <rdf:Bag>
+                  <rdf:li rdf:resource="urn:miriam:obo.chebi:CHEBI%3A16240"/>
+                  <rdf:li rdf:resource="urn:miriam:reactome:REACT_9751"/>
+                  <rdf:li rdf:resource="urn:miriam:kegg.compound:C00027"/>
+                </rdf:Bag>
+              </bqbiol:is>
+            </rdf:Description>
+          </rdf:RDF>
+        </annotation>
+      </species>
+      <species id="species_189480" name="CO2 [mitochondrial intermembrane space]" metaid="metaid_129" sboTerm="SBO:0000247" compartment="compartment_17927">
+<notes><p xmlns="http://www.w3.org/1999/xhtml">Derived from a Reactome SimpleEntity.  This is a small compound.</p></notes>
+        <annotation>
+          <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/" xmlns:bqmodel="http://biomodels.net/model-qualifiers/">
+            <rdf:Description rdf:about="#metaid_129">
+              <bqbiol:is>
+                <rdf:Bag>
+                  <rdf:li rdf:resource="urn:miriam:reactome:REACT_9640"/>
+                  <rdf:li rdf:resource="urn:miriam:obo.chebi:CHEBI%3A16526"/>
+                  <rdf:li rdf:resource="urn:miriam:kegg.compound:C00011"/>
+                </rdf:Bag>
+              </bqbiol:is>
+            </rdf:Description>
+          </rdf:RDF>
+        </annotation>
+      </species>
+      <species id="species_189485" name="CPO homodimer [mitochondrial intermembrane space]" metaid="metaid_131" sboTerm="SBO:0000253" compartment="compartment_17927">
+<notes><p xmlns="http://www.w3.org/1999/xhtml">Derived from a Reactome Complex.  Here is Reactomes nested structure for this complex: (P36551,P36551)</p></notes>
+        <annotation>
+          <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/" xmlns:bqmodel="http://biomodels.net/model-qualifiers/">
+            <rdf:Description rdf:about="#metaid_131">
+              <bqbiol:is>
+                <rdf:Bag>
+                  <rdf:li rdf:resource="urn:miriam:reactome:REACT_9811"/>
+                </rdf:Bag>
+              </bqbiol:is>
+              <bqbiol:hasPart>
+                <rdf:Bag>
+                  <rdf:li rdf:resource="urn:miriam:uniprot:P36551"/>
+                </rdf:Bag>
+              </bqbiol:hasPart>
+            </rdf:Description>
+          </rdf:RDF>
+        </annotation>
+      </species>
+      <species id="species_189469" name="PPO homodimer (FAD cofactor) [mitochondrial intermembrane space]" metaid="metaid_138" sboTerm="SBO:0000253" compartment="compartment_17927">
+<notes><p xmlns="http://www.w3.org/1999/xhtml">Derived from a Reactome Complex.  Here is Reactomes nested structure for this complex: (P50336,P50336,16238)</p></notes>
+        <annotation>
+          <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/" xmlns:bqmodel="http://biomodels.net/model-qualifiers/">
+            <rdf:Description rdf:about="#metaid_138">
+              <bqbiol:is>
+                <rdf:Bag>
+                  <rdf:li rdf:resource="urn:miriam:reactome:REACT_9681"/>
+                </rdf:Bag>
+              </bqbiol:is>
+              <bqbiol:hasPart>
+                <rdf:Bag>
+                  <rdf:li rdf:resource="urn:miriam:uniprot:P50336"/>
+                  <rdf:li rdf:resource="urn:miriam:kegg.compound:C00016"/>
+                  <rdf:li rdf:resource="urn:miriam:obo.chebi:CHEBI%3A16238"/>
+                </rdf:Bag>
+              </bqbiol:hasPart>
+            </rdf:Description>
+          </rdf:RDF>
+        </annotation>
+      </species>
+      <species id="species_113531" name="Fe2+ [mitochondrial matrix]" metaid="metaid_142" sboTerm="SBO:0000247" compartment="compartment_5460">
+<notes><p xmlns="http://www.w3.org/1999/xhtml">Derived from a Reactome SimpleEntity.  This is a small compound.</p></notes>
+        <annotation>
+          <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/" xmlns:bqmodel="http://biomodels.net/model-qualifiers/">
+            <rdf:Description rdf:about="#metaid_142">
+              <bqbiol:is>
+                <rdf:Bag>
+                  <rdf:li rdf:resource="urn:miriam:kegg.compound:C00023"/>
+                  <rdf:li rdf:resource="urn:miriam:reactome:REACT_4623"/>
+                  <rdf:li rdf:resource="urn:miriam:obo.chebi:CHEBI%3A18248"/>
+                </rdf:Bag>
+              </bqbiol:is>
+            </rdf:Description>
+          </rdf:RDF>
+        </annotation>
+      </species>
+      <species id="species_189444" name="heme [mitochondrial matrix]" metaid="metaid_144" sboTerm="SBO:0000247" compartment="compartment_5460">
+<notes><p xmlns="http://www.w3.org/1999/xhtml">Derived from a Reactome SimpleEntity.  This is a small compound.</p></notes>
+        <annotation>
+          <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/" xmlns:bqmodel="http://biomodels.net/model-qualifiers/">
+            <rdf:Description rdf:about="#metaid_144">
+              <bqbiol:is>
+                <rdf:Bag>
+                  <rdf:li rdf:resource="urn:miriam:kegg.compound:C00032"/>
+                  <rdf:li rdf:resource="urn:miriam:reactome:REACT_9617"/>
+                  <rdf:li rdf:resource="urn:miriam:obo.chebi:CHEBI%3A17627"/>
+                </rdf:Bag>
+              </bqbiol:is>
+            </rdf:Description>
+          </rdf:RDF>
+        </annotation>
+      </species>
+      <species id="species_113529" name="H+ [mitochondrial matrix]" metaid="metaid_146" sboTerm="SBO:0000247" compartment="compartment_5460">
+<notes><p xmlns="http://www.w3.org/1999/xhtml">Derived from a Reactome SimpleEntity.  This is a small compound.</p></notes>
+        <annotation>
+          <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/" xmlns:bqmodel="http://biomodels.net/model-qualifiers/">
+            <rdf:Description rdf:about="#metaid_146">
+              <bqbiol:is>
+                <rdf:Bag>
+                  <rdf:li rdf:resource="urn:miriam:obo.chebi:CHEBI%3A15378"/>
+                  <rdf:li rdf:resource="urn:miriam:reactome:REACT_5847"/>
+                  <rdf:li rdf:resource="urn:miriam:kegg.compound:C00080"/>
+                </rdf:Bag>
+              </bqbiol:is>
+            </rdf:Description>
+          </rdf:RDF>
+        </annotation>
+      </species>
+      <species id="species_189402" name="FECH homodimer (2Fe-2S cluster) [mitochondrial matrix]" metaid="metaid_148" sboTerm="SBO:0000253" compartment="compartment_5460">
+<notes><p xmlns="http://www.w3.org/1999/xhtml">Derived from a Reactome Complex.  Reactome uses a nested structure for complexes, which cannot be fully represented in SBML.</p></notes>
+        <annotation>
+          <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/" xmlns:bqmodel="http://biomodels.net/model-qualifiers/">
+            <rdf:Description rdf:about="#metaid_148">
+              <bqbiol:is>
+                <rdf:Bag>
+                  <rdf:li rdf:resource="urn:miriam:reactome:REACT_9592"/>
+                </rdf:Bag>
+              </bqbiol:is>
+              <bqbiol:hasPart>
+                <rdf:Bag>
+                  <rdf:li rdf:resource="urn:miriam:uniprot:P22830"/>
+                </rdf:Bag>
+              </bqbiol:hasPart>
+            </rdf:Description>
+          </rdf:RDF>
+        </annotation>
+      </species>
+      <species id="species_189387" name="Biliverdin reductase [cytosol]" metaid="metaid_158" sboTerm="SBO:0000240" compartment="compartment_70101">
+<notes><p xmlns="http://www.w3.org/1999/xhtml">Derived from a Reactome DefinedSet.  This is a list of alternative entities, any of which can perform the given function.</p></notes>
+        <annotation>
+          <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/" xmlns:bqmodel="http://biomodels.net/model-qualifiers/">
+            <rdf:Description rdf:about="#metaid_158">
+              <bqbiol:is>
+                <rdf:Bag>
+                  <rdf:li rdf:resource="urn:miriam:reactome:REACT_22833"/>
+                </rdf:Bag>
+              </bqbiol:is>
+              <bqbiol:hasPart>
+                <rdf:Bag>
+                  <rdf:li rdf:resource="urn:miriam:uniprot:P30043"/>
+                  <rdf:li rdf:resource="urn:miriam:uniprot:P53004"/>
+                  <rdf:li rdf:resource="urn:miriam:obo.chebi:CHEBI%3A29105"/>
+                  <rdf:li rdf:resource="urn:miriam:kegg.compound:C00038"/>
+                </rdf:Bag>
+              </bqbiol:hasPart>
+            </rdf:Description>
+          </rdf:RDF>
+        </annotation>
+      </species>
+    </listOfSpecies>
+    <listOfReactions>
+      <reaction id="reaction_189398" name="The heme ring is cleaved by heme oxygenase" metaid="metaid_1" reversible="false">
+<notes><p xmlns="http://www.w3.org/1999/xhtml">Heme oxygenase (HO) cleaves the heme ring at the alphamethene bridge to form bilverdin. This reaction forms the only endogenous source of carbon monoxide. HO1 is inducible and is thought to have an antioxidant role as it's activated in virtually all cell types and by many types of "oxidative stress" (Poss and Tonegawa, 1997). HO2 is noninducible.</p></notes>
+        <annotation>
+          <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/" xmlns:bqmodel="http://biomodels.net/model-qualifiers/">
+            <rdf:Description rdf:about="#metaid_1">
+              <bqbiol:is>
+                <rdf:Bag>
+                  <rdf:li rdf:resource="urn:miriam:reactome:REACT_22100"/>
+                  <rdf:li rdf:resource="urn:miriam:ec:1.14.99.3"/>
+                  <rdf:li rdf:resource="urn:miriam:obo.go:GO%3A0004392"/>
+                </rdf:Bag>
+              </bqbiol:is>
+            </rdf:Description>
+          </rdf:RDF>
+        </annotation>
+              <listOfReactants>
+          <speciesReference id="speciesreference_189398_input_71185" species="species_71185" metaid="metaid_4" sboTerm="SBO:0000010"/>
+          <speciesReference id="speciesreference_189398_input_29364" species="species_29364" metaid="metaid_6" sboTerm="SBO:0000010" stoichiometry="3"/>
+          <speciesReference id="speciesreference_189398_input_29368" species="species_29368" metaid="metaid_8" sboTerm="SBO:0000010" stoichiometry="3"/>
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference id="speciesreference_189398_output_29366" species="species_29366" metaid="metaid_10" sboTerm="SBO:0000011" stoichiometry="3"/>
+          <speciesReference id="speciesreference_189398_output_29356" species="species_29356" metaid="metaid_12" sboTerm="SBO:0000011" stoichiometry="3"/>
+          <speciesReference id="speciesreference_189398_output_71067" species="species_71067" metaid="metaid_14" sboTerm="SBO:0000011"/>
+          <speciesReference id="speciesreference_189398_output_189385" species="species_189385" metaid="metaid_16" sboTerm="SBO:0000011"/>
+          <speciesReference id="speciesreference_189398_output_189396" species="species_189396" metaid="metaid_18" sboTerm="SBO:0000011"/>
+        </listOfProducts>
+        <listOfModifiers>
+          <modifierSpeciesReference id="modifierspeciesreference_189398_catalyst_189382" species="species_189382" metaid="metaid_21" sboTerm="SBO:0000013"/>
+        </listOfModifiers>
+      </reaction>
+      <reaction id="reaction_189425" name="UROD decarboxylates URO3 to COPRO3" metaid="metaid_22" reversible="false">
+<notes><p xmlns="http://www.w3.org/1999/xhtml">Cytosolic uroporphyrinogen decarboxylase (UROD) catalyzes the sequntial removal of four carboxylic groups from the acetic acid side chains of uroporphyrinogen III (URO3) to form coproporphyrinogen III (COPRO3) (de Verneuil et al. 1983). Human UROD is a dimer (Whitby et al. 1998). Heterogenous and homogenous deficiencies of UROD are associated with porphyria cutanea tarda and hepatoerythropoietic porphyria respectively in vivo (MoranJiminez et al. 1996).</p></notes>
+        <annotation>
+          <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/" xmlns:bqmodel="http://biomodels.net/model-qualifiers/">
+            <rdf:Description rdf:about="#metaid_22">
+              <bqbiol:is>
+                <rdf:Bag>
+                  <rdf:li rdf:resource="urn:miriam:ec:4.1.1.37"/>
+                  <rdf:li rdf:resource="urn:miriam:reactome:REACT_9422"/>
+                  <rdf:li rdf:resource="urn:miriam:obo.go:GO%3A0004853"/>
+                </rdf:Bag>
+              </bqbiol:is>
+              <bqbiol:isDescribedBy>
+                <rdf:Bag>
+                  <rdf:li rdf:resource="urn:miriam:pubmed:8644733"/>
+                  <rdf:li rdf:resource="urn:miriam:pubmed:6822570"/>
+                </rdf:Bag>
+              </bqbiol:isDescribedBy>
+            </rdf:Description>
+          </rdf:RDF>
+        </annotation>
+              <listOfReactants>
+          <speciesReference id="speciesreference_189425_input_189407" species="species_189407" metaid="metaid_24" sboTerm="SBO:0000010"/>
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference id="speciesreference_189425_output_189455" species="species_189455" metaid="metaid_26" sboTerm="SBO:0000011"/>
+          <speciesReference id="speciesreference_189425_output_113528" species="species_113528" metaid="metaid_28" sboTerm="SBO:0000011" stoichiometry="4"/>
+        </listOfProducts>
+        <listOfModifiers>
+          <modifierSpeciesReference id="modifierspeciesreference_189425_catalyst_189454" species="species_189454" metaid="metaid_30" sboTerm="SBO:0000013"/>
+        </listOfModifiers>
+      </reaction>
+      <reaction id="reaction_189442" name="ALAS condenses SUCC-CoA and Gly to form dALA" metaid="metaid_31" reversible="false">
+<notes><p xmlns="http://www.w3.org/1999/xhtml">The committed step for porphyrin synthesis is the formation of 5aminolevulinate (ALA) by condensation of glycine (from the general amino acid pool) and succinylCoA (from the TCA cycle), in the mitochondrial matrix. The reaction is catalyzed by two different ALA synthases, one expressed ubiquitously (ALAS1) and the other only expressed in erythroid precursors (ALAS2). Both enzymes are expressed as homodimers and require pyridoxal 5phosphate as a cofactor.No diseasecausing mutations of ALAS1 have been recognised in humans. Mutations in ALAS2 cause Xlinked sideroblastic anaemia (XLSA), characterised by a microcytic hypochromic anaemia.</p></notes>
+        <annotation>
+          <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/" xmlns:bqmodel="http://biomodels.net/model-qualifiers/">
+            <rdf:Description rdf:about="#metaid_31">
+              <bqbiol:is>
+                <rdf:Bag>
+                  <rdf:li rdf:resource="urn:miriam:ec:2.3.1.37"/>
+                  <rdf:li rdf:resource="urn:miriam:obo.go:GO%3A0003870"/>
+                  <rdf:li rdf:resource="urn:miriam:reactome:REACT_9463"/>
+                </rdf:Bag>
+              </bqbiol:is>
+              <bqbiol:isDescribedBy>
+                <rdf:Bag>
+                  <rdf:li rdf:resource="urn:miriam:pubmed:1939222"/>
+                  <rdf:li rdf:resource="urn:miriam:pubmed:16121195"/>
+                </rdf:Bag>
+              </bqbiol:isDescribedBy>
+            </rdf:Description>
+          </rdf:RDF>
+        </annotation>
+              <listOfReactants>
+          <speciesReference id="speciesreference_189442_input_70958" species="species_70958" metaid="metaid_34" sboTerm="SBO:0000010"/>
+          <speciesReference id="speciesreference_189442_input_159549" species="species_159549" metaid="metaid_36" sboTerm="SBO:0000010"/>
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference id="speciesreference_189442_output_189466" species="species_189466" metaid="metaid_38" sboTerm="SBO:0000011"/>
+          <speciesReference id="speciesreference_189442_output_29374" species="species_29374" metaid="metaid_40" sboTerm="SBO:0000011"/>
+          <speciesReference id="speciesreference_189442_output_29376" species="species_29376" metaid="metaid_42" sboTerm="SBO:0000011"/>
+        </listOfProducts>
+        <listOfModifiers>
+          <modifierSpeciesReference id="modifierspeciesreference_189442_catalyst_189429" species="species_189429" metaid="metaid_44" sboTerm="SBO:0000013"/>
+        </listOfModifiers>
+      </reaction>
+      <reaction id="reaction_159179" name="bilirubin monoglucuronide + UDP-glucuronic acid => bilirubin diglucuronide + UDP" metaid="metaid_45" reversible="false">
+<notes><p xmlns="http://www.w3.org/1999/xhtml">The principal conjugate of bilirubin in bile is bilirubin diglucuronide. The monmeric form of UGT1A1 (Bilirubin UDPglucuronyltransferase) only conjugates the first step of bilirubin conjugation to form the monoglucuronide. A tetrameric form of UGT1A1 can convert bilirubin to both the monoglucuronide and the diglucuronide.</p></notes>
+        <annotation>
+          <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/" xmlns:bqmodel="http://biomodels.net/model-qualifiers/">
+            <rdf:Description rdf:about="#metaid_45">
+              <bqbiol:is>
+                <rdf:Bag>
+                  <rdf:li rdf:resource="urn:miriam:ec:2.4.1.17"/>
+                  <rdf:li rdf:resource="urn:miriam:reactome:REACT_22319"/>
+                  <rdf:li rdf:resource="urn:miriam:obo.go:GO%3A0015020"/>
+                </rdf:Bag>
+              </bqbiol:is>
+              <bqbiol:isDescribedBy>
+                <rdf:Bag>
+                  <rdf:li rdf:resource="urn:miriam:pubmed:4639028"/>
+                  <rdf:li rdf:resource="urn:miriam:pubmed:3082969"/>
+                  <rdf:li rdf:resource="urn:miriam:pubmed:6796486"/>
+                  <rdf:li rdf:resource="urn:miriam:pubmed:6654901"/>
+                </rdf:Bag>
+              </bqbiol:isDescribedBy>
+            </rdf:Description>
+          </rdf:RDF>
+        </annotation>
+              <listOfReactants>
+          <speciesReference id="speciesreference_159179_input_159160" species="species_159160" metaid="metaid_48" sboTerm="SBO:0000010"/>
+          <speciesReference id="speciesreference_159179_input_174384" species="species_174384" metaid="metaid_50" sboTerm="SBO:0000010"/>
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference id="speciesreference_159179_output_159149" species="species_159149" metaid="metaid_52" sboTerm="SBO:0000011"/>
+          <speciesReference id="speciesreference_159179_output_158602" species="species_158602" metaid="metaid_54" sboTerm="SBO:0000011"/>
+        </listOfProducts>
+        <listOfModifiers>
+          <modifierSpeciesReference id="modifierspeciesreference_159179_catalyst_159191" species="species_159191" metaid="metaid_56" sboTerm="SBO:0000013"/>
+        </listOfModifiers>
+      </reaction>
+      <reaction id="reaction_189406" name="4 PBGs bind to form HMB" metaid="metaid_57" reversible="false">
+<notes><p xmlns="http://www.w3.org/1999/xhtml">Cytosolic porphobilinogen deaminase catalyzes the polymerization of four molecules of porphobilinogen (PBG) to generate hydroxymethylbilane (HMB), an unstable tetrapyrrole. This reaction is the first step in the formation of the tetrapyrrole macrocycle. Two isoforms of porphobilinogen deaminase are generated by alternative splicing, one expresssed in erythroid tissues and one ubiquitously expressed in the body. Deficiencies of both forms of PBG deaminase are associated with acute intermittent porphyria.</p></notes>
+        <annotation>
+          <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/" xmlns:bqmodel="http://biomodels.net/model-qualifiers/">
+            <rdf:Description rdf:about="#metaid_57">
+              <bqbiol:is>
+                <rdf:Bag>
+                  <rdf:li rdf:resource="urn:miriam:ec:2.5.1.61"/>
+                  <rdf:li rdf:resource="urn:miriam:reactome:REACT_9446"/>
+                  <rdf:li rdf:resource="urn:miriam:obo.go:GO%3A0004418"/>
+                </rdf:Bag>
+              </bqbiol:is>
+              <bqbiol:isDescribedBy>
+                <rdf:Bag>
+                  <rdf:li rdf:resource="urn:miriam:pubmed:7354069"/>
+                  <rdf:li rdf:resource="urn:miriam:pubmed:12773194"/>
+                </rdf:Bag>
+              </bqbiol:isDescribedBy>
+            </rdf:Description>
+          </rdf:RDF>
+        </annotation>
+              <listOfReactants>
+          <speciesReference id="speciesreference_189406_input_189464" species="species_189464" metaid="metaid_59" sboTerm="SBO:0000010" stoichiometry="4"/>
+          <speciesReference id="speciesreference_189406_input_29356" species="species_29356" metaid="metaid_60" sboTerm="SBO:0000010"/>
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference id="speciesreference_189406_output_189449" species="species_189449" metaid="metaid_62" sboTerm="SBO:0000011"/>
+          <speciesReference id="speciesreference_189406_output_29382" species="species_29382" metaid="metaid_64" sboTerm="SBO:0000011" stoichiometry="4"/>
+        </listOfProducts>
+        <listOfModifiers>
+          <modifierSpeciesReference id="modifierspeciesreference_189406_catalyst_189426" species="species_189426" metaid="metaid_66" sboTerm="SBO:0000013"/>
+        </listOfModifiers>
+      </reaction>
+      <reaction id="reaction_190182" name="UROD decarboxylates URO1 to COPRO1" metaid="metaid_67" reversible="false">
+<notes><p xmlns="http://www.w3.org/1999/xhtml">Cytosolic uroporphyrinogen decarboxylase (UROD) catalyzes the sequential removal of four carboxylic groups from the acetic acid side chains of uroporphyrinogen I (URO1) to form coproporphyrinogen I (COPRO1). UROD catalyzes this reaction less efficiently than the decarboxylation of uroporphyrinogen III (de Verneuil et al. 1983).</p></notes>
+        <annotation>
+          <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/" xmlns:bqmodel="http://biomodels.net/model-qualifiers/">
+            <rdf:Description rdf:about="#metaid_67">
+              <bqbiol:is>
+                <rdf:Bag>
+                  <rdf:li rdf:resource="urn:miriam:ec:4.1.1.37"/>
+                  <rdf:li rdf:resource="urn:miriam:reactome:REACT_9436"/>
+                  <rdf:li rdf:resource="urn:miriam:obo.go:GO%3A0004853"/>
+                </rdf:Bag>
+              </bqbiol:is>
+              <bqbiol:isDescribedBy>
+                <rdf:Bag>
+                  <rdf:li rdf:resource="urn:miriam:pubmed:8644733"/>
+                  <rdf:li rdf:resource="urn:miriam:pubmed:6822570"/>
+                </rdf:Bag>
+              </bqbiol:isDescribedBy>
+            </rdf:Description>
+          </rdf:RDF>
+        </annotation>
+              <listOfReactants>
+          <speciesReference id="speciesreference_190182_input_190157" species="species_190157" metaid="metaid_69" sboTerm="SBO:0000010"/>
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference id="speciesreference_190182_output_190128" species="species_190128" metaid="metaid_71" sboTerm="SBO:0000011"/>
+          <speciesReference id="speciesreference_190182_output_113528" species="species_113528" metaid="metaid_72" sboTerm="SBO:0000011" stoichiometry="4"/>
+        </listOfProducts>
+        <listOfModifiers>
+          <modifierSpeciesReference id="modifierspeciesreference_190182_catalyst_189454" species="species_189454" metaid="metaid_73" sboTerm="SBO:0000013"/>
+        </listOfModifiers>
+      </reaction>
+      <reaction id="reaction_189439" name="ALAD condenses 2 dALAs to form PBG" metaid="metaid_74" reversible="false">
+<notes><p xmlns="http://www.w3.org/1999/xhtml">5Aminolevulinic acid dehydratase (ALAD aka porphobilinogen synthase, PBGS), catalyzes the asymmetric condensation of two molecules of ALA to form porphobilinogen (PBG). The substrate that becomes the acetyl side chaincontaining half of PBG is called Aside ALA; the half that becomes the propionyl side chains and the pyrrole nitrogen is called PALA (Jaffe 2004). PBG is the first pyrrole formed, the precursor to all tetrapyrrole pigments such as heme and chlorophyll. There are at least eight bonds that are made or broken during this reaction. The active form of the ALAD enzyme is an octamer complexed with eight Zn2+ ions, four that are strongly bound and four that are weakly bound. The four weakly bound ones are dispensible for enzyme activity in vitro (Bevan et al. 1980; Mitchell et al. 2001).Deficiencies of ALAD enzyme in vivo are associated with 5aminolevulinate dehydratasedeficient porphyria (e.g., Akagi et al. 2000).</p></notes>
+        <annotation>
+          <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/" xmlns:bqmodel="http://biomodels.net/model-qualifiers/">
+            <rdf:Description rdf:about="#metaid_74">
+              <bqbiol:is>
+                <rdf:Bag>
+                  <rdf:li rdf:resource="urn:miriam:obo.go:GO%3A0004655"/>
+                  <rdf:li rdf:resource="urn:miriam:ec:4.2.1.24"/>
+                  <rdf:li rdf:resource="urn:miriam:reactome:REACT_9430"/>
+                </rdf:Bag>
+              </bqbiol:is>
+              <bqbiol:isDescribedBy>
+                <rdf:Bag>
+                  <rdf:li rdf:resource="urn:miriam:pubmed:10706561"/>
+                  <rdf:li rdf:resource="urn:miriam:pubmed:11032841"/>
+                </rdf:Bag>
+              </bqbiol:isDescribedBy>
+            </rdf:Description>
+          </rdf:RDF>
+        </annotation>
+              <listOfReactants>
+          <speciesReference id="speciesreference_189439_input_189489" species="species_189489" metaid="metaid_76" sboTerm="SBO:0000010" stoichiometry="2"/>
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference id="speciesreference_189439_output_189464" species="species_189464" metaid="metaid_77" sboTerm="SBO:0000011"/>
+          <speciesReference id="speciesreference_189439_output_29356" species="species_29356" metaid="metaid_78" sboTerm="SBO:0000011" stoichiometry="2"/>
+        </listOfProducts>
+        <listOfModifiers>
+          <modifierSpeciesReference id="modifierspeciesreference_189439_catalyst_189400" species="species_189400" metaid="metaid_80" sboTerm="SBO:0000013"/>
+        </listOfModifiers>
+      </reaction>
+      <reaction id="reaction_189381" name="Bilirubin translocates from the cytosol to the ER lumen" metaid="metaid_81" reversible="false">
+<notes><p xmlns="http://www.w3.org/1999/xhtml">The enzyme which catalyzes the conjugation of bilirubin (UGT1A1) is found in the ER. Bilirubin translocates here to be eliminated from the body.</p></notes>
+        <annotation>
+          <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/" xmlns:bqmodel="http://biomodels.net/model-qualifiers/">
+            <rdf:Description rdf:about="#metaid_81">
+              <bqbiol:is>
+                <rdf:Bag>
+                  <rdf:li rdf:resource="urn:miriam:reactome:REACT_22403"/>
+                </rdf:Bag>
+              </bqbiol:is>
+            </rdf:Description>
+          </rdf:RDF>
+        </annotation>
+              <listOfReactants>
+          <speciesReference id="speciesreference_189381_input_189386" species="species_189386" metaid="metaid_83" sboTerm="SBO:0000010"/>
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference id="speciesreference_189381_output_159151" species="species_159151" metaid="metaid_85" sboTerm="SBO:0000011"/>
+        </listOfProducts>
+      </reaction>
+      <reaction id="reaction_189457" name="Mitochondrial intermembrane PRIN9 translocates to mitochondrial matrix" metaid="metaid_86" reversible="false">
+<notes><p xmlns="http://www.w3.org/1999/xhtml">Protoporphyrin IX (PRIN9) is transported into the mitochondrial matrix where it becomes available for the last step in the heme biosynthetic pathway. The transporter that mediates this event is unknown.</p></notes>
+        <annotation>
+          <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/" xmlns:bqmodel="http://biomodels.net/model-qualifiers/">
+            <rdf:Description rdf:about="#metaid_86">
+              <bqbiol:is>
+                <rdf:Bag>
+                  <rdf:li rdf:resource="urn:miriam:reactome:REACT_9393"/>
+                </rdf:Bag>
+              </bqbiol:is>
+            </rdf:Description>
+          </rdf:RDF>
+        </annotation>
+              <listOfReactants>
+          <speciesReference id="speciesreference_189457_input_189463" species="species_189463" metaid="metaid_89" sboTerm="SBO:0000010"/>
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference id="speciesreference_189457_output_189487" species="species_189487" metaid="metaid_91" sboTerm="SBO:0000011"/>
+        </listOfProducts>
+      </reaction>
+      <reaction id="reaction_190168" name="HMBL spontaneously transforms to URO1" metaid="metaid_92" reversible="false">
+<notes><p xmlns="http://www.w3.org/1999/xhtml">Hydroxymethybilane (HMBL) can spontaneously cyclize and rearrange to form uroporphyrinogen I (URO1).</p></notes>
+        <annotation>
+          <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/" xmlns:bqmodel="http://biomodels.net/model-qualifiers/">
+            <rdf:Description rdf:about="#metaid_92">
+              <bqbiol:is>
+                <rdf:Bag>
+                  <rdf:li rdf:resource="urn:miriam:reactome:REACT_9408"/>
+                </rdf:Bag>
+              </bqbiol:is>
+              <bqbiol:isDescribedBy>
+                <rdf:Bag>
+                  <rdf:li rdf:resource="urn:miriam:pubmed:3805019"/>
+                </rdf:Bag>
+              </bqbiol:isDescribedBy>
+            </rdf:Description>
+          </rdf:RDF>
+        </annotation>
+              <listOfReactants>
+          <speciesReference id="speciesreference_190168_input_189449" species="species_189449" metaid="metaid_93" sboTerm="SBO:0000010"/>
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference id="speciesreference_190168_output_29356" species="species_29356" metaid="metaid_94" sboTerm="SBO:0000011"/>
+          <speciesReference id="speciesreference_190168_output_190157" species="species_190157" metaid="metaid_95" sboTerm="SBO:0000011"/>
+        </listOfProducts>
+      </reaction>
+      <reaction id="reaction_189456" name="Mitochondrial dALA translocates to cytosol" metaid="metaid_96" reversible="false">
+<notes><p xmlns="http://www.w3.org/1999/xhtml">5aminolevulinate is transported from the mitochondrial matrix to the cytosol. The transporter that enables it to cross the inner mitochondrial membrane is unknown.</p></notes>
+        <annotation>
+          <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/" xmlns:bqmodel="http://biomodels.net/model-qualifiers/">
+            <rdf:Description rdf:about="#metaid_96">
+              <bqbiol:is>
+                <rdf:Bag>
+                  <rdf:li rdf:resource="urn:miriam:reactome:REACT_9454"/>
+                </rdf:Bag>
+              </bqbiol:is>
+            </rdf:Description>
+          </rdf:RDF>
+        </annotation>
+              <listOfReactants>
+          <speciesReference id="speciesreference_189456_input_189466" species="species_189466" metaid="metaid_97" sboTerm="SBO:0000010"/>
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference id="speciesreference_189456_output_189489" species="species_189489" metaid="metaid_98" sboTerm="SBO:0000011"/>
+        </listOfProducts>
+      </reaction>
+      <reaction id="reaction_189488" name="UROS transforms HMB to URO3" metaid="metaid_99" reversible="false">
+<notes><p xmlns="http://www.w3.org/1999/xhtml">Cytosolic uroporphyrinogen III synthase (URO3S) catalyzes the conversion of HMB (hydroxymethylbilane) to uroporphyrinogen III, a reaction involving ring closure and intramolecular rearrangement. Uroporphyrinogen III represents a branch point for the pathways leading to formation of heme, chlorophyll and corrins. HMB is rapidly converted from a linear tetrapyrrole to the cyclic form. Deficiencies of URO3S in vivo are associated with congenital erythropoietic porphyria.</p></notes>
+        <annotation>
+          <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/" xmlns:bqmodel="http://biomodels.net/model-qualifiers/">
+            <rdf:Description rdf:about="#metaid_99">
+              <bqbiol:is>
+                <rdf:Bag>
+                  <rdf:li rdf:resource="urn:miriam:ec:4.2.1.75"/>
+                  <rdf:li rdf:resource="urn:miriam:reactome:REACT_9526"/>
+                  <rdf:li rdf:resource="urn:miriam:obo.go:GO%3A0004852"/>
+                </rdf:Bag>
+              </bqbiol:is>
+              <bqbiol:isDescribedBy>
+                <rdf:Bag>
+                  <rdf:li rdf:resource="urn:miriam:pubmed:7592565"/>
+                  <rdf:li rdf:resource="urn:miriam:pubmed:3805019"/>
+                </rdf:Bag>
+              </bqbiol:isDescribedBy>
+            </rdf:Description>
+          </rdf:RDF>
+        </annotation>
+              <listOfReactants>
+          <speciesReference id="speciesreference_189488_input_189449" species="species_189449" metaid="metaid_100" sboTerm="SBO:0000010"/>
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference id="speciesreference_189488_output_189407" species="species_189407" metaid="metaid_101" sboTerm="SBO:0000011"/>
+          <speciesReference id="speciesreference_189488_output_29356" species="species_29356" metaid="metaid_102" sboTerm="SBO:0000011"/>
+        </listOfProducts>
+        <listOfModifiers>
+          <modifierSpeciesReference id="modifierspeciesreference_189488_catalyst_189430" species="species_189430" metaid="metaid_104" sboTerm="SBO:0000013"/>
+        </listOfModifiers>
+      </reaction>
+      <reaction id="reaction_190141" name="ALAD binds to Pb2+" metaid="metaid_105" reversible="false">
+<notes><p xmlns="http://www.w3.org/1999/xhtml">Lead binds to ALAD enzyme displacing half the zinc ions essential for its catalytic activity and inactivating it. Lead is a major environmental toxin and this enzyme is one of its principal molecular targets (Jaffe et al. 2001).</p></notes>
+        <annotation>
+          <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/" xmlns:bqmodel="http://biomodels.net/model-qualifiers/">
+            <rdf:Description rdf:about="#metaid_105">
+              <bqbiol:is>
+                <rdf:Bag>
+                  <rdf:li rdf:resource="urn:miriam:reactome:REACT_9437"/>
+                </rdf:Bag>
+              </bqbiol:is>
+              <bqbiol:isDescribedBy>
+                <rdf:Bag>
+                  <rdf:li rdf:resource="urn:miriam:pubmed:11032836"/>
+                </rdf:Bag>
+              </bqbiol:isDescribedBy>
+            </rdf:Description>
+          </rdf:RDF>
+        </annotation>
+              <listOfReactants>
+          <speciesReference id="speciesreference_190141_input_189400" species="species_189400" metaid="metaid_106" sboTerm="SBO:0000010"/>
+          <speciesReference id="speciesreference_190141_input_190173" species="species_190173" metaid="metaid_108" sboTerm="SBO:0000010" stoichiometry="4"/>
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference id="speciesreference_190141_output_190145" species="species_190145" metaid="metaid_110" sboTerm="SBO:0000011"/>
+          <speciesReference id="speciesreference_190141_output_29426" species="species_29426" metaid="metaid_112" sboTerm="SBO:0000011" stoichiometry="4"/>
+        </listOfProducts>
+      </reaction>
+      <reaction id="reaction_159194" name="bilirubin + UDP-glucuronic acid => bilirubin monoglucuronide + UDP" metaid="metaid_113" reversible="false">
+<notes><p xmlns="http://www.w3.org/1999/xhtml">Bilirubin is a breakdown product of heme, causing death if allowed to accumulate in the blood. It is highly lipophilic and thus requires conjugation to become more water soluble to aid excretion. UGT1A1 is the only enzyme that converts bilirubin to either a monoglucuronide or diglucuronide. Mutations of the UGT1A1 gene cause complete loss or partial activity for bilirubin glucuronidation.</p></notes>
+        <annotation>
+          <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/" xmlns:bqmodel="http://biomodels.net/model-qualifiers/">
+            <rdf:Description rdf:about="#metaid_113">
+              <bqbiol:is>
+                <rdf:Bag>
+                  <rdf:li rdf:resource="urn:miriam:ec:2.4.1.17"/>
+                  <rdf:li rdf:resource="urn:miriam:reactome:REACT_22274"/>
+                  <rdf:li rdf:resource="urn:miriam:obo.go:GO%3A0015020"/>
+                  <rdf:li rdf:resource="urn:miriam:obo.go:GO%3A0006789"/>
+                </rdf:Bag>
+              </bqbiol:is>
+              <bqbiol:isDescribedBy>
+                <rdf:Bag>
+                  <rdf:li rdf:resource="urn:miriam:pubmed:3082969"/>
+                  <rdf:li rdf:resource="urn:miriam:pubmed:8027054"/>
+                </rdf:Bag>
+              </bqbiol:isDescribedBy>
+            </rdf:Description>
+          </rdf:RDF>
+        </annotation>
+              <listOfReactants>
+          <speciesReference id="speciesreference_159194_input_159151" species="species_159151" metaid="metaid_114" sboTerm="SBO:0000010"/>
+          <speciesReference id="speciesreference_159194_input_174384" species="species_174384" metaid="metaid_115" sboTerm="SBO:0000010"/>
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference id="speciesreference_159194_output_159160" species="species_159160" metaid="metaid_116" sboTerm="SBO:0000011"/>
+          <speciesReference id="speciesreference_159194_output_158602" species="species_158602" metaid="metaid_117" sboTerm="SBO:0000011"/>
+        </listOfProducts>
+        <listOfModifiers>
+          <modifierSpeciesReference id="modifierspeciesreference_159194_catalyst_159156" species="species_159156" metaid="metaid_119" sboTerm="SBO:0000013"/>
+        </listOfModifiers>
+      </reaction>
+      <reaction id="reaction_189421" name="CPO transforms COPRO3 to PPGEN9" metaid="metaid_120" reversible="false">
+<notes><p xmlns="http://www.w3.org/1999/xhtml">O2dependent coproporpyrinogen oxidase (CPO) catalyzes the conversion of coproporphyrinogen III (COPRO3) to protoporphyrinogen IX (PPGEN9). The localization of the human enzyme to the mitochondrial intermembrane space is inferred from studies of the homologous rat enzyme (Elder and Evans 1978). The human enzyme functions as a homodimer (Lee et al. 2005). Enzyme deficiency is associated with hereditary coproporphyria in vivo.</p></notes>
+        <annotation>
+          <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/" xmlns:bqmodel="http://biomodels.net/model-qualifiers/">
+            <rdf:Description rdf:about="#metaid_120">
+              <bqbiol:is>
+                <rdf:Bag>
+                  <rdf:li rdf:resource="urn:miriam:ec:1.3.3.3"/>
+                  <rdf:li rdf:resource="urn:miriam:reactome:REACT_9421"/>
+                  <rdf:li rdf:resource="urn:miriam:obo.go:GO%3A0004109"/>
+                </rdf:Bag>
+              </bqbiol:is>
+              <bqbiol:isDescribedBy>
+                <rdf:Bag>
+                  <rdf:li rdf:resource="urn:miriam:pubmed:16176984"/>
+                  <rdf:li rdf:resource="urn:miriam:pubmed:666752"/>
+                  <rdf:li rdf:resource="urn:miriam:pubmed:16258391"/>
+                </rdf:Bag>
+              </bqbiol:isDescribedBy>
+            </rdf:Description>
+          </rdf:RDF>
+        </annotation>
+              <listOfReactants>
+          <speciesReference id="speciesreference_189421_input_189411" species="species_189411" metaid="metaid_122" sboTerm="SBO:0000010"/>
+          <speciesReference id="speciesreference_189421_input_189461" species="species_189461" metaid="metaid_124" sboTerm="SBO:0000010" stoichiometry="2"/>
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference id="speciesreference_189421_output_189478" species="species_189478" metaid="metaid_126" sboTerm="SBO:0000011"/>
+          <speciesReference id="speciesreference_189421_output_189481" species="species_189481" metaid="metaid_128" sboTerm="SBO:0000011" stoichiometry="2"/>
+          <speciesReference id="speciesreference_189421_output_189480" species="species_189480" metaid="metaid_130" sboTerm="SBO:0000011" stoichiometry="2"/>
+        </listOfProducts>
+        <listOfModifiers>
+          <modifierSpeciesReference id="modifierspeciesreference_189421_catalyst_189485" species="species_189485" metaid="metaid_132" sboTerm="SBO:0000013"/>
+        </listOfModifiers>
+      </reaction>
+      <reaction id="reaction_189423" name="PPO oxidises PPGEN9 to PRIN9" metaid="metaid_133" reversible="false">
+<notes><p xmlns="http://www.w3.org/1999/xhtml">Six electrons are oxidized in protophorphyrinogen IX (PPGEN9) to form the planar macrocycle protoporphyrin IX (PRIN9). This reaction is performed by the enzyme protoporphyrinogen oxidase (PPO). PPO functions as a homodimer containing one noncovalentlybound FAD. The protein resides on the outer surface of the inner mitochondrial membrane. PPO deficiency is associated with variegate porphyria in vivo.</p></notes>
+        <annotation>
+          <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/" xmlns:bqmodel="http://biomodels.net/model-qualifiers/">
+            <rdf:Description rdf:about="#metaid_133">
+              <bqbiol:is>
+                <rdf:Bag>
+                  <rdf:li rdf:resource="urn:miriam:reactome:REACT_9418"/>
+                  <rdf:li rdf:resource="urn:miriam:ec:1.3.3.4"/>
+                  <rdf:li rdf:resource="urn:miriam:obo.go:GO%3A0004729"/>
+                </rdf:Bag>
+              </bqbiol:is>
+              <bqbiol:isDescribedBy>
+                <rdf:Bag>
+                  <rdf:li rdf:resource="urn:miriam:pubmed:8771201"/>
+                </rdf:Bag>
+              </bqbiol:isDescribedBy>
+            </rdf:Description>
+          </rdf:RDF>
+        </annotation>
+              <listOfReactants>
+          <speciesReference id="speciesreference_189423_input_189478" species="species_189478" metaid="metaid_134" sboTerm="SBO:0000010"/>
+          <speciesReference id="speciesreference_189423_input_189461" species="species_189461" metaid="metaid_135" sboTerm="SBO:0000010" stoichiometry="3"/>
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference id="speciesreference_189423_output_189463" species="species_189463" metaid="metaid_136" sboTerm="SBO:0000011"/>
+          <speciesReference id="speciesreference_189423_output_189481" species="species_189481" metaid="metaid_137" sboTerm="SBO:0000011" stoichiometry="3"/>
+        </listOfProducts>
+        <listOfModifiers>
+          <modifierSpeciesReference id="modifierspeciesreference_189423_catalyst_189469" species="species_189469" metaid="metaid_139" sboTerm="SBO:0000013"/>
+        </listOfModifiers>
+      </reaction>
+      <reaction id="reaction_189465" name="FECH binds Fe2+ to PRIN9 to form heme" metaid="metaid_140" reversible="false">
+<notes><p xmlns="http://www.w3.org/1999/xhtml">Ferrochelatase (FECH) catalyzes the insertion of ferrous iron into protoporphyrin IX (PRIN9) to form heme. FECH is localized on the matrix surface of the inner mitochondrial membrane and this reaction takes place within the mitochondrial matrix. The enzyme functions as a homodimer with each monomer containing a nitric oxidesensitive 2Fe2S cluster. Enzyme deficiency is associated with erythropoietic protoporphyria in vivo, and inhibition of ferrochelatase activity is a clinically important consequence of lead poisoning (Piomelli et al. 1987).</p></notes>
+        <annotation>
+          <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/" xmlns:bqmodel="http://biomodels.net/model-qualifiers/">
+            <rdf:Description rdf:about="#metaid_140">
+              <bqbiol:is>
+                <rdf:Bag>
+                  <rdf:li rdf:resource="urn:miriam:reactome:REACT_9461"/>
+                  <rdf:li rdf:resource="urn:miriam:ec:4.99.1.1"/>
+                  <rdf:li rdf:resource="urn:miriam:obo.go:GO%3A0004325"/>
+                </rdf:Bag>
+              </bqbiol:is>
+              <bqbiol:isDescribedBy>
+                <rdf:Bag>
+                  <rdf:li rdf:resource="urn:miriam:pubmed:11175906"/>
+                </rdf:Bag>
+              </bqbiol:isDescribedBy>
+            </rdf:Description>
+          </rdf:RDF>
+        </annotation>
+              <listOfReactants>
+          <speciesReference id="speciesreference_189465_input_189487" species="species_189487" metaid="metaid_141" sboTerm="SBO:0000010"/>
+          <speciesReference id="speciesreference_189465_input_113531" species="species_113531" metaid="metaid_143" sboTerm="SBO:0000010"/>
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference id="speciesreference_189465_output_189444" species="species_189444" metaid="metaid_145" sboTerm="SBO:0000011"/>
+          <speciesReference id="speciesreference_189465_output_113529" species="species_113529" metaid="metaid_147" sboTerm="SBO:0000011" stoichiometry="2"/>
+        </listOfProducts>
+        <listOfModifiers>
+          <modifierSpeciesReference id="modifierspeciesreference_189465_catalyst_189402" species="species_189402" metaid="metaid_149" sboTerm="SBO:0000013"/>
+        </listOfModifiers>
+      </reaction>
+      <reaction id="reaction_189467" name="Cytosolic COPRO3 translocates to mitochondrial intermembrane space" metaid="metaid_150" reversible="false">
+<notes><p xmlns="http://www.w3.org/1999/xhtml">Coproporpyrinogen III (COPRO3) enters the mitochondrial intermembrane space from the cytosol. It is not known whether this process is facilitated by a transporter.</p></notes>
+        <annotation>
+          <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/" xmlns:bqmodel="http://biomodels.net/model-qualifiers/">
+            <rdf:Description rdf:about="#metaid_150">
+              <bqbiol:is>
+                <rdf:Bag>
+                  <rdf:li rdf:resource="urn:miriam:reactome:REACT_9945"/>
+                </rdf:Bag>
+              </bqbiol:is>
+            </rdf:Description>
+          </rdf:RDF>
+        </annotation>
+              <listOfReactants>
+          <speciesReference id="speciesreference_189467_input_189455" species="species_189455" metaid="metaid_151" sboTerm="SBO:0000010"/>
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference id="speciesreference_189467_output_189411" species="species_189411" metaid="metaid_152" sboTerm="SBO:0000011"/>
+        </listOfProducts>
+      </reaction>
+      <reaction id="reaction_189384" name="Biliverdin is reduced to bilirubin" metaid="metaid_153" reversible="false">
+<notes><p xmlns="http://www.w3.org/1999/xhtml">Bilirubin is the breakdown product of heme, causing death if allowed to accumulate in the blood. It is highly lipophilic thus requires conjugation to become more water soluble to aid excretion.</p></notes>
+        <annotation>
+          <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/" xmlns:bqmodel="http://biomodels.net/model-qualifiers/">
+            <rdf:Description rdf:about="#metaid_153">
+              <bqbiol:is>
+                <rdf:Bag>
+                  <rdf:li rdf:resource="urn:miriam:reactome:REACT_22177"/>
+                  <rdf:li rdf:resource="urn:miriam:ec:1.3.1.24"/>
+                  <rdf:li rdf:resource="urn:miriam:obo.go:GO%3A0004074"/>
+                </rdf:Bag>
+              </bqbiol:is>
+            </rdf:Description>
+          </rdf:RDF>
+        </annotation>
+              <listOfReactants>
+          <speciesReference id="speciesreference_189384_input_189396" species="species_189396" metaid="metaid_154" sboTerm="SBO:0000010"/>
+          <speciesReference id="speciesreference_189384_input_29364" species="species_29364" metaid="metaid_155" sboTerm="SBO:0000010"/>
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference id="speciesreference_189384_output_189386" species="species_189386" metaid="metaid_156" sboTerm="SBO:0000011"/>
+          <speciesReference id="speciesreference_189384_output_29366" species="species_29366" metaid="metaid_157" sboTerm="SBO:0000011"/>
+        </listOfProducts>
+        <listOfModifiers>
+          <modifierSpeciesReference id="modifierspeciesreference_189384_catalyst_189387" species="species_189387" metaid="metaid_159" sboTerm="SBO:0000013"/>
+        </listOfModifiers>
+      </reaction>
+    </listOfReactions>
+  </model>
+</sbml>
+

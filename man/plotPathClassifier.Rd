@@ -1,0 +1,91 @@
+\name{plotPathClassifier}
+\alias{plotPathClassifier}
+\title{Plots the structure of specified path found by pathClassifier.}
+\usage{
+plotPathClassifier(ybinpaths, obj, m, tol = NULL)
+}
+\arguments{
+  \item{ybinpaths}{The training paths computed by
+  \code{\link{pathsToBinary}}}
+
+  \item{obj}{The pathClassifier
+  \code{\link{pathClassifier}}.}
+
+  \item{m}{The path component to view.}
+
+  \item{tol}{A tolerance for 3M parameter \code{theta}
+  which is the probability for each edge within each
+  cluster. If the tolerance is set all edges with a
+  \code{theta} below that tolerance will be removed from
+  the plot.}
+}
+\value{
+Produces a plot of the paths with the path probabilities
+and prediction probabilities and ROC curve overlayed.
+\item{Center Plot}{An image of all paths the training
+dataset.  Rows are the paths and columns are the genes
+(vertices) included within each pathway.  A colour within
+image indicates if a particular gene (vertex) is included
+within a specific path. Colours flag whether a path belongs
+to the current HME3M component (P > 0.5).} \item{Center
+Right}{The training set posterior probabilities for each
+path belonging to the current 3M component.} \item{Center
+Top}{The ROC curve for this HME3M component.} \item{Top Bar
+Plots}{\code{Theta}: The 3M component probabilities -
+indicates the importance of each edge is to a path.
+\code{Beta}: The PLR coefficient - the magnitude indicates
+the importance of the edge to the classify the response.}
+}
+\description{
+Plots the structure of specified path found by
+pathClassifier.
+}
+\examples{
+## Prepare a weighted reaction network.
+	## Conver a metabolic network to a reaction network.
+ data(ex_sbml) # bipartite metabolic network of Carbohydrate metabolism.
+ rgraph <- makeReactionNetwork(ex_sbml, simplify=TRUE)
+
+	## Assign edge weights based on Affymetrix attributes and microarray dataset.
+ # Calculate Pearson's correlation.
+	data(ex_microarray)	# Part of ALL dataset.
+	rgraph <- assignEdgeWeights(microarray = ex_microarray, graph = rgraph,
+		weight.method = "cor", use.attr="miriam.uniprot",
+		y=factor(colnames(ex_microarray)), bootstrap = FALSE)
+
+	## Get ranked paths using probabilistic shortest paths.
+ ranked.p <- pathRanker(rgraph, method="prob.shortest.path",
+					K=20, minPathSize=6)
+
+	## Convert paths to binary matrix.
+	ybinpaths <- pathsToBinary(ranked.p)
+	p.class <- pathClassifier(ybinpaths, target.class = "BCR/ABL", M = 3)
+
+	## Plotting the classifier results.
+	plotClassifierROC(p.class)
+	plotClusters(ybinpaths, p.class)
+}
+\author{
+Timothy Hancock and Ichigaku Takigawa
+}
+\seealso{
+Other Path clustering & classification methods:
+\code{\link{pathClassifier}}; \code{\link{pathCluster}};
+\code{\link{pathsToBinary}};
+\code{\link{plotClassifierROC}};
+\code{\link{plotClusterMatrix}},
+\code{\link{plotClusterProbs}}, \code{\link{plotClusters}};
+\code{\link{plotPathCluster}};
+\code{\link{predictPathClassifier}};
+\code{\link{predictPathCluster}}
+
+Other Plotting methods: \code{\link{colorVertexByAttr}};
+\code{\link{layoutVertexByAttr}};
+\code{\link{plotAllNetworks}};
+\code{\link{plotClassifierROC}};
+\code{\link{plotClusterMatrix}},
+\code{\link{plotClusterProbs}}, \code{\link{plotClusters}};
+\code{\link{plotCytoscape}}; \code{\link{plotNetwork}};
+\code{\link{plotPaths}}
+}
+

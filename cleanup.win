@@ -1,0 +1,17 @@
+#!/bin/sh
+cd src; 
+echo "removing boost headers..."
+rm -rf boost
+
+echo "restoring handelsegfault file..."
+
+
+if test -f Makevars.win;
+	then 
+		rm Makevars.win;
+fi;
+
+
+echo "removing compiled code..."
+rm *.o
+cd ..;

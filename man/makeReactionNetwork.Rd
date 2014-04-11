@@ -1,0 +1,41 @@
+\name{makeReactionNetwork}
+\alias{makeReactionNetwork}
+\title{Convert metabolic network to reaction network.}
+\usage{
+makeReactionNetwork(graph, simplify = FALSE)
+}
+\arguments{
+  \item{graph}{A metabolic network.}
+
+  \item{simplify}{An option to remove translocation and
+  spontaneous reactions that require no catalyzing genes.
+  Translocation reactions are detected from reaction name
+  (SBML, BioPAX), or by having identical substrates and
+  products.}
+}
+\value{
+A reaction network.
+}
+\description{
+This function removes metabolite nodes keeping them as edge
+attributes. The resulting network contains reaction nodes
+only, where edges indicate that a metabolite produced by
+one reaction is consumed by the other.
+}
+\examples{
+## Conver a metabolic network to a reaction network.
+ data(ex_sbml) # bipartite metabolic network of Carbohydrate metabolism.
+ rgraph <- makeReactionNetwork(ex_sbml, simplify=TRUE)
+}
+\author{
+Ahmed Mohamed
+}
+\seealso{
+Other Network processing methods:
+\code{\link{expandComplexes}},
+\code{\link{makeGeneNetwork}};
+\code{\link{rmSmallCompounds}};
+\code{\link{simplifyReactionNetwork}};
+\code{\link{vertexDeleteReconnect}}
+}
+

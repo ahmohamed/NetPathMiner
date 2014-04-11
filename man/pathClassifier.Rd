@@ -1,0 +1,112 @@
+\name{pathClassifier}
+\alias{pathClassifier}
+\title{HME3M Markov pathway classifier.}
+\usage{
+pathClassifier(paths, target.class, M, alpha = 1, lambda = 2,
+  hme3miter = 100, plriter = 1, init = "random")
+}
+\arguments{
+  \item{paths}{The training paths computed by
+  \code{\link{pathsToBinary}}}
+
+  \item{target.class}{he label of the targe class to be
+  classified.  This label must be present as a label within
+  the \code{paths\$y} object}
+
+  \item{M}{Number of components within the paths to be
+  extracted.}
+
+  \item{alpha}{The PLR learning rate. (between 0 and 1).}
+
+  \item{lambda}{The PLR regularization parameter. (between
+  0 and 2)}
+
+  \item{hme3miter}{Maximum number of HME3M iterations.  It
+  will stop when likelihood change is < 0.001.}
+
+  \item{plriter}{Maximum number of PLR iteractions. It will
+  stop when likelihood change is < 0.001.}
+
+  \item{init}{Specify whether to initialize the HME3M
+  responsibilities with the 3M model - random is
+  recommended.}
+}
+\value{
+A list with the following elements. A list with the
+following values \item{h}{A dataframe with the EM
+responsibilities.} \item{theta}{A dataframe with the Markov
+parameters for each component.} \item{beta}{A dataframe
+with the PLR coefficients for each component.}
+\item{proportions}{The probability of each HME3M
+component.} \item{posterior.probs}{The HME3M posterior
+probability.} \item{likelihood}{The likelihood convergence
+history.} \item{plrplr}{The posterior predictions from each
+components PLR model.} \item{path.probabilities}{The 3M
+probabilities for each path belonging to each component.}
+\item{params}{The parameters used to build the model.}
+\item{y}{The binary response variable used by HME3M. A 1
+indicates the location of the target.class labels in
+\code{paths\$y}} \item{perf}{The training set ROC curve
+AUC.} \item{label}{The HME3M predicted label for each
+path.} \item{component}{The HME3M component assignment for
+each path.}
+}
+\description{
+HME3M Markov pathway classifier.
+}
+\details{
+Take care with selection of lambda and alpha - make sure
+you check that the likelihood is always increasing.
+}
+\examples{
+## Prepare a weighted reaction network.
+	## Conver a metabolic network to a reaction network.
+ data(ex_sbml) # bipartite metabolic network of Carbohydrate metabolism.
+ rgraph <- makeReactionNetwork(ex_sbml, simplify=TRUE)
+
+	## Assign edge weights based on Affymetrix attributes and microarray dataset.
+ # Calculate Pearson's correlation.
+	data(ex_microarray)	# Part of ALL dataset.
+	rgraph <- assignEdgeWeights(microarray = ex_microarray, graph = rgraph,
+		weight.method = "cor", use.attr="miriam.uniprot",
+		y=factor(colnames(ex_microarray)), bootstrap = FALSE)
+
+	## Get ranked paths using probabilistic shortest paths.
+ ranked.p <- pathRanker(rgraph, method="prob.shortest.path",
+					K=20, minPathSize=6)
+
+	## Convert paths to binary matrix.
+	ybinpaths <- pathsToBinary(ranked.p)
+	p.class <- pathClassifier(ybinpaths, target.class = "BCR/ABL", M = 3)
+
+	## Contingency table of classification performance
+	table(ybinpaths$y,p.class$label)
+
+	## Plotting the classifier results.
+	plotClassifierROC(p.class)
+	plotClusters(ybinpaths, p.class)
+}
+\author{
+Timothy Hancock and Ichigaku Takigawa
+}
+\references{
+Hancock, Timothy, and Mamitsuka, Hiroshi: A Markov
+Classification Model for Metabolic Pathways, Workshop on
+Algorithms in Bioinformatics (WABI) , 2009
+
+Hancock, Timothy, and Mamitsuka, Hiroshi: A Markov
+Classification Model for Metabolic Pathways, Algorithms for
+Molecular Biology 2010
+}
+\seealso{
+Other Path clustering & classification methods:
+\code{\link{pathCluster}}; \code{\link{pathsToBinary}};
+\code{\link{plotClassifierROC}};
+\code{\link{plotClusterMatrix}},
+\code{\link{plotClusterProbs}}, \code{\link{plotClusters}};
+\code{\link{plotPathClassifier}};
+\code{\link{plotPathCluster}};
+\code{\link{predictPathClassifier}};
+\code{\link{predictPathCluster}}
+}
+

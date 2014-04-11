@@ -1,0 +1,88 @@
+\name{plotClusterMatrix}
+\alias{plotClusterMatrix}
+\alias{plotClusterProbs}
+\alias{plotClusters}
+\title{Plots the structure of all path clusters}
+\usage{
+plotClusterMatrix(ybinpaths, clusters, col = rainbow(clusters$params$M),
+  grid = TRUE)
+
+plotClusterProbs(clusters, col = rainbow(clusters$params$M))
+
+plotClusters(ybinpaths, clusters, col, ...)
+}
+\arguments{
+  \item{ybinpaths}{The training paths computed by
+  \code{\link{pathsToBinary}}.}
+
+  \item{clusters}{The pathway cluster model trained by
+  \code{\link{pathCluster}} or
+  \code{\link{pathClassifier}}.}
+
+  \item{col}{Colors for each path cluster.}
+
+  \item{grid}{A logical, whether to add a
+  \code{\link[graphics]{grid}} to the plot}
+
+  \item{...}{Extra paramaters passed to
+  \code{plotClusterMatrix}}
+}
+\value{
+\code{plotClusterMatrix} plots an image of all paths the
+training dataset. Rows are the paths and columns are the
+genes (features) included within each path. Paths are
+colored according to cluster membership.
+
+\code{plotClusterProbs} The training set posterior
+probabilities for each path belonging to a 3M component.
+\cr
+
+\code{plotClusters}: combines the two plots produced by
+\code{plotClusterProbs} and \code{plotClusterMatrix}.
+}
+\description{
+Plots the structure of all path clusters
+}
+\examples{
+## Prepare a weighted reaction network.
+	## Conver a metabolic network to a reaction network.
+ data(ex_sbml) # bipartite metabolic network of Carbohydrate metabolism.
+ rgraph <- makeReactionNetwork(ex_sbml, simplify=TRUE)
+
+	## Assign edge weights based on Affymetrix attributes and microarray dataset.
+ # Calculate Pearson's correlation.
+	data(ex_microarray)	# Part of ALL dataset.
+	rgraph <- assignEdgeWeights(microarray = ex_microarray, graph = rgraph,
+		weight.method = "cor", use.attr="miriam.uniprot",
+		y=factor(colnames(ex_microarray)), bootstrap = FALSE)
+
+	## Get ranked paths using probabilistic shortest paths.
+ ranked.p <- pathRanker(rgraph, method="prob.shortest.path",
+					K=20, minPathSize=8)
+
+	## Convert paths to binary matrix.
+	ybinpaths <- pathsToBinary(ranked.p)
+	p.cluster <- pathCluster(ybinpaths, M=2)
+	plotClusters(ybinpaths, p.cluster, col=c("red", "blue") )
+}
+\author{
+Ahmed Mohamed
+}
+\seealso{
+Other Path clustering & classification methods:
+\code{\link{pathClassifier}}; \code{\link{pathCluster}};
+\code{\link{pathsToBinary}};
+\code{\link{plotClassifierROC}};
+\code{\link{plotPathClassifier}};
+\code{\link{plotPathCluster}};
+\code{\link{predictPathClassifier}};
+\code{\link{predictPathCluster}}
+
+Other Plotting methods: \code{\link{colorVertexByAttr}};
+\code{\link{layoutVertexByAttr}};
+\code{\link{plotAllNetworks}};
+\code{\link{plotClassifierROC}};
+\code{\link{plotCytoscape}}; \code{\link{plotNetwork}};
+\code{\link{plotPathClassifier}}; \code{\link{plotPaths}}
+}
+

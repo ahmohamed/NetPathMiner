@@ -1,0 +1,48 @@
+\name{plotClassifierROC}
+\alias{plotClassifierROC}
+\title{Diagnostic plots for pathClassifier.}
+\usage{
+plotClassifierROC(mix)
+}
+\arguments{
+  \item{mix}{The result from \code{\link{pathClassifier}}.}
+}
+\value{
+Diagnostic plots of the result from pathClassifier.
+item{Top}{ROC curves for the posterior probabilities
+(\code{mix\$posterior.probs}) and for each HME3M component
+(\code{mix\$h}).  This gives information about what
+response label each relates to. A ROC curve with an
+\code{AUC < 0.5} relates to \code{y = 0}. Conversely ROC
+curves with \code{AUC > 0.5} relate to \code{y = 1}. }
+item{Bottom}{The likelihood convergence history for the
+HME3M model.  If the parameters \code{alpha} or
+\code{lambda} are set too large then the likelihood may
+decrease.}
+}
+\description{
+Diagnostic plots for \code{\link{pathClassifier}}.
+}
+\author{
+Timothy Hancock and Ichigaku Takigawa
+}
+\seealso{
+Other Path clustering & classification methods:
+\code{\link{pathClassifier}}; \code{\link{pathCluster}};
+\code{\link{pathsToBinary}};
+\code{\link{plotClusterMatrix}},
+\code{\link{plotClusterProbs}}, \code{\link{plotClusters}};
+\code{\link{plotPathClassifier}};
+\code{\link{plotPathCluster}};
+\code{\link{predictPathClassifier}};
+\code{\link{predictPathCluster}}
+
+Other Plotting methods: \code{\link{colorVertexByAttr}};
+\code{\link{layoutVertexByAttr}};
+\code{\link{plotAllNetworks}};
+\code{\link{plotClusterMatrix}},
+\code{\link{plotClusterProbs}}, \code{\link{plotClusters}};
+\code{\link{plotCytoscape}}; \code{\link{plotNetwork}};
+\code{\link{plotPathClassifier}}; \code{\link{plotPaths}}
+}
+

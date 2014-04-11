@@ -1,0 +1,64 @@
+\name{predictPathCluster}
+\alias{predictPathCluster}
+\title{Predicts new paths given a pathCluster model}
+\usage{
+predictPathCluster(pfit, newdata)
+}
+\arguments{
+  \item{pfit}{The pathway cluster model trained by
+  \code{\link{pathCluster}} or
+  \code{\link{pathClassifier}}.}
+
+  \item{newdata}{The binary pathway dataset to be assigned
+  a cluster label.}
+}
+\value{
+A list with the following elements: \tabular{ll}{
+\code{labels} \tab a vector indicating the 3M cluster
+membership. \cr \code{posterior.probs} \tab a matrix of
+posterior probabilities for each path belonging to each
+cluster. }
+}
+\description{
+Predicts new paths given a pathCluster model.
+}
+\examples{
+## Prepare a weighted reaction network.
+	## Conver a metabolic network to a reaction network.
+ data(ex_sbml) # bipartite metabolic network of Carbohydrate metabolism.
+ rgraph <- makeReactionNetwork(ex_sbml, simplify=TRUE)
+
+	## Assign edge weights based on Affymetrix attributes and microarray dataset.
+ # Calculate Pearson's correlation.
+	data(ex_microarray)	# Part of ALL dataset.
+	rgraph <- assignEdgeWeights(microarray = ex_microarray, graph = rgraph,
+		weight.method = "cor", use.attr="miriam.uniprot", bootstrap = FALSE)
+
+	## Get ranked paths using probabilistic shortest paths.
+ ranked.p <- pathRanker(rgraph, method="prob.shortest.path",
+					K=20, minPathSize=8)
+
+	## Convert paths to binary matrix.
+	ybinpaths <- pathsToBinary(ranked.p)
+	p.cluster <- pathCluster(ybinpaths, M=2)
+
+	## just an example of how to predict cluster membership.
+	pclust.pred <- predictPathCluster(p.cluster,ybinpaths$paths)
+}
+\author{
+Ichigaku Takigawa
+
+Timothy Hancock
+}
+\seealso{
+Other Path clustering & classification methods:
+\code{\link{pathClassifier}}; \code{\link{pathCluster}};
+\code{\link{pathsToBinary}};
+\code{\link{plotClassifierROC}};
+\code{\link{plotClusterMatrix}},
+\code{\link{plotClusterProbs}}, \code{\link{plotClusters}};
+\code{\link{plotPathClassifier}};
+\code{\link{plotPathCluster}};
+\code{\link{predictPathClassifier}}
+}
+

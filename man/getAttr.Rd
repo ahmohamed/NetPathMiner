@@ -1,0 +1,83 @@
+\name{getAttrStatus}
+\alias{getAttrNames}
+\alias{getAttrStatus}
+\alias{getAttribute}
+\alias{rmAttribute}
+\alias{setAttribute}
+\title{Get / Set vertex attribute names and coverage}
+\usage{
+getAttrStatus(graph, pattern = "^miriam.")
+
+getAttrNames(graph, pattern = "")
+
+getAttribute(graph, attr.name)
+
+setAttribute(graph, attr.name, attr.value)
+
+rmAttribute(graph, attr.name)
+}
+\arguments{
+  \item{graph}{An annotated igraph object.}
+
+  \item{pattern}{A \code{\link{regex}} experssion
+  representing attribute name pattern.}
+
+  \item{attr.name}{The attribute name}
+
+  \item{attr.value}{A list of attribute values. This must
+  be the same size as the number of vertices.}
+}
+\value{
+For \code{getAttrStatus}, a dataframe summarizing the
+number of vertices with no (\code{missing}), one
+(\code{single}) or more than one (\code{complex}) attribute
+value. The coverage% is also reported to each attribute.
+
+For \code{getAttrNames}, a character vector of attribute
+names matching the pattern.
+
+For \code{getAttribute}, a list of vertex annotation values
+for the query attribute.
+
+For \code{setAttribute}, a graph with the new attribute
+set.
+
+For \code{rmAttrNames}, a new igraph object with the
+attibute removed.
+}
+\description{
+These functions report the annotation status of the
+vertices of a given network, modify or remove certain
+annotations.
+}
+\details{
+NetPathMiner stores all its vertex annotation attributes in
+a list, and stores them collectively as a single
+\code{attr}. This is not to interfer with
+\code{\link[igraph]{attributes}} from \code{igraph}
+package. All functions here target NetPathMiner annotations
+only.
+}
+\examples{
+data(ex_kgml_sig)	# Ras and chemokine signaling pathways in human
+
+ # Get status of attribute "pathway" only
+ getAttrStatus(ex_kgml_sig, "^pathway$")
+
+ # Get status of all attributes  starting with "pathway" and "miriam" keywords
+ getAttrStatus(ex_kgml_sig, "(^miriam)|(^pathway)")
+# Get all attribute names containing "miriam"
+ getAttrNames(ex_kgml_sig, "miriam")
+# Get all attribute names containing "miriam"
+ getAttribute(ex_kgml_sig, "miriam.ncbigene")
+# Remove an attribute from graph
+ graph <- rmAttribute(ex_kgml_sig, "miriam.ncbigene")
+}
+\author{
+Ahmed Mohamed
+}
+\seealso{
+Other Attribute handling methods:
+\code{\link{fetchAttribute}}, \code{\link{stdAttrNames}}
+}
+

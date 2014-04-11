@@ -1,0 +1,36 @@
+\name{NPMdefaults}
+\alias{NPMdefaults}
+\title{Default values for NetPathMiner}
+\usage{
+NPMdefaults(value)
+}
+\arguments{
+  \item{value}{a character string indicating the variable
+  name.}
+}
+\value{
+The defuult value for the given variable.
+}
+\description{
+This function gets a NetPathMiner default value for a
+variable.
+}
+\details{
+NetPathMiner defines the following defaults: \itemize{
+\item small.comp.ls Dataframe of ubiquitous metabolites.
+Used by \code{\link{rmSmallCompounds}}.  \item bridge
+Dataframe of attributes supported by Brigde Database. Used
+by \code{\link{fetchAttribute}}.  \item bridge.organisms A
+list of bridge supported organisms. Used by
+\code{\link{fetchAttribute}}.  \item bridge.web The base
+URL for Brigde Database webservices. Used by
+\code{\link{fetchAttribute}}. }
+}
+\examples{
+# Get the default list of small compounds (uniquitous metabolites).
+ NPMdefaults("small.comp.ls")
+}
+\author{
+Ahmed Mohamed
+}
+
