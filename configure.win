@@ -36,8 +36,7 @@ echo '
 #include <sbml/SBMLTypes.h>
 
 int main(){
-    SBMLDocument_t* doc = readSBML("nofile");
-	Model_t *m = SBMLDocument_getModel(doc);
+    readSBML("nofile")->getModel();
     return 0;
 }
 '>sbml_test.cpp
@@ -94,16 +93,11 @@ echo "PKG_CPPFLAGS=${pkg_cppflags}
 PKG_LIBS = ${pkg_libs} \$(LAPACK_LIBS) \$(BLAS_LIBS) \$(FLIBS)
 "> Makevars.win;
 
-if ${HAVE_SBML}
-	then
-	echo "all:\$(SHLIB)
-	mkdir -p \"\$(R_PACKAGE_DIR)/libs/\${R_ARCH}\"
-	cp ${LIBSBML_PATH}/\${R_ARCH}/bin/*.dll \"\${R_PACKAGE_DIR}/libs/\${R_ARCH}\"
-">>Makevars.win
-fi;
 }
 
 xml_check_header(){
+echo "XML folder";
+echo `find ${lib_xml_location} | tr '\n' ' '`;
 echo -n "* searching for libxml2 headers under ${lib_xml_location} ... ";
 if test -f ${lib_xml_location}/libxml/xmlreader.h
 	then
@@ -138,6 +132,8 @@ echo "failed"
 }
 
 sbml_check_header(){
+echo "SBML folder";
+echo `find ${lib_sbml_location} | tr '\n' ' '`;
 echo -n "* searching for libSBML headers under ${lib_sbml_location} ... ";
 if test -f ${lib_sbml_location}/sbml/SBMLTypes.h
 	then
@@ -322,11 +318,3 @@ PKG_CPPFLAGS=-DWIN_COMPILE -I. -I${R_HOME}/include
 PKG_LIBS=\$(LAPACK_LIBS) \$(BLAS_LIBS) \$(FLIBS)
 endif
 ">Makevars.win
-
-if ${HAVE_SBML}
-	then
-	echo "all:\$(SHLIB)
-	mkdir -p \"\$(R_PACKAGE_DIR)/libs${R_ARCH}\"
-	cp ${lib_sbml_location}/bin/*.dll \"\${R_PACKAGE_DIR}/libs${R_ARCH}\"
-">>Makevars.win
-fi;

@@ -1,10 +1,6 @@
 #ifdef HAVE_SBML
 #include "sbml_interface.h"
 
-void NPM_parseRDFAnnotation(const XMLNode_t *annotation, List_t *CVTerms);
-void NPM_CVTermsFromAnnotation(const XMLNode_t *annotation, List_t *CVTerms);
-
-
 template <class T>
 void free_vec(vector<T> &v){
 	vector<T>().swap(v);
@@ -22,16 +18,16 @@ SEXP readsbmlfile(SEXP FILENAME, SEXP ATTR_TERMS, SEXP VERBOSE) {
 
 	bool verbose = LOGICAL(VERBOSE)[0];
 
-	SBMLDocument_t *document = readSBML(filename);
-	unsigned int errors = SBMLDocument_getNumErrors(document);
+	SBMLDocument* document = readSBML(filename);
+	unsigned int errors = document->getNumErrors();
 
 	if(verbose){
 		Rprintf("Processing SBML file: %s",filename);
-		Rprintf( ", SBML level %d",SBMLDocument_getLevel(document));
-		Rprintf( " version %d",SBMLDocument_getVersion(document));
+		Rprintf( ", SBML level %d",document->getLevel());
+		Rprintf( " version %d",document->getVersion());
 	}
 
-	Model_t *model = SBMLDocument_getModel(document);
+	Model *model = document->getModel();
 	if(!model){
 		if(verbose)	Rprintf(": Error.\n");
 		Rf_warningcall(mkChar(filename), "No model in file");
@@ -41,9 +37,9 @@ SEXP readsbmlfile(SEXP FILENAME, SEXP ATTR_TERMS, SEXP VERBOSE) {
 	if(errors>0){
 		ostringstream message;
 		for(unsigned e=0; e<errors; e++){
-			const SBMLError_t *err = SBMLDocument_getError(document, e);
-			message<<"line "<< XMLError_getLine(err) <<": "<< XMLError_getShortMessage(err) << "\n";
-			if(XMLError_getErrorId(err) == NotSchemaConformant ){
+			const SBMLError *err = document->getError(e);
+			message<<"line "<< err->getLine() <<": "<< err->getShortMessage() << "\n";
+			if(err->getErrorId() == NotSchemaConformant ){
 				if(verbose)	Rprintf(": Error.\n");
 				Rf_warningcall(mkChar(filename), message.str().c_str());
 				return(R_NilValue);
@@ -73,28 +69,28 @@ SEXP readsbmlfile(SEXP FILENAME, SEXP ATTR_TERMS, SEXP VERBOSE) {
 	return(OUT);
 }
 
-SEXP getReactionList(Model_t *model, const vector<string> &attr_terms, vector<string> &species, bool verbose) {
-    ListOf_t *reactions = Model_getListOfReactions(model);
-    ListOf_t *speciesList = Model_getListOfSpecies(model);
-    ListOf_t *compList = Model_getListOfCompartments(model);
+SEXP getReactionList(Model *model, const vector<string> &attr_terms, vector<string> &species, bool verbose) {
+    ListOfReactions *reactions = model->getListOfReactions();
+    ListOfSpecies *speciesList = model->getListOfSpecies();
+    ListOfCompartments *compList = model->getListOfCompartments();
     
-    if(verbose)	Rprintf(": %d reactions found.\n", ListOf_size(reactions));
+    if(verbose)	Rprintf(": %d reactions found.\n", reactions->size());
     
     SEXP REACTIONLIST,ID;
-    PROTECT(REACTIONLIST = allocVector(VECSXP, ListOf_size(reactions) ));
-    PROTECT(ID = NEW_STRING( ListOf_size(reactions) ));
+    PROTECT(REACTIONLIST = allocVector(VECSXP, reactions->size()));
+    PROTECT(ID = NEW_STRING(reactions->size()));
     
     SEXP PATHWAY;
     PROTECT(PATHWAY = NEW_STRING(1));
-    SET_STRING_ELT(PATHWAY,0, mkChar( Model_getName(model) ) );
+    SET_STRING_ELT(PATHWAY,0, mkChar(model->getName().c_str()) );
 
-    for (unsigned i = 0;i < ListOf_size(reactions); i++) {
-    	Reaction_t *ri = (Reaction_t *) ListOf_get(reactions,i);
+    for (unsigned i = 0;i < reactions->size();i++) {
+    	Reaction *ri = reactions->get(i);
 
     	// Attributes will include all associated with the reaction node and its modifiers
     	vector< vector<string> > attr;
     	vector<string> attr_names;
-    	get_MIRIAM( SBase_getAnnotation(ri), attr_terms, attr, attr_names);
+    	get_MIRIAM(ri->getAnnotation(), attr_terms, attr, attr_names);
 
     	// Compartment is inhireted from modifiers.
     	vector< vector<string> > comp_attr;
@@ -103,44 +99,44 @@ SEXP getReactionList(Model_t *model, const vector<string> &attr_terms, vector<st
 		comp_attr_terms.push_back("go");
 
 
-		SET_STRING_ELT(ID,i,mkChar( Reaction_getId(ri) ));
+		SET_STRING_ELT(ID,i,mkChar(ri->getId().c_str()));
 
         SEXP REACTION,REACTIONNAMES;
         SEXP NAME, REVERSIBLE, REACTANTS, RSTOIC, PRODUCTS, PSTOIC, GENES, KINETICS,KNAMES, COMPARTMENT, COMP_NAME;
 
         PROTECT( NAME = NEW_STRING(1) );
-        SET_STRING_ELT(NAME,0, mkChar( Reaction_getName(ri) ) );
+        SET_STRING_ELT(NAME,0, mkChar(ri->getName().c_str()) );
         
         PROTECT( REVERSIBLE = NEW_LOGICAL(1) );
-        LOGICAL(REVERSIBLE)[0] = Reaction_getReversible(ri);
+        LOGICAL(REVERSIBLE)[0] = ri->getReversible();
 
-        int numOfReactants = Reaction_getNumReactants(ri);
+        int numOfReactants = ri->getNumReactants();
         PROTECT( REACTANTS = NEW_STRING(numOfReactants) );
         PROTECT( RSTOIC = NEW_NUMERIC(numOfReactants) );
         for (int r = 0;r < numOfReactants;r++) {
-        	const string sp = SpeciesReference_getSpecies( Reaction_getReactant(ri, r) );
+        	const string sp = ri->getReactant(r)->getSpecies();
         	add_elem( species, sp );
 
-            SET_STRING_ELT(REACTANTS, r, mkChar( sp.c_str() ));
-            REAL(RSTOIC)[r] = SpeciesReference_getStoichiometry( Reaction_getReactant(ri, r) );
+            SET_STRING_ELT(REACTANTS,r,mkChar(sp.c_str()));
+            REAL(RSTOIC)[r] = ri->getReactant(r)->getStoichiometry();
         }
         //cout << "Reactant level :|" << endl;
         
-        int numOfProducts = Reaction_getNumProducts(ri);
+        int numOfProducts = ri->getNumProducts();
         PROTECT( PRODUCTS = NEW_STRING(numOfProducts) );
         PROTECT( PSTOIC = NEW_NUMERIC(numOfProducts) );
         for (int p = 0;p < numOfProducts;p++) {
-        	const string sp = SpeciesReference_getSpecies( Reaction_getProduct(ri, p) );
+        	const string sp = ri->getProduct(p)->getSpecies();
 			add_elem( species, sp );
 
         	SET_STRING_ELT(PRODUCTS,p,mkChar(sp.c_str()));
-            REAL(PSTOIC)[p] = SpeciesReference_getStoichiometry( Reaction_getProduct(ri, p) );
+            REAL(PSTOIC)[p] = ri->getProduct(p)->getStoichiometry();
         } 
         //cout << "Product level :|" << endl;
 
         //Kinetic law
-        KineticLaw_t *kinetics = Reaction_getKineticLaw(ri);
-        int knum = kinetics ? KineticLaw_getNumParameters(kinetics) : 0;
+        KineticLaw *kinetics = ri->getKineticLaw();
+        int knum = kinetics ? kinetics->getNumParameters() : 0;
 		//cout << "Kinetic for level :|" << knum << endl;
 		PROTECT( KINETICS = NEW_LIST(knum) );
         PROTECT( KNAMES = NEW_STRING(knum) );
@@ -148,27 +144,26 @@ SEXP getReactionList(Model_t *model, const vector<string> &attr_terms, vector<st
         for (int k = 0;k < knum;k++) {
            SEXP value;
            PROTECT( value = NEW_NUMERIC(1) );
-           REAL(value)[0] = Parameter_getValue( KineticLaw_getParameter(kinetics, k) );
-           SET_STRING_ELT(KNAMES,k,mkChar( Parameter_getId( KineticLaw_getParameter(kinetics, k) )));
+           REAL(value)[0] = kinetics->getParameter(k)->getValue();
+           SET_STRING_ELT(KNAMES,k,mkChar(kinetics->getParameter(k)->getId().c_str()));
            SET_VECTOR_ELT(KINETICS,k,value);
            UNPROTECT(1);
         }
         setAttrib(KINETICS,R_NamesSymbol,KNAMES);
         //cout << "kinetic level :|" << endl;
 
-        int numOfModifiers = Reaction_getNumModifiers(ri);
+        int numOfModifiers = ri->getNumModifiers();
 		PROTECT( GENES = NEW_STRING(numOfModifiers) );
 		for (int m = 0;m < numOfModifiers;m++) {
-			Species_t *sp = (Species_t *) ListOfSpecies_getById(speciesList, SpeciesReference_getSpecies( Reaction_getModifier(ri, m) ));
-			get_MIRIAM(SBase_getAnnotation(sp), attr_terms, attr, attr_names);
+			Species *sp = speciesList->get( ri->getModifier(m)->getSpecies() );
+			get_MIRIAM(sp->getAnnotation(), attr_terms, attr, attr_names);
 
 			//Compartment info and attributes.
-			Compartment_t *comp = (Compartment_t *) ListOfCompartments_getById(compList, Species_getCompartment(sp) );
-			get_MIRIAM(SBase_getAnnotation(comp), comp_attr_terms, comp_attr, comp_attr_names);
-			add_elem(compartment, (string) Compartment_getId(comp));
-			add_elem(comp_name, (string) Compartment_getName(comp));
+			Compartment *comp = compList->get( sp->getCompartment() );
+			get_MIRIAM(comp->getAnnotation(), comp_attr_terms, comp_attr, comp_attr_names);
+			add_elem(compartment, comp->getId());	add_elem(comp_name, comp->getName());
 
-			SET_STRING_ELT(GENES,m,mkChar( Species_getName(sp) ));
+			SET_STRING_ELT(GENES,m,mkChar(sp->getName().c_str()));
 		}
 
 		PROTECT(COMPARTMENT = NEW_STRING(compartment.size()));
@@ -237,7 +232,7 @@ SEXP getReactionList(Model_t *model, const vector<string> &attr_terms, vector<st
 //
 // Can be made more general if more info is present
 //
-SEXP getSpeciesFrame(Model_t *model, vector<string> species, const vector<string> &attr_terms) {
+SEXP getSpeciesFrame(Model *model, vector<string> species, const vector<string> &attr_terms) {
 	SEXP SPECIESFRAME,ID;
 	PROTECT( SPECIESFRAME = NEW_LIST(species.size()) );
 	PROTECT( ID = NEW_STRING(species.size()) );
@@ -253,37 +248,37 @@ SEXP getSpeciesFrame(Model_t *model, vector<string> species, const vector<string
   return(SPECIESFRAME);
 }
 
-SEXP get_species_info(Model_t *model, const string species, const vector<string> &attr_terms){
-	ListOf_t *speciesList = Model_getListOfSpecies(model);
-	ListOf_t *compList = Model_getListOfCompartments(model);
+SEXP get_species_info(Model *model, const string species, const vector<string> &attr_terms){
+	ListOfSpecies *speciesList = model->getListOfSpecies();
+	ListOfCompartments *compList = model->getListOfCompartments();
 
 	SEXP SP, SPNAMES;
 	SEXP NAME,COMPARTMENT, COMP_NAME, PATHWAY;
 	PROTECT(PATHWAY = NEW_STRING(1));
-	SET_STRING_ELT(PATHWAY,0, mkChar( Model_getName(model) ));
+	SET_STRING_ELT(PATHWAY,0, mkChar(model->getName().c_str()) );
 
-	Species *sp = ListOfSpecies_getById(speciesList, species.c_str());
+	Species *sp = speciesList->get( species );
 
 	//Species attributes
 	vector< vector<string> > attr;
 	vector<string> attr_names;
-	get_MIRIAM(SBase_getAnnotation(sp), attr_terms, attr, attr_names);
+	get_MIRIAM(sp->getAnnotation(), attr_terms, attr, attr_names);
 
 	//Compartment info and attributes.
-	Compartment_t *comp = (Compartment_t *) ListOfCompartments_getById(compList, Species_getCompartment(sp) );
+	Compartment *comp = compList->get( sp->getCompartment() );
 	vector< vector<string> > comp_attr;
 	vector<string> comp_attr_names;
 	vector<string> comp_attr_terms = attr_terms;
 	comp_attr_terms.push_back("go");
-	get_MIRIAM(SBase_getAnnotation(comp), comp_attr_terms, comp_attr, comp_attr_names);
+	get_MIRIAM(comp->getAnnotation(), comp_attr_terms, comp_attr, comp_attr_names);
 
 
 	PROTECT(NAME = NEW_STRING(1));
 	PROTECT(COMPARTMENT = NEW_STRING(1));
 	PROTECT(COMP_NAME = NEW_STRING(1));
-	SET_STRING_ELT(NAME,0, mkChar( Species_getName(sp) ));
-	SET_STRING_ELT(COMPARTMENT,0, mkChar( Compartment_getId(comp) ));
-	SET_STRING_ELT(COMP_NAME,0, mkChar( Compartment_getName(comp) ));
+	SET_STRING_ELT(NAME,0, mkChar(sp->getName().c_str() ));
+	SET_STRING_ELT(COMPARTMENT,0, mkChar(comp->getId().c_str() ));
+	SET_STRING_ELT(COMP_NAME,0, mkChar(comp->getName().c_str() ));
 
 
 	PROTECT( SP = NEW_LIST(attr.size() + comp_attr.size() + 4) );
@@ -345,15 +340,15 @@ SEXP readsbml_sign(SEXP FILENAME, SEXP ATTR_TERMS, SEXP VERBOSE){
 
 	for(int i=0; i<LENGTH(FILENAME); i++){
 		const char *filename = CHAR(STRING_ELT(FILENAME,i));
-		SBMLDocument_t *document = readSBML(filename);
+		SBMLDocument* document = readSBML(filename);
 
 		if(verbose){
 			Rprintf("Processing SBML file: %s",filename);
-			Rprintf( ", SBML level %d",SBMLDocument_getLevel(document));
-			Rprintf( " version %d",SBMLDocument_getVersion(document));
+			Rprintf( ", SBML level %d",document->getLevel());
+			Rprintf( " version %d",document->getVersion());
 		}
 
-		Model_t *model = SBMLDocument_getModel(document);
+		Model *model = document->getModel();
 		if(!model){
 			if(verbose)	Rprintf(": Error.\n");
 			Rf_warningcall(mkChar(filename), "No model in file");
@@ -361,12 +356,12 @@ SEXP readsbml_sign(SEXP FILENAME, SEXP ATTR_TERMS, SEXP VERBOSE){
 		}
 
 		bool fatal=false;
-		if(SBMLDocument_getNumErrors(document)){
+		if(document->getNumErrors()>0){
 			ostringstream message;
-			for(unsigned e=0; e<SBMLDocument_getNumErrors(document); e++){
-				const SBMLError_t *err = SBMLDocument_getError(document, e);
-				message<<"line "<< XMLError_getLine(err) <<": "<< XMLError_getShortMessage(err) << "\n";
-				if(XMLError_getErrorId(err) == NotSchemaConformant ){
+			for(unsigned e=0; e<document->getNumErrors(); e++){
+				const SBMLError *err = document->getError(e);
+				message<<"line "<< err->getLine() <<": "<< err->getShortMessage() << "\n";
+				if(err->getErrorId() == NotSchemaConformant ){
 					if(verbose)	Rprintf(": Error.\n");
 					fatal=true; break;
 				}
@@ -409,20 +404,20 @@ SEXP readsbml_sign(SEXP FILENAME, SEXP ATTR_TERMS, SEXP VERBOSE){
 	return(OUT);
 }
 
-void readsbml_sign_int(Model_t *model, vector<string> &species, vector<size_t> &non_gene,
+void readsbml_sign_int(Model *model, vector<string> &species, vector<size_t> &non_gene,
 						vector<SEXP> &info, vector<size_t> &edges,
 						const vector<string> &attr_terms, bool verbose)
 {
-	ListOf_t *reactions = Model_getListOfReactions(model);
+	ListOfReactions *reactions = model->getListOfReactions();
 
-	if(verbose)	Rprintf(": %d reactions found.\n", ListOf_size(reactions));
+	if(verbose)	Rprintf(": %d reactions found.\n", reactions->size());
 
-	for (unsigned i = 0;i < ListOf_size(reactions); i++) {
-		Reaction_t *ri = (Reaction_t *) ListOf_get(reactions, i);
+	for (unsigned i = 0;i < reactions->size();i++) {
+		Reaction *ri = reactions->get(i);
 
 		vector<size_t> reactants, products, modifiers;
-		for (unsigned r = 0;r < Reaction_getNumReactants(ri);r++){
-			string sp = SpeciesReference_getSpecies( Reaction_getReactant(ri, r) );
+		for (unsigned r = 0;r < ri->getNumReactants();r++){
+			string sp = ri->getReactant(r)->getSpecies();
 
 			size_t pos = add_elem(species, sp);
 			reactants.push_back(pos);
@@ -434,8 +429,8 @@ void readsbml_sign_int(Model_t *model, vector<string> &species, vector<size_t> &
 			}
 		}
 
-		for (unsigned p = 0;p < Reaction_getNumProducts(ri);p++){
-			string sp = SpeciesReference_getSpecies( Reaction_getProduct(ri, p) );
+		for (unsigned p = 0;p < ri->getNumProducts();p++){
+			string sp = ri->getProduct(p)->getSpecies();
 
 			size_t pos = add_elem(species, sp);
 			products.push_back(pos);
@@ -448,8 +443,8 @@ void readsbml_sign_int(Model_t *model, vector<string> &species, vector<size_t> &
 		}
 
 
-		for (unsigned m = 0;m < Reaction_getNumModifiers(ri); m++) {
-			string sp = SpeciesReference_getSpecies( Reaction_getModifier(ri, m) );
+		for (unsigned m = 0;m < ri->getNumModifiers();m++) {
+			string sp = ri->getModifier(m)->getSpecies();
 
 			size_t pos = add_elem(species, sp);
 			modifiers.push_back(pos);
@@ -461,8 +456,8 @@ void readsbml_sign_int(Model_t *model, vector<string> &species, vector<size_t> &
 			}
 		}
 
-		if(Reaction_getNumModifiers(ri)==0){
-			size_t pos = add_elem(species, (string) Reaction_getId(ri));
+		if(ri->getNumModifiers()==0){
+			size_t pos = add_elem(species, ri->getId());
 			modifiers.push_back(pos);
 			add_elem(non_gene, pos);
 
@@ -493,24 +488,24 @@ const char* URL_decode(const char* URL){
 	return(CHAR(STRING_ELT(x,0)));
 }
 
-void get_MIRIAM(XMLNode_t *rdf, const vector<string> &terms, vector< vector<string> > &values, vector<string> &names){
+void get_MIRIAM(XMLNode* rdf, const vector<string> &terms, vector< vector<string> > &values, vector<string> &names){
 	if(terms[0]=="none")
 		return;
 
 	string URI;
-	List_t *cvl = List_create();
-	NPM_parseRDFAnnotation(rdf, cvl);
+	List cvl = List();
+	RDFAnnotationParser::parseRDFAnnotation(rdf, (List *) &cvl);
 
-	for(unsigned i=0; i< List_size(cvl); i++){
-		CVTerm_t *cv = (CVTerm_t *) List_get(cvl, i);
+	for(unsigned i=0; i<cvl.getSize();i++){
+		CVTerm *cv = (CVTerm *) cvl.get(i);
 
 		// Extract attributes for biological qualifiers of types bqb:is, bqb:hasPart only.
-		if(CVTerm_getQualifierType(cv) == BIOLOGICAL_QUALIFIER
-				&& CVTerm_getBiologicalQualifierType(cv) != BQB_IS && CVTerm_getBiologicalQualifierType(cv) != BQB_HAS_PART)
+		if(cv->getQualifierType() == BIOLOGICAL_QUALIFIER
+				&& cv->getBiologicalQualifierType() != BQB_IS && cv->getBiologicalQualifierType() != BQB_HAS_PART)
 			continue;
 
-		for(size_t n=0;n< CVTerm_getNumResources(cv); n++){
-			URI= CVTerm_getResourceURI(cv, n);
+		for(size_t n=0;n< cv -> getNumResources();n++){
+			URI= cv ->getResourceURI(n);
 			for(size_t t=0; t<terms.size(); t++){
 				string term = terms[t];
 				int pos;
@@ -538,107 +533,6 @@ void get_MIRIAM(XMLNode_t *rdf, const vector<string> &terms, vector< vector<stri
 			}// loop over terms
 		}//loop over URIs
 	}// loop over CVTerms
-}
-
-void 
-NPM_parseRDFAnnotation(
-     const XMLNode_t *annotation, 
-     List_t *CVTerms)
-{
-  if (annotation == NULL) 
-    return;
-
-  const XMLTriple_t * rdfabout = 
-				XMLTriple_createWith(
-                "about", 
-                "http://www.w3.org/1999/02/22-rdf-syntax-ns#",
-                "rdf");
-  const XMLNode_t *RDFDesc = NULL;
-  const XMLNode_t *current = 
-                 XMLNode_getChildForName(XMLNode_getChildForName(annotation, "RDF"), "Description");
-
-  if (XMLNode_hasAttrWithTriple(current, rdfabout) || XMLNode_hasAttrWithName(current, "rdf:about"))
-  {
-    string about;
-    if (XMLNode_hasAttrWithName(current, "rdf:about"))
-    {
-      about = XMLNode_getAttrValueByName(current, "rdf:about");
-    }
-    else
-    {
-      about = XMLNode_getAttrValueByTriple(current, rdfabout);
-    }
-
-    if (!about.empty())
-    {
-		RDFDesc = current;
-	}
-  }
-
-  // if no error logged create CVTerms
-  if (RDFDesc != NULL)
-  {
-    NPM_CVTermsFromAnnotation(annotation, CVTerms);
-  }
-}
-
-void
-NPM_CVTermsFromAnnotation(
-     const XMLNode_t *annotation, 
-     List_t *CVTerms)
-{
-  if (annotation == NULL)
-    return;
-
-  // the annotation passed in may have a toplevel annotation tag BUT
-  // it may not be- so need to check
-  // if it isnt then it must be RDF or we do not have an rdf annotation
-  bool topLevelIsAnnotation = false;
-  if ( (string)XMLNode_getName(annotation) == "annotation")
-  {
-    topLevelIsAnnotation = true;
-  }
-
-
-  CVTerm_t *term;
-  if (CVTerms == NULL)
-    CVTerms = List_create();
-
-  const XMLNode_t *RDFDesc = NULL;
-  if (topLevelIsAnnotation == true)
-  {
-    RDFDesc = XMLNode_getChildForName(XMLNode_getChildForName(annotation, "RDF"), "Description");
-  }
-  else
-  {
-    if( (string) XMLNode_getName(annotation) == "RDF")
-    {
-      RDFDesc = XMLNode_getChildForName(annotation, "Description");
-    }
-  }
-  
-  // find qualifier nodes and create CVTerms
-  
-  unsigned int n = 0;
-  if (RDFDesc != NULL)
-  {
-    while (n < XMLNode_getNumChildren(RDFDesc))
-    {
-      const string &name2 = XMLNode_getPrefix( XMLNode_getChild(RDFDesc, n) );
-      if (name2 == "bqbiol" || name2 == "bqmodel")
-      {
-        term = CVTerm_createFromNode(XMLNode_getChild(RDFDesc, n));
-        if (XMLAttributes_getLength( CVTerm_getResources(term) ) > 0)
-          List_add(CVTerms, (void *)term);
-      }
-      n++;
-    }
-  }
-  // rest modified flags
-  for (n = 0; n < List_size(CVTerms); n++)
-  {
-    //static_cast<CVTerm_t *>(List_get(CVTerms, n))->resetModifiedFlags();
-  } 
 }
 
 template <class T>
