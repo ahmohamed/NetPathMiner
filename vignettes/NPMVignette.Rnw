@@ -79,11 +79,13 @@ This document provides a general overview of the functionalities presented in Ne
 Below, we provide a step-by-step tutorial starting by installation 
 instructions followed by a guide on how to use the package functions perform different network analyses.
 
+To report bugs and arising issues, please visit \url{https://github.com/ahmohamed/NetPathMiner}
+
 \section{Installation Instructions}
 \label{sec:installation}
 
 \subsection{System Prerequisites}
-NPM depends on libxml2 and libsbml to process pathway files.Installation or running 
+NPM depends on libxml2 and libSBML to process pathway files.Installation or running 
 certain functions MIGHT fail if these prerequisite libraries are
 not available. Please read through the following instructions.
 
@@ -107,11 +109,11 @@ binaries suitable for your system from ``Download libSBML'' link. You can follow
 on the website.
 
 \subsubsection{Prerequisites for Windows users}
-Since installing libxml2 and libSBML under Windows is challenging, we have prepared all dependencies in 
-a tar file, downloadable from \url{https://github.com/ahmohamed/NPM_dependencies} . Please download the file
-and place in in the home directory of R (type R RHOMEin command prompt to locate it). Unless
-you want to use customized libraries, you can skip the rest of this section.
+#### Prerequisites for Windows users
+If you are installing the package through Bioconductor, you don't have to install external libraries. However, currently the Bioconductor version for Windows doesn't support SBML processing. Alternatively, we have prepared all dependencies in  a tar file, downloadable from \url{https://github.com/ahmohamed/NPM_dependencies} . Please download the file and place in in the home directory of R 
+(type "R RHOME" in command prompt to locate it). 
 
+Unless you want to use customized libraries, you can skip the rest of this section.
 To use customized libraries, you have to compile them and provide them to R at the time of installation.
 This is not a trivial task, please be sure you really need these custom libraries.
 
@@ -155,16 +157,6 @@ Package igraph is available at CRAN. To install it call:
     install.packages("igraph")
 \end{verbatim}
 
-\paragraph{devtools}
-Package devtools is available at CRAN. For Windows this seems to depend on
-having Rtools for Windows installed. You can download and install this from:
-\url{http://cran.r-project.org/bin/windows/Rtools/}
-
-To install R package devtools call:
-\begin{verbatim}
-    install.packages("devtools")
-\end{verbatim}
-
 \paragraph{RCurl}
 For Unix users, make sure your Linux has library libcurl installed. Check out:
 \begin{verbatim}
@@ -205,13 +197,36 @@ supported. After installing Cytoscape, call:
 \end{verbatim}
 to install it right away.
 
-\subsection{NPM Installation}
-If everything went well you will be able to install the NPM package from GitHub using devtools:
+\subsection{NetPathMiner Installation}
+If everything went well you will be able to install the NetPathMiner package.
+
+\subsubsection{From Bioconductor:}
+In R console, type:
+
+\begin{verbatim}
+    source("http://bioconductor.org/biocLite.R")
+    biocLite("NetPathMiner")
+\end{verbatim}
+
+\subsubsection{From GitHub using devtools:}
+To install the package from Github, you need devtools R package.
+
+\paragraph{devtools}
+Package devtools is available at CRAN. For Windows this seems to depend on
+having Rtools for Windows installed. You can download and install this from:
+\url{http://cran.r-project.org/bin/windows/Rtools/}
+
+To install R package devtools call:
+\begin{verbatim}
+    install.packages("devtools")
+\end{verbatim}
+
+Finally, in R console:
+
 \begin{verbatim}
     library(devtools)
     install_github(repo="NetPathMiner", username="ahmohamed")
 \end{verbatim}
-To report bugs and arising issues, please visit \url{https://github.com/mohamedr/NetPathMiner}
 
 \section{Getting Started}
 \label{sec:gettingstarted}

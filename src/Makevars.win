@@ -1,1 +1,0 @@
-PKG_CPPFLAGS=-D_R_=1 -DUSE_R=1 -I. -I"${LIB_XML}/include/" -I"${LIB_XML}/include/libxml2" -I"${LIB_XML2}/include/" -I"${LIB_XML2}/include/libxml2"
