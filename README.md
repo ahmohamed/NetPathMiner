@@ -7,6 +7,8 @@ file formats, enabling its utility to most common pathway databases.
 In addition, NetPathMiner provides different visualization techniques to facilitate the analysis of even 
 thousands of output paths.
 
+To report bugs and arising issues, please visit https://github.com/ahmohamed/NetPathMiner
+
 ## Installation Instructions
 
 ### System Prerequisites
@@ -34,13 +36,9 @@ binaries suitable for your system from ``Download libSBML'' link. You can follow
 on the website.
 
 #### Prerequisites for Windows users
-Since installing libxml2 and libSBML under Windows is challenging, we have prepared all dependencies in 
-a tar file, downloadable from https://github.com/ahmohamed/NPM_dependencies . Please download the file
-and place in in the home directory of R (type <code>R RHOME</code> in command prompt to locate it). Unless
-you want to use customized libraries, you can skip the rest of this section.
+If you are installing the package through Bioconductor, you don't have to install external libraries. However, currently the Bioconductor version for Windows doesn't support SBML processing. Alternatively, we have prepared all dependencies in a tar file, downloadable from https://github.com/ahmohamed/NPM_dependencies . Please download the file and place in in the home directory of R (type <code>R RHOME</code> in command prompt to locate it), before installation.
 
-To use customized libraries, you have to compile them and provide them to R at the time of installation.
-This is not a trivial task, please be sure you really need these custom libraries.
+Unless you want to use customized libraries, you can skip the rest of this section.To use customized libraries, you have to compile them and provide them to R at the time of installation. This is not a trivial task, please be sure you really need these custom libraries.
 
 ##### Installing libxml2
 NetPathMiner expects an enviroment variable `LIB_XML` or `LIB_XML2` pointing to directory where 
@@ -137,13 +135,21 @@ supported. After installing Cytoscape, call:
 </code>
 to install RCytoscape.
 
-### NetPathMiner InstallationS
-If everything went well you will be able to install the NetPathMiner package from GitHub using devtools:
+### NetPathMiner Installation
+If everything went well you will be able to install the NetPathMiner package.
+
+#### From Bioconductor:
+In R console, type:
+<code>
+    source("http://bioconductor.org/biocLite.R")   
+    biocLite("NetPathMiner")
+</code>
+
+
+#### From GitHub using devtools:
+In R console, type:
 
 <code>
     library(devtools)   
     install_github(repo="NetPathMiner", username="ahmohamed")
 </code>
-
-To report bugs and arising issues, please visit https://github.com/ahmohamed/NetPathMiner
-
