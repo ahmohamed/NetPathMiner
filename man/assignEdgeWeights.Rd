@@ -2,7 +2,7 @@
 \alias{assignEdgeWeights}
 \title{Assigning weights to network edges}
 \usage{
-assignEdgeWeights(microarray, graph, use.attr, y, weight.method = "compCor",
+assignEdgeWeights(microarray, graph, use.attr, y, weight.method = "cor",
   complex.method = "max", missing.method = "median",
   same.gene.penalty = "median", bootstrap = 100, verbose = TRUE)
 }
