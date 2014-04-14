@@ -479,22 +479,6 @@ samplePaths <- function(graph, max.path.length, num.samples=1000, num.warmup=10,
 }
 
 processNetwork <- function(graph, start, end, scale=c("ecdf", "rescale"), normalize){
-    # Get edge.weights and apply ecdf on each column
-    edge.weights <- do.call("rbind", as.list(E(graph)$edge.weights))
-    if(sum(!is.finite(edge.weights))>0){
-        warning("Edge weights contain non-finite numbers. Setting them to the minimum edge weight")
-        
-        edge.weights <- apply(edge.weights, 2, 
-                            function(x){
-                                x[ !is.finite(x) ] <- min( x[ is.finite(x) ] )
-                                return(x)
-                            })        
-    }
-        
-    if(scale=="ecdf")
-        edge.probs <- apply(edge.weights, 2, function(x) ecdf(x[1:ecount(graph)])(x))        
-    else edge.probs <- apply(edge.weights, 2, rescale, c(1,0))
-    
     # Add S, T vetrices for the shortest path algorithm.
     snodes <- if(missing(start)) V(graph)[degree(graph,mode="in")==0]$name else V(graph)[start]$name
     enodes <- if(missing(end)) V(graph)[degree(graph,mode="out")==0]$name else V(graph)[end]$name
@@ -507,13 +491,28 @@ processNetwork <- function(graph, start, end, scale=c("ecdf", "rescale"), normal
             attr=list(edge.weights=list(rep(1, length(unlist(graph$y.labels)) )), 
                     compound=""))
     
+    # Get edge.weights and apply ecdf on each column
+    edge.weights <- do.call("rbind", as.list(E(graph)$edge.weights))
+    cat("weights: ", nrow(edge.weights))   
+    if(sum(!is.finite(edge.weights))>0){
+        warning("Edge weights contain non-finite numbers. Setting them to the minimum edge weight")
+        
+        edge.weights <- apply(edge.weights, 2, 
+                            function(x){
+                                x[ !is.finite(x) ] <- min( x[ is.finite(x) ] )
+                                return(x)
+                            })        
+    }
+    if(scale=="ecdf")
+        edge.probs <- apply(edge.weights, 2, function(x) ecdf(x[1:ecount(graph)])(x))        
+    else edge.probs <- apply(edge.weights, 2, rescale, c(1,0))
     
     
     # Normalize across Y labels
     if (ncol(edge.probs) > 1 & normalize == TRUE) {
         edge.probs <- edge.probs / rowSums(edge.probs)
     }
-    
+    cat("weights: ", nrow(edge.probs))
     if(scale=="ecdf")
         edge.probs <- -log(edge.probs)
     
@@ -522,6 +521,7 @@ processNetwork <- function(graph, start, end, scale=c("ecdf", "rescale"), normal
     edgelist = get.edgelist(graph, names=FALSE)
     edgelist = data.frame(from=edgelist[,1], to=edgelist[,2], label=unlist(label), stringsAsFactors=FALSE)
     
+    cat("edges: ", nrow(edgelist), ",weights: ", nrow(edge.probs))
     return(list(nodes=V(graph)$name, edges=edgelist, weights=edge.probs))
 }
 
