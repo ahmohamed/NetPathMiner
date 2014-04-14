@@ -109,7 +109,6 @@ binaries suitable for your system from ``Download libSBML'' link. You can follow
 on the website.
 
 \subsubsection{Prerequisites for Windows users}
-#### Prerequisites for Windows users
 If you are installing the package through Bioconductor, you don't have to install external libraries. However, currently the Bioconductor version for Windows doesn't support SBML processing. Alternatively, we have prepared all dependencies in  a tar file, downloadable from \url{https://github.com/ahmohamed/NPM_dependencies} . Please download the file and place in in the home directory of R 
 (type "R RHOME" in command prompt to locate it). 
 

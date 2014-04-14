@@ -296,7 +296,7 @@ fetchAttribute <- function(graph, organism="Homo sapiens", target.attr, source.a
 #'                 missing.method = -1)
 #'  }
 #' 
-assignEdgeWeights <- function(microarray, graph, use.attr, y, weight.method="compCor", 
+assignEdgeWeights <- function(microarray, graph, use.attr, y, weight.method="cor", 
                                 complex.method="max", missing.method="median", same.gene.penalty ="median", 
                                 bootstrap = 100, verbose=TRUE) 
 {
