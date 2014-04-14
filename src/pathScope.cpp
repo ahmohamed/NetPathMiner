@@ -693,7 +693,7 @@ extern "C" SEXP scope(SEXP node_list,
             for (it=reachedTargets.begin();it < reachedTargets.end();it++) {
                 if (last_compound.compare(*it) == 0) {
                     alreadyreached = 1;
-                    if (echo == 1) Rprintf(" - Already found a path to %s", last_compound.c_str());
+                    if (echo == 1) Rprintf(" - Already found a path to %s\n", last_compound.c_str());
                 }
             }
             if (alreadyreached == 0) {
@@ -702,9 +702,9 @@ extern "C" SEXP scope(SEXP node_list,
                     if (newpath != R_NilValue) {
                         SET_VECTOR_ELT(allpaths,vectid,newpath);   
                         reachedTargets.push_back(last_compound);
-                         if (echo == 1) Rprintf(" - Found a path to %s", last_compound.c_str());;
+                         if (echo == 1) Rprintf(" - Found a path to %s\n", last_compound.c_str());;
                     } else {
-                         if (echo == 1) Rprintf(" - Node out of scope");
+                         if (echo == 1) Rprintf(" - Node out of scope\n");
                     }
                 }
             }

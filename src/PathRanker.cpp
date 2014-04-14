@@ -172,7 +172,7 @@ st_shortest_path(const Vertex s, const Vertex t, Graph& g){
 
 pair<Graph,VertexPair> R_get_st_graph_from(SEXP nodes, SEXP edges,SEXP edge_weights);
 
-SEXP store_path_R(deque<Vertex>& st_path, Graph& g, double p_score);
+SEXP store_path_R(deque<Vertex> st_path, Graph& g, double p_score);
 
 SEXP pathranker(SEXP node_list, SEXP edge_list, SEXP edge_weights, SEXP rk,SEXP minpathsize)
 {
@@ -242,13 +242,14 @@ SEXP pathranker(SEXP node_list, SEXP edge_list, SEXP edge_weights, SEXP rk,SEXP 
       break;
     }
 
+	/* disabled *****/
     // I want to make sure the path involves more than 1 gene
     // so the path distance must be greater than 2 times the s-> gene and gene->t
     // edges have the same weight.
     Edge e_temp = edge(p.sequence[0],p.sequence[1],g).first;
-    double fw = get(edge_weight, g)[e_temp];
+    //double fw = get(edge_weight, g)[e_temp];
 
-    if (p.sequence.size() > mps && p.score > 2*fw) {
+    if (p.sequence.size() > mps) {
       new_path = store_path_R(p.sequence,g,p.score);
       SET_VECTOR_ELT(all_paths,rsize,new_path);
       rsize = rsize + 1;
@@ -362,7 +363,7 @@ pair<Graph,VertexPair> R_get_st_graph_from(SEXP nodes, SEXP edges,SEXP edge_weig
   return ret;
 }
 
-SEXP store_path_R(deque<Vertex>& st_path, Graph& g, double p_score) {
+SEXP store_path_R(deque<Vertex> st_path, Graph& g, double p_score) {
   SEXP new_path,dimnames;
   SEXP genes,compounds,weights,distance;  
 
