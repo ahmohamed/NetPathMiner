@@ -1,0 +1,12 @@
+NetPathMiner 1.1.6
+===========
+
+* plotCytoscapeGML: a new function to export network plots as GML files, for Cytoscape 3.0 compatibility.
+* getGetsetNetworks now can return pathway-class objects, used by graphite package, which allows fast topology-based geneset analyses.
+* getGenesets now can export the results in GMT file format, readily parsed by most GSEA packages. 
+* Bug fixes on KGML signaling network construction.
+
+NetPathMiner 1.1.3
+===========
+
+* Bioconductor stable release on the development branch

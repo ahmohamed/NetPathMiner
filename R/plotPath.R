@@ -295,12 +295,16 @@ colorVertexByAttr <- function(graph, attr.name, col.palette = palette()){
 
 #' Plots an annotated igraph object in Cytoscape.
 #' 
-#' This function uses RCytoscape interface to plot igraph object in Cytoscape, enabling
-#' interactive investigation of the network. The function requires an open Cytoscape window,
-#' with CytoscapeRPC plugin activated.
+#' Thess functions provide ways to plot igraph object in Cytoscape, enabling
+#' interactive investigation of the network. \link{plotCytoscape} uses RCytoscape 
+#' interface to plot graphs in Cytoscape directly form R. The function is compatible with Cytoscape
+#' 2.8.3 or lower, and requires an open Cytoscape window, with CytoscapeRPC plugin installed and activated.
+#' \link{plotCytoscapeGML} exports the network plot in GML format, that can be later imported into Cytoscape
+#' (using "import network from file" option). This fuction is compatible with all Cytoscape versions. 
 #' 
 #' @param graph An annotated igraph object.
 #' @param title Will be set as a window title in Cytoscape.
+#' @param file Output GML file name to which the network plot is exported.
 #' @param layout Either a graph layout function, or a two-column matrix specifiying vertex coordinates.
 #' @param vertex.size Vertex size. If missing, the vertex attribute "size" (\preformatted{V(g)$size)}) will be used.
 #' @param vertex.label Vertex labels. If missing, the vertex attribute "label" (\preformatted{V(g)$label)}) will be used.
@@ -317,13 +321,16 @@ colorVertexByAttr <- function(graph, attr.name, col.palette = palette()){
 #' 
 #' @author Ahmed Mohamed
 #' @family Plotting methods
+#' @rdname plotCytoscape
 #' @export
 #' @examples
+#'  data("ex_sbml")
+#' 	rgraph <- makeReactionNetwork(ex_sbml, simplify=TRUE)
+#'  v.layout <- layoutVertexByAttr(rgraph, "compartment") 
+#' 	v.color <- colorVertexByAttr(rgraph, "compartment")
+#' 
 #' \dontrun{
-#'  data("ex_kgml_sig")
-#'  v.layout <- layoutVertexByAttr(ex_kgml_sig, "pathway") 
-#' 	
-#' 	cw<-plotCytoscape(ex_kgml_sig, title="example", layout = v.layout,
+#' 	cw<-plotCytoscape(rgraph, title="example", layout = v.layout,
 #' 				vertex.size = 5, vertex.color = v.color)
 #' } 
 #' 
@@ -343,14 +350,14 @@ plotCytoscape <- function(graph, title, layout=layout.auto,
     for(i in 1:length(v.attrs)){
         nel <- RCytoscape::initNodeAttribute(nel, names(v.attrs)[[i]],
                                 ifelse(v.attrs[[i]], "numeric", "char"),
-                                ifelse(v.attrs, 1, ""))
+                                ifelse(v.attrs[[i]], 1, ""))
     }
     
     e.attrs <- sapply(list.edge.attributes(graph), function(x) is.numeric(get.edge.attribute(graph,x)))
-    for(i in 1:length(e.attrs)){
-        nel <- RCytoscape::initEdgeAttribute(nel, names(e.attrs)[[i]],
+    for(i in names(e.attrs)){
+        nel <- RCytoscape::initEdgeAttribute(nel, i,
                 ifelse(e.attrs[[i]], "numeric", "char"),
-                ifelse(e.attrs, 1, ""))
+                ifelse(e.attrs[[i]], 1, ""))
     }
     
     cw <- RCytoscape::new.CytoscapeWindow (title, graph=nel)
@@ -446,6 +453,137 @@ plotCytoscape <- function(graph, title, layout=layout.auto,
 }
 
 
+#' @return For \code{plotCytoscapeGML}, results are written to file.
+#' 
+#' @export
+#' @rdname plotCytoscape
+#' @examples
+#'  # Export network plot to GML file
+#'  plotCytoscapeGML(rgraph, file="example.gml", layout=v.layout, 
+#' 				vertex.color=v.color, vertex.size=10)
+#' 
+plotCytoscapeGML <- function(graph, file, layout=layout.auto, 
+        vertex.size, vertex.label, vertex.shape, vertex.color, edge.color){
+    
+    #v.size
+    if(!missing(vertex.size)){
+        if(length(vertex.size)==1)
+            vertex.size <- rep(vertex.size, vcount(graph))
+        
+        vertex.size <- as.integer(vertex.size)
+        if(length(vertex.size) != vcount(graph)){
+            warning("Vertex sizes length and number of vertices don't match")
+        }else{
+            V(graph)$size <- vertex.size
+        }
+    }else if(is.null(V(graph)$size)){
+        V(graph)$size <- 15
+    }
+    
+    #v.label
+    if(!missing(vertex.label)){
+        if(length(vertex.label) == vcount(graph)){
+            V(graph)$label <- as.character(vertex.label)
+        }else
+            warning("Vertex lebels length and number of vertices don't match")        
+    }
+    
+    #v.shape
+    igraphShape2Cyto <- function(x){
+        return(ifelse( x %in% c("square","rectangle","vrectangle"), "rect",
+                        ifelse(x %in% c("csquare","crectangle"), "round_rect", "ellipse" ))
+        )
+    }
+    if(!missing(vertex.shape)){
+        vertex.shape <- as.character(vertex.shape)
+        if(length(vertex.shape)==1)
+            vertex.shape <- rep(vertex.shape, vcount(graph))
+        
+        if(length(vertex.shape) == vcount(graph)){
+            V(graph)$type <- vertex.shape
+        }else
+            warning("Vertex shapes length and number of vertices don't match")
+        
+    }else if(!is.null(V(graph)$shape)){
+        V(graph)$type <- igraphShape2Cyto(V(graph)$shape)
+    }else{
+        V(graph)$type <- "ellipse"
+    }
+    
+    #v.color
+    col2hex <- function(x) return( rgb(t(col2rgb( x )/255)) )
+    if(!missing(vertex.color)){
+        vertex.color <- as.character(vertex.color)
+        if(length(vertex.color)==1)
+            vertex.color <- rep(vertex.color, vcount(graph))        
+        
+        if(length(vertex.color) == vcount(graph)){
+            V(graph)$fill <- col2hex(vertex.color)
+        }else{
+            warning("Vertex colors length and number of vertices don't match.\n
+                            Multi-colored vertices are not supported in Cytoscape plots")
+        }
+    }else if(!is.null(V(graph)$color)){
+        V(graph)$fill <- col2hex(V(graph)$color)
+    }else{
+        V(graph)$fill <- col2hex("skyblue")		
+    }
+    
+    #e.color
+    if(!missing(edge.color)){
+        edge.color <- col2hex(edge.color)
+        if(length(edge.color)==1)
+            edge.color <- rep(edge.color, ecount(graph))
+        
+        if(length(edge.color) == ecount(graph)){
+            E(graph)$fill <- col2hex(edge.color)
+        }else
+            warning("Edge colors length and number of vertices don't match")
+        
+    }else if(!is.null(E(graph)$color)){
+        E(graph)$fill <- col2hex(E(graph)$color)
+    }else{
+        E(graph)$fill <- col2hex("grey")
+    }
+    
+    if(!is.null(layout)){
+        if(is.function(layout)){
+            l <- layout(graph) #* max(V(graph)$size)
+            V(graph)$x <- l[,1]
+            V(graph)$y <- l[,2]
+        }else if(ncol(layout)==2 && nrow(layout)==vcount(graph)){
+            V(graph)$x <- layout[,1]
+            V(graph)$y <- layout[,2]
+        }else{
+            warning("Incompatible layout dimensions. It should be 2 columns and rows matching number of vertices")
+        }		
+    }
+    
+    attr <- get.data.frame(graph, what="both")
+    node.attr <- attr$vertices[!sapply(attr$vertices, is.list)]
+    node.graphics <- node.attr[ ,colnames(node.attr) %in% c("x", "y", "size", "type", "fill"), drop=FALSE]
+    
+    node.attr <- node.attr[ ,!colnames(node.attr) %in% c("x", "y", "size", "type", "fill", "shape", "color"), drop=FALSE]
+    node.attr <- cbind(id=as.numeric(V(graph)), node.attr, graphics=toGML(node.graphics, "graphics"))
+    nodes.gml <- toGML(node.attr, "node", "\n")
+    
+    
+    edge.attr <- attr$edges[!sapply(attr$edges, is.list)]
+    names(edge.attr)[1:2] <- c("source", "target")
+    edge.attr[1:2] <- get.edgelist(graph,names=FALSE)
+    edge.graphics <- edge.attr[ ,colnames(edge.attr) %in% c("size", "type", "fill"), drop=FALSE]
+    
+    edge.attr <- edge.attr[ ,!colnames(edge.attr) %in% c("size", "type", "fill", "shape", "color"), drop=FALSE]
+    edge.attr <- cbind(edge.attr, graphics=toGML(edge.graphics, "graphics"))
+    edges.gml <- toGML(edge.attr, "edge", "\n")
+    
+    gml.ret <- paste('Creator "NetPathMiner ', packageVersion("NetPathMiner"), 
+            ' ', date(),'" \n',
+            'graph [\n', nodes.gml, '\n', edges.gml, '\n]',
+            sep='')
+    
+    write(gml.ret, file=file)
+}
 ####################### Internal functions for plotting #######################
 
 plotNetwork_internal <- function(graph, vertex.color, col.palette = palette(), layout = layout.auto, legend,...){
@@ -730,6 +868,36 @@ drawLegend <- function(vertices, paths){
             title="Legend", text.font=font, cex=l.cex,xpd=NA)
     
 } 
+
+toGML <- function(attr, element, collapse=NULL){
+    l <- length(attr)
+    num <- sapply(attr,is.numeric)
+    
+    # Formats create sprintf formulas for GML formatting.
+    # In general, GML format follow the pattern: attr.name attr.val \n
+    # Attribute string values are quoted.
+    #
+    # Format1 deals with attribute names.
+    # Format2 deals with attribute values.
+    # Format interwines format1 and format2, and supply it to sprintf method.
+    
+    format1 <- paste('%',1:l,'$s ', sep='') # attribute names exported as strings.
+    format1[names(attr)== "graphics"] <- ''
+    format2 <- paste('%', (1:l) + l,'$', ifelse(num, 'g', 's'), sep='')
+    format2 <- paste(ifelse(num, '', '"'), 
+            format2, 
+            ifelse(num, '\n', '"\n'), 
+            sep='')
+    
+    format2[names(attr)== "graphics"] <- paste('%', which(names(attr)== "graphics") + l, '$s\n', sep='')
+    
+    format <- paste(t(cbind(format1, format2)), collapse='')
+    format <- paste(element, '[\n', format, ']')
+    
+    
+    ret <- paste( do.call(function(...) sprintf(format, ...), c(names(attr), attr)) ,collapse=collapse) 
+    return(ret)
+}
 
 strWrap <- function(s, width=20){
     for(i in 1:(floor( max(nchar(s))/ width )+1) ){

@@ -493,9 +493,11 @@ assignEdgeWeights <- function(microarray, graph, use.attr, y, weight.method="cor
 #' 
 #' @param graph An annotated igraph object..
 #' @param use.attr The attribute by which vertices are grouped (tepically pathway, or GO)
-#' @param gene.attr The attribute listing genes annotated with each vertex (ex: miriam.ncbigene, miriam.uniprot, ...) 
+#' @param gene.attr The attribute listing genes annotated with each vertex (ex: miriam.ncbigene, miriam.uniprot, ...)
+#' @param gmt.file Optinal. If provided, Results are exported to a GMT file. GMT files are readily used
+#' by most gene set analysis packages. 
 #' 
-#' @return A list of genesets.
+#' @return A list of genesets or written to gmt file if provided.
 #' 
 #' @author Ahmed Mohamed
 #' @seealso \code{\link{getGeneSetNetworks}}
@@ -503,8 +505,19 @@ assignEdgeWeights <- function(microarray, graph, use.attr, y, weight.method="cor
 #' @examples
 #'  data(ex_kgml_sig)	# Ras and chemokine signaling pathways in human
 #'  genesets <- getGeneSets(ex_kgml_sig, use.attr="pathway", gene.attr="miriam.ncbigene")
+#' 
+#' \donttest{	
+#' 	# Write the genesets in a GMT file, and read it using GSEABase package.
+#'  getGeneSets(ex_kgml_sig, use.attr="pathway", gene.attr="miriam.ncbigene", gmt.file="kgml.gmt")
+#' 	if(require(GSEABase))
+#' 		toGmt("kgml.gmt")
+#' }
+#' 	
+#' 	# Create genesets using compartment information
+#' 	data(ex_sbml) # bipartite metabolic network of Carbohydrate metabolism.
+#' 	genesets <- getGeneSets(ex_sbml, use.attr="compartment.name", gene.attr="miriam.uniprot")
 #'
-getGeneSets <- function(graph, use.attr="pathway", gene.attr="genes"){    
+getGeneSets <- function(graph, use.attr="pathway", gene.attr="genes", gmt.file){    
     attr.names <- getAttrNames(graph)
     if(!use.attr %in% getAttrNames(graph))
         stop(use.attr, ": attribute not found in graph.")
@@ -521,7 +534,23 @@ getGeneSets <- function(graph, use.attr="pathway", gene.attr="genes"){
     sets <- split(as.numeric(attr[,1]), attr[,2])
     genesets <- lapply(sets, function(x) unlist(genes[x]))
     
-    return(genesets)
+    if(!missing(gmt.file)){
+        pos <- regexpr("\\.([[:alnum:]]+)$", gmt.file)
+        ext <- ifelse(pos > -1L, substring(gmt.file, pos + 1L), "")
+        ext <- tolower(ext)
+        
+        if(!ext == "gmt")
+            stop("File format not suuported. Please rename the file as *.gmt")
+        
+        gmt <- paste(names(genesets), paste(graph$source, use.attr), 
+                    lapply(genesets, paste, sep="", collapse="\t"), 
+                    sep="\t", collapse="\n")
+        
+        write(gmt, file=gmt.file)
+        
+    }else{
+        return(genesets)
+    }
 }
 
 #' Generate geneset networks from an annotated network.
@@ -531,8 +560,11 @@ getGeneSets <- function(graph, use.attr="pathway", gene.attr="genes"){
 #' 
 #' @param graph An annotated igraph object..
 #' @param use.attr The attribute by which vertices are grouped (tepically pathway, or GO)
+#' @param format The output format. If "list" is specified, a list of subgraphs are returned (default). 
+#' If "pathway-class" is specified, a list of pathway-class objects are returned. \link[graphite]{pathway-class} 
+#' is used by graphite package to run several methods of topology-based enrichment analyses.  
 #' 
-#' @return A list of geneset networks.
+#' @return A list of geneset networks as igraph or \link[graphite]{pathway-class} objects.
 #' 
 #' @author Ahmed Mohamed
 #' @seealso \code{\link{getGeneSets}}
@@ -540,8 +572,25 @@ getGeneSets <- function(graph, use.attr="pathway", gene.attr="genes"){
 #' @examples
 #'  data(ex_kgml_sig)	# Ras and chemokine signaling pathways in human
 #'  genesetnets <- getGeneSetNetworks(ex_kgml_sig, use.attr="pathway")
+#' 
+#'  # Integration with graphite package
+#' \donttest{
+#'  if(require(graphite) & require(clipper) & require(ALL)){
+#'		genesetnets <- getGeneSetNetworks(ex_kgml_sig, 
+#' 						use.attr="pathway", format="pathway-class")
+#'		path <- convertIdentifiers(genesetnets$`Chemokine signaling pathway`, 
+#' 						"entrez")
+#'		genes <- nodes(path)
+#'		data(ALL)
+#'		all <- as.matrix(exprs(ALL[1:length(genes),1:20]))
+#'		classes <- c(rep(1,10), rep(2,10))
+#'		rownames(all) <- genes
+#'		
+#'		runClipper(path, all, classes, "mean", pathThr=0.1)
+#'  }
+#' } 
 #'
-getGeneSetNetworks <- function(graph, use.attr="pathway"){    
+getGeneSetNetworks <- function(graph, use.attr="pathway", format=c("list", "pathway-class")){    
     attr.names <- getAttrNames(graph)
     if(!use.attr %in% getAttrNames(graph))
         stop(use.attr, ": attribute not found in graph.")
@@ -553,6 +602,68 @@ getGeneSetNetworks <- function(graph, use.attr="pathway"){
     
     sets <- split(as.numeric(attr[,1]), attr[,2])
     genesetnet <- lapply(sets, function(x) induced.subgraph(graph, x))
+    
+    if(!missing(format) && format=="pathway-class"){
+        pathway <- setClass("pathway",
+                representation(title="vector",
+                        nodes="vector",
+                        edges="data.frame",
+                        ident="vector",
+                        database="vector",
+                        timestamp="Date"))
+        
+        stds <- stdAttrNames(graph, "matches")
+        if("miriam.ncbigene" %in% stds$standard){
+            annotation <- "miriam.ncbigene" 
+        }else if("miriam.uniprot" %in% stds$standard){
+            annotation <- "miriam.uniprot"
+        }else{
+            stop("Provided graph doesn't contain Entrez IDs nor UniProt IDs needed for graphite package")
+        }
+        
+        genesetnet <- lapply(genesetnet, function(g)
+                            try(
+                                expandComplexes(g, rownames(stds[stds$standard==annotation,]), missing.method="remove"),
+                            silent=TRUE)
+                )
+        
+        genesetnet <- genesetnet[ !sapply(genesetnet, class) == "try-error" ]
+                
+        genesetnet <- genesetnet[ !sapply(genesetnet, ecount) == 0 ]
+        ann.prefix <- ifelse(annotation == "miriam.ncbigene", "EntrezGene", "UniProt") 
+        genesetnet <- lapply(genesetnet, function(g) 
+                                        set.vertex.attribute(g, "name", 
+                                                value=paste(ann.prefix, V(g)$name, sep=":") ) 
+                            )
+                            
+        prepareEdges <- function(g){
+            ret <- data.frame( get.edgelist(g), 
+                    direction="directed", 
+                    type=as.character(E(g)$attr)
+            )
+            names(ret)[1:2] <- c("src", "dest")
+            ret$src <- as.character(ret$src)
+            ret$dest <- as.character(ret$dest)
+            return(ret)
+        }
+                
+                edges <- lapply(genesetnet, function(g){
+                                                    
+                } )
+        
+        pathwayset <- mapply(function(name, g){
+                    pathway(title=name, 
+                            nodes=V(g)$name,
+                            edges=prepareEdges(g),
+                            ident="native", 
+                            database=paste("NetPathMiner(",graph$source,")", sep=""),
+                            timestamp=Sys.Date()
+                    )                    
+                }, names(genesetnet), genesetnet
+            )
+        
+        return(pathwayset)
+    }# End pathway-class return
     
     return(genesetnet)
 }

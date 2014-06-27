@@ -493,7 +493,7 @@ processNetwork <- function(graph, start, end, scale=c("ecdf", "rescale"), normal
     
     # Get edge.weights and apply ecdf on each column
     edge.weights <- do.call("rbind", as.list(E(graph)$edge.weights))
-    cat("weights: ", nrow(edge.weights))   
+    
     if(sum(!is.finite(edge.weights))>0){
         warning("Edge weights contain non-finite numbers. Setting them to the minimum edge weight")
         
@@ -512,7 +512,7 @@ processNetwork <- function(graph, start, end, scale=c("ecdf", "rescale"), normal
     if (ncol(edge.probs) > 1 & normalize == TRUE) {
         edge.probs <- edge.probs / rowSums(edge.probs)
     }
-    cat("weights: ", nrow(edge.probs))
+
     if(scale=="ecdf")
         edge.probs <- -log(edge.probs)
     
@@ -521,7 +521,7 @@ processNetwork <- function(graph, start, end, scale=c("ecdf", "rescale"), normal
     edgelist = get.edgelist(graph, names=FALSE)
     edgelist = data.frame(from=edgelist[,1], to=edgelist[,2], label=unlist(label), stringsAsFactors=FALSE)
     
-    cat("edges: ", nrow(edgelist), ",weights: ", nrow(edge.probs))
+
     return(list(nodes=V(graph)$name, edges=edgelist, weights=edge.probs))
 }
 

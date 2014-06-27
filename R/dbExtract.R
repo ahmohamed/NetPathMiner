@@ -144,7 +144,7 @@ KGML2igraph <- function(filename, parse.as=c("metabolic","signaling"), expand.co
 
 
 KGML_signal <- function(fileList, expand.complexes, verbose){
-    if(verbose) message("Parsing KGML files as metabolic networks")
+    if(verbose) message("Parsing KGML files as signaling networks")
     zkgml <- .Call("readkgml_sign", FILENAME = fileList, 
                 EXPAND_COMPLEXES = expand.complexes, VERBOSE=verbose)
     
