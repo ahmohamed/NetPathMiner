@@ -377,6 +377,8 @@ expandComplexes <- function(graph, v.attr,
     for(i in list.edge.attributes(graph)){
         gout <- set.edge.attribute(gout, i, value=get.edge.attribute(graph, i)[z$e.parents] )
     }
+    
+    gout$source <- graph$source
     return(gout);
 }
 

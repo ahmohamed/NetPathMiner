@@ -352,7 +352,7 @@ void readkgml_sign_int(const char* filename,
 								bool expand_complexes, bool verbose)
 {
 	xmlDocPtr doc;
-	xmlXPathContextPtr xpathCtx;
+	xmlXPathContextPtr xpathCtx = NULL;
 	xmlXPathObjectPtr nodes;
 
 	if(verbose)	Rprintf("Processing KGML file: %s",filename);
@@ -615,6 +615,8 @@ void readkgml_sign_int(const char* filename,
 }//kgml_sig_int
 
 xmlNodePtr node_by_id(char* id, const char* type, xmlXPathContextPtr &xpathCtx){
+	if(!id) return( NULL );
+
 	string XPath = ((string)"//")+ ((string)type)+ ((string)"[@id='")+ ((string)id)+ ((string)"']");
 	xmlNodeSetPtr node_set = xmlXPathEvalExpression(
 				(const xmlChar *) XPath.c_str(), xpathCtx ) ->nodesetval;
@@ -632,6 +634,8 @@ char* get_attr(xmlNodePtr node, const char* attr_name){
 	return( (char *) xmlGetProp(node,(const xmlChar *)attr_name) );
 }
 char* attr_by_id(char* id, const char* attr_name,xmlXPathContextPtr &xpathCtx){
+	if(!id) return( NULL );
+
 	xmlNodePtr node = node_by_id(id, "entry", xpathCtx);
 	return( node? get_attr(node, attr_name) : NULL );
 }
@@ -647,8 +651,13 @@ char* get_group_components(char* id, xmlXPathContextPtr &xpathCtx){
 		char* comp_id = get_attr(sub_node, "id");
 		char* comp_name = comp_id ? attr_by_id(comp_id, "name", xpathCtx) : NULL;
 
-		if(comp_name)
-			group = group + ((string)" ") + ((string) comp_name);
+		if(comp_name){
+			if(a != 0)
+				group = group + ((string)" ");
+
+			group = group + ((string) comp_name);
+		}
+
 
 	}
 	return(strdup(group.c_str()));
