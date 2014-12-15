@@ -298,7 +298,7 @@ SBML2igraph <- function(filename, parse.as=c("metabolic","signaling"), miriam.at
     graph <- graph + vertices(names(zsbml$species))
     graph <- graph + igraph::edges(c(t(edges[,1:2])), stoichiometry=edges$stoichiometry)
     
-    graph <- simplify(graph.data.frame(edges), edge.attr.comb="first")
+    graph <- simplify(graph, edge.attr.comb="first")
     V(graph)$attr <- unlist(zsbml, recursive=FALSE, use.names=FALSE)
     
     # Set graphical attributes

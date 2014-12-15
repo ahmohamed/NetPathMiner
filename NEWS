@@ -1,3 +1,8 @@
+NetPathMiner 1.3.1
+===========
+* Fixed a bug SBML2igraph (metabolic).
+
+
 NetPathMiner 1.1.6
 ===========
 
