@@ -27,12 +27,11 @@ can be specified through \code{gene.attr} argument.
 data(ex_kgml_sig)	# Ras and chemokine signaling pathways in human
  genesets <- getGeneSets(ex_kgml_sig, use.attr="pathway", gene.attr="miriam.ncbigene")
 
-\donttest{
+
 	# Write the genesets in a GMT file, and read it using GSEABase package.
  getGeneSets(ex_kgml_sig, use.attr="pathway", gene.attr="miriam.ncbigene", gmt.file="kgml.gmt")
 	if(require(GSEABase))
 		toGmt("kgml.gmt")
-}
 
 	# Create genesets using compartment information
 	data(ex_sbml) # bipartite metabolic network of Carbohydrate metabolism.

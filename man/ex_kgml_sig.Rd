@@ -4,7 +4,7 @@
 \alias{ex_kgml_sig}
 \title{Singaling network from KGML example}
 \description{
-An exmaple igraph object representing Ras and chemokine signaling pathways in human
+An example igraph object representing Ras and chemokine signaling pathways in human
 extracted from KGML files.
 }
 \examples{

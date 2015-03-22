@@ -27,7 +27,6 @@ data(ex_kgml_sig)	# Ras and chemokine signaling pathways in human
  genesetnets <- getGeneSetNetworks(ex_kgml_sig, use.attr="pathway")
 
  # Integration with graphite package
-\donttest{
  if(require(graphite) & require(clipper) & require(ALL)){
 		genesetnets <- getGeneSetNetworks(ex_kgml_sig,
 						use.attr="pathway", format="pathway-class")
@@ -41,7 +40,6 @@ data(ex_kgml_sig)	# Ras and chemokine signaling pathways in human
 
 		runClipper(path, all, classes, "mean", pathThr=0.1)
  }
-}
 }
 \author{
 Ahmed Mohamed
