@@ -545,7 +545,7 @@ cw <- plotCytoscape(graph, "example", layout = layout.c,
 @
 
 \section{Additional functions}
-\subsection{Genesets and geneses subnetworks}
+\subsection{Genesets and geneset subnetworks}
 NetPathMiner provides functions to extract genesets utilizing annotation attributes in the network. To get genesets as lists of genes for geneset enrichment analyses:
 
 <<echo=TRUE, eval=TRUE, results=hide>>=

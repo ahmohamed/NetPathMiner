@@ -42,7 +42,7 @@ NULL
 
 #' Singaling network from KGML example
 #' 
-#' An exmaple igraph object representing Ras and chemokine signaling pathways in human 
+#' An example igraph object representing Ras and chemokine signaling pathways in human 
 #' extracted from KGML files.
 #' 
 #' @docType data
@@ -68,7 +68,7 @@ NULL
 
 #' An microarray data example.
 #' 
-#' An microarray data example. This is part of the ALL dataset, for demonestration purposes.
+#' An microarray data example. This is part of the ALL dataset, for demonstration purposes.
 #' 
 #' @docType data
 #' @name ex_microarray
