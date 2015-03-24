@@ -1,0 +1,13 @@
+citHeader("To cite NetPathMiner in publications use:")
+
+citEntry(
+   entry="article",
+   title = "NetPathMiner: R/Bioconductor package for network path mining through gene expression",
+   author = "Ahmed Mohamed, Timothy Hancock, Canh Hao Nguyen, Hiroshi Mamitsuka",
+   journal = "Bioinformatics",
+   volume = 30,
+   issue = 21,
+   pages = "3139-3141",
+   year = 2014,
+   textVersion = "Mohamed, A., Hancock, T., Nguyen, C. H., & Mamitsuka, H. (2014). NetPathMiner: R/Bioconductor package for network path mining through gene expression. Bioinformatics, 30(21), 3139-3141."
+)
