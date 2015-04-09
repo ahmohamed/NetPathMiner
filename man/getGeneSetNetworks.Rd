@@ -12,11 +12,11 @@ getGeneSetNetworks(graph, use.attr = "pathway", format = c("list",
 \item{use.attr}{The attribute by which vertices are grouped (tepically pathway, or GO)}
 
 \item{format}{The output format. If "list" is specified, a list of subgraphs are returned (default).
-If "pathway-class" is specified, a list of pathway-class objects are returned. \link[graphite]{pathway-class}
+If "pathway-class" is specified, a list of pathway-class objects are returned. Pathway-class
 is used by graphite package to run several methods of topology-based enrichment analyses.}
 }
 \value{
-A list of geneset networks as igraph or \link[graphite]{pathway-class} objects.
+A list of geneset networks as igraph or Pathway-class objects.
 }
 \description{
 This function generates geneset networks based on a given netowrk, by grouping vertices sharing
