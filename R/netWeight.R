@@ -696,7 +696,7 @@ toGraphNEL<- function(graph, export.attr=""){
         new.graph <- set.vertex.attribute(new.graph, i, value=getAttribute(graph, i))
     }
     
-    return(igraph.to.graphNEL(new.graph))
+    return(as_graphnel(new.graph))
 }
 
 

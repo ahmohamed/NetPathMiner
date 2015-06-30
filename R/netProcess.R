@@ -258,7 +258,7 @@ vertexDeleteReconnect <- function(graph, vids, reconnect.threshold=vcount(graph)
     }
     
     new.graph <- add.edges(graph, new.edges, attr=attr)
-    new.graph <- delete.vertices(new.graph, V(graph)[delete])
+    new.graph <- delete.vertices(new.graph, V(graph)[delete]$name)
     new.graph <- remove.vertex.attribute(new.graph, "delete")
     
     return(new.graph)    

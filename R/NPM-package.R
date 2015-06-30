@@ -79,7 +79,7 @@ NULL
 
 .onLoad<- function(lib, pkg){
     env <- new.env()
-    load(file.path(find.package("NetPathMiner"), "extdata", "env_data.RData"), envir=env)
+    load(system.file("extdata", "env_data.RData", package="NetPathMiner"), envir=env)
     env$memory.err <- character()
     options(NPM_ENV = env)
 }
