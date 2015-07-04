@@ -687,6 +687,8 @@ getGeneSetNetworks <- function(graph, use.attr="pathway", format=c("list", "path
 #'  graphNEL <- toGraphNEL(ex_kgml_sig, export.attr="^miriam.")
 #'
 toGraphNEL<- function(graph, export.attr=""){
+  if(!require(graph))
+      stop("This function uses graph package. Required package not installed.")
     attr.names  <- getAttrNames(graph)
     attr.names  <- grep(export.attr, attr.names, value=TRUE)
     
@@ -696,7 +698,7 @@ toGraphNEL<- function(graph, export.attr=""){
         new.graph <- set.vertex.attribute(new.graph, i, value=getAttribute(graph, i))
     }
     
-    return(igraph.to.graphNEL(new.graph))
+    return(as_graphnel(new.graph))
 }
 
 
