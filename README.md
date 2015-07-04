@@ -1,4 +1,5 @@
 # NetPathMiner
+[![Travis-CI Build Status](https://travis-ci.org/ahmohamed/NetPathMiner.svg?branch=master)](https://travis-ci.org/ahmohamed/NetPathMiner)
 
 NetPathMiner implements a flexible module-based process flow for network path mining and visualization,
 which can be fully inte-grated with user-customized functions. 
