@@ -10,7 +10,7 @@ bioc_use_devel: true
 apt_packages:
  - libcurl4-openssl-dev
  - libxml2-dev
- - libsbml
+ - python-libsbml
  
 env:
  global:
