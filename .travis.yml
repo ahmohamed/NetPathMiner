@@ -1,0 +1,27 @@
+# Sample .travis.yml for R projects
+
+language: r
+warnings_are_errors: true
+sudo: required
+bioc_required: true
+bioc_use_devel: true
+
+# System dependencies for HTTP calling
+apt_packages:
+ - libcurl4-openssl-dev
+ - libxml2-dev
+ - libsbml
+ 
+env:
+ global:
+   - CRAN: http://cran.rstudio.com
+
+# Install the bleeding edge version of a package from github (eg to pick
+# up a not-yet-released bugfix)
+r_github_packages:
+ - igraph/igraph
+
+notifications:
+  email:
+    on_success: change
+    on_failure: change
