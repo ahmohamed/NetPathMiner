@@ -8,8 +8,8 @@ bioc_use_devel: true
 
 before_install:
  - wget 'http://downloads.sourceforge.net/project/sbml/libsbml/5.11.4/stable/libSBML-5.11.4-core-src.tar.gz?r=&ts=1435978044' -O /tmp/libsbml.tar.gz
- - tar -xvf /tmp/libsbml.tar.gz
- - cd libsbml-5.11.4 && ./configure --prefix=/usr && sudo make install
+ - tar -xf /tmp/libsbml.tar.gz
+ - cd libsbml-5.11.4 && ./configure --prefix=/usr >/dev/null && sudo make install >/dev/null && cd ..
 
 # System dependencies for HTTP calling
 apt_packages:
