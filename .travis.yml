@@ -7,8 +7,8 @@ bioc_required: true
 bioc_use_devel: true
 
 before_install:
- - wget 'http://downloads.sourceforge.net/project/sbml/libsbml/5.11.4/stable/Linux/64-bit/libSBML-5.11.4-Linux-x64.deb?r=&ts=1435974035'
- - sudo dpkg -i libSBML-5.11.4-Linux-x64.deb
+ - wget 'http://downloads.sourceforge.net/project/sbml/libsbml/5.11.4/stable/Linux/64-bit/libSBML-5.11.4-Linux-x64.deb?r=&ts=1435974035' -O libSBML.deb
+ - sudo dpkg -i libSBML.deb
 
 # System dependencies for HTTP calling
 apt_packages:
