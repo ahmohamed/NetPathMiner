@@ -1,0 +1,31 @@
+# Sample .travis.yml for R projects
+
+language: r
+warnings_are_errors: true
+sudo: required
+bioc_required: true
+bioc_use_devel: true
+
+before_install:
+ - wget 'http://downloads.sourceforge.net/project/sbml/libsbml/5.11.4/stable/libSBML-5.11.4-core-src.tar.gz?r=&ts=1435978044' -O /tmp/libsbml.tar.gz
+ - tar -xf /tmp/libsbml.tar.gz
+ - cd libsbml-5.11.4 && ./configure --prefix=/usr >/dev/null && sudo make install >/dev/null && cd .. && sudo rm -rf libsbml-5.11.4
+
+# System dependencies for HTTP calling
+apt_packages:
+ - libcurl4-openssl-dev
+ - libxml2-dev
+ 
+env:
+ global:
+   - CRAN: http://cran.rstudio.com
+
+# Install the bleeding edge version of a package from github (eg to pick
+# up a not-yet-released bugfix)
+r_github_packages:
+ - igraph/rigraph
+
+notifications:
+  email:
+    on_success: change
+    on_failure: change
