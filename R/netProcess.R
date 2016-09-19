@@ -13,7 +13,7 @@
 ###############################################################################
 
 # Neccessary non-sense to pass R CMD check
-utils::globalVariables(c("nei", "to", "from", "delete"))
+utils::globalVariables(c(".nei", ".to", ".from", "delete"))
 
 #' Remove uniquitous compounds from a metabolic network
 #' 
@@ -234,7 +234,7 @@ vertexDeleteReconnect <- function(graph, vids, reconnect.threshold=vcount(graph)
     
     #A subgraph only including vertices to be deleted and their neighbours.
     graph.sub <- subgraph.edges(graph,
-            E(graph)[V(graph)[delete] %--% V(graph)[nei(V(graph)[delete])|delete]])
+            E(graph)[V(graph)[delete] %--% V(graph)[.nei(V(graph)[delete])|delete]])
     
     #Calculate the shortest path length in this network between "neighbours" (retained) vertices. 
     #In this graph, the shortest path will have to go through deleted vertices only.

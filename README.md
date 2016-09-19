@@ -1,4 +1,5 @@
 # NetPathMiner
+[![Travis-CI Build Status](https://travis-ci.org/ahmohamed/NetPathMiner.svg?branch=master)](https://travis-ci.org/ahmohamed/NetPathMiner)
 
 NetPathMiner implements a flexible module-based process flow for network path mining and visualization,
 which can be fully inte-grated with user-customized functions. 
@@ -71,9 +72,7 @@ directory, which should now contain dll files inder `bin` and header files under
 ### R Package dependencies
 NetPathMiner depends on package igraph to represent network objects. Installing igraph is required for the package 
 to work. You will also need devtools package to install directly from github.
-NetPathMiner suggests package rBiopaxParser to process BioPAX files, RCurl to download annotations from the web, and 
-RCytoscape to visualise networks in Cytoscape. NetPathMiner can still work without installing the suggested packages, but you
-will not be able to use the aforementioned functionalities.
+NetPathMiner suggests package rBiopaxParser to process BioPAX files and RCurl to download annotations from the web. NetPathMiner can still work without installing the suggested packages, but you will not be able to use the aforementioned functionalities.
 
 ##### igraph
 Package igraph is available at CRAN. To install it call:
@@ -118,31 +117,20 @@ call:
 
 <code>
     source("http://bioconductor.org/biocLite.R")   
-     biocLite("rBiopaxParser")
+     biocLite("rBiopaxParser")  
 </code>
 
 to install it right away.
-
-##### RCytoscape
-Package RCytoscape is available on Bioconductor. For installation instructions check 
-out http://www.bioconductor.org/packages/release/bioc/html/RCytoscape.html . Please note 
-that RCytoscape requires Cytoscape 2.8 installed with XMLRPC plugin. Cytoscape 3 is not yet 
-supported. After installing Cytoscape, call:
-
-<code>
-    source("http://bioconductor.org/biocLite.R")   
-    biocLite("RCytoscape")
-</code>
-to install RCytoscape.
 
 ### NetPathMiner Installation
 If everything went well you will be able to install the NetPathMiner package.
 
 #### From Bioconductor:
 In R console, type:
+
 <code>
     source("http://bioconductor.org/biocLite.R")   
-    biocLite("NetPathMiner")
+    biocLite("NetPathMiner")  
 </code>
 
 

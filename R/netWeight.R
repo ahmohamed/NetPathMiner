@@ -277,7 +277,7 @@ fetchAttribute <- function(graph, organism="Homo sapiens", target.attr, source.a
 #' @author Ahmed Mohamed
 #' @export
 #' @examples
-#' 	## Conver a metabolic network to a reaction network.
+#' 	## Convert a metabolic network to a reaction network.
 #'  data(ex_sbml) # bipartite metabolic network of Carbohydrate metabolism.
 #'  rgraph <- makeReactionNetwork(ex_sbml, simplify=TRUE)
 #' 
@@ -290,10 +290,10 @@ fetchAttribute <- function(graph, organism="Homo sapiens", target.attr, source.a
 #'  
 #'  # Using Spearman correlation, assigning missing edges to -1 
 #'  \dontrun{
-#'         assignEdgeWeights(microarray, graph, use.attr="miriam.affy.probeset", 
-#'                 y=factor(colnames(microarray)), 
-#'                 weight.method = function(x1,x2) cor(x1,x2, method="spearman),
-#'                 missing.method = -1)
+#'    assignEdgeWeights(microarray, graph, use.attr="miriam.affy.probeset", 
+#'        y=factor(colnames(microarray)), 
+#'        weight.method = function(x1,x2) cor(x1,x2, method="spearman"),
+#'        missing.method = -1)
 #'  }
 #' 
 assignEdgeWeights <- function(microarray, graph, use.attr, y, weight.method="cor", 
