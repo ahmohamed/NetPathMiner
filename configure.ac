@@ -1,4 +1,5 @@
 AC_INIT([NetPathMiner]) dnl package name, version
+AC_CONFIG_SRCDIR(DESCRIPTION) dnl make sure the dir is an R package
 
 dnl A user-specifiable option
 
