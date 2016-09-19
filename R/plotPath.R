@@ -321,6 +321,11 @@ colorVertexByAttr <- function(graph, attr.name, col.palette = palette()){
 #' @family Plotting methods
 #' @rdname plotCytoscape
 #' @examples
+#'  data("ex_sbml")
+#' 	rgraph <- makeReactionNetwork(ex_sbml, simplify=TRUE)
+#'  v.layout <- layoutVertexByAttr(rgraph, "compartment") 
+#' 	v.color <- colorVertexByAttr(rgraph, "compartment")
+#'  
 #'  # Export network plot to GML file
 #'  plotCytoscapeGML(rgraph, file="example.gml", layout=v.layout, 
 #' 				vertex.color=v.color, vertex.size=10)
