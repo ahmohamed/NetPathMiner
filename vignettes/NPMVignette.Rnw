@@ -146,9 +146,7 @@ directory, which should now contain dll files inder `bin` and header files under
 \subsection{R Package dependencies}
 NPM depends on package igraph to represent network objects. Installing igraph is required for the package 
 to work. You will also need devtools package to install directly from github.
-NPM suggests package rBiopaxParser to process BioPAX files, RCurl to download annotations from the web, and 
-RCytoscape to visualise networks in Cytoscape. NPM can still work without installing the suggested packages, but you
-will not be able to use the aforementioned functionalities.
+NPM suggests package rBiopaxParser to process BioPAX files and RCurl to download annotations from the web. NPM can still work without installing the suggested packages, but you will not be able to use the aforementioned functionalities.
 
 \paragraph{igraph}
 Package igraph is available at CRAN. To install it call:
@@ -181,18 +179,6 @@ call:
 \begin{verbatim}
     source("http://bioconductor.org/biocLite.R")
     biocLite("rBiopaxParser")
-\end{verbatim}
-to install it right away.
-
-\paragraph{RCytoscape}
-Package RCytoscapeis available on Bioconductor. For installation instructions check 
-out \url{http://www.bioconductor.org/packages/release/bioc/html/RCytoscape.html}. Please note 
-that RCytoscape requires Cytoscape 2.8 installed with XMLRPC plugin. Cytoscape 3 is not yet 
-supported. After installing Cytoscape, call:
-
-\begin{verbatim}
-    source("http://bioconductor.org/biocLite.R")
-    biocLite("RCytoscape")
 \end{verbatim}
 to install it right away.
 
@@ -536,11 +522,10 @@ plotPaths(ranked.p , rgraph, clusters=p.class,
 	layout = layout.c, vertex.color = v.color)
 @
 
-Finally, for interactive visualization using Cytoscape, plotCytoscape requires RCytoscape installed and configured. Having done that simply type:
+Finally, for interactive visualization using Cytoscape, plotCytoscapeGML can export the graph, attributes and layout as a GML file, which can be imported directly into Cytoscape. For example:
 
 <<echo=TRUE, eval=FALSE>>=
-require(RCytoscape)
-cw <- plotCytoscape(graph, "example", layout = layout.c,
+plotCytoscapeGML(graph, file="example.gml", layout = layout.c,
 				vertex.size = 5, vertex.color = v.color)
 @
 

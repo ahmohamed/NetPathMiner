@@ -294,168 +294,31 @@ colorVertexByAttr <- function(graph, attr.name, col.palette = palette()){
 }
 
 #' Plots an annotated igraph object in Cytoscape.
-#' 
-#' Thess functions provide ways to plot igraph object in Cytoscape, enabling
-#' interactive investigation of the network. \link{plotCytoscape} uses RCytoscape 
-#' interface to plot graphs in Cytoscape directly form R. The function is compatible with Cytoscape
-#' 2.8.3 or lower, and requires an open Cytoscape window, with CytoscapeRPC plugin installed and activated.
+#'
+#' \code{plotCytoscape} function has been removed because RCytoscape is no longer prensent in Bioconductor.
+#' Future plans will use RCy3 for Cytoscape plotting, once RCy3 is supported on MacOS and Windows.    
 #' \link{plotCytoscapeGML} exports the network plot in GML format, that can be later imported into Cytoscape
-#' (using "import network from file" option). This fuction is compatible with all Cytoscape versions. 
-#' 
+#' (using "import network from file" option). This fuction is compatible with all Cytoscape versions.
+#'
 #' @param graph An annotated igraph object.
-#' @param title Will be set as a window title in Cytoscape.
 #' @param file Output GML file name to which the network plot is exported.
 #' @param layout Either a graph layout function, or a two-column matrix specifiying vertex coordinates.
 #' @param vertex.size Vertex size. If missing, the vertex attribute "size" (\preformatted{V(g)$size)}) will be used.
 #' @param vertex.label Vertex labels. If missing, the vertex attribute "label" (\preformatted{V(g)$label)}) will be used.
 #' If missing, vertices are labeled by their name.
-#' @param vertex.shape Vertex shape in one of igraph shapes. If missing, the vertex attribute "shape" (\preformatted{V(g)$shape)}) 
-#' will be used. Shapes are converted from igraph convention to Cytoscape convention. "square","rectangle" and "vrectangle" are 
+#' @param vertex.shape Vertex shape in one of igraph shapes. If missing, the vertex attribute "shape" (\preformatted{V(g)$shape)})
+#' will be used. Shapes are converted from igraph convention to Cytoscape convention. "square","rectangle" and "vrectangle" are
 #' converted to "RECT",  "csquare" and "crectangle" are converted to "ROUND_RECT", all other shapes are considered "ELLIPSE"
-#' @param vertex.color A color or a list of colors for vertices. Vetices with multiple colors are not 
+#' @param vertex.color A color or a list of colors for vertices. Vetices with multiple colors are not
 #' supported. If missing, the vertex attribute "color" (\preformatted{V(g)$color)}) will be used.
-#' @param edge.color A color or a list of colors for edges. If missing, the edge attribute "color" 
+#' @param edge.color A color or a list of colors for edges. If missing, the edge attribute "color"
 #' (\preformatted{E(g)$color)}) will be used.
-#' 
-#' @return A CytoscapeWindow object constructed by \code{\link[RCytoscape]{new.CytoscapeWindow}}. 
-#' 
-#' @author Ahmed Mohamed
-#' @family Plotting methods
-#' @rdname plotCytoscape
-#' @export
-#' @examples
-#'  data("ex_sbml")
-#' 	rgraph <- makeReactionNetwork(ex_sbml, simplify=TRUE)
-#'  v.layout <- layoutVertexByAttr(rgraph, "compartment") 
-#' 	v.color <- colorVertexByAttr(rgraph, "compartment")
-#' 
-#' \dontrun{
-#' 	cw<-plotCytoscape(rgraph, title="example", layout = v.layout,
-#' 				vertex.size = 5, vertex.color = v.color)
-#' } 
-#' 
-plotCytoscape <- function(graph, title, layout=layout.auto, 
-        vertex.size, vertex.label, vertex.shape, vertex.color, edge.color){
-    if(!require(RCytoscape))
-        stop("This function uses RCytoscape package. Required package not installed.")
-    
-    if(!missing(vertex.color))
-        V(graph)$color <- vertex.color
-    
-    nel <- igraph.to.graphNEL(graph)
-    nel <- RCytoscape::initEdgeAttribute(nel, "weight", "numeric", 1)
-    
-    ## Initializing vertex attributes
-    v.attrs <- sapply(list.vertex.attributes(graph), function(x) is.numeric(get.vertex.attribute(graph,x)))
-    for(i in 1:length(v.attrs)){
-        nel <- RCytoscape::initNodeAttribute(nel, names(v.attrs)[[i]],
-                                ifelse(v.attrs[[i]], "numeric", "char"),
-                                ifelse(v.attrs[[i]], 1, ""))
-    }
-    
-    e.attrs <- sapply(list.edge.attributes(graph), function(x) is.numeric(get.edge.attribute(graph,x)))
-    for(i in names(e.attrs)){
-        nel <- RCytoscape::initEdgeAttribute(nel, i,
-                ifelse(e.attrs[[i]], "numeric", "char"),
-                ifelse(e.attrs[[i]], 1, ""))
-    }
-    
-    cw <- RCytoscape::new.CytoscapeWindow (title, graph=nel)
-    RCytoscape::displayGraph(cw)
-    RCytoscape::setNodePosition(cw, V(graph)$name, layout[,1], layout[,2])
-    RCytoscape::redraw(cw)
-    #v.size
-    if(!missing(vertex.size)){
-        if(length(vertex.size)==1)
-            vertex.size <- rep(vertex.size, vcount(graph))
-        
-        vertex.size <- as.integer(vertex.size)
-        if(length(vertex.size) == vcount(graph)){
-            RCytoscape::setNodeSizeDirect(cw, as.character(V(graph)$name), vertex.size)
-        }else
-            warning("Vertex sizes length and number of vertices don't match")
-        
-    }else if(!is.null(V(graph)$size)){
-        RCytoscape::setNodeSizeDirect(cw, as.character(V(graph)$name), as.integer(V(graph)$size))
-    }
-    
-    #v.label
-    if(!missing(vertex.label)){
-        vertex.label <- as.character(vertex.label)
-        if(length(vertex.label) == vcount(graph)){
-            RCytoscape::setNodeLabelDirect(cw, as.character(V(graph)$name), vertex.label)
-        }else
-            warning("Vertex lebels length and number of vertices don't match")
-        
-    }else if(!is.null(V(graph)$label)){
-        RCytoscape::setNodeLabelDirect(cw, as.character(V(graph)$name),as.character(V(graph)$label))
-    }
-    
-    #v.shape
-    igraphShape2Cyto <- function(x){
-        return(ifelse( x%in%c("square","rectangle","vrectangle"), "rect",
-                        ifelse(x%in%c("csquare","crectangle"), "round_rect", "ellipse" ))
-        )
-    }
-    if(!missing(vertex.shape)){
-        vertex.shape <- as.character(vertex.shape)
-        if(length(vertex.shape)==1)
-            vertex.shape <- rep(vertex.shape, vcount(graph))
-        
-        if(length(vertex.shape) == vcount(graph)){
-            RCytoscape::setNodeShapeDirect(cw, as.character(V(graph)$name), vertex.shape)
-        }else
-            warning("Vertex shapes length and number of vertices don't match")
-        
-    }else if(!is.null(V(graph)$shape)){
-        RCytoscape::setNodeShapeDirect(cw, as.character(V(graph)$name),igraphShape2Cyto(V(graph)$shape))
-    }
-    
-    #v.color
-    col2hex <- function(x) return( rgb(t(col2rgb( x )/255)) )
-    if(!missing(vertex.color)){
-        vertex.color <- as.character(vertex.color)
-        if(length(vertex.color)==1)
-            vertex.color <- rep(vertex.color, vcount(graph))        
-        
-        if(length(vertex.color) == vcount(graph)){
-            vertex.color <- split(V(graph)$name, vertex.color)
-            names(vertex.color) <- col2hex(names(vertex.color))            
-            lapply(names(vertex.color), function(x) RCytoscape::setNodeColorDirect(cw, as.character(vertex.color[[x]]), x))
-        }else{
-            warning("Vertex colors length and number of vertices don't match")
-        }
-    }else if(!is.null(V(graph)$color)){
-        vertex.color <- split(V(graph)$name, V(graph)$color)
-        names(vertex.color) <- col2hex(names(vertex.color))
-        
-        lapply(names(vertex.color), function(x) RCytoscape::setNodeColorDirect(cw, as.character(vertex.color[[x]]), x))
-    }
-    
-    #e.color
-    if(!missing(edge.color)){
-        edge.color <- col2hex(edge.color)
-        if(length(edge.color)==1)
-            edge.color <- rep(edge.color, ecount(graph))
-        
-        if(length(edge.color) == ecount(graph)){
-            RCytoscape::setEdgeAttributesDirect(cw, "color", "char", cy2.edge.names(cw@graph), edge.color)
-            RCytoscape::setEdgeColorRule(cw, "color", unique(edge.color),unique(edge.color), mode="lookup")
-        }else
-            warning("Edge colors length and number of vertices don't match")
-        
-    }else if(!is.null(E(graph)$color)){
-        RCytoscape::setEdgeColorRule(cw, "color", unique(E(graph)$color),unique(col2hex(E(graph)$color)), mode="lookup")
-    }
-    
-    RCytoscape::redraw(cw)    
-    return(cw)
-}
-
-
+#'
 #' @return For \code{plotCytoscapeGML}, results are written to file.
 #' 
 #' @export
+#' @author Ahmed Mohamed
+#' @family Plotting methods
 #' @rdname plotCytoscape
 #' @examples
 #'  # Export network plot to GML file

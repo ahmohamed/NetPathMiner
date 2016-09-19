@@ -108,6 +108,5 @@ v.color <- colorVertexByAttr(rgraph, "pathway")
 plotPaths(graph, rgraph, clusters=p.class, layout = layout.c, vertex.color = v.color)
 
 # Plot in Cytoscape
-require(RCytoscape)
-cw<-plotCytoscape(rgraph, "example", layout = layout.c,
+plotCytoscapeGML(rgraph, file="example.gml", layout = layout.c,
 				vertex.size = 5, vertex.color = v.color)
