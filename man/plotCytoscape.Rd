@@ -39,6 +39,11 @@ Future plans will use RCy3 for Cytoscape plotting, once RCy3 is supported on Mac
 (using "import network from file" option). This fuction is compatible with all Cytoscape versions.
 }
 \examples{
+ data("ex_sbml")
+	rgraph <- makeReactionNetwork(ex_sbml, simplify=TRUE)
+ v.layout <- layoutVertexByAttr(rgraph, "compartment") 
+	v.color <- colorVertexByAttr(rgraph, "compartment")
+ 
  # Export network plot to GML file
  plotCytoscapeGML(rgraph, file="example.gml", layout=v.layout, 
 				vertex.color=v.color, vertex.size=10)
