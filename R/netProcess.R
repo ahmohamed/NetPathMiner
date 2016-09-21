@@ -13,7 +13,7 @@
 ###############################################################################
 
 # Neccessary non-sense to pass R CMD check
-utils::globalVariables(c("nei", ".to", ".from", "delete"))
+utils::globalVariables(c("nei", "to", "from", "delete"))
 
 #' Remove uniquitous compounds from a metabolic network
 #' 
