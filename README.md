@@ -23,10 +23,10 @@ Make sure your system has library libxml2 installed. In Mac OSX 10.6 or later, l
 are built in. For Linux users also, this is almost always the case, however, developing headers
 may be missing. To install libxml2 and the headers:
 
-<code>
+```Shell
     sudo apt-get install libxml2   
     sudo apt-get install libxml2-dev   
-</code>
+```
 
 ##### Installing libSBML 
 Installing libSBML for Unix users is optional. However, NetPathMiner will not be able to process SBML
@@ -76,9 +76,9 @@ NetPathMiner suggests package rBiopaxParser to process BioPAX files and RCurl to
 
 ##### igraph
 Package igraph is available at CRAN. To install it call:
-<code>
+```r
     install.packages("igraph")
-</code>
+```
 
 ##### devtools
 Package devtools is available at CRAN. For Windows, this seems to depend on
@@ -86,28 +86,29 @@ having Rtools for Windows installed. You can download and install this from:
 http://cran.r-project.org/bin/windows/Rtools/
 
 To install R package devtools call:
-<code>
+```r
     install.packages("devtools")
-</code>
+```
 
 ##### RCurl
 For Unix users, make sure your Linux has library libcurl installed. Check out:
 
-<code>
+```Shell
     locate libcurl   
     locate curl-config
-</code>
+```
 
 If these are not found (usually the developer version is missing), most Linux
 users will be able to fix this by running:
-<code>
+```Shell
     sudo apt-get install libcurl4-openssl-dev
-</code>
+```
 
 You will now be able to install R package RCurl. In R console:
-<code>
+```r
     install.packages("RCurl")
-</code>
+```
+
 If you encounter other problems check out http://www.omegahat.org/RCurl/FAQ.html
 
 ##### rBiopaxParser
@@ -115,10 +116,10 @@ Package rBiopaxParser is available on Bioconductor. For installation instruction
 out http://www.bioconductor.org/packages/release/bioc/html/rBiopaxParser.html or
 call:
 
-<code>
+```r
     source("http://bioconductor.org/biocLite.R")   
-     biocLite("rBiopaxParser")  
-</code>
+    biocLite("rBiopaxParser")  
+```
 
 to install it right away.
 
@@ -128,16 +129,16 @@ If everything went well you will be able to install the NetPathMiner package.
 #### From Bioconductor:
 In R console, type:
 
-<code>
+```r
     source("http://bioconductor.org/biocLite.R")   
     biocLite("NetPathMiner")  
-</code>
+```
 
 
 #### From GitHub using devtools:
 In R console, type:
 
-<code>
+```r
     library(devtools)   
     install_github(repo="NetPathMiner", username="ahmohamed")
-</code>
+```

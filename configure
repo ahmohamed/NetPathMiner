@@ -582,6 +582,7 @@ PACKAGE_BUGREPORT=
 PACKAGE_URL=
 
 ac_unique_file="NetPathMiner"
+ac_unique_file="DESCRIPTION"
 ac_subst_vars='LTLIBOBJS
 LIBOBJS
 PKG_LIBS

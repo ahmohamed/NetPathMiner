@@ -150,9 +150,9 @@ getPaths <- function(paths, graph, source.net){
         paths[[i]]$compounds <- unlist(strsplit(paths[[i]]$compounds, "(->)|( \\+ )"))
         paths[[i]]$genes <- gene.nodes[[i]]
         eid[[i]] = c(as.numeric(deleted.edges),
-                    E(graph)[.to(paths[[i]]$genes[1]) | 
+                    E(graph)[to(paths[[i]]$genes[1]) | 
                         paths[[i]]$genes %--% paths[[i]]$compounds| 
-                        .from(tail(paths[[i]]$genes,1)) ]
+                        from(tail(paths[[i]]$genes,1)) ]
                     )
     }    
     return(eid)    
