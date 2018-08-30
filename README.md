@@ -117,8 +117,9 @@ out http://www.bioconductor.org/packages/release/bioc/html/rBiopaxParser.html or
 call:
 
 ```r
-    source("http://bioconductor.org/biocLite.R")   
-    biocLite("rBiopaxParser")  
+    if (!requireNamespace("BiocManager", quietly=TRUE))
+        install.packages("BiocManager")
+    BiocManager::install("rBiopaxParser")  
 ```
 
 to install it right away.
@@ -130,8 +131,9 @@ If everything went well you will be able to install the NetPathMiner package.
 In R console, type:
 
 ```r
-    source("http://bioconductor.org/biocLite.R")   
-    biocLite("NetPathMiner")  
+    if (!requireNamespace("BiocManager", quietly=TRUE))
+        install.packages("BiocManager")
+    BiocManager::install("NetPathMiner")  
 ```
 
 
