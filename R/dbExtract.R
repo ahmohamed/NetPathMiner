@@ -474,7 +474,7 @@ bpMetabolicL3 <- function(biopax, verbose){
     #pw.ann <- bpGetAnnFromXRef(df, pwXRef)
     
     ## Get pathway components (only reactions are returned)
-    pwcomp <- lapply(pw$id, function(x)rBiopaxParser::listPathwayComponents(biopax,x, returnIDonly=TRUE))
+    pwcomp <- lapply(pw$id, function(x)rBiopaxParser::listPathwayComponents(biopax,x, returnIDonly=TRUE, includeSubPathways = FALSE))
     pwcomp <- do.call("rbind", lapply(1:length(pwcomp), 
                     function(x)data.frame(id=x, comp=pwcomp[[x]])))
     

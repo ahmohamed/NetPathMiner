@@ -239,7 +239,9 @@ layoutVertexByAttr <- function(graph, attr.name, cluster.strength = 1,layout=lay
     if(!is.function(layout))
         stop("'layout' is not a function.")
     
-    g <- graph.edgelist(get.edgelist(graph)) # create a lightweight graph w/o the attributes.
+    # create a lightweight graph w/o the attributes.
+    g <- graph.empty() + vertices(V(graph)$name)
+    g <- igraph::union(g, graph.edgelist(get.edgelist(graph)))
     V(g)$name <- as.character(1:vcount(g))
     E(g)$weight <- 1
     
@@ -739,8 +741,8 @@ drawLegend <- function(vertices, paths){
 
 toGML <- function(attr, element, collapse=NULL){
     l <- length(attr)
-    num <- sapply(attr,is.numeric)
-    
+    num <- sapply(attr,is.numeric) & !sapply(attr,function(x) any(is.na(x)))
+
     # Formats create sprintf formulas for GML formatting.
     # In general, GML format follow the pattern: attr.name attr.val \n
     # Attribute string values are quoted.

@@ -189,14 +189,15 @@ simplifyReactionNetwork <- function(reaction.graph, gene.attr="genes",
             function(x) grepl("spontaneous", x[["name"]], ignore.case=TRUE)
     )
     
-    if(length(c(translocation, spontaneous))==0)
-        return(reaction.graph)
-
-    new.reaction.graph = vertexDeleteReconnect(reaction.graph, 
-            V(reaction.graph)[no.gene][translocation | spontaneous]
-            ,copy.attr=list(compound=function(...)paste(..., sep="->"), attr="c") )
+    new.reaction.graph = reaction.graph
     
-    if(remove.missing.genes & length(V(new.reaction.graph)[no.gene]>0)){ 
+    if(sum(translocation | spontaneous) > 0){
+      new.reaction.graph = vertexDeleteReconnect(reaction.graph, 
+              V(reaction.graph)[no.gene][translocation | spontaneous]
+              ,copy.attr=list(compound=function(...)paste(..., sep="->"), attr="c") )
+    }
+    
+    if(remove.missing.genes & length(which(no.gene)[!translocation & !spontaneous] >0)){ 
         new.reaction.graph = vertexDeleteReconnect(new.reaction.graph, 
                 V(new.reaction.graph)[no.gene], reconnect.threshold)
     }        
@@ -340,9 +341,9 @@ expandComplexes <- function(graph, v.attr,
     }
     
     attr_func <- function(...){
-        mapply(function(...) unique(c(...)),...,SIMPLIFY=FALSE)
-    }
-    
+        l = mapply(function(...) unique(c(...)),...,SIMPLIFY=FALSE)
+        l[!is.na(names(l))]
+    }    
     z = .Call("expand_complexes", ATTR_LS=attr.ls, 
             EL=as.integer(t(get.edgelist(graph, names=FALSE))-1),
             V = V(graph)$name,                                
@@ -360,8 +361,8 @@ expandComplexes <- function(graph, v.attr,
     
     if(!is.null(keep.parent.attr)){
         if(length(keep.parent.attr)==1 && keep.parent.attr=="all"){
-            V(gout)$attr <- lapply(z$parents, function(x) do.call("attr_func", V(graph)$attr[x]))
-            
+            attr_terms = lapply(V(graph)$attr, "[", keep.parent.attr)
+            V(gout)$attr <- lapply(z$parents, function(x) do.call("attr_func", attr_terms[x]))
         }else{
             if(length(keep.parent.attr) > 1) 
                 keep.parent.attr <- do.call("paste",as.list(c(keep.parent.attr, sep="|")))
