@@ -1,24 +1,24 @@
 #' Converts the result from pathRanker into something suitable for pathClassifier or pathCluster.
-#' 
-#' Converts the result from pathRanker into something suitable for pathClassifier or pathCluster.    
-#' 
-#' Converts a set of pathways from \code{\link{pathRanker}} 
-#' into a list of binary pathway matrices. If the pathways are grouped by a response label then the 
-#' \emph{pathsToBinary} returns a list labeled by response class where each element is the binary 
+#'
+#' Converts the result from pathRanker into something suitable for pathClassifier or pathCluster.
+#'
+#' Converts a set of pathways from \code{\link{pathRanker}}
+#' into a list of binary pathway matrices. If the pathways are grouped by a response label then the
+#' \emph{pathsToBinary} returns a list labeled by response class where each element is the binary
 #' pathway matrix for each class. If the pathways are from \code{\link{pathRanker}} then a list wiht
-#' a single element containing the binary pathway matrix is returned. To look up the structure of a 
+#' a single element containing the binary pathway matrix is returned. To look up the structure of a
 #' specific binary path in the corresponding \code{ypaths} object simply use matrix index by calling
-#' \code{ypaths[[ybinpaths\$pidx[i,]]]}, where \code{i} is the row in the binary paths object you 
+#' \code{ypaths[[ybinpaths\$pidx[i,]]]}, where \code{i} is the row in the binary paths object you
 #' wish to reference.
-#' 
+#'
 #' @param ypaths The result of \code{\link{pathRanker}}.
-#' 
+#'
 #' @return A list with the following elements.
 #' \item{paths}{All paths within ypaths converted to a binary string and concatenated into the one matrix.}
 #' \item{y}{The response variable.}
 #' \item{pidx}{An matrix where each row specifies the location of that path within the \code{ypaths} object.}
-#' 
-#' 
+#'
+#'
 #' @author Timothy Hancock and Ichigaku Takigawa
 #' @family Path clustering & classification methods
 #' @export
@@ -27,23 +27,23 @@
 #' 	## Conver a metabolic network to a reaction network.
 #'  data(ex_sbml) # bipartite metabolic network of Carbohydrate metabolism.
 #'  rgraph <- makeReactionNetwork(ex_sbml, simplify=TRUE)
-#' 
+#'
 #' 	## Assign edge weights based on Affymetrix attributes and microarray dataset.
 #'  # Calculate Pearson's correlation.
 #' 	data(ex_microarray)	# Part of ALL dataset.
 #' 	rgraph <- assignEdgeWeights(microarray = ex_microarray, graph = rgraph,
-#' 		weight.method = "cor", use.attr="miriam.uniprot", 
+#' 		weight.method = "cor", use.attr="miriam.uniprot",
 #' 		y=factor(colnames(ex_microarray)), bootstrap = FALSE)
-#' 
+#'
 #' 	## Get ranked paths using probabilistic shortest paths.
-#'  ranked.p <- pathRanker(rgraph, method="prob.shortest.path", 
+#'  ranked.p <- pathRanker(rgraph, method="prob.shortest.path",
 #' 					K=20, minPathSize=6)
-#' 	
-#' 	## Convert paths to binary matrix. 
+#'
+#' 	## Convert paths to binary matrix.
 #' 	ybinpaths <- pathsToBinary(ranked.p)
 #' 	p.cluster <- pathCluster(ybinpaths, M=3)
 #' 	plotClusters(ybinpaths, p.cluster, col=c("red", "green", "blue") )
-#'  
+#'
 pathsToBinary <- function(ypaths) {
   makeBin <- function(pathGenes,allGenes) return(as.numeric(allGenes %in% pathGenes$genes))
 
@@ -51,16 +51,16 @@ pathsToBinary <- function(ypaths) {
     stop("ypaths is a an empty list. Please rerun pathRanker with different parameters.")
   }
   # if there are response labels
-  if (!is.null(names(ypaths$paths))) { 
+  if (!is.null(names(ypaths$paths))) {
     all.genes <- c()
     path.data <- NULL
 
     all.genes <- unique(unlist(lapply(unlist(ypaths$paths,FALSE),"[[","genes")))
-    
+
     resp <- c()
     for (p in 1:length(ypaths$paths)) {
       if(length(ypaths$paths[[p]])==0) next;
-      
+
       binpaths <- data.frame(t(sapply(ypaths$paths[[p]],makeBin,allGenes = all.genes)))
       names(binpaths) <- all.genes
 
@@ -77,7 +77,7 @@ pathsToBinary <- function(ypaths) {
     return(list(paths = path.data,y = as.factor(resp), pidx = m.idx))
   } else {
     all.genes <- unique(unlist(lapply(ypaths$paths,"[[","genes")))
-    
+
     binpaths <- data.frame(t(sapply(ypaths$paths,makeBin,allGenes = all.genes)))
 
     pl <- sapply(ypaths$paths,length)
@@ -90,14 +90,14 @@ pathsToBinary <- function(ypaths) {
 }
 
 #' HME3M Markov pathway classifier.
-#' 
-#' HME3M Markov pathway classifier.    
-#' 
-#' Take care with selection of lambda and alpha - make sure you check that the likelihood 
-#' is always increasing. 
-#' 
+#'
+#' HME3M Markov pathway classifier.
+#'
+#' Take care with selection of lambda and alpha - make sure you check that the likelihood
+#' is always increasing.
+#'
 #' @param paths The training paths computed by \code{\link{pathsToBinary}}
-#' @param target.class he label of the targe class to be classified.  This label must be present 
+#' @param target.class he label of the targe class to be classified.  This label must be present
 #' as a label within the \code{paths\$y} object
 #' @param M Number of components within the paths to be extracted.
 #' @param alpha The PLR learning rate. (between 0 and 1).
@@ -105,7 +105,7 @@ pathsToBinary <- function(ypaths) {
 #' @param hme3miter Maximum number of HME3M iterations.  It will stop when likelihood change is < 0.001.
 #' @param plriter Maximum number of PLR iteractions. It will stop when likelihood change is < 0.001.
 #' @param init Specify whether to initialize the HME3M responsibilities with the 3M model - random is recommended.
-#' 
+#'
 #' @return A list with the following elements.
 #' A list with the following values
 #' \item{h}{A dataframe with the EM responsibilities.}
@@ -121,11 +121,11 @@ pathsToBinary <- function(ypaths) {
 #' \item{perf}{The training set ROC curve AUC.}
 #' \item{label}{The HME3M predicted label for each path.}
 #' \item{component}{The HME3M component assignment for each path.}
-#' 
+#'
 #' @author Timothy Hancock and Ichigaku Takigawa
 #' @references Hancock, Timothy, and Mamitsuka, Hiroshi: A Markov Classification Model for Metabolic Pathways, Workshop on Algorithms in Bioinformatics (WABI) , 2009
 #' @references Hancock, Timothy, and Mamitsuka, Hiroshi: A Markov Classification Model for Metabolic Pathways, Algorithms for Molecular Biology 2010
-#' 
+#'
 #' @family Path clustering & classification methods
 #' @export
 #' @examples
@@ -133,32 +133,32 @@ pathsToBinary <- function(ypaths) {
 #' 	## Conver a metabolic network to a reaction network.
 #'  data(ex_sbml) # bipartite metabolic network of Carbohydrate metabolism.
 #'  rgraph <- makeReactionNetwork(ex_sbml, simplify=TRUE)
-#' 
+#'
 #' 	## Assign edge weights based on Affymetrix attributes and microarray dataset.
 #'  # Calculate Pearson's correlation.
 #' 	data(ex_microarray)	# Part of ALL dataset.
 #' 	rgraph <- assignEdgeWeights(microarray = ex_microarray, graph = rgraph,
-#' 		weight.method = "cor", use.attr="miriam.uniprot", 
+#' 		weight.method = "cor", use.attr="miriam.uniprot",
 #' 		y=factor(colnames(ex_microarray)), bootstrap = FALSE)
-#' 
+#'
 #' 	## Get ranked paths using probabilistic shortest paths.
-#'  ranked.p <- pathRanker(rgraph, method="prob.shortest.path", 
+#'  ranked.p <- pathRanker(rgraph, method="prob.shortest.path",
 #' 					K=20, minPathSize=6)
-#' 	
-#' 	## Convert paths to binary matrix. 
+#'
+#' 	## Convert paths to binary matrix.
 #' 	ybinpaths <- pathsToBinary(ranked.p)
 #' 	p.class <- pathClassifier(ybinpaths, target.class = "BCR/ABL", M = 3)
-#' 
+#'
 #' 	## Contingency table of classification performance
 #' 	table(ybinpaths$y,p.class$label)
-#' 
+#'
 #' 	## Plotting the classifier results.
 #' 	plotClassifierROC(p.class)
 #' 	plotClusters(ybinpaths, p.class)
-#' 
+#'
 pathClassifier <- function(paths,target.class,M,alpha=1,lambda=2,hme3miter = 100,plriter = 1,init = "random") {
     if ((target.class %in% levels(paths$y)) == FALSE) stop(paste("Cannot find",target.class,"in paths$y object"))
-    y <- ifelse(paths$y == target.class,1,0) 
+    y <- ifelse(paths$y == target.class,1,0)
     x <- paths$paths
 
     # remove constant columns to train HME3M
@@ -172,9 +172,9 @@ pathClassifier <- function(paths,target.class,M,alpha=1,lambda=2,hme3miter = 100
         pk <- pclust$proportions
         theta <- as.matrix(pclust$theta)
         beta <- matrix(0,nrow(theta),ncol(theta))
-        pmx <- as.matrix(pclust$h) 
+        pmx <- as.matrix(pclust$h)
         fits <- matrix(0.5,nrow(tr.x),ncol = M)
-    
+
         pkm <- matrix(pk,nrow=nrow(tr.x),ncol = M,byrow = TRUE)
         hij <- pkm*pmx*fits/rowSums(pkm*pmx*fits)
     } else {
@@ -183,9 +183,9 @@ pathClassifier <- function(paths,target.class,M,alpha=1,lambda=2,hme3miter = 100
         pk <- rep(1/M,M)
 
         theta <- as.matrix(aggregate(tr.x,by = list(clusters),mean)[-1])
-        pmx <- matrix(0,nrow(tr.x),M) 
+        pmx <- matrix(0,nrow(tr.x),M)
         for (k in 1:nrow(theta)) {
-            res <- as.matrix(tr.x) %*% diag(as.double(theta[k,])) 
+            res <- as.matrix(tr.x) %*% diag(as.double(theta[k,]))
             res[tr.x == 0] <- NA
             pmx[,k] <- apply(res,1,prod,na.rm = TRUE)
         }
@@ -228,8 +228,8 @@ pathClassifier <- function(paths,target.class,M,alpha=1,lambda=2,hme3miter = 100
     beta <- data.frame(beta)
 	names(beta) <- names(theta) <- names(x)
 
-	hij <- matrix(fit$H,nrow(x),M) 
-	fits <- matrix(fit$PLRPRE,nrow(x)) 
+	hij <- matrix(fit$H,nrow(x),M)
+	fits <- matrix(fit$PLRPRE,nrow(x))
 	#perf <- compROC(y,fit$HMEPRE)$auc
 
     # cluster labels
@@ -240,7 +240,7 @@ pathClassifier <- function(paths,target.class,M,alpha=1,lambda=2,hme3miter = 100
         clusters <-  paste("M",sapply(cl,"[[",1),sep = "")
     } else clusters <- cl
 
-    pmx <- matrix(fit$PATHPROBS,nrow(x),M) 
+    pmx <- matrix(fit$PATHPROBS,nrow(x),M)
     pmx <- pmx/rowSums(pmx)
 	output <- list(h = hij,
 		theta = theta,
@@ -260,20 +260,20 @@ pathClassifier <- function(paths,target.class,M,alpha=1,lambda=2,hme3miter = 100
 }
 
 #' Predicts new paths given a pathClassifier model.
-#' 
-#' Predicts new paths given a pathClassifier model.    
-#' 
+#'
+#' Predicts new paths given a pathClassifier model.
+#'
 #' @param mix The result from \code{\link{pathClassifier}}.
 #' @param newdata A data.frame containing the new paths to be classified.
-#' 
+#'
 #' @return A list with the following elements.
 #' \item{h}{The posterior probabilities for each HME3M component.}
 #' \item{posterior.probs}{The posterior probabilities for HME3M model to classify the response.}
 #' \item{label}{A vector indicating the HME3M cluster membership.}
 #' \item{component}{The HME3M component membership for each pathway.}
 #' \item{path.probabilities}{The 3M path probabilities.}
-#' \item{plr.probabilities}{The PLR predictions for each component.} 
-#' 
+#' \item{plr.probabilities}{The PLR predictions for each component.}
+#'
 #' @author Timothy Hancock and Ichigaku Takigawa
 #' @family Path clustering & classification methods
 #' @export
@@ -282,25 +282,25 @@ pathClassifier <- function(paths,target.class,M,alpha=1,lambda=2,hme3miter = 100
 #' 	## Conver a metabolic network to a reaction network.
 #'  data(ex_sbml) # bipartite metabolic network of Carbohydrate metabolism.
 #'  rgraph <- makeReactionNetwork(ex_sbml, simplify=TRUE)
-#' 
+#'
 #' 	## Assign edge weights based on Affymetrix attributes and microarray dataset.
 #'  # Calculate Pearson's correlation.
 #' 	data(ex_microarray)	# Part of ALL dataset.
 #' 	rgraph <- assignEdgeWeights(microarray = ex_microarray, graph = rgraph,
-#' 		weight.method = "cor", use.attr="miriam.uniprot", 
+#' 		weight.method = "cor", use.attr="miriam.uniprot",
 #' 		y=factor(colnames(ex_microarray)), bootstrap = FALSE)
-#' 
+#'
 #' 	## Get ranked paths using probabilistic shortest paths.
-#'  ranked.p <- pathRanker(rgraph, method="prob.shortest.path", 
+#'  ranked.p <- pathRanker(rgraph, method="prob.shortest.path",
 #' 					K=20, minPathSize=6)
-#' 	
-#' 	## Convert paths to binary matrix. 
+#'
+#' 	## Convert paths to binary matrix.
 #' 	ybinpaths <- pathsToBinary(ranked.p)
 #' 	p.class <- pathClassifier(ybinpaths, target.class = "BCR/ABL", M = 3)
-#' 
+#'
 #' 	## Just an example of how to predict cluster membership
 #'  pclass.pred <- predictPathCluster(p.class, ybinpaths$paths)
-#' 
+#'
 predictPathClassifier <- function(mix,newdata) {
     pexp <- matrix(0,nrow=nrow(newdata),ncol = nrow(mix$theta))
     pmx <- matrix(0,nrow=nrow(newdata),ncol = nrow(mix$theta))
@@ -339,26 +339,26 @@ predictPathClassifier <- function(mix,newdata) {
 }
 
 #' Diagnostic plots for pathClassifier.
-#' 
-#' Diagnostic plots for \code{\link{pathClassifier}}.    
-#' 
+#'
+#' Diagnostic plots for \code{\link{pathClassifier}}.
+#'
 #' @param mix The result from \code{\link{pathClassifier}}.
-#' 
+#'
 #' @return Diagnostic plots of the result from pathClassifier.
-#' item{Top}{ROC curves for the posterior probabilities (\code{mix\$posterior.probs}) 
-#' and for each HME3M component (\code{mix\$h}).  This gives information about what response 
-#' label each relates to. A ROC curve with an \code{AUC < 0.5} relates to \code{y = 0}. 
+#' item{Top}{ROC curves for the posterior probabilities (\code{mix\$posterior.probs})
+#' and for each HME3M component (\code{mix\$h}).  This gives information about what response
+#' label each relates to. A ROC curve with an \code{AUC < 0.5} relates to \code{y = 0}.
 #' Conversely ROC curves with \code{AUC > 0.5} relate to \code{y = 1}. }
-#' item{Bottom}{The likelihood convergence history for the HME3M model.  If the parameters 
+#' item{Bottom}{The likelihood convergence history for the HME3M model.  If the parameters
 #' \code{alpha} or \code{lambda} are set too large then the likelihood may decrease.}
-#' 
+#'
 #' @author Timothy Hancock and Ichigaku Takigawa
 #' @family Path clustering & classification methods
 #' @family Plotting methods
 #' @export
-#' 
-plotClassifierROC <- function(mix) {   
-    palette("default") 
+#'
+plotClassifierROC <- function(mix) {
+    palette("default")
 
     layout(c(1,2), widths=c(1,1), heights=c(0.7,0.3))
     plotPathROC(mix)
@@ -368,26 +368,26 @@ plotClassifierROC <- function(mix) {
 }
 
 #' Plots the structure of specified path found by pathClassifier.
-#' 
+#'
 #' Plots the structure of specified path found by pathClassifier.
-#' 
+#'
 #' @param ybinpaths The training paths computed by \code{\link{pathsToBinary}}
 #' @param obj The pathClassifier \code{\link{pathClassifier}}.
 #' @param m The path component to view.
 #' @param tol A tolerance for 3M parameter \code{theta} which is the probability for each edge within each cluster.
 #' If the tolerance is set all edges with a \code{theta} below that tolerance will be removed from the plot.
-#' 
+#'
 #' @return Produces a plot of the paths with the path probabilities and prediction probabilities and ROC curve overlayed.
-#' \item{Center Plot}{An image of all paths the training dataset.  Rows are the paths and columns are the genes (vertices) 
-#' included within each pathway.  A colour within image indicates if a particular gene (vertex) is included within a specific path.  
+#' \item{Center Plot}{An image of all paths the training dataset.  Rows are the paths and columns are the genes (vertices)
+#' included within each pathway.  A colour within image indicates if a particular gene (vertex) is included within a specific path.
 #' Colours flag whether a path belongs to the current HME3M component (P > 0.5).}
 #' \item{Center Right}{The training set posterior probabilities for each path belonging to the current 3M component.}
 #' \item{Center Top}{The ROC curve for this HME3M component.}
 #' \item{Top Bar Plots}{\code{Theta}: The 3M component probabilities - indicates the importance of each edge is to a path.
 #' \code{Beta}: The PLR coefficient - the magnitude indicates the importance of the edge to the classify the response.}
-#' 
+#'
 #' @author Timothy Hancock and Ichigaku Takigawa
-#' 
+#'
 #' @family Path clustering & classification methods
 #' @family Plotting methods
 #' @export
@@ -396,26 +396,26 @@ plotClassifierROC <- function(mix) {
 #' 	## Conver a metabolic network to a reaction network.
 #'  data(ex_sbml) # bipartite metabolic network of Carbohydrate metabolism.
 #'  rgraph <- makeReactionNetwork(ex_sbml, simplify=TRUE)
-#' 
+#'
 #' 	## Assign edge weights based on Affymetrix attributes and microarray dataset.
 #'  # Calculate Pearson's correlation.
 #' 	data(ex_microarray)	# Part of ALL dataset.
 #' 	rgraph <- assignEdgeWeights(microarray = ex_microarray, graph = rgraph,
-#' 		weight.method = "cor", use.attr="miriam.uniprot", 
+#' 		weight.method = "cor", use.attr="miriam.uniprot",
 #' 		y=factor(colnames(ex_microarray)), bootstrap = FALSE)
-#' 
+#'
 #' 	## Get ranked paths using probabilistic shortest paths.
-#'  ranked.p <- pathRanker(rgraph, method="prob.shortest.path", 
+#'  ranked.p <- pathRanker(rgraph, method="prob.shortest.path",
 #' 					K=20, minPathSize=6)
-#' 	
-#' 	## Convert paths to binary matrix. 
+#'
+#' 	## Convert paths to binary matrix.
 #' 	ybinpaths <- pathsToBinary(ranked.p)
 #' 	p.class <- pathClassifier(ybinpaths, target.class = "BCR/ABL", M = 3)
-#' 
+#'
 #' 	## Plotting the classifier results.
 #' 	plotClassifierROC(p.class)
 #' 	plotClusters(ybinpaths, p.class)
-#' 
+#'
 plotPathClassifier <- function(ybinpaths,obj,m,tol = NULL) {
     pp <- obj$theta[m,]
     fidx <- 1:length(pp)
@@ -424,18 +424,18 @@ plotPathClassifier <- function(ybinpaths,obj,m,tol = NULL) {
 
     g <- names(pp)
 	x <- ybinpaths$paths[fidx]
-		
+
 #    gc <- strsplit(g,":")[-c(1,length(g))]
 #    frt <- c("",paste(sapply(gc,"[[",2),sapply(gc,"[[",4),sapply(gc,"[[",3),sep = "-"),"")
 #    gn <- c("s",sapply(gc,"[[",1),"t")
 #    pname <- sapply(gc,"[[",5)
 #    pcol <- c(0,as.numeric(as.factor(pname)),0)
-#    
+#
     y <- ybinpaths$y
-    h <- obj$h[,m]    
+    h <- obj$h[,m]
     bp <- obj$beta[m,][fidx]
 
-    palette("default") 
+    palette("default")
     mpar <- par()$mar
 
     sy <- sort(h,index.return = TRUE)
@@ -455,7 +455,7 @@ plotPathClassifier <- function(ybinpaths,obj,m,tol = NULL) {
 	ylab = "theta", col = c(1:length(pp))%% 5 + 1)
     abline(h = 0,lwd = 2)
 
-	par(mar = c(8,0,0,4))	
+	par(mar = c(8,0,0,4))
 	plot(NA,xlim = c(0,1),ylim = c(1,nrow(x)),
 		xlab = paste("Probability P(M=",m,"|x,y)",sep =""),ylab = "",yaxs = "i",type = "l",axes = FALSE)
     points(x = h[sy$ix],y = 1:nrow(x),type = "l",col = 1)
@@ -467,7 +467,7 @@ plotPathClassifier <- function(ybinpaths,obj,m,tol = NULL) {
 	ystats <- as.numeric(summary(as.factor(ypred)))
 	ylab <- c("","","","Not a\nMember","Member")
 	ytick <- c(1,nrow(x),ystats[1],ystats[1]/2,ystats[2]/2 + ystats[1])
-	
+
 	par(mar = c(8,8,0,0))
 	px <- x[sy$ix,]
     px[px == 0] <- NA
@@ -485,7 +485,7 @@ plotPathClassifier <- function(ybinpaths,obj,m,tol = NULL) {
     mtext("All Paths\nSorted By Component Membership",line = 5,side = 2)
 
 	par(mar = c(1,1,6,6))
-    rocs <- compROC(obj$y,obj$h[,m]) 
+    rocs <- compROC(obj$y,obj$h[,m])
     plot(NA,xlim = c(0,1),ylim = c(0,1),axes = FALSE)
     abline(0,1)
     lines(x = rocs$fnr,y = rocs$tpr,type = "l",col = 2,lwd = 2)
@@ -505,42 +505,42 @@ compROC <- function(y,yprob) {
 	tpr <- c(0)
 	fnr <- c(0)
 	for (i in seq(0,1,1/1000)) {
-		tpr <- c(tpr, sum(y == 1 & yprob >= i)  / sum(y == 1) ) 
+		tpr <- c(tpr, sum(y == 1 & yprob >= i)  / sum(y == 1) )
 		fnr <- c(fnr, sum(y == 0 & yprob >= i) /  sum(y == 0) )
 	}
 	trap.rule <- function(x, y) {
 		idx <- 2:length(x)
-		dx <- x[idx] - x[idx-1] 
-		dy <- y[idx] + y[idx-1] 
+		dx <- x[idx] - x[idx-1]
+		dy <- y[idx] + y[idx-1]
 		auc <- dx%*%dy / 2
 		return( auc )
 	}
-	# The probabilites can get sparse and actual 0's and 1's occur!  
+	# The probabilites can get sparse and actual 0's and 1's occur!
 	# This causes problems with the AUC.
 	if (sum(tpr == 0) > 0) fnr[tpr == 0] <- max(fnr[tpr == 0])
 	if (sum(fnr == 0) > 0)tpr[fnr == 0] <- max(tpr[fnr == 0])
-	
+
 	fnr <- sort(fnr,index.return = TRUE)
 	tpr <- tpr[fnr$ix]
 	auc <- trap.rule(x = fnr$x,y = tpr)
-	
+
 	return(list(tpr = tpr,fnr = fnr$x,auc = auc))
 }
 
 plotPathROC <- function(pfit) {
 	palette("default")
-	
+
 	plot(NA,xlim = c(0,2),ylim = c(0,1),axes = FALSE,
 			ylab = "True Positive Rate", xlab = "False Positive Rate",
 			main ="ROC Curve For Each HME3M Component")
-	
+
 	y <- pfit$y
-	
+
 	auc <- c()
 	mpre <- pfit$h
 	yprob <- cbind(mpre,pfit$posterior.probs)
 	auc <- c()
-	for (j in 1:ncol(data.frame(yprob))) {  
+	for (j in 1:ncol(data.frame(yprob))) {
 		zroc <- compROC(y,yprob[,j])
 		lines(x = zroc$fnr, y = zroc$tpr,col = j,lwd = 2)
 		auc <- c(auc,zroc$auc)
@@ -555,4 +555,3 @@ plotPathROC <- function(pfit) {
 	lnames <- paste(lnames,"(AUC =",round(auc,3),")",sep = "")
 	legend(x = 1.05,y = .95,lnames,col = 1:ncol(yprob),lty = rep(1,ncol(yprob)),lwd = 2,bg = "white",cex = 0.8)
 }
-
