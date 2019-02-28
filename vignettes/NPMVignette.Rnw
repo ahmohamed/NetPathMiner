@@ -69,14 +69,14 @@ Email: mohamed@kuicr.kyoto-u.ac.jp}}
 \section{Introduction}
 \label{sec:introduction}
 NetPathMiner implements a flexible module-based process flow for network path mining and visualization,
-which can be fully integrated with user-customized functions. 
-It supports construction of various types of genome scale networks from three different pathway 
-file formats, enabling its utility to most common pathway databases. 
-In addition, NetPathMiner provides different visualization techniques to facilitate the analysis of even 
+which can be fully integrated with user-customized functions.
+It supports construction of various types of genome scale networks from three different pathway
+file formats, enabling its utility to most common pathway databases.
+In addition, NetPathMiner provides different visualization techniques to facilitate the analysis of even
 thousands of output paths.
 
 This document provides a general overview of the functionalities presented in NetPathMiner (NPM) package .
-Below, we provide a step-by-step tutorial starting by installation 
+Below, we provide a step-by-step tutorial starting by installation
 instructions followed by a guide on how to use the package functions perform different network analyses.
 
 To report bugs and arising issues, please visit \url{https://github.com/ahmohamed/NetPathMiner}
@@ -85,7 +85,7 @@ To report bugs and arising issues, please visit \url{https://github.com/ahmohame
 \label{sec:installation}
 
 \subsection{System Prerequisites}
-NPM depends on libxml2 and libSBML to process pathway files.Installation or running 
+NPM depends on libxml2 and libSBML to process pathway files.Installation or running
 certain functions MIGHT fail if these prerequisite libraries are
 not available. Please read through the following instructions.
 
@@ -102,22 +102,22 @@ may be missing. To install libxml2 and the headers:
 
 \paragraph{Installing libSBML}
 Installing libSBML for Unix users is optional. However, NPM will not be able to process SBML
-files. If you will not use SBML functions, you can skip this part. 
+files. If you will not use SBML functions, you can skip this part.
 
 From the website of libSBML \url{http://sbml.org/Software/libSBML}, you can directly download the
 binaries suitable for your system from ``Download libSBML'' link. You can follow the installation instructions
 on the website.
 
 \subsubsection{Prerequisites for Windows users}
-If you are installing the package through Bioconductor, you don't have to install external libraries. However, currently the Bioconductor version for Windows doesn't support SBML processing. Alternatively, we have prepared all dependencies in  a tar file, downloadable from \url{https://github.com/ahmohamed/NPM_dependencies} . Please download the file and place in in the home directory of R 
-(type "R RHOME" in command prompt to locate it). 
+If you are installing the package through Bioconductor, you don't have to install external libraries. However, currently the Bioconductor version for Windows doesn't support SBML processing. Alternatively, we have prepared all dependencies in  a tar file, downloadable from \url{https://github.com/ahmohamed/NPM_dependencies} . Please download the file and place in in the home directory of R
+(type "R RHOME" in command prompt to locate it).
 
 Unless you want to use customized libraries, you can skip the rest of this section.
 To use customized libraries, you have to compile them and provide them to R at the time of installation.
 This is not a trivial task, please be sure you really need these custom libraries.
 
 \paragraph{Installing libxml2}
-NetPathMiner expects an enviroment variable \texttt{LIB\_XML} or \texttt{LIB\_XML2} pointing to directory where 
+NetPathMiner expects an enviroment variable \texttt{LIB\_XML} or \texttt{LIB\_XML2} pointing to directory where
 libxml2 is installed. This directory should have both the compiled library (DLL file) and the header files.
 
 You can download libxml2.dll from \url{http://sourceforge.net/projects/gnuwin/files/libxml/} among other sources.
@@ -126,7 +126,7 @@ Please, place it in a `bin` folder under the installation directory.
 You will need also the header files, which can be obtained from NPM\_dependecies.tar file. After extracing it, copy
 the include directory to the installation directory.
 
-Finally, set the \texttt{LIB\_XML2} variable to point to the installation directory, which should now contain dll files inder \texttt{bin} 
+Finally, set the \texttt{LIB\_XML2} variable to point to the installation directory, which should now contain dll files inder \texttt{bin}
 and header files under `include`.
 
 \paragraph{Installing libSBML}
@@ -140,11 +140,11 @@ Add `mingw/bin` to your PATH, by editing eviroment variables.
 Second, you need CMake \url{http://www.cmake.org/} . You can follow the instructions at \url{http://sbml.org/Software/libSBML/docs/java-api/libsbml-installation.html#windows-configuring} , however, choose "MinGW Makefiles" instead of "Visual Studio 10".
 
 After finishing the CMake step, use the MinGW's \texttt{make.exe} to compile libSBML. Copy the dependencies you used
-during the compilation to the `bin` directory. Set the enviroment variable \texttt{LIB\_SBML} to point the installation 
+during the compilation to the `bin` directory. Set the enviroment variable \texttt{LIB\_SBML} to point the installation
 directory, which should now contain dll files inder `bin` and header files under `include`
 
 \subsection{R Package dependencies}
-NPM depends on package igraph to represent network objects. Installing igraph is required for the package 
+NPM depends on package igraph to represent network objects. Installing igraph is required for the package
 to work. You will also need devtools package to install directly from github.
 NPM suggests package rBiopaxParser to process BioPAX files and RCurl to download annotations from the web. NPM can still work without installing the suggested packages, but you will not be able to use the aforementioned functionalities.
 
@@ -173,12 +173,13 @@ You will now be able to install R package RCurl. In R console:
 If you encounter other problems check out \url{http://www.omegahat.org/RCurl/FAQ.html}
 
 \paragraph{rBiopaxParser}
-Package rBiopaxParser is available on Bioconductor. For installation instructions check 
+Package rBiopaxParser is available on Bioconductor. For installation instructions check
 out \url{http://www.bioconductor.org/packages/release/bioc/html/rBiopaxParser.html} or
 call:
 \begin{verbatim}
-    source("http://bioconductor.org/biocLite.R")
-    biocLite("rBiopaxParser")
+    if (!requireNamespace("BiocManager", quietly=TRUE))
+        install.packages("BiocManager")
+    BiocManager::install("rBiopaxParser")
 \end{verbatim}
 to install it right away.
 
@@ -189,8 +190,9 @@ If everything went well you will be able to install the NetPathMiner package.
 In R console, type:
 
 \begin{verbatim}
-    source("http://bioconductor.org/biocLite.R")
-    biocLite("NetPathMiner")
+    if (!requireNamespace("BiocManager", quietly=TRUE))
+        install.packages("BiocManager")
+    BiocManager::install("NetPathMiner")
 \end{verbatim}
 
 \subsubsection{From GitHub using devtools:}
@@ -224,13 +226,13 @@ library(NetPathMiner)
 \section{Database Extraction}
 \label{sec:dbExtract}
 Here we create a network from a pathway file. Pathway files can be downloaded from
-a verity of databases, like \href{http://www.kegg.jp/kegg/pathway.html}{KEGG}, 
+a verity of databases, like \href{http://www.kegg.jp/kegg/pathway.html}{KEGG},
 \href{http://www.reactome.org/}{Reactome}, \href{http://pid.nci.nih.gov/}{Pathway Interaction
 Database (PID)} and \href{http://www.ebi.ac.uk/biomodels-main/}{BioModels}.
 
-NPM supports processing KGML, SBML and BioPAX. Different databases export pathway information 
-in different formats. Depending on the format you are using, you can choose the corresponding NPM 
-function. 
+NPM supports processing KGML, SBML and BioPAX. Different databases export pathway information
+in different formats. Depending on the format you are using, you can choose the corresponding NPM
+function.
 
 <<echo=TRUE, eval=FALSE>>=
 graph <- KGML2igraph(filename = file)
@@ -246,7 +248,7 @@ biopax = readBiopax(file)
 graph <- BioPAX2igraph(biopax = biopax)
 @
 
-If you want to create a genome-scale network, you may want to process multiple files into a single 
+If you want to create a genome-scale network, you may want to process multiple files into a single
 network. To do that, you can either provide a list of files.
 
 <<echo=TRUE, eval=FALSE>>=
@@ -268,8 +270,8 @@ graph <- SBML2igraph(filename = file, miriam = "all")
 graph <- BioPAX2igraph(biopax = biopax, miriam = "go")
 @
 
-The above command gives us a bipartite metabolic network. You may be interested in protein-protein 
-interaction, and you would like to get a network in which genes are vertices, and edges represent relationships. 
+The above command gives us a bipartite metabolic network. You may be interested in protein-protein
+interaction, and you would like to get a network in which genes are vertices, and edges represent relationships.
 In NPM, you can do that by:
 
 <<echo=FALSE, eval=TRUE, results=hide>>=
@@ -278,7 +280,7 @@ file <- file.path(find.package("NetPathMiner"), "extdata", "hsa00860.xml")
 <<echo=TRUE, eval=FALSE, results=hide>>=
 graph <- KGML2igraph(filename = file, parse.as = "signaling")
 
-graph <- KGML2igraph(filename = file, parse.as = "signaling", 
+graph <- KGML2igraph(filename = file, parse.as = "signaling",
 	expand.complexes = TRUE)
 @
 
@@ -316,7 +318,7 @@ V(graph)[ "reaction_71850" ]$attr
 @
 
 Here, our reaction vertex annotations describing the chemical transition. You can also notice annotations
-starting with "miriam" key word. MIRIAM is a standard format for writing biological identifiers. You can explore the details of 
+starting with "miriam" key word. MIRIAM is a standard format for writing biological identifiers. You can explore the details of
 this annotation system on \url{http://www.ebi.ac.uk/miriam/main/collections}. To list all vertex attributes:
 
 <<echo=TRUE, eval=TRUE>>=
@@ -331,21 +333,21 @@ miriam.kegg.genes annotations can be view as protein complexes.
 getAttrStatus(graph, pattern = "^miriam.")
 @
 
-NPM also implements an Attribute Fetcher, where you can convert one annotation to another. The Attribute 
+NPM also implements an Attribute Fetcher, where you can convert one annotation to another. The Attribute
 Fetcher requires RCurl installed, because it uses the online web service of BridgeDb \url{http://www.bridgedb.org/}.
 
 <<echo=TRUE, eval=FALSE>>=
 require("RCurl")
 # Fetch uniprot annotation
-graph <- fetchAttribute(graph, organism = "Homo sapiens", 
+graph <- fetchAttribute(graph, organism = "Homo sapiens",
 target.attr = "miriam.ncbigene" , source.attr = "miriam.uniprot")
 
-# Fetch ChEBI annotation. 
-graph <- fetchAttribute(graph, target.attr = "miriam.chebi", 
+# Fetch ChEBI annotation.
+graph <- fetchAttribute(graph, target.attr = "miriam.chebi",
 source.attr = "miriam.kegg.compound")
 @
 
-You can also use the Attribute Fetcher to obtain Affymetrix annotation needed for 
+You can also use the Attribute Fetcher to obtain Affymetrix annotation needed for
 microarray analysis.
 
 \section{Network Processing}
@@ -368,7 +370,7 @@ Some reaction vertices will be catalysed by more than one enzyme. We can ``expan
 
 <<echo=TRUE, eval=TRUE>>=
 # Expand complexes of gene network.
-ggraph <- expandComplexes(rgraph, v.attr = "miriam.uniprot", 
+ggraph <- expandComplexes(rgraph, v.attr = "miriam.uniprot",
 		keep.parent.attr= c("^pathway", "^compartment"))
 
 # Convert reaction network to gene network.
@@ -382,7 +384,7 @@ and annotation inheritance. Refer to the manual for for details.
 \label{sec:netWeight}
 Now that we have our network, we can use gene expression data to weight the network edges. For this example we use an subset of data provided by ``ALL'' data package. The data consist of microarrays from 128 different individuals with acute lymphoblastic leukemia (ALL).
 
-The gene expression is present as Affymetrix IDs. Since we don't have these annotations in out network, we can use Attribute Fetcher to get them. 
+The gene expression is present as Affymetrix IDs. Since we don't have these annotations in out network, we can use Attribute Fetcher to get them.
 
 <<echo=TRUE, eval=TRUE>>=
 data(ex_microarray)
@@ -390,8 +392,8 @@ data(ex_microarray)
 <<echo=TRUE, eval=FALSE>>=
 # Assign weights to edges.
 if(require("RCurl") && url.exists( NPMdefaults("bridge.web") ))
-	rgraph <- fetchAttribute(rgraph, organism = "Homo sapiens", 
-						target.attr = "miriam.affy.probeset", 
+	rgraph <- fetchAttribute(rgraph, organism = "Homo sapiens",
+						target.attr = "miriam.affy.probeset",
 						source.attr = "miriam.uniprot")
 @
 
@@ -400,7 +402,7 @@ Now that we checked that we have affy.probeset annotations, we can use the weigh
 We can also provide sample categories as ``y'' labels. In that case, edge weights are computed for each label separately. Here we use Leukaemia molecular subtypes as categories.
 
 % This requires an internet connection, and RCurl and ALL packages to be present.
-% Instead, we will actually use a processed ALL data, where features are converted 
+% Instead, we will actually use a processed ALL data, where features are converted
 % to miriam.uniprot annotation.
 <<echo=TRUE, eval=FALSE>>=
 library(ALL)
@@ -439,11 +441,11 @@ Second, ``value'' method finds paths where the sum of edge weights are significa
 pathsample <- samplePaths(rgraph, max.path.length = vcount(rgraph),
 num.samples = 1000, num.warmup = 10)
 
-ranked.p <- pathRanker(rgraph, method = "pvalue", 
+ranked.p <- pathRanker(rgraph, method = "pvalue",
 sampledpaths = pathsample ,alpha=0.1)
 @
 
-We can get our path set as lists of edge IDs instead. 
+We can get our path set as lists of edge IDs instead.
 
 <<echo=TRUE, eval=TRUE>>=
 # Get paths as edge IDs.
@@ -453,7 +455,7 @@ eids <- getPathsAsEIDs(paths = ranked.p, graph = rgraph)
 We can also get paths as edge IDs on another network representation. In this example, we extracted paths from a reaction network. We can get the equivalent paths on the gene network by supplying the corresponding igraph object.
 
 <<echo=TRUE, eval=TRUE, results=hide>>=
-# Convert paths to other networks. 
+# Convert paths to other networks.
 eids <- getPathsAsEIDs(paths = ranked.p, graph = ggraph)
 @
 
@@ -518,7 +520,7 @@ To make use of the annotation attributes, NetPathMiner can layout vertices such 
 <<echo=TRUE, eval=FALSE>>=
 layout.c <- clusterVertexByAttr(rgraph, "pathway", cluster.strength = 3)
 v.color <- colorVertexByAttr(rgraph, "pathway")
-plotPaths(ranked.p , rgraph, clusters=p.class, 
+plotPaths(ranked.p , rgraph, clusters=p.class,
 	layout = layout.c, vertex.color = v.color)
 @
 
@@ -552,7 +554,7 @@ graphNEL <- toGraphNEL(graph, export.attr="^miriam.")
 
 
 \bibliographystyle{plain}  % Style BST file
-%\bibliography{references}     % Bibliography file (usually '*.bib' ) 
+%\bibliography{references}     % Bibliography file (usually '*.bib' )
 \end{document}
 
 %

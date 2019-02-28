@@ -2,10 +2,10 @@
 [![Travis-CI Build Status](https://travis-ci.org/ahmohamed/NetPathMiner.svg?branch=master)](https://travis-ci.org/ahmohamed/NetPathMiner)
 
 NetPathMiner implements a flexible module-based process flow for network path mining and visualization,
-which can be fully inte-grated with user-customized functions. 
-It supports construction of various types of genome scale networks from three different pathway 
-file formats, enabling its utility to most common pathway databases. 
-In addition, NetPathMiner provides different visualization techniques to facilitate the analysis of even 
+which can be fully inte-grated with user-customized functions.
+It supports construction of various types of genome scale networks from three different pathway
+file formats, enabling its utility to most common pathway databases.
+In addition, NetPathMiner provides different visualization techniques to facilitate the analysis of even
 thousands of output paths.
 
 To report bugs and arising issues, please visit https://github.com/ahmohamed/NetPathMiner
@@ -13,7 +13,7 @@ To report bugs and arising issues, please visit https://github.com/ahmohamed/Net
 ## Installation Instructions
 
 ### System Prerequisites
-NetPathMiner depends on libxml2 and libsbml to process pathway files. Installation or running 
+NetPathMiner depends on libxml2 and libsbml to process pathway files. Installation or running
 certain functions MAY fail if these prerequisite libraries are
 not available. Please read through the following instructions.
 
@@ -28,9 +28,9 @@ may be missing. To install libxml2 and the headers:
     sudo apt-get install libxml2-dev   
 ```
 
-##### Installing libSBML 
+##### Installing libSBML
 Installing libSBML for Unix users is optional. However, NetPathMiner will not be able to process SBML
-files. If you will not use SBML functions, you can skip this part. 
+files. If you will not use SBML functions, you can skip this part.
 
 From the website of libSBML http://sbml.org/Software/libSBML, you can directly download the
 binaries suitable for your system from ``Download libSBML'' link. You can follow the installation instructions
@@ -42,7 +42,7 @@ If you are installing the package through Bioconductor, you don't have to instal
 Unless you want to use customized libraries, you can skip the rest of this section.To use customized libraries, you have to compile them and provide them to R at the time of installation. This is not a trivial task, please be sure you really need these custom libraries.
 
 ##### Installing libxml2
-NetPathMiner expects an enviroment variable `LIB_XML` or `LIB_XML2` pointing to directory where 
+NetPathMiner expects an enviroment variable `LIB_XML` or `LIB_XML2` pointing to directory where
 libxml2 is installed. This directory should have both the compiled library (DLL file) and the header files.
 
 You can download libxml2.dll from http://sourceforge.net/projects/gnuwin32/files/libxml/ among other sources.
@@ -51,7 +51,7 @@ Please, place it in a `bin` folder under the installation directory.
 You will need also the header files, which can be obtained from NPM_dependecies.tar file. After extracing it, copy
 the include directory to the installation directory.
 
-Finally, set the `LIB_XML2` variable to point to the installation directory, which should now contain dll files inder `bin` 
+Finally, set the `LIB_XML2` variable to point to the installation directory, which should now contain dll files inder `bin`
 and header files under `include`.
 
 ##### Installing libSBML
@@ -65,12 +65,12 @@ Add `mingw/bin` to your PATH, by editing eviroment variables.
 Second, you need CMake http://www.cmake.org/ . You can follow the instructions at http://sbml.org/Software/libSBML/docs/java-api/libsbml-installation.html#windows-configuring , however, choose "MinGW Makefiles" instead of "Visual Studio 10".
 
 After finishing the CMake step, use the MinGW's `make.exe` to compile libSBML. Copy the dependencies you used
-during the compilation to the `bin` directory. Set the enviroment variable `LIB_SBML` to point the installation 
+during the compilation to the `bin` directory. Set the enviroment variable `LIB_SBML` to point the installation
 directory, which should now contain dll files inder `bin` and header files under `include`
 
 
 ### R Package dependencies
-NetPathMiner depends on package igraph to represent network objects. Installing igraph is required for the package 
+NetPathMiner depends on package igraph to represent network objects. Installing igraph is required for the package
 to work. You will also need devtools package to install directly from github.
 NetPathMiner suggests package rBiopaxParser to process BioPAX files and RCurl to download annotations from the web. NetPathMiner can still work without installing the suggested packages, but you will not be able to use the aforementioned functionalities.
 
@@ -112,13 +112,14 @@ You will now be able to install R package RCurl. In R console:
 If you encounter other problems check out http://www.omegahat.org/RCurl/FAQ.html
 
 ##### rBiopaxParser
-Package rBiopaxParser is available on Bioconductor. For installation instructions check 
+Package rBiopaxParser is available on Bioconductor. For installation instructions check
 out http://www.bioconductor.org/packages/release/bioc/html/rBiopaxParser.html or
 call:
 
 ```r
-    source("http://bioconductor.org/biocLite.R")   
-    biocLite("rBiopaxParser")  
+    if (!requireNamespace("BiocManager", quietly=TRUE))
+        install.packages("BiocManager")
+    BiocManager::install("rBiopaxParser")  
 ```
 
 to install it right away.
@@ -130,8 +131,9 @@ If everything went well you will be able to install the NetPathMiner package.
 In R console, type:
 
 ```r
-    source("http://bioconductor.org/biocLite.R")   
-    biocLite("NetPathMiner")  
+    if (!requireNamespace("BiocManager", quietly=TRUE))
+        install.packages("BiocManager")
+    BiocManager::install("NetPathMiner")  
 ```
 
 
