@@ -84,6 +84,31 @@ rmSmallCompounds <- function(graph, method=c("remove","duplicate"), small.comp.l
     return(graph - vertices(vids))
 }
 
+#' Convert metabolic network to metabolite network.
+#'
+#' This function removes reaction nodes keeping them as edge attributes. The resulting
+#' network contains metabolite nodes only, where edges indicate that reaction conversions.
+#'
+#'
+#' @param graph A metabolic network.
+#'
+#' @return A reaction network.
+#'
+#' @author Ahmed Mohamed
+#' @family Network processing methods
+#' @export
+#' @examples
+#' 	## Conver a metabolic network to a metbolite network.
+#'  data(ex_sbml) # bipartite metabolic network of Carbohydrate metabolism.
+#'  mgraph <- makeMetaboliteNetwork(ex_sbml)
+#'
+makeMetaboliteNetwork <- function(graph) {
+    V(graph)$reactions <- !V(graph)$reactions
+    new.graph <- makeReactionNetwork(graph, FALSE)
+    new.graph$type <- "M.graph"
+    return(new.graph)
+}
+
 #' Convert metabolic network to reaction network.
 #'
 #' This function removes metabolite nodes keeping them as edge attributes. The resulting
@@ -195,8 +220,8 @@ simplifyReactionNetwork <- function(reaction.graph, gene.attr="genes",
 
     if(sum(translocation | spontaneous) > 0){
       new.reaction.graph = vertexDeleteReconnect(reaction.graph,
-              V(reaction.graph)[no.gene][translocation | spontaneous]
-              ,copy.attr=list(compound=function(...)paste(..., sep="->"), attr="c") )
+              V(reaction.graph)[no.gene][translocation | spontaneous],
+              copy.attr=list(compound=function(...)paste(..., sep="->"), attr="c") )
     }
 
     if(remove.missing.genes & length(which(no.gene)[!translocation & !spontaneous] >0)){
