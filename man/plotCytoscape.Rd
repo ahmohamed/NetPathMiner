@@ -4,8 +4,8 @@
 \alias{plotCytoscapeGML}
 \title{Plots an annotated igraph object in Cytoscape.}
 \usage{
-plotCytoscapeGML(graph, file, layout = layout.auto, vertex.size, vertex.label,
-  vertex.shape, vertex.color, edge.color)
+plotCytoscapeGML(graph, file, layout = layout.auto, vertex.size,
+  vertex.label, vertex.shape, vertex.color, edge.color)
 }
 \arguments{
 \item{graph}{An annotated igraph object.}
@@ -34,23 +34,20 @@ For \code{plotCytoscapeGML}, results are written to file.
 }
 \description{
 \code{plotCytoscape} function has been removed because RCytoscape is no longer prensent in Bioconductor.
-Future plans will use RCy3 for Cytoscape plotting, once RCy3 is supported on MacOS and Windows.    
+Future plans will use RCy3 for Cytoscape plotting, once RCy3 is supported on MacOS and Windows.
 \link{plotCytoscapeGML} exports the network plot in GML format, that can be later imported into Cytoscape
 (using "import network from file" option). This fuction is compatible with all Cytoscape versions.
 }
 \examples{
  data("ex_sbml")
 	rgraph <- makeReactionNetwork(ex_sbml, simplify=TRUE)
- v.layout <- layoutVertexByAttr(rgraph, "compartment") 
+ v.layout <- layoutVertexByAttr(rgraph, "compartment")
 	v.color <- colorVertexByAttr(rgraph, "compartment")
- 
+
  # Export network plot to GML file
- plotCytoscapeGML(rgraph, file="example.gml", layout=v.layout, 
+ plotCytoscapeGML(rgraph, file="example.gml", layout=v.layout,
 				vertex.color=v.color, vertex.size=10)
 
-}
-\author{
-Ahmed Mohamed
 }
 \seealso{
 Other Plotting methods: \code{\link{colorVertexByAttr}},
@@ -61,4 +58,7 @@ Other Plotting methods: \code{\link{colorVertexByAttr}},
   \code{\link{plotNetwork}},
   \code{\link{plotPathClassifier}}, \code{\link{plotPaths}}
 }
-
+\author{
+Ahmed Mohamed
+}
+\concept{Plotting methods}

@@ -11,4 +11,3 @@ An microarray data example. This is part of the ALL dataset, for demonstration p
 data(ex_microarray)
 
 }
-

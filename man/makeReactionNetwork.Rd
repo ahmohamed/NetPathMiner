@@ -27,13 +27,15 @@ by one reaction is consumed by the other.
  rgraph <- makeReactionNetwork(ex_sbml, simplify=TRUE)
 
 }
-\author{
-Ahmed Mohamed
-}
 \seealso{
 Other Network processing methods: \code{\link{expandComplexes}},
+  \code{\link{makeMetaboliteNetwork}},
+  \code{\link{reindexNetwork}},
   \code{\link{rmSmallCompounds}},
   \code{\link{simplifyReactionNetwork}},
   \code{\link{vertexDeleteReconnect}}
 }
-
+\author{
+Ahmed Mohamed
+}
+\concept{Network processing methods}

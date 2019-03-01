@@ -30,4 +30,5 @@ SystemRequirements: libxml2, libSBML (>= 5.5)
 Biarch: TRUE
 biocViews: GraphAndNetwork, Pathways, Network, Clustering,
     Classification
-RoxygenNote: 5.0.1
+RoxygenNote: 6.1.1
+Encoding: UTF-8

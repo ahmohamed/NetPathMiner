@@ -10,7 +10,7 @@ pathClassifier(paths, target.class, M, alpha = 1, lambda = 2,
 \arguments{
 \item{paths}{The training paths computed by \code{\link{pathsToBinary}}}
 
-\item{target.class}{he label of the targe class to be classified.  This label must be present 
+\item{target.class}{he label of the targe class to be classified.  This label must be present
 as a label within the \code{paths\$y} object}
 
 \item{M}{Number of components within the paths to be extracted.}
@@ -46,7 +46,7 @@ A list with the following values
 HME3M Markov pathway classifier.
 }
 \details{
-Take care with selection of lambda and alpha - make sure you check that the likelihood 
+Take care with selection of lambda and alpha - make sure you check that the likelihood
 is always increasing.
 }
 \examples{
@@ -59,14 +59,14 @@ is always increasing.
  # Calculate Pearson's correlation.
 	data(ex_microarray)	# Part of ALL dataset.
 	rgraph <- assignEdgeWeights(microarray = ex_microarray, graph = rgraph,
-		weight.method = "cor", use.attr="miriam.uniprot", 
+		weight.method = "cor", use.attr="miriam.uniprot",
 		y=factor(colnames(ex_microarray)), bootstrap = FALSE)
 
 	## Get ranked paths using probabilistic shortest paths.
- ranked.p <- pathRanker(rgraph, method="prob.shortest.path", 
+ ranked.p <- pathRanker(rgraph, method="prob.shortest.path",
 					K=20, minPathSize=6)
-	
-	## Convert paths to binary matrix. 
+
+	## Convert paths to binary matrix.
 	ybinpaths <- pathsToBinary(ranked.p)
 	p.class <- pathClassifier(ybinpaths, target.class = "BCR/ABL", M = 3)
 
@@ -77,9 +77,6 @@ is always increasing.
 	plotClassifierROC(p.class)
 	plotClusters(ybinpaths, p.class)
 
-}
-\author{
-Timothy Hancock and Ichigaku Takigawa
 }
 \references{
 Hancock, Timothy, and Mamitsuka, Hiroshi: A Markov Classification Model for Metabolic Pathways, Workshop on Algorithms in Bioinformatics (WABI) , 2009
@@ -96,4 +93,7 @@ Other Path clustering & classification methods: \code{\link{pathCluster}},
   \code{\link{predictPathClassifier}},
   \code{\link{predictPathCluster}}
 }
-
+\author{
+Timothy Hancock and Ichigaku Takigawa
+}
+\concept{Path clustering & classification methods}

@@ -13,4 +13,3 @@ data(ex_sbml)
 plotNetwork(ex_sbml, vertex.color="compartment.name")
 
 }
-

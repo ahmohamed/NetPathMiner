@@ -18,8 +18,8 @@ If the tolerance is set all edges with a \code{theta} below that tolerance will 
 }
 \value{
 Produces a plot of the paths with the path probabilities and prediction probabilities and ROC curve overlayed.
-\item{Center Plot}{An image of all paths the training dataset.  Rows are the paths and columns are the genes (vertices) 
-included within each pathway.  A colour within image indicates if a particular gene (vertex) is included within a specific path.  
+\item{Center Plot}{An image of all paths the training dataset.  Rows are the paths and columns are the genes (vertices)
+included within each pathway.  A colour within image indicates if a particular gene (vertex) is included within a specific path.
 Colours flag whether a path belongs to the current HME3M component (P > 0.5).}
 \item{Center Right}{The training set posterior probabilities for each path belonging to the current 3M component.}
 \item{Center Top}{The ROC curve for this HME3M component.}
@@ -39,14 +39,14 @@ Plots the structure of specified path found by pathClassifier.
  # Calculate Pearson's correlation.
 	data(ex_microarray)	# Part of ALL dataset.
 	rgraph <- assignEdgeWeights(microarray = ex_microarray, graph = rgraph,
-		weight.method = "cor", use.attr="miriam.uniprot", 
+		weight.method = "cor", use.attr="miriam.uniprot",
 		y=factor(colnames(ex_microarray)), bootstrap = FALSE)
 
 	## Get ranked paths using probabilistic shortest paths.
- ranked.p <- pathRanker(rgraph, method="prob.shortest.path", 
+ ranked.p <- pathRanker(rgraph, method="prob.shortest.path",
 					K=20, minPathSize=6)
-	
-	## Convert paths to binary matrix. 
+
+	## Convert paths to binary matrix.
 	ybinpaths <- pathsToBinary(ranked.p)
 	p.class <- pathClassifier(ybinpaths, target.class = "BCR/ABL", M = 3)
 
@@ -54,9 +54,6 @@ Plots the structure of specified path found by pathClassifier.
 	plotClassifierROC(p.class)
 	plotClusters(ybinpaths, p.class)
 
-}
-\author{
-Timothy Hancock and Ichigaku Takigawa
 }
 \seealso{
 Other Path clustering & classification methods: \code{\link{pathClassifier}},
@@ -75,4 +72,8 @@ Other Plotting methods: \code{\link{colorVertexByAttr}},
   \code{\link{plotCytoscapeGML}},
   \code{\link{plotNetwork}}, \code{\link{plotPaths}}
 }
-
+\author{
+Timothy Hancock and Ichigaku Takigawa
+}
+\concept{Path clustering & classification methods}
+\concept{Plotting methods}

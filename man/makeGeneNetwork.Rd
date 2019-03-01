@@ -6,8 +6,8 @@
 \title{Expand reactions / complexes into their gene constituents.}
 \usage{
 expandComplexes(graph, v.attr, keep.parent.attr = "^pathway",
-  expansion.method = c("normal", "duplicate"), missing.method = c("keep",
-  "remove", "reconnect"))
+  expansion.method = c("normal", "duplicate"),
+  missing.method = c("keep", "remove", "reconnect"))
 
 makeGeneNetwork(graph, v.attr = "genes", keep.parent.attr = "^pathway",
   expansion.method = "duplicate", missing.method = "remove")
@@ -20,7 +20,7 @@ makeGeneNetwork(graph, v.attr = "genes", keep.parent.attr = "^pathway",
 \item{keep.parent.attr}{A (List of) \code{\link{regex}} experssions representing attributes to be
 inherited by daughter vertices. If \code{"all"} is passed, all parent attributes are inherited.}
 
-\item{expansion.method}{If \code{"duplicate"}, attribute values sharing more than one parent vertex 
+\item{expansion.method}{If \code{"duplicate"}, attribute values sharing more than one parent vertex
 are duplicated for each vertex they participate in. For exmaple, if one gene G1 catalyzes reactions
 R1, R2; then G1##R1, and G1##R2 vertices are created. If \code{"normal"} only one vertex (G1) is created,
 and inherit all R1 and R2 connections and attributes.}
@@ -45,33 +45,35 @@ For example, to match a network created from Reactome to a KEGG network, you can
 vertices by "miriam.kegg.compound" attribute.
 }
 \examples{
- ## Make a gene network from a reaction network. 
+ ## Make a gene network from a reaction network.
  data(ex_sbml)	# A bipartite metbaolic network.
  rgraph <- makeReactionNetwork(ex_sbml, simplify=TRUE)
  ggraph <- makeGeneNetwork(rgraph)
 
  ## Expand vertices into their contituent genes.
  data(ex_kgml_sig)	# Ras and chemokine signaling pathways in human
-	ggraph <- expandComplexes(ex_kgml_sig, v.attr = "miriam.ncbigene", 
+	ggraph <- expandComplexes(ex_kgml_sig, v.attr = "miriam.ncbigene",
 						keep.parent.attr= c("^pathway", "^compartment"))
 
  ## Create a separate vertex for each compartment. This is useful in duplicating
 	##  metabolite vertices in a network.
 \dontrun{
- graph <- expandComplexes(graph, v.attr = "compartment", 
+ graph <- expandComplexes(graph, v.attr = "compartment",
         keep.parent.attr = "all",
         expansion.method = "duplicate",
         missing.method = "keep")
 }
 
 }
-\author{
-Ahmed Mohamed
-}
 \seealso{
-Other Network processing methods: \code{\link{makeReactionNetwork}},
+Other Network processing methods: \code{\link{makeMetaboliteNetwork}},
+  \code{\link{makeReactionNetwork}},
+  \code{\link{reindexNetwork}},
   \code{\link{rmSmallCompounds}},
   \code{\link{simplifyReactionNetwork}},
   \code{\link{vertexDeleteReconnect}}
 }
-
+\author{
+Ahmed Mohamed
+}
+\concept{Network processing methods}

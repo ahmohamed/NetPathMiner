@@ -33,23 +33,20 @@ Predicts new paths given a pathClassifier model.
  # Calculate Pearson's correlation.
 	data(ex_microarray)	# Part of ALL dataset.
 	rgraph <- assignEdgeWeights(microarray = ex_microarray, graph = rgraph,
-		weight.method = "cor", use.attr="miriam.uniprot", 
+		weight.method = "cor", use.attr="miriam.uniprot",
 		y=factor(colnames(ex_microarray)), bootstrap = FALSE)
 
 	## Get ranked paths using probabilistic shortest paths.
- ranked.p <- pathRanker(rgraph, method="prob.shortest.path", 
+ ranked.p <- pathRanker(rgraph, method="prob.shortest.path",
 					K=20, minPathSize=6)
-	
-	## Convert paths to binary matrix. 
+
+	## Convert paths to binary matrix.
 	ybinpaths <- pathsToBinary(ranked.p)
 	p.class <- pathClassifier(ybinpaths, target.class = "BCR/ABL", M = 3)
 
 	## Just an example of how to predict cluster membership
  pclass.pred <- predictPathCluster(p.class, ybinpaths$paths)
 
-}
-\author{
-Timothy Hancock and Ichigaku Takigawa
 }
 \seealso{
 Other Path clustering & classification methods: \code{\link{pathClassifier}},
@@ -60,4 +57,7 @@ Other Path clustering & classification methods: \code{\link{pathClassifier}},
   \code{\link{plotPathCluster}},
   \code{\link{predictPathCluster}}
 }
-
+\author{
+Timothy Hancock and Ichigaku Takigawa
+}
+\concept{Path clustering & classification methods}

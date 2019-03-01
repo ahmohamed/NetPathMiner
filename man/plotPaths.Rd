@@ -38,26 +38,23 @@ paths in the same cluster are assigned similar colors.
  # Calculate Pearson's correlation.
 	data(ex_microarray)	# Part of ALL dataset.
 	rgraph <- assignEdgeWeights(microarray = ex_microarray, graph = rgraph,
-		weight.method = "cor", use.attr="miriam.uniprot", 
+		weight.method = "cor", use.attr="miriam.uniprot",
 		y=factor(colnames(ex_microarray)), bootstrap = FALSE)
 
 	## Get ranked paths using probabilistic shortest paths.
- ranked.p <- pathRanker(rgraph, method="prob.shortest.path", 
+ ranked.p <- pathRanker(rgraph, method="prob.shortest.path",
 					K=20, minPathSize=6)
 
 	## Plot paths.
 	plotPaths(ranked.p, rgraph)
 
-	## Convert paths to binary matrix, build a classifier. 
+	## Convert paths to binary matrix, build a classifier.
 	ybinpaths <- pathsToBinary(ranked.p)
 	p.class <- pathClassifier(ybinpaths, target.class = "BCR/ABL", M = 3)
-	
+
  ## Plotting with clusters, on a metabolic graph.
 	plotPaths(ranked.p, ex_sbml, path.clusters=p.class)
 
-}
-\author{
-Ahmed Mohamed
 }
 \seealso{
 Other Plotting methods: \code{\link{colorVertexByAttr}},
@@ -69,4 +66,7 @@ Other Plotting methods: \code{\link{colorVertexByAttr}},
   \code{\link{plotNetwork}},
   \code{\link{plotPathClassifier}}
 }
-
+\author{
+Ahmed Mohamed
+}
+\concept{Plotting methods}

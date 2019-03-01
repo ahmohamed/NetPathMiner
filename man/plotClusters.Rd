@@ -25,7 +25,7 @@ plotClusters(ybinpaths, clusters, col, ...)
 \item{...}{Extra paramaters passed to \code{plotClusterMatrix}}
 }
 \value{
-\code{plotClusterMatrix} 	plots an image of all paths the training dataset. Rows are the paths and columns 
+\code{plotClusterMatrix} 	plots an image of all paths the training dataset. Rows are the paths and columns
 are the genes (features) included within each path. Paths are colored according to cluster membership.
 
 \code{plotClusterProbs} 	The training set posterior probabilities for each path belonging to a 3M component. \cr
@@ -45,21 +45,18 @@ Plots the structure of all path clusters
  # Calculate Pearson's correlation.
 	data(ex_microarray)	# Part of ALL dataset.
 	rgraph <- assignEdgeWeights(microarray = ex_microarray, graph = rgraph,
-		weight.method = "cor", use.attr="miriam.uniprot", 
+		weight.method = "cor", use.attr="miriam.uniprot",
 		y=factor(colnames(ex_microarray)), bootstrap = FALSE)
 
 	## Get ranked paths using probabilistic shortest paths.
- ranked.p <- pathRanker(rgraph, method="prob.shortest.path", 
+ ranked.p <- pathRanker(rgraph, method="prob.shortest.path",
 					K=20, minPathSize=8)
-	
-	## Convert paths to binary matrix. 
+
+	## Convert paths to binary matrix.
 	ybinpaths <- pathsToBinary(ranked.p)
 	p.cluster <- pathCluster(ybinpaths, M=2)
 	plotClusters(ybinpaths, p.cluster, col=c("red", "blue") )
- 
-}
-\author{
-Ahmed Mohamed
+
 }
 \seealso{
 Other Path clustering & classification methods: \code{\link{pathClassifier}},
@@ -78,4 +75,8 @@ Other Plotting methods: \code{\link{colorVertexByAttr}},
   \code{\link{plotNetwork}},
   \code{\link{plotPathClassifier}}, \code{\link{plotPaths}}
 }
-
+\author{
+Ahmed Mohamed
+}
+\concept{Path clustering & classification methods}
+\concept{Plotting methods}

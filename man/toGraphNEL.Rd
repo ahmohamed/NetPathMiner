@@ -9,7 +9,7 @@ toGraphNEL(graph, export.attr = "")
 \arguments{
 \item{graph}{An annotated igraph object..}
 
-\item{export.attr}{A \code{\link{regex}} experssion representing vertex attributes to be 
+\item{export.attr}{A \code{\link{regex}} experssion representing vertex attributes to be
 exported to the new graphNEL object. Supplying an empty string "" (default) will export
 all attributes.}
 }
@@ -27,4 +27,3 @@ Converts an annotated igraph object to graphNEL
 \author{
 Ahmed Mohamed
 }
-

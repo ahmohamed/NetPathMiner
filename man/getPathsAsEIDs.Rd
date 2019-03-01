@@ -29,13 +29,13 @@ edges on a metabolic network).
  # Calculate Pearson's correlation.
 	data(ex_microarray)	# Part of ALL dataset.
 	rgraph <- assignEdgeWeights(microarray = ex_microarray, graph = rgraph,
-		weight.method = "cor", use.attr="miriam.uniprot", 
+		weight.method = "cor", use.attr="miriam.uniprot",
 		y=factor(colnames(ex_microarray)), bootstrap = FALSE)
 
 	## Get ranked paths using probabilistic shortest paths.
- ranked.p <- pathRanker(rgraph, method="prob.shortest.path", 
+ ranked.p <- pathRanker(rgraph, method="prob.shortest.path",
 					K=20, minPathSize=6)
- 
+
 	## Get the edge ids along paths in the reaction graph.
 	path.eids <- getPathsAsEIDs(ranked.p, rgraph)
 
@@ -43,11 +43,11 @@ edges on a metabolic network).
 	path.eids <- getPathsAsEIDs(ranked.p, ex_sbml)
 
 }
-\author{
-Ahmed Mohamed
-}
 \seealso{
 Other Path ranking methods: \code{\link{extractPathNetwork}},
   \code{\link{pathRanker}}, \code{\link{samplePaths}}
 }
-
+\author{
+Ahmed Mohamed
+}
+\concept{Path ranking methods}

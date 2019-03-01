@@ -4,8 +4,8 @@
 \alias{samplePaths}
 \title{Creates a set of sample path p-values for each length given a weighted network}
 \usage{
-samplePaths(graph, max.path.length, num.samples = 1000, num.warmup = 10,
-  verbose = TRUE)
+samplePaths(graph, max.path.length, num.samples = 1000,
+  num.warmup = 10, verbose = TRUE)
 }
 \arguments{
 \item{graph}{A weighted igraph object. Weights must be in \code{edge.weights} or \code{weight}
@@ -23,7 +23,7 @@ edge attributes.}
 A matrix where each row is a path length and each column is the number of paths sampled.
 }
 \description{
-Randomly traverses paths of increasing lengths within a set network to create an 
+Randomly traverses paths of increasing lengths within a set network to create an
 empirical pathway distribution for more accurate determination of path significance.
 }
 \details{
@@ -39,26 +39,26 @@ Can take a bit of time.
  # Calculate Pearson's correlation.
 	data(ex_microarray)	# Part of ALL dataset.
 	rgraph <- assignEdgeWeights(microarray = ex_microarray, graph = rgraph,
-		weight.method = "cor", use.attr="miriam.uniprot", 
+		weight.method = "cor", use.attr="miriam.uniprot",
 		y=factor(colnames(ex_microarray)), bootstrap = FALSE)
- 
+
 	## Get significantly correlated paths using "p-valvue" method.
-	##   First, establish path score distribution by calling "samplePaths" 
+	##   First, establish path score distribution by calling "samplePaths"
  pathsample <- samplePaths(rgraph, max.path.length=10,
                         num.samples=100, num.warmup=10)
-	
-	##   Get all significant paths with p<0.1 
-	significant.p <- pathRanker(rgraph, method = "pvalue", 
+
+	##   Get all significant paths with p<0.1
+	significant.p <- pathRanker(rgraph, method = "pvalue",
                 sampledpaths = pathsample ,alpha=0.1)
 
+}
+\seealso{
+Other Path ranking methods: \code{\link{extractPathNetwork}},
+  \code{\link{getPathsAsEIDs}}, \code{\link{pathRanker}}
 }
 \author{
 Timothy Hancock
 
 Ahmed Mohamed
 }
-\seealso{
-Other Path ranking methods: \code{\link{extractPathNetwork}},
-  \code{\link{getPathsAsEIDs}}, \code{\link{pathRanker}}
-}
-
+\concept{Path ranking methods}

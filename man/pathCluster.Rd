@@ -38,22 +38,17 @@ A list with the following items:
 		weight.method = "cor", use.attr="miriam.uniprot", bootstrap = FALSE)
 
 	## Get ranked paths using probabilistic shortest paths.
- ranked.p <- pathRanker(rgraph, method="prob.shortest.path", 
+ ranked.p <- pathRanker(rgraph, method="prob.shortest.path",
 					K=20, minPathSize=8)
-	
-	## Convert paths to binary matrix. 
+
+	## Convert paths to binary matrix.
 	ybinpaths <- pathsToBinary(ranked.p)
 	p.cluster <- pathCluster(ybinpaths, M=2)
 	plotClusters(ybinpaths, p.cluster)
- 
-}
-\author{
-Ichigaku Takigawa
 
-Timothy Hancock
 }
 \references{
-Mamitsuka, H., Okuno, Y., and Yamaguchi, A. 2003. Mining biologically active patterns in 
+Mamitsuka, H., Okuno, Y., and Yamaguchi, A. 2003. Mining biologically active patterns in
 metabolic pathways using microarray expression profiles. SIGKDD Explor. News l. 5, 2 (Dec. 2003), 113-121.
 }
 \seealso{
@@ -66,4 +61,9 @@ Other Path clustering & classification methods: \code{\link{pathClassifier}},
   \code{\link{predictPathClassifier}},
   \code{\link{predictPathCluster}}
 }
+\author{
+Ichigaku Takigawa
 
+Timothy Hancock
+}
+\concept{Path clustering & classification methods}

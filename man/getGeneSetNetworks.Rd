@@ -12,7 +12,7 @@ getGeneSetNetworks(graph, use.attr = "pathway", format = c("list",
 
 \item{use.attr}{The attribute by which vertices are grouped (tepically pathway, or GO)}
 
-\item{format}{The output format. If "list" is specified, a list of subgraphs are returned (default). 
+\item{format}{The output format. If "list" is specified, a list of subgraphs are returned (default).
 If "pathway-class" is specified, a list of pathway-class objects are returned. Pathway-class
 is used by graphite package to run several methods of topology-based enrichment analyses.}
 }
@@ -30,25 +30,24 @@ common attributes (in the same pathway or compartment).
  # Integration with graphite package
  \dontrun{
  if(require(graphite) & require(clipper) & require(ALL)){
-	genesetnets <- getGeneSetNetworks(ex_kgml_sig, 
+	genesetnets <- getGeneSetNetworks(ex_kgml_sig,
 						use.attr="pathway", format="pathway-class")
-	path <- convertIdentifiers(genesetnets$`Chemokine signaling pathway`, 
+	path <- convertIdentifiers(genesetnets$`Chemokine signaling pathway`,
 						"entrez")
 	genes <- nodes(path)
 	data(ALL)
 	all <- as.matrix(exprs(ALL[1:length(genes),1:20]))
 	classes <- c(rep(1,10), rep(2,10))
 	rownames(all) <- genes
-	
+
 	runClipper(path, all, classes, "mean", pathThr=0.1)
  }
  }
 
 }
-\author{
-Ahmed Mohamed
-}
 \seealso{
 \code{\link{getGeneSets}}
 }
-
+\author{
+Ahmed Mohamed
+}

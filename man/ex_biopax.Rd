@@ -13,4 +13,3 @@ data(ex_biopax)
 ex_biopax
 
 }
-

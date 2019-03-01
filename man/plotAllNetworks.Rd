@@ -44,19 +44,16 @@ gene networks. The functions finds equivalent paths across different networks an
  # Calculate Pearson's correlation.
 	data(ex_microarray)	# Part of ALL dataset.
 	rgraph <- assignEdgeWeights(microarray = ex_microarray, graph = rgraph,
-		weight.method = "cor", use.attr="miriam.uniprot", 
+		weight.method = "cor", use.attr="miriam.uniprot",
 		y=factor(colnames(ex_microarray)), bootstrap = FALSE)
 
 	## Get ranked paths using probabilistic shortest paths.
- ranked.p <- pathRanker(rgraph, method="prob.shortest.path", 
+ ranked.p <- pathRanker(rgraph, method="prob.shortest.path",
 					K=20, minPathSize=6)
 
 plotAllNetworks(ranked.p, metabolic.net = ex_sbml, reaction.net = rgraph,
 					vertex.label = "", vertex.size = 4)
 
-}
-\author{
-Ahmed Mohamed
 }
 \seealso{
 Other Plotting methods: \code{\link{colorVertexByAttr}},
@@ -67,4 +64,7 @@ Other Plotting methods: \code{\link{colorVertexByAttr}},
   \code{\link{plotNetwork}},
   \code{\link{plotPathClassifier}}, \code{\link{plotPaths}}
 }
-
+\author{
+Ahmed Mohamed
+}
+\concept{Plotting methods}

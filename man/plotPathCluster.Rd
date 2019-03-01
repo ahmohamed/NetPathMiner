@@ -13,7 +13,7 @@ plotPathCluster(ybinpaths, clusters, m, tol = NULL)
 
 \item{m}{The path cluster to view.}
 
-\item{tol}{A tolerance for 3M parameter \code{theta} which is the probability for 
+\item{tol}{A tolerance for 3M parameter \code{theta} which is the probability for
 each edge within each cluster.  If the tolerance is set all edges with a \code{theta}
 below that tolerance will be removed from the plot.}
 }
@@ -40,17 +40,14 @@ Plots the structure of specified path found by pathCluster.
 		weight.method = "cor", use.attr="miriam.uniprot", bootstrap = FALSE)
 
 	## Get ranked paths using probabilistic shortest paths.
- ranked.p <- pathRanker(rgraph, method="prob.shortest.path", 
+ ranked.p <- pathRanker(rgraph, method="prob.shortest.path",
 					K=20, minPathSize=8)
-	
-	## Convert paths to binary matrix. 
+
+	## Convert paths to binary matrix.
 	ybinpaths <- pathsToBinary(ranked.p)
 	p.cluster <- pathCluster(ybinpaths, M=2)
 	plotPathCluster(ybinpaths, p.cluster, m=2, tol=0.05)
- 
-}
-\author{
-Timothy Hancock and Ichigaku Takigawa
+
 }
 \seealso{
 Other Path clustering & classification methods: \code{\link{pathClassifier}},
@@ -61,4 +58,7 @@ Other Path clustering & classification methods: \code{\link{pathClassifier}},
   \code{\link{predictPathClassifier}},
   \code{\link{predictPathCluster}}
 }
-
+\author{
+Timothy Hancock and Ichigaku Takigawa
+}
+\concept{Path clustering & classification methods}

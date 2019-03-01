@@ -5,7 +5,8 @@
 \title{Removes reactions with no gene annotations}
 \usage{
 simplifyReactionNetwork(reaction.graph, gene.attr = "genes",
-  remove.missing.genes = TRUE, reconnect.threshold = vcount(reaction.graph))
+  remove.missing.genes = TRUE,
+  reconnect.threshold = vcount(reaction.graph))
 }
 \arguments{
 \item{reaction.graph}{A reaction network.}
@@ -21,26 +22,28 @@ all rections with no gene annotations are removed.}
 A simplified reaction network.
 }
 \description{
-This function removes reaction vertices with no gene annotations as indicated by the parameter 
-\code{gene.attr}, and connect their neighbour vertices to preserve graph connectivity. This is 
-particularly meaningful when reactions are translocation or spontaneous reactions, 
+This function removes reaction vertices with no gene annotations as indicated by the parameter
+\code{gene.attr}, and connect their neighbour vertices to preserve graph connectivity. This is
+particularly meaningful when reactions are translocation or spontaneous reactions,
 which are not catalysed by genes.
 }
 \examples{
  data(ex_sbml)
  rgraph <- makeReactionNetwork(ex_sbml, simplify=FALSE)
- 
+
  ## Removes all reaction nodes with no annotated genes.
  rgraph <- simplifyReactionNetwork(rgraph, remove.missing.genes=TRUE)
 
 }
-\author{
-Ahmed Mohamed
-}
 \seealso{
 Other Network processing methods: \code{\link{expandComplexes}},
+  \code{\link{makeMetaboliteNetwork}},
   \code{\link{makeReactionNetwork}},
+  \code{\link{reindexNetwork}},
   \code{\link{rmSmallCompounds}},
   \code{\link{vertexDeleteReconnect}}
 }
-
+\author{
+Ahmed Mohamed
+}
+\concept{Network processing methods}

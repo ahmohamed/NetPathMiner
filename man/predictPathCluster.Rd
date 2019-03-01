@@ -34,21 +34,16 @@ Predicts new paths given a pathCluster model.
 		weight.method = "cor", use.attr="miriam.uniprot", bootstrap = FALSE)
 
 	## Get ranked paths using probabilistic shortest paths.
- ranked.p <- pathRanker(rgraph, method="prob.shortest.path", 
+ ranked.p <- pathRanker(rgraph, method="prob.shortest.path",
 					K=20, minPathSize=8)
-	
-	## Convert paths to binary matrix. 
+
+	## Convert paths to binary matrix.
 	ybinpaths <- pathsToBinary(ranked.p)
 	p.cluster <- pathCluster(ybinpaths, M=2)
 
 	## just an example of how to predict cluster membership.
 	pclust.pred <- predictPathCluster(p.cluster,ybinpaths$paths)
-	
-}
-\author{
-Ichigaku Takigawa
 
-Timothy Hancock
 }
 \seealso{
 Other Path clustering & classification methods: \code{\link{pathClassifier}},
@@ -59,4 +54,9 @@ Other Path clustering & classification methods: \code{\link{pathClassifier}},
   \code{\link{plotPathCluster}},
   \code{\link{predictPathClassifier}}
 }
+\author{
+Ichigaku Takigawa
 
+Timothy Hancock
+}
+\concept{Path clustering & classification methods}

@@ -41,10 +41,9 @@ can be specified through \code{gene.attr} argument.
 	genesets <- getGeneSets(ex_sbml, use.attr="compartment.name", gene.attr="miriam.uniprot")
 
 }
-\author{
-Ahmed Mohamed
-}
 \seealso{
 \code{\link{getGeneSetNetworks}}
 }
-
+\author{
+Ahmed Mohamed
+}

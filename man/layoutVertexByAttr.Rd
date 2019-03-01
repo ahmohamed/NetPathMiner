@@ -12,10 +12,10 @@ layoutVertexByAttr(graph, attr.name, cluster.strength = 1,
 
 \item{attr.name}{The attribute name by which vertices are laid out.}
 
-\item{cluster.strength}{A number indicating tie strengths between vertices with the same attribute. 
+\item{cluster.strength}{A number indicating tie strengths between vertices with the same attribute.
 The larger it is, the closer the vertices will be.}
 
-\item{layout}{A layout function, ideally a force-directed layout fuction, such as 
+\item{layout}{A layout function, ideally a force-directed layout fuction, such as
 \code{\link[igraph]{layout.fruchterman.reingold}} and \code{\link[igraph]{layout.kamada.kawai}}.}
 }
 \value{
@@ -27,15 +27,12 @@ This function generates a layout for igraph objects, keeping vertices with the s
 }
 \examples{
   data("ex_kgml_sig")
-  v.layout <- layoutVertexByAttr(ex_kgml_sig, "pathway") 
+  v.layout <- layoutVertexByAttr(ex_kgml_sig, "pathway")
   plotNetwork(ex_kgml_sig, vertex.color="pathway", layout=v.layout)
 
   v.layout <- layoutVertexByAttr(ex_kgml_sig, "pathway", cluster.strength=5)
   plotNetwork(ex_kgml_sig, vertex.color="pathway", layout=v.layout)
 
-}
-\author{
-Ahmed Mohamed
 }
 \seealso{
 Other Plotting methods: \code{\link{colorVertexByAttr}},
@@ -46,4 +43,7 @@ Other Plotting methods: \code{\link{colorVertexByAttr}},
   \code{\link{plotNetwork}},
   \code{\link{plotPathClassifier}}, \code{\link{plotPaths}}
 }
-
+\author{
+Ahmed Mohamed
+}
+\concept{Plotting methods}

@@ -10,7 +10,7 @@ rmSmallCompounds(graph, method = c("remove", "duplicate"),
 \arguments{
 \item{graph}{A metabolic network.}
 
-\item{method}{How to handle small compounds. Either simply delete these vertices \code{"remove"} (default), 
+\item{method}{How to handle small compounds. Either simply delete these vertices \code{"remove"} (default),
 or make a separate vertex for each reaction they participate in \code{"duplicate"}.}
 
 \item{small.comp.ls}{A list of small compounds to be used.}
@@ -27,19 +27,21 @@ ChEBI and CAS identifiers.
 }
 \examples{
     data(ex_sbml)
-    \dontshow{ex_sbml}    
-    
+    \dontshow{ex_sbml}
+
     sbml.removed <- rmSmallCompounds(ex_sbml, method="remove")
     \dontshow{sbml.removed}
 
 }
-\author{
-Ahmed Mohamed
-}
 \seealso{
 Other Network processing methods: \code{\link{expandComplexes}},
+  \code{\link{makeMetaboliteNetwork}},
   \code{\link{makeReactionNetwork}},
+  \code{\link{reindexNetwork}},
   \code{\link{simplifyReactionNetwork}},
   \code{\link{vertexDeleteReconnect}}
 }
-
+\author{
+Ahmed Mohamed
+}
+\concept{Network processing methods}

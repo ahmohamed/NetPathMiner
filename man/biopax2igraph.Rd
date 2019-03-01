@@ -12,10 +12,10 @@ biopax2igraph(biopax, parse.as = c("metabolic", "signaling"),
 
 \item{parse.as}{Whether to process file into a metabolic or a signaling network.}
 
-\item{expand.complexes}{Split protein complexes into individual gene nodes. Ignored if 
+\item{expand.complexes}{Split protein complexes into individual gene nodes. Ignored if
 \code{parse.as="metabolic"}.}
 
-\item{inc.sm.molecules}{Include small molecules that are participating in signaling events. Ignored if 
+\item{inc.sm.molecules}{Include small molecules that are participating in signaling events. Ignored if
 \code{parse.as="metabolic"}.}
 
 \item{verbose}{Whether to display the progress of the function.}
@@ -38,7 +38,7 @@ to their corresponding \code{Left}s and \code{Right}s. Each reaction vertex has 
 listing all \code{Catalysis} relationships of this reaction. As a general rule, reactions inherit all annotation
 attributes of its catalyzig genes.
 
-Signaling network have genes as vertices and edges represent interactions, such as activiation / inhibition. 
+Signaling network have genes as vertices and edges represent interactions, such as activiation / inhibition.
 Genes participating in successive reactions are also connected. Signaling interactions are constructed from
 \code{Control} classes, where edges are drawn from \code{controller} to \code{controlled}.
 
@@ -48,7 +48,7 @@ MIRIAM guidelines (\code{miraim.db}, where db is the database name).
 \examples{
 if(require(rBiopaxParser)){
     data(ex_biopax)
-    # Process biopax as a metabolic network 
+    # Process biopax as a metabolic network
     g <- biopax2igraph(ex_biopax)
     plotNetwork(g)
 
@@ -56,11 +56,11 @@ if(require(rBiopaxParser)){
     g <- biopax2igraph(ex_biopax, parse.as="signaling", expand.complexes=TRUE)
 }
 }
-\author{
-Ahmed Mohamed
-}
 \seealso{
 Other Database extraction methods: \code{\link{KGML2igraph}},
   \code{\link{SBML2igraph}}
 }
-
+\author{
+Ahmed Mohamed
+}
+\concept{Database extraction methods}

@@ -9,7 +9,7 @@ colorVertexByAttr(graph, attr.name, col.palette = palette())
 \arguments{
 \item{graph}{An annotated igraph object.}
 
-\item{attr.name}{The attribute name (ex: "pathway") by which vertices will be colored. 
+\item{attr.name}{The attribute name (ex: "pathway") by which vertices will be colored.
 Complex attributes, where a vertex belongs to more than one group, are supported.}
 
 \item{col.palette}{A color palette, or a palette generating function (ex: \preformatted{col.palette=rainbow}).}
@@ -23,12 +23,9 @@ This function returns a list of colors for vertices, assigned similar colors if 
 }
 \examples{
   data("ex_kgml_sig")
-  v.colors <- colorVertexByAttr(ex_kgml_sig, "pathway") 
+  v.colors <- colorVertexByAttr(ex_kgml_sig, "pathway")
   plotNetwork(ex_kgml_sig, vertex.color=v.colors)
 
-}
-\author{
-Ahmed Mohamed
 }
 \seealso{
 Other Plotting methods: \code{\link{layoutVertexByAttr}},
@@ -39,4 +36,7 @@ Other Plotting methods: \code{\link{layoutVertexByAttr}},
   \code{\link{plotNetwork}},
   \code{\link{plotPathClassifier}}, \code{\link{plotPaths}}
 }
-
+\author{
+Ahmed Mohamed
+}
+\concept{Plotting methods}
