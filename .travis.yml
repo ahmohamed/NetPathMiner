@@ -1,10 +1,7 @@
 # Sample .travis.yml for R projects
 
 language: r
-warnings_are_errors: true
-sudo: required
-bioc_required: true
-bioc_use_devel: true
+r: bioc-devel
 
 before_install:
  - wget 'http://downloads.sourceforge.net/project/sbml/libsbml/5.11.4/stable/libSBML-5.11.4-core-src.tar.gz?r=&ts=1435978044' -O /tmp/libsbml.tar.gz
@@ -15,7 +12,7 @@ before_install:
 apt_packages:
  - libcurl4-openssl-dev
  - libxml2-dev
- 
+
 env:
  global:
    - CRAN: http://cran.rstudio.com
