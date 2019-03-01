@@ -42,11 +42,12 @@ utils::globalVariables(c("nei", "to", "from", "delete"))
 #'     \dontshow{sbml.removed}
 #'
 rmSmallCompounds <- function(graph, method=c("remove","duplicate"), small.comp.ls=NPMdefaults("small.comp.ls")){
-    if(is.null(V(graph)$reactions))
+    if(graph$type != "MR.graph")
         stop("graph is not a metaboite-reaction netowrk.")
 
     if(is.null(V(graph)$attr))
         stop("graph is not annotated.")
+
     term.list <- c("miriam.pubchem.compound", "miriam.kegg.compound", "miriam.chebi", "miriam.cas")
 
     std.names <- stdAttrNames(graph, "matches")
@@ -59,12 +60,13 @@ rmSmallCompounds <- function(graph, method=c("remove","duplicate"), small.comp.l
                         function(x) getAttribute(graph, x)[!V(graph)$reactions]
                 )
 
-
+    std_names_map = std.names[terms,1]
     res <- sapply(1:length(attr.ls), function(i){
-                sapply(attr.ls[[i]],
-                        function(x) sum(x%in%small.comp.ls[,std.names[terms,1][[i]]])>0
-                )
-            })
+        sapply(attr.ls[[i]],
+            function(x)
+                sum( x %in% small.comp.ls[, std_names_map[[i]]] )>0
+        )
+    })
 
     vids <- which(apply(res,1,any)) # Rows with at least one match.
     vids <- as.integer(V(graph)[!V(graph)$reactions])[vids] #vertex ids on the graph
