@@ -410,6 +410,93 @@ expandComplexes <- function(graph, v.attr,
     return(gout);
 }
 
+#' Replaces current vertex ids with chosen attribute.
+#'
+#' This function allows users to replace vertex ids with another attribute,
+#' calculating connectivities based on the new attribute.
+#'
+#' This functions can be very useful when merging networks constructed from different databases.
+#' For example, to match a network created from Reactome to a KEGG network, you can reindex the
+#' vertices by "miriam.kegg.compound" attribute. Another usage is to remove duplicated vertices (in case of
+#' different subcellular compartments, for example). if a network has ATP_membrane & ATP_cytoplasm vertices,
+#' reindexing by chemical name will collapse them into one `ATP` vertex.
+#'
+#' @param graph An annotated igraph object.
+#' @param v.attr Name of the attribute to use as vertex ids.
+#'
+#' @return A new graph with vertices expanded.
+#'
+#' @author Ahmed Mohamed
+#' @family Network processing methods
+#' @export
+#' @examples
+#'  ## Make a gene network from a reaction network.
+#'  data(ex_sbml)	# A bipartite metbaolic network.
+#'  rgraph <- makeReactionNetwork(ex_sbml, simplify=TRUE)
+#'  ggraph <- makeGeneNetwork(rgraph)
+#'
+#'  ## Expand vertices into their contituent genes.
+#'  data(ex_kgml_sig)	# Ras and chemokine signaling pathways in human
+#' 	ggraph <- expandComplexes(ex_kgml_sig, v.attr = "miriam.ncbigene",
+#' 						keep.parent.attr= c("^pathway", "^compartment"))
+#'
+#'  ## Create a separate vertex for each compartment. This is useful in duplicating
+#' 	##  metabolite vertices in a network.
+#' \dontrun{
+#'  graph <- expandComplexes(graph, v.attr = "compartment",
+#'         keep.parent.attr = "all",
+#'         expansion.method = "duplicate",
+#'         missing.method = "keep")
+#' }
+#'
+reindexNetwork <- function(graph, v.attr) {
+    if(missing(v.attr))
+        stop("v.attr: Vertex attribute to be used in expansion is not specified.")
+
+    attr.names <- getAttrNames(graph)
+    if(!v.attr %in% attr.names)
+        stop(v.attr,": Attribute not found in graph.")
+
+    attr.ls = lapply(V(graph)$attr, "[[", v.attr)
+
+    expansion.method <- "normal"
+    missing.method <- "remove"
+
+    attr_func <- function(...){
+        l = mapply(function(...) unique(c(...)),...,SIMPLIFY=FALSE)
+        l[!is.na(names(l))]
+    }
+
+    z = .Call("expand_complexes", ATTR_LS=attr.ls,
+    EL=as.integer(t(get.edgelist(graph, names=FALSE))-1),
+    V = V(graph)$name,
+    EXPAND=expansion.method,
+    MISSING=missing.method)
+
+    gout = graph.empty() + vertices(z$vertices)
+    gout = gout +igraph::edges(z$edges)
+
+    attr_terms = lapply(V(graph)$attr, "[", attr.names)
+    V(gout)$attr <- lapply(z$parents, function(x)
+    do.call("attr_func", attr_terms[x])
+    )
+
+    gout <- setAttribute(gout, v.attr, V(gout)$name)
+    for(i in list.edge.attributes(graph)){
+        gout <- set.edge.attribute(gout, i, value=get.edge.attribute(graph, i)[z$e.parents] )
+    }
+    for(i in list.graph.attributes(graph)){
+        gout <- set.graph.attribute(gout, i, value=get.graph.attribute(graph, i) )
+    }
+    first_parent = sapply(z$parents, head,1)
+    for(i in list.vertex.attributes(graph)){
+        if(!i %in% c("name", "attr")){
+            gout <- set.vertex.attribute(gout, i, value=get.vertex.attribute(graph, i)[first_parent] )
+        }
+    }
+    return(gout);
+}
+
 #' @return \code{makeGeneNetwork} returns a graph, where nodes are genes, and edges represent
 #' participation in succesive reactions.
 #'
