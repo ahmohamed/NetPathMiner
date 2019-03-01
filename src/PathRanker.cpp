@@ -1,6 +1,6 @@
 //=======================================================================
-// Path Ranker 
-// 
+// Path Ranker
+//
 // Author: Ichigaku Takigawa
 //   a2ps --no-header --landscape --columns=1 --font-size=3.6
 //   output.log -o test.ps
@@ -12,12 +12,21 @@
 #include <iterator>
 #include <math.h>
 
+// Disable warnings in boost header code.
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wunused-local-typedef"
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wunused-local-typedef"
+
 
 // boost 1.33.1 required
 #include <boost/graph/graph_utility.hpp>
 #include <boost/graph/adjacency_list.hpp>
 #include <boost/pending/relaxed_heap.hpp>
 #include <boost/pending/indirect_cmp.hpp>
+
+#pragma GCC diagnostic pop
+#pragma clang diagnostic pop
 
 #define R_NO_REMAP
 
@@ -92,7 +101,7 @@ struct st_path_with_deviation {
   Vertex        deviation;
 };
 
-inline bool compare(const struct st_path_with_deviation& x, 
+inline bool compare(const struct st_path_with_deviation& x,
             const struct st_path_with_deviation& y){
   return x.score < y.score;
 }
@@ -115,7 +124,7 @@ void dijkstra_algorithm(Graph& g, const Vertex& s,
   IndirectCmp icmp(distance, compare);
 
   relaxed_heap<Vertex, IndirectCmp> minheap(n,icmp);
-  
+
   VertexIter vitr,vend;
   for(tie(vitr,vend)=vertices(g); vitr != vend; ++vitr) {
     minheap.push(*vitr);
@@ -161,10 +170,10 @@ st_shortest_path(const Vertex s, const Vertex t, Graph& g){
     }
     p.sequence.push_front(s);
   }
-  
+
   p.score = distance[t];
   p.deviation = 0;
-  
+
   return p;
 }
 
@@ -181,20 +190,20 @@ SEXP pathranker(SEXP node_list, SEXP edge_list, SEXP edge_weights, SEXP rk,SEXP 
   unsigned K =(unsigned)(REAL(rk)[0]);
   unsigned mps = (int)(REAL(minpathsize)[0]);
   SEXP new_path,all_paths;
-    
+
   Rf_protect(all_paths = Rf_allocVector(VECSXP,K));
 
   pair<Graph,VertexPair> data = R_get_st_graph_from(node_list, edge_list, edge_weights);
-    
+
   g = get_graph(data);
   s = get_start_vertex(data);
   t = get_end_vertex(data);
-    
+
   if(s == numeric_limits<Vertex>::max() or t == numeric_limits<Vertex>::max()){
     Rprintf("No vertex start or end vertices found.");
     return R_NilValue;
   }
-    
+
   // ======= Yen-Lawler algorithm ==================================
   // [1] Jin Y. Yen,
   //     Finding the k shortest loopless paths in a network,
@@ -205,19 +214,19 @@ SEXP pathranker(SEXP node_list, SEXP edge_list, SEXP edge_weights, SEXP rk,SEXP 
   //     to the shortest path problem,
   //     Management science, vol. 18, no. 7, 1972. 401-405
   // ===============================================================
- 
+
   deque<struct st_path_with_deviation> result, candidates;
-    
+
   Graph g_copy;
   deque<Vertex> prefix;
 
   WeightType    accumulated_score;
   EdgeWeightMap edge_weight_map = get(edge_weight, g);
-    
+
   struct st_path_with_deviation p, q;
 
   candidates.push_back(st_shortest_path(s, t, g));
-  
+
   unsigned k = 0;
   unsigned rsize = 0;
   while (rsize < K) {
@@ -226,17 +235,17 @@ SEXP pathranker(SEXP node_list, SEXP edge_list, SEXP edge_weights, SEXP rk,SEXP 
       //cout << "No more paths." << endl;
       break;
     }
-    
+
     // output k-th shortest loopless path
     sort(candidates.begin(), candidates.end(), compare);
     if(candidates.size() > K-rsize+1){
       candidates.resize(K-rsize+1);
     }
-    
+
     p = candidates.front();
     candidates.pop_front();
     result.push_back(p);
-    
+
     if(p.score==numeric_limits<WeightType>::max()){
       //cout << "No more paths." << endl;
       break;
@@ -258,23 +267,23 @@ SEXP pathranker(SEXP node_list, SEXP edge_list, SEXP edge_weights, SEXP rk,SEXP 
 
     prefix.clear();
     accumulated_score = 0;
-    
+
     for(unsigned i=0; i < p.sequence.size()-1; ++i){
       if(i >= p.deviation){
           // copy of the graph for editing
           g_copy = g;
-    
+
           // edge deletion
           for(unsigned j=0; j < result.size(); ++j){
             if(equal_first_i_nodes(result[j].sequence, p.sequence ,i)){
               remove_edge(result[j].sequence[i], result[j].sequence[i+1], g_copy);
             }
-          }             
+          }
           // vertex deletion
           for(unsigned j=0; j < i; ++j){
             clear_vertex(p.sequence[j], g_copy);
           }
-    
+
           // compute shortest path
           q = st_shortest_path(p.sequence[i], t, g_copy);
 
@@ -288,12 +297,12 @@ SEXP pathranker(SEXP node_list, SEXP edge_list, SEXP edge_weights, SEXP rk,SEXP 
             candidates.push_back(q);
           }
         }
-      
+
         prefix.push_back(p.sequence[i]);
         accumulated_score += edge_weight_map[edge(p.sequence[i], p.sequence[i+1],g).first];
     }
   }
-   
+
   Rf_unprotect(1);
   return all_paths;
 }
@@ -319,28 +328,28 @@ pair<Graph,VertexPair> R_get_st_graph_from(SEXP nodes, SEXP edges,SEXP edge_weig
     }
     counter++;
   }
-  
+
   SizeType n_vertices = name.size(); // # of vertices
-   
+
   // create a graph object
   Graph g(n_vertices);
-  
+
   // resister vertex names
   VertexIter v_iter, v_end;
   VertexNameMap vertex_name_map     = get(vertex_name, g);
-  
+
   for ( tie(v_iter,v_end)=vertices(g); v_iter != v_end; ++v_iter ){
     vertex_name_map[*v_iter] = name[*v_iter];
   }
-  
+
   // read the edgelist file
   VertexPair  v_pair;
   Edge        e_temp;
   //WeightType  d_value;
   string      edge_label;
-  
+
   EdgeNameMap   edge_name_map   = get(edge_name, g);
-  
+
   // define R types
   from_idxs = VECTOR_ELT(edges,0);
   to_idxs = VECTOR_ELT(edges,1);
@@ -354,18 +363,18 @@ pair<Graph,VertexPair> R_get_st_graph_from(SEXP nodes, SEXP edges,SEXP edge_weig
     e_temp = edge(v_pair.first, v_pair.second , g).first;
     edge_name_map[e_temp] = CHAR(STRING_ELT(labels,i));
   }
-  
+
   pair<Graph,VertexPair> ret;
   ret.first = g;
   ret.second.first  = s;
   ret.second.second = t;
-  
+
   return ret;
 }
 
 SEXP store_path_R(deque<Vertex> st_path, Graph& g, double p_score) {
   SEXP new_path,dimnames;
-  SEXP genes,compounds,weights,distance;  
+  SEXP genes,compounds,weights,distance;
 
   st_path.pop_back();	st_path.pop_front();  //delete "s" & "t" nodes
 
@@ -377,7 +386,7 @@ SEXP store_path_R(deque<Vertex> st_path, Graph& g, double p_score) {
   EdgeNameMap   edge_name_map   = get(edge_name, g);
   EdgeWeightMap edge_weight_map = get(edge_weight, g);
   Edge e_temp;
-     
+
   Rf_protect(genes = Rf_allocVector(STRSXP,st_path.size()));
   Rf_protect(compounds = Rf_allocVector(STRSXP,st_path.size() - 1));
   Rf_protect(weights = Rf_allocVector(REALSXP,st_path.size()-1));
@@ -387,7 +396,7 @@ SEXP store_path_R(deque<Vertex> st_path, Graph& g, double p_score) {
   SET_STRING_ELT(genes,0,Rf_mkChar(vertex_name_map[st_path[0]].c_str()));
   for (unsigned i = 0; i < st_path.size()-1; ++i) {
     e_temp = edge(st_path[i],st_path[i+1],g).first;
-    
+
     SET_STRING_ELT(compounds,i,Rf_mkChar(edge_name_map[e_temp].c_str()));
     SET_STRING_ELT(genes,i+1,Rf_mkChar(vertex_name_map[st_path[i+1]].c_str()));
     REAL(weights)[i] = edge_weight_map[e_temp];
@@ -401,7 +410,7 @@ SEXP store_path_R(deque<Vertex> st_path, Graph& g, double p_score) {
 
   SET_VECTOR_ELT(new_path,1,compounds);
   SET_VECTOR_ELT(dimnames,1,Rf_mkString("compounds"));
-  
+
   SET_VECTOR_ELT(new_path,2,weights);
   SET_VECTOR_ELT(dimnames,2,Rf_mkString("weights"));
 
@@ -414,5 +423,3 @@ SEXP store_path_R(deque<Vertex> st_path, Graph& g, double p_score) {
 
   return new_path;
 }
-
-

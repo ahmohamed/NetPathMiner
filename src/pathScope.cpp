@@ -1,6 +1,6 @@
 	//=======================================================================
-// Path Ranker 
-// 
+// Path Ranker
+//
 // Author: Ichigaku Takigawa
 //   a2ps --no-header --landscape --columns=1 --font-size=3.6
 //   output.log -o test.ps
@@ -18,11 +18,20 @@
 //init
 #include "init.h"
 
+// Disable warnings in boost header code.
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wunused-local-typedef"
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wunused-local-typedef"
+
 // boost 1.33.1 required
 #include <boost/graph/graph_utility.hpp>
 #include <boost/graph/adjacency_list.hpp>
 #include <boost/pending/relaxed_heap.hpp>
 #include <boost/pending/indirect_cmp.hpp>
+
+#pragma GCC diagnostic pop
+#pragma clang diagnostic pop
 
 #define R_NO_REMAP
 
@@ -78,7 +87,7 @@ void dijkstra_algorithm(Graph& g, const Vertex& s,
   IndirectCmp icmp(distance, compare);
 
   relaxed_heap<Vertex, IndirectCmp> minheap(n,icmp);
-  
+
   VertexIter vitr,vend;
   for(tie(vitr,vend)=vertices(g); vitr != vend; ++vitr){
     minheap.push(*vitr);
@@ -131,7 +140,7 @@ struct st_path_with_deviation {
   Vertex        deviation;
 };
 
-inline bool compare(const struct st_path_with_deviation& x, 
+inline bool compare(const struct st_path_with_deviation& x,
         const struct st_path_with_deviation& y){
   return x.score < y.score;
 }
@@ -153,12 +162,12 @@ st_shortest_path(const Vertex s, const Vertex t, Graph& g){
     }
     p.sequence.push_front(s);
   }
-  
+
   p.score = distance[t];
   p.deviation = 0;
-  
+
   return p;
-} 
+}
 
 pair<Graph,VertexPair> SCOPE_R_get_st_graph_from(SEXP nodes, SEXP edges,SEXP edge_weights,int *nt);
 
@@ -176,14 +185,14 @@ pair<Graph,VertexPair> SCOPE_R_get_st_graph_from(SEXP nodes, SEXP edges,SEXP edg
 /************************************************************************/
 
 void computeRandomScores(int maximumPathLength,const Vertex s,Graph &g,int nbSamples,
-                         int nbWarmingSteps,double **randomScores) 
+                         int nbWarmingSteps,double **randomScores)
 {
   //int currentIndex,currentLength,precedingVertexIndex,deadEnd,pvalue=0;
   int i,j,k,length,noLoop,vindex;
   int iterator,randomValue,nbValidNeighbours;
-  EdgeWeightMap  weight = get(edge_weight, g); 
+  EdgeWeightMap  weight = get(edge_weight, g);
   AdjacencyIter aitr, aend;
-  Vertex currentVertex; 
+  Vertex currentVertex;
   VertexIndexMap vertexIndexMap=get(vertex_index, g);
   int *indices,validVertexFound,validPath;
   int nbVertices;
@@ -191,9 +200,9 @@ void computeRandomScores(int maximumPathLength,const Vertex s,Graph &g,int nbSam
   int warmingTime;
   double logCurrentPathProbability,logProposalPathProbability;
   double currentScore,proposalScore;
- 
+
   indices=new int[maximumPathLength+1];
-  /*vertices array to obtain a vertex from an index*/ 
+  /*vertices array to obtain a vertex from an index*/
   nbVertices = num_vertices(g);
   Vertex *verticesArray=new Vertex[nbVertices];
   VertexIter vitr,vend;
@@ -213,7 +222,7 @@ void computeRandomScores(int maximumPathLength,const Vertex s,Graph &g,int nbSam
         } else {
             warmingTime=1;
         }
-        validPath=0; 
+        validPath=0;
         while(validPath==0) {
             /*here the paths building procedure starts*/
             logProposalPathProbability=0.0;
@@ -224,7 +233,7 @@ void computeRandomScores(int maximumPathLength,const Vertex s,Graph &g,int nbSam
             for(i=0;i<length;i++) {
                 if(out_degree(currentVertex,g)==0) {
                     break;
-                } 
+                }
                 /*check how many non-visited neighbours there are*/
                 nbValidNeighbours=0;
                 for(tie(aitr,aend)=adjacent_vertices(currentVertex,g); aitr != aend; ++aitr) {
@@ -236,11 +245,11 @@ void computeRandomScores(int maximumPathLength,const Vertex s,Graph &g,int nbSam
                             noLoop=0;
                             break;
                         }
-                    }    
+                    }
                     if(noLoop==1) {
                         nbValidNeighbours++;
                     }
-                }  
+                }
                 if(nbValidNeighbours>0) {
                     logProposalPathProbability-=log((double)nbValidNeighbours);
                     validVertexFound=0;
@@ -249,16 +258,16 @@ void computeRandomScores(int maximumPathLength,const Vertex s,Graph &g,int nbSam
                         j=0;
                         for(tie(aitr,aend)=adjacent_vertices(currentVertex,g); aitr != aend; ++aitr) {
                             if(j==randomValue) {
-                                proposalScore+=(double)weight[edge(currentVertex,*aitr,g).first];                    
+                                proposalScore+=(double)weight[edge(currentVertex,*aitr,g).first];
                                 /*must verify first if there is no loop*/
                                 noLoop=1;
                                 vindex=vertexIndexMap[*aitr];
-                                for(k=i;k>=0;k--) {                        
+                                for(k=i;k>=0;k--) {
                                     if(vindex==indices[k]) {
                                         noLoop=0;
                                         break;
                                     }
-                                }                        
+                                }
                                 if(noLoop==1) {
                                     currentVertex=*aitr;
                                     indices[i+1]=vindex;
@@ -285,13 +294,13 @@ void computeRandomScores(int maximumPathLength,const Vertex s,Graph &g,int nbSam
             nbChanges++;
             currentScore=proposalScore;
             logCurrentPathProbability=logProposalPathProbability;
-        } 
+        }
         if(warmingTime==0) {
             randomScores[length][currentSampleSize]=currentScore;
             logCurrentPathProbability=DBL_MAX;
             currentSampleSize++;
         }
-     } 
+     }
   }
   delete []indices;
   delete []verticesArray;
@@ -344,9 +353,9 @@ double computePvalue(double score,int length,int nbSamples,double **randomScores
   while(true) {
     c=(a+b)/2;
     if(randomScores[length][c]>=score) {
-      b=c;      
+      b=c;
     } else {
-      a=c;  
+      a=c;
     }
     if(b==(a+1)) {
       break;
@@ -362,7 +371,7 @@ double computePvalue(double score,int length,int nbSamples,double **randomScores
 /***************************************************************************/
 
 double computePvalue2(double score,int length,int nbEdges,double *weights) {
-  
+
   int i;
   int iterator,nbIterations,randomValue;
 
@@ -390,18 +399,18 @@ double computePvalue2(double score,int length,int nbEdges,double *weights) {
 
 //struct st_path_with_deviation
 SEXP st_shortestPvalue_path(const Vertex s,const Vertex t,Graph &g,
-                       int maximumPathLength,int nbSamples,double **randomScores,double alpha) { 
+                       int maximumPathLength,int nbSamples,double **randomScores,double alpha) {
   int i,j,n;
   int sindex,tindex;
   int length,uindex,vindex,noLoop,precedingVertexIndex,currentIndex,currentLength;
-  Vertex u,v; 
-  double rhs; 
-  int **pathsMatrix; /*pathsMatrix indicates for each pari (vertexIndex,length) the preceding vertexIndex 
+  Vertex u,v;
+  double rhs;
+  int **pathsMatrix; /*pathsMatrix indicates for each pari (vertexIndex,length) the preceding vertexIndex
                            for the shortest path of length l*/
   double **scoresMatrix;
   AdjacencyIter aitr, aend;
   n = num_vertices(g);
- 
+
   /*call shortest path function*/
   struct st_path_with_deviation shortestPath=st_shortest_path(s,t,g);
 
@@ -416,7 +425,7 @@ SEXP st_shortestPvalue_path(const Vertex s,const Vertex t,Graph &g,
   scoresMatrix=new double *[n];
   pathsMatrix=new int *[n];
   /*end of memory allocation*/
- 
+
    /*initialization*/
   for(i=0;i<n;i++) {
     scoresMatrix[i]=new double[n];
@@ -430,8 +439,8 @@ SEXP st_shortestPvalue_path(const Vertex s,const Vertex t,Graph &g,
   VertexIter vitr,vend;
   for(tie(vitr,vend)=vertices(g); vitr != vend; ++vitr) {
     verticesArray[vertexIndexMap[*vitr]]=*vitr;
-  }  
-     
+  }
+
   sindex=vertexIndexMap[s];
   tindex=vertexIndexMap[t];
   scoresMatrix[sindex][0]=0.0;
@@ -439,11 +448,11 @@ SEXP st_shortestPvalue_path(const Vertex s,const Vertex t,Graph &g,
   for(length=0;length<maximumPathLength;length++) {
     for(tie(vitr,vend)=vertices(g); vitr != vend; ++vitr) {
         u=*vitr;
-        uindex=vertexIndexMap[u]; 
+        uindex=vertexIndexMap[u];
 
         /*impossible value*/
 
-        if(scoresMatrix[uindex][length]>-0.5) { 
+        if(scoresMatrix[uindex][length]>-0.5) {
 
             for(tie(aitr,aend)=adjacent_vertices(u,g); aitr != aend; ++aitr) {
                 v   = *aitr;
@@ -456,7 +465,7 @@ SEXP st_shortestPvalue_path(const Vertex s,const Vertex t,Graph &g,
                 currentLength=length;
 
                 while(currentIndex!=sindex) {
-                   
+
                     precedingVertexIndex=pathsMatrix[currentIndex][currentLength];
 
                     if(precedingVertexIndex==vindex) {
@@ -478,7 +487,7 @@ SEXP st_shortestPvalue_path(const Vertex s,const Vertex t,Graph &g,
         }
      }
   }
-  
+
   /*generate pvalues*/
   double *pvalues;
   EdgeIter eitr,eend;
@@ -501,7 +510,7 @@ SEXP st_shortestPvalue_path(const Vertex s,const Vertex t,Graph &g,
   deque <double>pathWeights;
   Edge e_temp;
 
-  SEXP genes = R_NilValue,compounds = R_NilValue,pweights = R_NilValue,distance = R_NilValue,pp = R_NilValue;  
+  SEXP genes = R_NilValue,compounds = R_NilValue,pweights = R_NilValue,distance = R_NilValue,pp = R_NilValue;
 
   int allocated = 0;
 
@@ -518,12 +527,12 @@ SEXP st_shortestPvalue_path(const Vertex s,const Vertex t,Graph &g,
                 Rf_protect(pweights = Rf_allocVector(REALSXP,length-1));
                 Rf_protect(distance = Rf_allocVector(REALSXP,1));
                 Rf_protect(pp =  Rf_allocVector(REALSXP,1));
-                
+
                 REAL(distance)[0] = scoresMatrix[tindex][length];
                 REAL(pp)[0] = pvalues[length];
                 allocated = 1;
-                
-                /*path display*/             
+
+                /*path display*/
                 currentIndex=tindex;
                 currentLength=length;
                 path.clear();
@@ -544,7 +553,7 @@ SEXP st_shortestPvalue_path(const Vertex s,const Vertex t,Graph &g,
                 //v=u;
                 path.pop_front();
                 pathWeights.clear();
-                
+
                 u=path.front();
                 SET_STRING_ELT(genes,0,Rf_mkChar(vertexNameMap[u].c_str()));
                 path.pop_front();
@@ -556,36 +565,36 @@ SEXP st_shortestPvalue_path(const Vertex s,const Vertex t,Graph &g,
                     e_temp = edge(v,u,g).first;
                     pathWeights.push_back(weight_map[e_temp]);
                     v=u;
-                    
+
                     SET_STRING_ELT(compounds,i,Rf_mkChar(edge_name_map[e_temp].c_str()));
                     SET_STRING_ELT(genes,i+1,Rf_mkChar(vertexNameMap[u].c_str()));
-                    
+
                     i = i + 1;
-                    
+
                     path.pop_front();
                 }
                 e_temp = edge(v,t,g).first;
                 pathWeights.push_back(weight_map[e_temp]);
-                               
+
                 SET_STRING_ELT(compounds,length-2,Rf_mkChar(edge_name_map[e_temp].c_str()));
                 SET_STRING_ELT(genes,length-1,Rf_mkChar(vertexNameMap[t].c_str()));
-                
+
                 i = 0;
                 while(not pathWeights.empty()) {
-                    REAL(pweights)[i] = pathWeights.front();                    
+                    REAL(pweights)[i] = pathWeights.front();
                     pathWeights.pop_front();
                     i = i + 1;
                 }
-                
+
                 break;
                 /*end of path display*/
-                
+
         } else if(pvalues[length]>0.1) {
                break;
         }
     }
   }
- 
+
   /*memory desallocation*/
   for(i=0;i<n;i++) {
     delete [] scoresMatrix[i];
@@ -596,7 +605,7 @@ SEXP st_shortestPvalue_path(const Vertex s,const Vertex t,Graph &g,
   delete [] pvalues;
   delete [] weights;
   /*end of memory desallocation*/
-  
+
   SEXP np, dimnames;
   if (allocated == 1) {
     Rf_protect(np = Rf_allocVector(VECSXP, 5));
@@ -604,20 +613,20 @@ SEXP st_shortestPvalue_path(const Vertex s,const Vertex t,Graph &g,
     SET_VECTOR_ELT(np,0,genes);
     SET_VECTOR_ELT(dimnames,0,Rf_mkString("genes"));
     SET_VECTOR_ELT(np,1,compounds);
-    SET_VECTOR_ELT(dimnames,1,Rf_mkString("compounds"));  
+    SET_VECTOR_ELT(dimnames,1,Rf_mkString("compounds"));
     SET_VECTOR_ELT(np,2,pweights);
     SET_VECTOR_ELT(dimnames,2,Rf_mkString("weights"));
     SET_VECTOR_ELT(np,3,distance);
-    SET_VECTOR_ELT(dimnames,3,Rf_mkString("distance"));  
+    SET_VECTOR_ELT(dimnames,3,Rf_mkString("distance"));
     SET_VECTOR_ELT(np,4,pp);
     SET_VECTOR_ELT(dimnames,4,Rf_mkString("pvalue"));
     Rf_setAttrib(np,R_NamesSymbol,dimnames);
     Rf_unprotect(7);
     return(np);
-  } else {  
+  } else {
     return R_NilValue;
   }
-  
+
 }
 
 /*********************************************************************************/
@@ -626,12 +635,12 @@ SEXP st_shortestPvalue_path(const Vertex s,const Vertex t,Graph &g,
 /*                                                                               */
 /*********************************************************************************/
 
-extern "C" SEXP scope(SEXP node_list, 
-                      SEXP edge_list, 
-                      SEXP edge_weights, 
+extern "C" SEXP scope(SEXP node_list,
+                      SEXP edge_list,
+                      SEXP edge_weights,
                       SEXP SAMPLEDPATHS,
                       SEXP ALPHA,
-                      SEXP ECHO) 
+                      SEXP ECHO)
 {
   Vertex s,t;
   Graph g;
@@ -640,11 +649,11 @@ extern "C" SEXP scope(SEXP node_list,
   double **randomScores;
   int maxSamplePathLength = Rf_ncols(SAMPLEDPATHS), numberPathSamples = Rf_nrows(SAMPLEDPATHS);
   double alpha = REAL(ALPHA)[0];
-    
+
   int nt = 0;
   pair<Graph,VertexPair> data = SCOPE_R_get_st_graph_from(node_list, edge_list, edge_weights,&nt);
-    
-  
+
+
   g = get_graph(data);
   s = get_start_vertex(data);
   t = get_end_vertex(data);
@@ -665,20 +674,20 @@ extern "C" SEXP scope(SEXP node_list,
     Rprintf("No vertex start or end vertices found.");
     return R_NilValue;
   }
-    
+
   start=0;
   end=num_vertices(g);
 
   VertexNameMap vertex_name_map = get(vertex_name, g);
   VertexIter vitr,vend;
   AdjacencyIter aitr, aend;
-   
+
   //struct st_path_with_deviation p, q;
   SEXP newpath,allpaths;
   Rf_protect(allpaths = Rf_allocVector(VECSXP,nt));
   vector<string> reachedTargets;
   vector<string>::iterator it;
-  
+
   counter=0;
   if (echo == 1) Rprintf("There are %d nodes in the neighborhood", nt);
   int vectid = 0;
@@ -686,8 +695,8 @@ extern "C" SEXP scope(SEXP node_list,
     for(tie(aitr,aend)=adjacent_vertices(*vitr,g); aitr != aend; ++aitr) {
         if(*aitr==t) {
             string target(vertex_name_map[*vitr]);
-            string last_compound = target; 
-            
+            string last_compound = target;
+
             if (echo == 1) Rprintf("TARGET : %s %d/ %d", last_compound.c_str() ,vectid+1 ,nt);
             int alreadyreached = 0;
             for (it=reachedTargets.begin();it < reachedTargets.end();it++) {
@@ -700,7 +709,7 @@ extern "C" SEXP scope(SEXP node_list,
                 if((start<=counter)&&(counter<end)) {
                     newpath = st_shortestPvalue_path(s,*vitr,g,maxSamplePathLength,numberPathSamples,randomScores,alpha);
                     if (newpath != R_NilValue) {
-                        SET_VECTOR_ELT(allpaths,vectid,newpath);   
+                        SET_VECTOR_ELT(allpaths,vectid,newpath);
                         reachedTargets.push_back(last_compound);
                          if (echo == 1) Rprintf(" - Found a path to %s\n", last_compound.c_str());;
                     } else {
@@ -712,27 +721,27 @@ extern "C" SEXP scope(SEXP node_list,
         }
     }
     counter++;
-  }  
-  
+  }
+
   SEXP scopecompounds, out, dimnames;
-  
+
   Rf_protect(scopecompounds = Rf_allocVector(STRSXP,reachedTargets.size()));
-  for (int s = 0;s < (int)reachedTargets.size();s++) {   
+  for (int s = 0;s < (int)reachedTargets.size();s++) {
       SET_STRING_ELT(scopecompounds,s,Rf_mkChar(reachedTargets.at(s).c_str()));
   }
-  
+
   Rf_protect(out = Rf_allocVector(VECSXP,2));
-  Rf_protect(dimnames = Rf_allocVector(VECSXP,2));      
+  Rf_protect(dimnames = Rf_allocVector(VECSXP,2));
   SET_VECTOR_ELT(out,0,allpaths);
-  SET_VECTOR_ELT(dimnames,0,Rf_mkString("paths"));   
+  SET_VECTOR_ELT(dimnames,0,Rf_mkString("paths"));
   SET_VECTOR_ELT(out,1,scopecompounds);
-  SET_VECTOR_ELT(dimnames,1,Rf_mkString("scope"));    
+  SET_VECTOR_ELT(dimnames,1,Rf_mkString("scope"));
   Rf_setAttrib(out,R_NamesSymbol,dimnames);
-  
+
   /*memory desallocation*/
   delete [] randomScores;
   Rf_unprotect(4);
-  
+
   return(out);
 }
 
@@ -757,27 +766,27 @@ pair<Graph,VertexPair> SCOPE_R_get_st_graph_from(SEXP nodes, SEXP edges,SEXP edg
     }
     counter++;
   }
-  
+
   SizeType n_vertices = name.size(); // # of vertices
-   
+
   // create a graph object
   Graph g(n_vertices);
-  
+
   // resister vertex names
   VertexIter v_iter, v_end;
   VertexNameMap vertex_name_map     = get(vertex_name, g);
-  
+
   for ( tie(v_iter,v_end)=vertices(g); v_iter != v_end; ++v_iter ){
     vertex_name_map[*v_iter] = name[*v_iter];
   }
-  
+
   // read the edgelist file
   VertexPair  v_pair;
   Edge        e_temp;
   string      edge_label;
-  
+
   EdgeNameMap   edge_name_map   = get(edge_name, g);
-  
+
   // define R types
   from_idxs = VECTOR_ELT(edges,0);
   to_idxs = VECTOR_ELT(edges,1);
@@ -793,21 +802,21 @@ pair<Graph,VertexPair> SCOPE_R_get_st_graph_from(SEXP nodes, SEXP edges,SEXP edg
     e_temp = edge(v_pair.first, v_pair.second , g).first;
     edge_name_map[e_temp] = CHAR(STRING_ELT(labels,i));
   }
-  
+
   pair<Graph,VertexPair> ret;
   ret.first = g;
   ret.second.first  = s;
   ret.second.second = t;
-   
+
   return ret;
 }
 
-extern "C" SEXP samplepaths(SEXP node_list, 
-                      SEXP edge_list, 
-                      SEXP edge_weights, 
+extern "C" SEXP samplepaths(SEXP node_list,
+                      SEXP edge_list,
+                      SEXP edge_weights,
                       SEXP MAXPATHLENGTH,
                       SEXP SAMPLEPATHS,
-                      SEXP WARMUPSTEPS) 
+                      SEXP WARMUPSTEPS)
 {
   Vertex s;
   Graph g;
@@ -816,23 +825,23 @@ extern "C" SEXP samplepaths(SEXP node_list,
   int nbSamples=INTEGER(SAMPLEPATHS)[0];
   int nbWarmingSteps=INTEGER(WARMUPSTEPS)[0];
   int i,j;
-  
+
   SEXP SCORES;
   Rf_protect(SCORES = Rf_allocVector(REALSXP,nbSamples*(maximumPathLength+1)));
   double *rs = REAL(SCORES);
-  
+
   double **randomScores= new double *[(maximumPathLength+1)];
   for (i = 0;i < (maximumPathLength+1);i = i + 1) randomScores[i] = &rs[i*(nbSamples)];
-    
+
   int nt = 0;
   pair<Graph,VertexPair> data = SCOPE_R_get_st_graph_from(node_list, edge_list, edge_weights,&nt);
-    
+
   g = get_graph(data);
   s = get_start_vertex(data);
-        
+
   /*compute random scores for length ranging from 1 to maximumPathLength*/
   GetRNGstate();
-  computeRandomScores(maximumPathLength,s,g,nbSamples,nbWarmingSteps,randomScores);  
+  computeRandomScores(maximumPathLength,s,g,nbSamples,nbWarmingSteps,randomScores);
   PutRNGstate();
   std::vector<double> orderedScores;
   for(i=1;i<=maximumPathLength;i++) {
@@ -848,9 +857,6 @@ extern "C" SEXP samplepaths(SEXP node_list,
 
   Rf_unprotect(1);
   delete [] randomScores;
-  
-  return(SCORES);    
+
+  return(SCORES);
 }
-
-
-
