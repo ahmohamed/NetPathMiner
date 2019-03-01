@@ -76,7 +76,7 @@ void corEdgeWeights(double * X,
 					xp = X[from_indx*nobs + i]; yp = X[to_indx*nobs + i];
 					}
 
-					if (!isnan(xp) && !isnan(yp)) {
+					if (!std::isnan(xp) && !std::isnan(yp)) {
 						Ex = Ex + xp; Exx = Exx + xp*xp; Ey = Ey + yp; Eyy = Eyy + yp*yp; Exy = Exy + xp*yp;
 					} else n = n - 1.0; // If it is a missing value skip that observation completely and reduce the dataset size by 1.
 				}
