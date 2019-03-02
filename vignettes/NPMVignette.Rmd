@@ -1,9 +1,9 @@
 ---
 title: Annotating Genomic Variants
 author:
-–name: Ahmed Mohamed
+- name: Ahmed Mohamed
   affiliation: QIMR Berghofer Medical Research Institute, 300 Herston Road, Herston QLD 4006, Australia
-  date: "`r Sys.Date()`"
+date: "`r Sys.Date()`"
 vignette: >
   %\VignetteIndexEntry{NetPathMiner Vignette}
   %\VignetteEngine{knitr::rmarkdown}
