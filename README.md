@@ -2,7 +2,7 @@
 [![Travis-CI Build Status](https://travis-ci.org/ahmohamed/NetPathMiner.svg?branch=master)](https://travis-ci.org/ahmohamed/NetPathMiner)
 
 NetPathMiner implements a flexible module-based process flow for network path mining and visualization,
-which can be fully inte-grated with user-customized functions.
+which can be fully integrated with user-customized functions.
 It supports construction of various types of genome scale networks from three different pathway
 file formats, enabling its utility to most common pathway databases.
 In addition, NetPathMiner provides different visualization techniques to facilitate the analysis of even
@@ -33,7 +33,7 @@ Installing libSBML for Unix users is optional. However, NetPathMiner will not be
 files. If you will not use SBML functions, you can skip this part.
 
 From the website of libSBML http://sbml.org/Software/libSBML, you can directly download the
-binaries suitable for your system from ``Download libSBML'' link. You can follow the installation instructions
+binaries suitable for your system from `Download libSBML` link. You can follow the installation instructions
 on the website.
 
 #### Prerequisites for Windows users
