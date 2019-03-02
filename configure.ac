@@ -27,7 +27,7 @@ AC_CHECK_LIB(sbml, readSBML, , [SBML=false])
 
 #!/bin/sh
 if test -d ./src/boost.tar.gz;
-  then 
+  then
       echo 'found boost header sources and tar archive;\n using what is there.'
   else
       echo "untarring boost include tree...";
@@ -45,42 +45,42 @@ PKG_LIBS="${LIBS}"
 
 if ${SBML}
   then
-    echo 'libSBML found, finding configuration...';   
-    if type "pkg-config" > /dev/null 
+    echo 'libSBML found, finding configuration...';
+    if type "pkg-config" > /dev/null
       then
           PKG_CONFIG="pkg-config"
           echo "pkg-config tool found"
       else
         AC_PATH_PROG(PKG_CONFIG, pkg-config)
     fi;
-    
+
     SBMLPC="libsbml"
     if test -z `${PKG_CONFIG} --exists ${SBMLPC}`
       then
-        SBMLPC=`locate libsbml.pc`
+        SBMLPC=`locate libsbml.pc 2>/dev/null`
     fi;
-    
+
     if test -n "${SBMLPC}"
       then
-        echo "libsbml.pc found. Using pkg-config to extract it."        
+        echo "libsbml.pc found. Using pkg-config to extract it."
         SBML_INCDIR="-DHAVE_SBML `${PKG_CONFIG} --cflags ${SBMLPC}`"
         SBML_LIBS=`${PKG_CONFIG} --libs ${SBMLPC}`
       else
         echo "Couldn't find libsbml.pc. Searching for libsbml in candidate directories."
         if test -d /usr/include/sbml
           then SBML_INCDIR="-DHAVE_SBML -I/usr/include/"
-          else 
+          else
             if test -d /usr/local/include/sbml
               then SBML_INCDIR="-DHAVE_SBML -I/usr/local/include/"
             fi;
-        fi;       
+        fi;
     fi;
-    CHECK_XML()               
+    CHECK_XML()
         SBML_INCDIR="$LIBXML_INCDIR $SBML_INCDIR"
         SBML_LIBS="$XML_LIBS"
     CPPFLAGS="${CPPFLAGS} ${SBML_INCDIR}"
     PKG_LIBS="${PKG_LIBS} ${SBML_LIBS} -lsbml"
-      
+
   else
     echo 'SBML not found.';
 
