@@ -188,7 +188,7 @@ stdAttrNames <- function(graph, return.value=c("matches", "graph")){
 #'  }
 #'
 fetchAttribute <- function(graph, organism="Homo sapiens", target.attr, source.attr, bridge.web=NPMdefaults("bridge.web")){
-    if(!requireNamespace(RCurl))
+    if(!requireNamespace("RCurl"))
         stop("This function uses RCurl package. Required package not installed.")
     if(!RCurl::url.exists(bridge.web))
         stop("Couldn't access BridgeDB webservice.\nThere may be a internet connection problem, or the server is down.")
@@ -510,7 +510,7 @@ assignEdgeWeights <- function(microarray, graph, use.attr, y, weight.method="cor
 #' 	# Write the genesets in a GMT file, and read it using GSEABase package.
 #'  getGeneSets(ex_kgml_sig, use.attr="pathway", gene.attr="miriam.ncbigene", gmt.file="kgml.gmt")
 #'  \dontrun{
-#' 	if(requireNamespace(GSEABase))
+#' 	if(requireNamespace("GSEABase"))
 #' 		toGmt("kgml.gmt")
 #' 	}
 #'
@@ -576,7 +576,7 @@ getGeneSets <- function(graph, use.attr="pathway", gene.attr="genes", gmt.file){
 #'
 #'  # Integration with graphite package
 #'  \dontrun{
-#'  if(requireNamespace(graphite) & requireNamespace(clipper) & requireNamespace(ALL)){
+#'  if(requireNamespace("graphite") & requireNamespace("clipper") & requireNamespace("ALL")){
 #'		genesetnets <- getGeneSetNetworks(ex_kgml_sig,
 #' 						use.attr="pathway", format="pathway-class")
 #'		path <- convertIdentifiers(genesetnets$`Chemokine signaling pathway`,
@@ -687,7 +687,7 @@ getGeneSetNetworks <- function(graph, use.attr="pathway", format=c("list", "path
 #'  graphNEL <- toGraphNEL(ex_kgml_sig, export.attr="^miriam.")
 #'
 toGraphNEL<- function(graph, export.attr=""){
-  if(!requireNamespace(graph))
+  if(!requireNamespace("graph"))
       stop("This function uses graph package. Required package not installed.")
     attr.names  <- getAttrNames(graph)
     attr.names  <- grep(export.attr, attr.names, value=TRUE)

@@ -382,7 +382,7 @@ SBML_signal <- function(fileList, miriam.attr="all", gene.attr, expand.complexes
 #' @family Database extraction methods
 #' @export
 #' @examples
-#' if(requireNamespace(rBiopaxParser)){
+#' if(requireNamespace("rBiopaxParser")){
 #'     data(ex_biopax)
 #'     # Process biopax as a metabolic network
 #'     g <- biopax2igraph(ex_biopax)
@@ -393,7 +393,7 @@ SBML_signal <- function(fileList, miriam.attr="all", gene.attr, expand.complexes
 #' }
 biopax2igraph <- function(biopax, parse.as=c("metabolic","signaling"),
                     expand.complexes=FALSE, inc.sm.molecules=FALSE, verbose=TRUE){
-    if (!requireNamespace(rBiopaxParser))
+    if (!requireNamespace("rBiopaxParser"))
         stop("This functions needs the rBiopaxParser library installed. Check out the installation instructions!")
     if (!("biopax" %in% class(biopax)))
         stop("Error: biopax2igraph: parameter biopax has to be of class biopax.")
