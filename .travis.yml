@@ -1,13 +1,14 @@
 # Sample .travis.yml for R projects
 
 language: r
-r: bioc-devel
 
 matrix:
   include:
     - os: linux
       dist: trusty
+      r: bioc-devel
     - os: osx
+      r: bioc-release
   allow_failures:
     - os: osx
 
