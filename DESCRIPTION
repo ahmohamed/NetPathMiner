@@ -22,7 +22,9 @@ Depends:
 Suggests:
     rBiopaxParser (>= 2.1),
     RCurl,
-    graph
+    graph,
+    knitr, rmarkdown, BiocStyle
+VignetteBuilder: knitr
 License: GPL (>= 2)
 URL: https://github.com/ahmohamed/NetPathMiner
 NeedsCompilation: yes
