@@ -70,7 +70,7 @@ void corEdgeWeights(double * X,
 
 				for (i = 0;i < nobs;i = i + 1) {
 					if(ncor >1){  //If multiple correlations, sample the columns and take the median.
-						int sample = rand() % nobs;
+						int sample = unif_rand() * nobs;
 						xp = X[from_indx*nobs + sample]; yp = X[to_indx*nobs + sample];
 					}else{
 					xp = X[from_indx*nobs + i]; yp = X[to_indx*nobs + i];
