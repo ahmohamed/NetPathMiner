@@ -42,7 +42,7 @@ If you are installing the package through Bioconductor, you don't have to instal
 Unless you want to use customized libraries, you can skip the rest of this section.To use customized libraries, you have to compile them and provide them to R at the time of installation. This is not a trivial task, please be sure you really need these custom libraries.
 
 ##### Installing libxml2
-NetPathMiner expects an enviroment variable `LIB_XML` or `LIB_XML2` pointing to directory where
+NetPathMiner expects an environment variable `LIB_XML` or `LIB_XML2` pointing to directory where
 libxml2 is installed. This directory should have both the compiled library (DLL file) and the header files.
 
 You can download libxml2.dll from http://sourceforge.net/projects/gnuwin32/files/libxml/ among other sources.
@@ -51,7 +51,7 @@ Please, place it in a `bin` folder under the installation directory.
 You will need also the header files, which can be obtained from NPM_dependecies.tar file. After extracing it, copy
 the include directory to the installation directory.
 
-Finally, set the `LIB_XML2` variable to point to the installation directory, which should now contain dll files inder `bin`
+Finally, set the `LIB_XML2` variable to point to the installation directory, which should now contain dll files under `bin`
 and header files under `include`.
 
 ##### Installing libSBML
@@ -60,13 +60,13 @@ version for Windows comipled with GCC. To use libSBML, you need to build it from
 
 First, dowload source package from http://sourceforge.net/projects/sbml/files/libsbml/ , extract it. You will
 need also MinGW http://www.mingw.org/ or the 64-bit version http://mingw-w64.sourceforge.net/ depending on your system.
-Add `mingw/bin` to your PATH, by editing eviroment variables.
+Add `mingw/bin` to your PATH, by editing environment variables.
 
 Second, you need CMake http://www.cmake.org/ . You can follow the instructions at http://sbml.org/Software/libSBML/docs/java-api/libsbml-installation.html#windows-configuring , however, choose "MinGW Makefiles" instead of "Visual Studio 10".
 
 After finishing the CMake step, use the MinGW's `make.exe` to compile libSBML. Copy the dependencies you used
-during the compilation to the `bin` directory. Set the enviroment variable `LIB_SBML` to point the installation
-directory, which should now contain dll files inder `bin` and header files under `include`
+during the compilation to the `bin` directory. Set the environment variable `LIB_SBML` to point the installation
+directory, which should now contain dll files under `bin` and header files under `include`
 
 
 ### R Package dependencies
