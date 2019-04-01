@@ -1,5 +1,5 @@
 ---
-title: Annotating Genomic Variants
+title: Workflow for NetPathMiner
 author:
 - name: Ahmed Mohamed
   affiliation: QIMR Berghofer Medical Research Institute, 300 Herston Road, Herston QLD 4006, Australia
