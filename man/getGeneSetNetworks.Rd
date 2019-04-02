@@ -29,7 +29,7 @@ common attributes (in the same pathway or compartment).
 
  # Integration with graphite package
  \dontrun{
- if(require(graphite) & require(clipper) & require(ALL)){
+ if(requireNamespace("graphite") & requireNamespace("clipper") & requireNamespace("ALL")){
 	genesetnets <- getGeneSetNetworks(ex_kgml_sig,
 						use.attr="pathway", format="pathway-class")
 	path <- convertIdentifiers(genesetnets$`Chemokine signaling pathway`,

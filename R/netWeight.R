@@ -18,7 +18,7 @@
 #' or remove certain annotations.
 #'
 #' NetPathMiner stores all its vertex annotation attributes in a list, and stores them collectively as
-#' a single \code{attr}. This is not to interfer with \code{\link[igraph]{attributes}} from \code{igraph} package.
+#' a single \code{attr}. This is not to interfer with \code{\link[igraph]{graph_attr_names}} from \code{igraph} package.
 #' All functions here target NetPathMiner annotations only.
 #'
 #' @param graph An annotated igraph object.
@@ -261,7 +261,7 @@ fetchAttribute <- function(graph, organism="Homo sapiens", target.attr, source.a
 #' value (or \code{NA}). The default computes Pearson's correlation.
 #' @param complex.method A function, or a string indicating the name of the function to be used in weighting edges connecting complexes.
 #' If a vertex has >1 attribute value, all possible pairwise weights are first computed, and given to \code{complex.method}. The default
-#' function is \code{\link[base]{max}}.
+#' function is \code{\link[base:Extremes]{max}}.
 #' @param missing.method A function, or a string indicating the name of the function to be used in weighting edges when one of the vertices
 #' lack expression data. The function is passed all edge weights on the graph. Default is \code{\link[stats]{median}}.
 #' @param same.gene.penalty A numerical value to be assigned when 2 adjacent vertices have the same attribute value, since correlation and

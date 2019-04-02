@@ -46,7 +46,7 @@ All annotation attributes are exracted from \code{XRefs} associated with the ver
 MIRIAM guidelines (\code{miraim.db}, where db is the database name).
 }
 \examples{
-if(require(rBiopaxParser)){
+if(requireNamespace("rBiopaxParser")){
     data(ex_biopax)
     # Process biopax as a metabolic network
     g <- biopax2igraph(ex_biopax)

@@ -25,7 +25,7 @@ value (or \code{NA}). The default computes Pearson's correlation.}
 
 \item{complex.method}{A function, or a string indicating the name of the function to be used in weighting edges connecting complexes.
 If a vertex has >1 attribute value, all possible pairwise weights are first computed, and given to \code{complex.method}. The default
-function is \code{\link[base]{max}}.}
+function is \code{\link[base:Extremes]{max}}.}
 
 \item{missing.method}{A function, or a string indicating the name of the function to be used in weighting edges when one of the vertices
 lack expression data. The function is passed all edge weights on the graph. Default is \code{\link[stats]{median}}.}

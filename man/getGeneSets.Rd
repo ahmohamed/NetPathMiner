@@ -32,7 +32,7 @@ can be specified through \code{gene.attr} argument.
 	# Write the genesets in a GMT file, and read it using GSEABase package.
  getGeneSets(ex_kgml_sig, use.attr="pathway", gene.attr="miriam.ncbigene", gmt.file="kgml.gmt")
  \dontrun{
-	if(require(GSEABase))
+	if(requireNamespace("GSEABase"))
 		toGmt("kgml.gmt")
 	}
 

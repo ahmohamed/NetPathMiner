@@ -16,7 +16,7 @@ layoutVertexByAttr(graph, attr.name, cluster.strength = 1,
 The larger it is, the closer the vertices will be.}
 
 \item{layout}{A layout function, ideally a force-directed layout fuction, such as
-\code{\link[igraph]{layout.fruchterman.reingold}} and \code{\link[igraph]{layout.kamada.kawai}}.}
+\code{\link[igraph]{layout_with_fr}} and \code{\link[igraph]{layout_with_kk}}.}
 }
 \value{
 A two-column matrix indicating the x and y postions of vertices.

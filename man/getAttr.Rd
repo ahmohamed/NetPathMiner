@@ -45,7 +45,7 @@ or remove certain annotations.
 }
 \details{
 NetPathMiner stores all its vertex annotation attributes in a list, and stores them collectively as
-a single \code{attr}. This is not to interfer with \code{\link[igraph]{attributes}} from \code{igraph} package.
+a single \code{attr}. This is not to interfer with \code{\link[igraph]{graph_attr_names}} from \code{igraph} package.
 All functions here target NetPathMiner annotations only.
 }
 \examples{

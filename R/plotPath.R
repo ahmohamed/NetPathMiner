@@ -220,7 +220,7 @@ plotAllNetworks <- function(paths, metabolic.net=NULL, reaction.net=NULL, gene.n
 #' @param cluster.strength A number indicating tie strengths between vertices with the same attribute.
 #' The larger it is, the closer the vertices will be.
 #' @param layout A layout function, ideally a force-directed layout fuction, such as
-#' \code{\link[igraph]{layout.fruchterman.reingold}} and \code{\link[igraph]{layout.kamada.kawai}}.
+#' \code{\link[igraph]{layout_with_fr}} and \code{\link[igraph]{layout_with_kk}}.
 #'
 #' @return A two-column matrix indicating the x and y postions of vertices.
 #'
