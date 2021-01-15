@@ -5,12 +5,14 @@ language: r
 matrix:
   include:
     - os: linux
-      dist: trusty
+      dist: bionic
       r: bioc-devel
     - os: osx
       r: bioc-release
   allow_failures:
     - os: osx
+
+bioc_check: true
 
 before_install:
  - wget 'http://downloads.sourceforge.net/project/sbml/libsbml/5.11.4/stable/libSBML-5.11.4-core-src.tar.gz?r=&ts=1435978044' -O /tmp/libsbml.tar.gz
@@ -26,12 +28,12 @@ env:
  global:
    - CRAN: http://cran.rstudio.com
 
-# Install the bleeding edge version of a package from github (eg to pick
-# up a not-yet-released bugfix)
-r_github_packages:
- - igraph/rigraph
-
 notifications:
   email:
     on_success: change
     on_failure: change
+
+# Install the bleeding edge version of a package from github (eg to pick
+# up a not-yet-released bugfix)
+# r_github_packages:
+#  - igraph/rigraph
