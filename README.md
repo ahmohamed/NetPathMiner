@@ -11,9 +11,28 @@ thousands of output paths.
 To report bugs and arising issues, please visit https://github.com/ahmohamed/NetPathMiner
 
 ## Installation Instructions
+### Using Docker
+You can use `NetPathMiner` in a containerized form by pulling the image from docker hub. This is the easiest way to automatically manage system dependencies. It currently the recommended way to use `NetPathMiner` on Windows.
+
+```
+docker pull ahmohamed/netpathminer
+docker run -e PASSWORD=bioc -p 8787:8787 ahmohamed/netpathminer:latest
+```
+
+In your browser, navigate to RStudio will be available on your web browser at `http://localhost:8787`. The USER is fixed to always being `rstudio`. The password in the above command is given as `bioc` but it can be set to anything. For more information on how-to-use, refer to [Bioconductor help page](https://www.bioconductor.org/help/docker/).
+
+You can access your local files by mapping to the container:
+
+```
+docker run -e PASSWORD=bioc -p 8787:8787 \
+  -v "path/to/data_folder":"/home/rstudio/data_folder" \
+  ahmohamed/netpathminer:latest
+```
+
+You should see `data_folder` in your working directory.
 
 ### System Prerequisites
-NetPathMiner depends on libxml2 and libsbml to process pathway files. Installation or running
+If you are not using docker, you need to install system depedencies for `NetPathMiner`.  NetPathMiner depends on `libxml2` and `libsbml` to process pathway files. Installation or running
 certain functions MAY fail if these prerequisite libraries are
 not available. Please read through the following instructions.
 
@@ -37,7 +56,11 @@ binaries suitable for your system from `Download libSBML` link. You can follow t
 on the website.
 
 #### Prerequisites for Windows users
-If you are installing the package through Bioconductor, you don't have to install external libraries. However, currently the Bioconductor version for Windows doesn't support SBML processing. Alternatively, we have prepared all dependencies in a tar file, downloadable from https://github.com/ahmohamed/NPM_dependencies . Please download the file and place in in the home directory of R (type <code>R RHOME</code> in command prompt to locate it), before installation.
+If you are installing the package through Bioconductor, you don't have to install external libraries. **However, currently the Bioconductor version for Windows doesn't support SBML processing**. 
+
+**Docker installtion is currently the recommended way to use `NetPathMiner` on Windows.**
+
+~~Alternatively, we have prepared all dependencies in a tar file, downloadable from https://github.com/ahmohamed/NPM_dependencies . Please download the file and place in in the home directory of R (type <code>R RHOME</code> in command prompt to locate it), before installation.~~
 
 Unless you want to use customized libraries, you can skip the rest of this section.To use customized libraries, you have to compile them and provide them to R at the time of installation. This is not a trivial task, please be sure you really need these custom libraries.
 
