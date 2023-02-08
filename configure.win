@@ -298,15 +298,13 @@ if test -z "${lib_sbml_location}"
 		fi;
 fi;	
 
-if ${HAVE_XML}
-	then
+if ! ${HAVE_XML}
 	else
 		echo "NOTE: The package failed to find libxml2. KGML file processing disabled."
 fi;
 
-if ${HAVE_SBML}
+if ! ${HAVE_SBML}
 	then
-	else
 		echo "NOTE: The package failed to find libSBML. SBML file processing disabled."
 fi;
 
