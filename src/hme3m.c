@@ -367,7 +367,7 @@ void irls(double *y,
 		}
 					
 		// t(X) %*% W %*% X
-		F77_NAME(dgemm)(transpose, dont_transpose,&nx,&nx,&nobs,&double_one, XW, &nobs, x, &nobs, &double_zero, cov, &nx); 
+		F77_NAME(dgemm)(transpose, dont_transpose,&nx,&nx,&nobs,&double_one, XW, &nobs, x, &nobs, &double_zero, cov, &nx FCONE FCONE); 
 
 		//cov = t(X) %*% W %*% X + L
 		for (i = 0;i < nx;i = i + 1) cov[i*nx + i] = cov[i*nx + i] + lambda;
