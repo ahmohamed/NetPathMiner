@@ -15,10 +15,10 @@
 // Disable warnings in boost header code.
 #pragma GCC diagnostic push
 #pragma GCC diagnostic ignored "-Wunused-local-typedefs"
-#pragma GCC diagnostic ignored "-Wno-deprecated-declarations"
+#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wunused-local-typedef"
-
+#pragma clang diagnostic ignored "-Wdeprecated-declarations"
 
 // boost 1.33.1 required
 #include <boost/graph/graph_utility.hpp>
