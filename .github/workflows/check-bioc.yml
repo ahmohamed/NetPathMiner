@@ -243,7 +243,7 @@ jobs:
       - name: Test coverage
         if: github.ref == 'refs/heads/master' && env.run_covr == 'true' && runner.os == 'Linux' && matrix.config.r == 'devel'
         run: |
-          covr::codecov(type="all", commentDontrun=FALSE)
+          covr::codecov(type="all", commentDontrun=TRUE)
         shell: Rscript {0}
 
       - name: Install package
