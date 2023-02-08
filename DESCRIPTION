@@ -3,11 +3,12 @@ Version: 1.35.0
 Date: 2014 onwards
 Title: NetPathMiner for Biological Network Construction, Path Mining
     and Visualization
-Author: Ahmed Mohamed <mohamed@kuicr.kyoto-u.ac.jp>, Tim Hancock
-    <timothy.hancock@kuicr.kyoto-u.ac.jp>, Ichigaku Takigawa
-    <takigawa@kuicr.kyoto-u.ac.jp>, Nicolas Wicker
-    <nicolas.wicker@unistra.fr>
-Maintainer: Ahmed Mohamed <mohamed@kuicr.kyoto-u.ac.jp>
+Authors@R: c(
+    person("Ahmed", "Mohamed", , "mohamed@kuicr.kyoto-u.ac.jp", role = c("aut", "cre"),
+           comment = c(ORCID = "0000-0001-6507-5300")),
+    person("Tim", "Hancock", , "timothy.hancock@kuicr.kyoto-u.ac.jp", role = c("aut")),
+    person("Tim", "Hancock", , "timothy.hancock@kuicr.kyoto-u.ac.jp", role = c("aut"))
+    )
 Description: NetPathMiner is a general framework for network path
     mining using genome-scale networks. It constructs networks from
     KGML, SBML and BioPAX files, providing three network
