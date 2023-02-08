@@ -1,4 +1,4 @@
-Creator "NetPathMiner 1.35.0 Wed Feb  8 13:46:58 2023" 
+Creator "NetPathMiner 1.35.1 Wed Feb  8 14:04:58 2023" 
 graph [
 node [
  id 1
@@ -7,8 +7,8 @@ graphics [
  size 10
 type "ellipse"
 fill "#7380D2"
-x 2.7371
-y -2.05026
+x -2.39255
+y 1.37497
  ]
  ]
 node [
@@ -18,8 +18,8 @@ graphics [
  size 10
 type "ellipse"
 fill "#7380D2"
-x -0.250878
-y -2.75978
+x 0.0869189
+y 1.0338
  ]
  ]
 node [
@@ -29,8 +29,8 @@ graphics [
  size 10
 type "ellipse"
 fill "#23A4E5"
-x -3.477
-y 6.1179
+x -6.74247
+y 9.43813
  ]
  ]
 node [
@@ -40,8 +40,8 @@ graphics [
  size 10
 type "ellipse"
 fill "#BC7563"
-x 6.08171
-y 5.71007
+x -13.5371
+y 5.33808
  ]
  ]
 node [
@@ -51,8 +51,8 @@ graphics [
  size 10
 type "ellipse"
 fill "#EA933E"
-x 9.14428
-y -4.15302
+x -7.8596
+y -5.26298
  ]
  ]
 node [
@@ -62,8 +62,8 @@ graphics [
  size 10
 type "ellipse"
 fill "#BC7563"
-x 7.61269
-y 4.70258
+x -14.157
+y 3.54661
  ]
  ]
 node [
@@ -73,8 +73,8 @@ graphics [
  size 10
 type "ellipse"
 fill "#BC7563"
-x 6.78821
-y 5.32703
+x -13.6792
+y 4.58206
  ]
  ]
 node [
@@ -84,8 +84,8 @@ graphics [
  size 10
 type "ellipse"
 fill "#6CC451"
-x 10.7659
-y 4.37567
+x -17.8928
+y 2.592
  ]
  ]
 node [
@@ -95,8 +95,8 @@ graphics [
  size 10
 type "ellipse"
 fill "#000000"
-x 7.51715
-y -7.65457
+x -4.25519
+y -6.63101
  ]
  ]
 node [
@@ -106,8 +106,8 @@ graphics [
  size 10
 type "ellipse"
 fill "#D01CAC"
-x -5.19511
-y -4.77782
+x -8.4732
+y 0.688446
  ]
  ]
 node [
@@ -117,8 +117,8 @@ graphics [
  size 10
 type "ellipse"
 fill "#D01CAC"
-x -3.24228
-y -4.07332
+x -7.55416
+y 0.445232
  ]
  ]
 node [
@@ -128,8 +128,8 @@ graphics [
  size 10
 type "ellipse"
 fill "#7380D2"
-x 0.444124
-y -3.21089
+x -0.63821
+y 0.806084
  ]
  ]
 node [
@@ -139,8 +139,8 @@ graphics [
  size 10
 type "ellipse"
 fill "#23A4E5"
-x -3.33681
-y 6.47688
+x -3.79095
+y 10.5036
  ]
  ]
 node [
@@ -150,8 +150,8 @@ graphics [
  size 10
 type "ellipse"
 fill "#7380D2"
-x 1.95002
-y -5.88807
+x -2.21576
+y -0.931587
  ]
  ]
 node [
@@ -161,8 +161,8 @@ graphics [
  size 10
 type "ellipse"
 fill "#BC7563"
-x 6.61024
-y 7.609
+x -13.8706
+y 7.04694
  ]
  ]
 node [
@@ -172,8 +172,8 @@ graphics [
  size 10
 type "ellipse"
 fill "#7380D2"
-x 4.29651
-y -4.1451
+x -3.92566
+y -2.0837
  ]
  ]
 node [
@@ -183,8 +183,8 @@ graphics [
  size 10
 type "ellipse"
 fill "#BC7563"
-x 9.35155
-y 7.88264
+x -15.0676
+y 3.91992
  ]
  ]
 node [
@@ -194,8 +194,8 @@ graphics [
  size 10
 type "ellipse"
 fill "#BC7563"
-x 8.65383
-y 8.58794
+x -14.6787
+y 4.63919
  ]
  ]
 node [
@@ -205,8 +205,8 @@ graphics [
  size 10
 type "ellipse"
 fill "#23A4E5"
-x -7.52375
-y 3.33505
+x -4.44728
+y 13.303
  ]
  ]
 node [
@@ -216,8 +216,8 @@ graphics [
  size 10
 type "ellipse"
 fill "#BC7563"
-x 3.91259
-y 7.02078
+x -12.4465
+y 7.23925
  ]
  ]
 node [
@@ -227,8 +227,8 @@ graphics [
  size 10
 type "ellipse"
 fill "#9E9E9E"
-x 6.19498
-y -1.99452
+x -5.48088
+y -3.0163
  ]
  ]
 node [
@@ -238,8 +238,8 @@ graphics [
  size 10
 type "ellipse"
 fill "#EA933E"
-x 9.78531
-y -3.64041
+x -8.74712
+y -5.32547
  ]
  ]
 node [
@@ -249,8 +249,8 @@ graphics [
  size 10
 type "ellipse"
 fill "#BC7563"
-x 9.98063
-y 6.92357
+x -15.5594
+y 3.11732
  ]
  ]
 node [
@@ -260,8 +260,8 @@ graphics [
  size 10
 type "ellipse"
 fill "#7380D2"
-x 2.87595
-y -6.8025
+x -2.19054
+y -2.82985
  ]
  ]
 node [
@@ -271,8 +271,8 @@ graphics [
  size 10
 type "ellipse"
 fill "#9E9E9E"
-x 5.4719
-y -0.944504
+x -4.88263
+y -1.48754
  ]
  ]
 node [
@@ -282,8 +282,8 @@ graphics [
  size 10
 type "ellipse"
 fill "#000000"
-x 7.20272
-y -8.2027
+x -4.18338
+y -7.13013
  ]
  ]
 node [
@@ -293,8 +293,8 @@ graphics [
  size 10
 type "ellipse"
 fill "#EA933E"
-x 11.3353
-y -4.34458
+x -10.2567
+y -6.1746
  ]
  ]
 node [
@@ -304,8 +304,8 @@ graphics [
  size 10
 type "ellipse"
 fill "#EA933E"
-x 5.71937
-y -3.18698
+x -6.5424
+y -1.72696
  ]
  ]
 node [
@@ -315,8 +315,8 @@ graphics [
  size 10
 type "ellipse"
 fill "#7380D2"
-x -1.32434
-y -5.59784
+x -5.15812
+y 0.355988
  ]
  ]
 node [
@@ -326,8 +326,8 @@ graphics [
  size 10
 type "ellipse"
 fill "#6CC451"
-x 11.3031
-y 5.66766
+x -16.586
+y 1.80318
  ]
  ]
 node [
@@ -337,8 +337,8 @@ graphics [
  size 10
 type "ellipse"
 fill "#26D4E5"
-x -7.22264
-y -5.87789
+x -10.8061
+y 1.80509
  ]
  ]
 node [
@@ -348,8 +348,8 @@ graphics [
  size 10
 type "ellipse"
 fill "#BC7563"
-x 5.91819
-y 6.8186
+x -13.8919
+y 6.31455
  ]
  ]
 node [
@@ -359,8 +359,8 @@ graphics [
  size 10
 type "ellipse"
 fill "#BC7563"
-x 5.11383
-y 6.72536
+x -13.125
+y 6.42764
  ]
  ]
 node [
@@ -370,8 +370,8 @@ graphics [
  size 10
 type "ellipse"
 fill "#7380D2"
-x -0.991315
-y -2.18184
+x 0.554078
+y 2.12493
  ]
  ]
 node [
@@ -381,8 +381,8 @@ graphics [
  size 10
 type "ellipse"
 fill "#7380D2"
-x 1.2926
-y -3.62928
+x -2.13401
+y 0.264882
  ]
  ]
 node [
@@ -392,8 +392,8 @@ graphics [
  size 10
 type "ellipse"
 fill "#23A4E5"
-x -6.89957
-y 6.79454
+x -8.38794
+y 11.3383
  ]
  ]
 node [
@@ -403,8 +403,8 @@ graphics [
  size 10
 type "ellipse"
 fill "#000000"
-x 7.74107
-y -8.08905
+x -3.63944
+y -6.86875
  ]
  ]
 node [
@@ -414,8 +414,8 @@ graphics [
  size 10
 type "ellipse"
 fill "#000000"
-x 6.0481
-y -7.16188
+x -3.34703
+y -5.39522
  ]
  ]
 node [
@@ -425,8 +425,8 @@ graphics [
  size 10
 type "ellipse"
 fill "#7380D2"
-x 2.96562
-y -0.715344
+x -1.16812
+y 3.29115
  ]
  ]
 node [
@@ -436,8 +436,8 @@ graphics [
  size 10
 type "ellipse"
 fill "#7380D2"
-x 1.30477
-y -2.98135
+x -1.0663
+y 0.964591
  ]
  ]
 node [
@@ -447,8 +447,8 @@ graphics [
  size 10
 type "ellipse"
 fill "#BC7563"
-x 6.28878
-y 9.12132
+x -15.363
+y 6.73932
  ]
  ]
 node [
@@ -458,8 +458,8 @@ graphics [
  size 10
 type "ellipse"
 fill "#23A4E5"
-x -4.21996
-y 5.37895
+x -6.02237
+y 9.55724
  ]
  ]
 node [
@@ -469,8 +469,8 @@ graphics [
  size 10
 type "ellipse"
 fill "#BC7563"
-x 7.67528
-y 9.12259
+x -15.4465
+y 7.91084
  ]
  ]
 node [
@@ -480,8 +480,8 @@ graphics [
  size 10
 type "ellipse"
 fill "#7380D2"
-x 2.43553
-y -3.60056
+x -1.09646
+y -0.776942
  ]
  ]
 node [
@@ -491,8 +491,8 @@ graphics [
  size 10
 type "ellipse"
 fill "#23A4E5"
-x -4.77657
-y 7.36499
+x -7.71813
+y 10.2179
  ]
  ]
 node [
@@ -502,8 +502,8 @@ graphics [
  size 10
 type "ellipse"
 fill "#EA933E"
-x 10.2974
-y -4.39176
+x -8.3512
+y -6.61052
  ]
  ]
 node [
@@ -513,8 +513,8 @@ graphics [
  size 10
 type "ellipse"
 fill "#7380D2"
-x 4.23022
-y -5.27276
+x -1.68334
+y -3.1632
  ]
  ]
 node [
@@ -524,8 +524,8 @@ graphics [
  size 10
 type "ellipse"
 fill "#23A4E5"
-x -5.22383
-y 5.83782
+x -6.58421
+y 10.4636
  ]
  ]
 node [
@@ -535,8 +535,8 @@ graphics [
  size 10
 type "ellipse"
 fill "#EA933E"
-x 9.1735
-y -2.32705
+x -8.60804
+y -4.05437
  ]
  ]
 node [
@@ -546,8 +546,8 @@ graphics [
  size 10
 type "ellipse"
 fill "#7380D2"
-x 0.178394
-y -5.44349
+x -2.93582
+y -0.213859
  ]
  ]
 node [
@@ -557,8 +557,8 @@ graphics [
  size 10
 type "ellipse"
 fill "#23A4E5"
-x -7.19234
-y 6.08706
+x -8.18621
+y 11.9101
  ]
  ]
 node [
@@ -568,8 +568,8 @@ graphics [
  size 10
 type "ellipse"
 fill "#BC7563"
-x 8.59817
-y 5.93418
+x -16.0104
+y 4.35069
  ]
  ]
 node [
@@ -579,8 +579,8 @@ graphics [
  size 10
 type "ellipse"
 fill "#7380D2"
-x 1.54728
-y -4.87355
+x -3.48539
+y -0.455355
  ]
  ]
 node [
@@ -590,8 +590,8 @@ graphics [
  size 10
 type "ellipse"
 fill "#23A4E5"
-x -2.73016
-y 4.38849
+x -4.73677
+y 8.71529
  ]
  ]
 node [
@@ -601,8 +601,8 @@ graphics [
  size 10
 type "ellipse"
 fill "#7380D2"
-x -1.37286
-y -2.67643
+x 1.35344
+y 0.711614
  ]
  ]
 node [
@@ -612,8 +612,8 @@ graphics [
  size 10
 type "ellipse"
 fill "#23A4E5"
-x -6.14424
-y 7.25276
+x -8.24401
+y 10.7251
  ]
  ]
 node [
@@ -623,8 +623,8 @@ graphics [
  size 10
 type "ellipse"
 fill "#BC7563"
-x 9.13829
-y 4.95697
+x -16.9565
+y 3.7893
  ]
  ]
 node [
@@ -634,8 +634,8 @@ graphics [
  size 10
 type "ellipse"
 fill "#D01CAC"
-x -3.27838
-y -6.28732
+x -6.63162
+y 1.25442
  ]
  ]
 node [
@@ -645,8 +645,8 @@ graphics [
  size 10
 type "ellipse"
 fill "#23A4E5"
-x -7.55924
-y 4.07573
+x -6.83022
+y 12.7735
  ]
  ]
 node [
@@ -656,8 +656,8 @@ graphics [
  size 10
 type "ellipse"
 fill "#7380D2"
-x 1.71479
-y -1.47695
+x -2.57542
+y 2.60237
  ]
  ]
 node [
@@ -667,8 +667,8 @@ graphics [
  size 10
 type "ellipse"
 fill "#BC7563"
-x 6.96776
-y 9.05934
+x -15.8427
+y 7.24353
  ]
  ]
 node [
@@ -678,8 +678,8 @@ graphics [
  size 10
 type "ellipse"
 fill "#23A4E5"
-x -7.67341
-y 5.68132
+x -8.23529
+y 12.5631
  ]
  ]
 node [
@@ -689,8 +689,8 @@ graphics [
  size 10
 type "ellipse"
 fill "#BC7563"
-x 8.96834
-y 6.80419
+x -17.2679
+y 5.33789
  ]
  ]
 node [
@@ -700,8 +700,8 @@ graphics [
  size 10
 type "ellipse"
 fill "#BC7563"
-x 5.9175
-y 8.55063
+x -14.7882
+y 7.33224
  ]
  ]
 node [
@@ -711,8 +711,8 @@ graphics [
  size 10
 type "ellipse"
 fill "#9E9E9E"
-x 12.5638
-y 0.276984
+x -13.6171
+y -4.36515
  ]
  ]
 node [
@@ -722,8 +722,8 @@ graphics [
  size 10
 type "ellipse"
 fill "#7380D2"
-x -0.881537
-y -5.69129
+x 1.55175
+y -0.542991
  ]
  ]
 node [
@@ -733,8 +733,8 @@ graphics [
  size 10
 type "ellipse"
 fill "#23A4E5"
-x -4.32654
-y 4.84702
+x -5.74672
+y 10.5684
  ]
  ]
 node [
@@ -744,8 +744,8 @@ graphics [
  size 10
 type "ellipse"
 fill "#7380D2"
-x -0.103331
-y -1.6371
+x -3.45002
+y 2.67007
  ]
  ]
 node [
@@ -755,8 +755,8 @@ graphics [
  size 10
 type "ellipse"
 fill "#BC7563"
-x 8.12138
-y 5.35388
+x -16.6131
+y 4.69144
  ]
  ]
 node [
@@ -766,8 +766,8 @@ graphics [
  size 10
 type "ellipse"
 fill "#7380D2"
-x -1.16314
-y -3.85199
+x -4.70614
+y 1.4906
  ]
  ]
 node [
@@ -777,8 +777,8 @@ graphics [
  size 10
 type "ellipse"
 fill "#BC7563"
-x 9.5401
-y 5.57504
+x -17.445
+y 4.28757
  ]
  ]
 node [
@@ -788,8 +788,8 @@ graphics [
  size 10
 type "ellipse"
 fill "#23A4E5"
-x -7.81673
-y 4.69112
+x -5.94529
+y 12.8228
  ]
  ]
 node [
@@ -799,8 +799,8 @@ graphics [
  size 10
 type "ellipse"
 fill "#9E9E9E"
-x 3.01853
-y 9.61293
+x -16.5831
+y 9.62771
  ]
  ]
 node [
@@ -810,8 +810,8 @@ graphics [
  size 10
 type "ellipse"
 fill "#7380D2"
-x 2.19058
-y -4.34806
+x -2.22545
+y 0.744169
  ]
  ]
 node [
@@ -821,8 +821,8 @@ graphics [
  size 10
 type "ellipse"
 fill "#26D4E5"
-x -7.77053
-y -3.84974
+x -11.9158
+y 0.0589702
  ]
  ]
 node [
@@ -832,8 +832,8 @@ graphics [
  size 10
 type "ellipse"
 fill "#BC7563"
-x 8.57728
-y 7.74999
+x -16.6224
+y 5.90421
  ]
  ]
 node [
@@ -843,8 +843,8 @@ graphics [
  size 10
 type "ellipse"
 fill "#D01CAC"
-x -4.29799
-y -6.12419
+x -7.76359
+y 1.4132
  ]
  ]
 node [
@@ -854,8 +854,8 @@ graphics [
  size 10
 type "ellipse"
 fill "#26D4E5"
-x -6.43851
-y -4.2844
+x -10.5281
+y 0.332424
  ]
  ]
 node [
@@ -865,8 +865,8 @@ graphics [
  size 10
 type "ellipse"
 fill "#9E9E9E"
-x 3.621
-y 10.2753
+x -15.435
+y 9.99873
  ]
  ]
 node [
@@ -876,8 +876,8 @@ graphics [
  size 10
 type "ellipse"
 fill "#EA933E"
-x 11.0697
-y -4.1378
+x -9.84497
+y -6.67438
  ]
  ]
 node [
@@ -887,8 +887,8 @@ graphics [
  size 10
 type "ellipse"
 fill "#7380D2"
-x -1.87975
-y -4.51645
+x -4.66968
+y 0.75217
  ]
  ]
 node [
@@ -898,8 +898,8 @@ graphics [
  size 10
 type "ellipse"
 fill "#23A4E5"
-x -5.71695
-y 3.81542
+x -6.95229
+y 11.6123
  ]
  ]
 node [
@@ -909,8 +909,8 @@ graphics [
  size 10
 type "ellipse"
 fill "#9E9E9E"
-x 8.65107
-y -6.91842
+x -5.60435
+y -6.91306
  ]
  ]
 node [
@@ -920,8 +920,8 @@ graphics [
  size 10
 type "ellipse"
 fill "#9E9E9E"
-x -0.386466
-y -12.611
+x -17.5726
+y -2.38722
  ]
  ]
 node [
@@ -931,8 +931,8 @@ graphics [
  size 10
 type "ellipse"
 fill "#8D3444"
-x -3.07715
-y -11.6762
+x -16.3833
+y -4.10905
  ]
  ]
 node [
@@ -942,8 +942,8 @@ graphics [
  size 10
 type "ellipse"
 fill "#23A4E5"
-x -3.18147
-y 6.96546
+x -3.06795
+y 10.7064
  ]
  ]
 node [
@@ -953,8 +953,8 @@ graphics [
  size 10
 type "ellipse"
 fill "#7380D2"
-x 2.55238
-y -4.85941
+x -3.0742
+y 1.06823
  ]
  ]
 node [
@@ -964,8 +964,8 @@ graphics [
  size 10
 type "ellipse"
 fill "#EA933E"
-x 11.6327
-y -1.68862
+x -11.4643
+y -4.99368
  ]
  ]
 node [
@@ -975,8 +975,8 @@ graphics [
  size 10
 type "ellipse"
 fill "#BC7563"
-x 4.7081
-y 8.88
+x -16.1629
+y 8.29597
  ]
  ]
 node [
@@ -986,8 +986,8 @@ graphics [
  size 10
 type "ellipse"
 fill "#23A4E5"
-x -2.88984
-y 5.87764
+x -3.60387
+y 10.0206
  ]
  ]
 node [
@@ -997,8 +997,8 @@ graphics [
  size 10
 type "ellipse"
 fill "#7380D2"
-x 0.0696594
-y -3.24896
+x 0.389344
+y 0.0588538
  ]
  ]
 node [
@@ -1008,8 +1008,8 @@ graphics [
  size 10
 type "ellipse"
 fill "#3EB0A1"
-x -1.92973
-y 7.10337
+x -2.28608
+y 9.78814
  ]
  ]
 node [
@@ -1019,8 +1019,8 @@ graphics [
  size 10
 type "ellipse"
 fill "#7380D2"
-x 2.0769
-y -7.89713
+x 0.638622
+y -2.4671
  ]
  ]
 node [
@@ -1030,8 +1030,8 @@ graphics [
  size 10
 type "ellipse"
 fill "#7380D2"
-x 2.30114
-y -7.06283
+x -0.458903
+y -2.28454
  ]
  ]
 node [
@@ -1041,8 +1041,8 @@ graphics [
  size 10
 type "ellipse"
 fill "#9E9E9E"
-x -2.3272
-y -11.4011
+x -15.9034
+y -3.27002
  ]
  ]
 node [
@@ -1052,8 +1052,8 @@ graphics [
  size 10
 type "ellipse"
 fill "#7380D2"
-x 0.600844
-y -2.62086
+x 0.472632
+y 0.590427
  ]
  ]
 node [
@@ -1063,8 +1063,8 @@ graphics [
  size 10
 type "ellipse"
 fill "#7380D2"
-x -0.641736
-y -4.66408
+x 1.00406
+y -0.534593
  ]
  ]
 node [
@@ -1074,8 +1074,8 @@ graphics [
  size 10
 type "ellipse"
 fill "#23A4E5"
-x -5.65126
-y 4.6396
+x -4.05258
+y 11.4477
  ]
  ]
 node [
@@ -1085,8 +1085,8 @@ graphics [
  size 10
 type "ellipse"
 fill "#7380D2"
-x 3.08834
-y -3.55277
+x -3.01571
+y 2.04551
  ]
  ]
 node [
@@ -1096,8 +1096,8 @@ graphics [
  size 10
 type "ellipse"
 fill "#23A4E5"
-x -5.63115
-y 7.4189
+x -3.23788
+y 12.2203
  ]
  ]
 node [
@@ -1107,8 +1107,8 @@ graphics [
  size 10
 type "ellipse"
 fill "#7380D2"
-x 3.7735
-y -5.84452
+x -3.18559
+y -2.92611
  ]
  ]
 node [
@@ -1118,8 +1118,8 @@ graphics [
  size 10
 type "ellipse"
 fill "#23A4E5"
-x -4.63264
-y 4.28125
+x -5.08521
+y 10.3494
  ]
  ]
 node [
@@ -1129,8 +1129,8 @@ graphics [
  size 10
 type "ellipse"
 fill "#7380D2"
-x 4.47446
-y -2.4736
+x -4.14293
+y -0.153565
  ]
  ]
 node [
@@ -1140,8 +1140,8 @@ graphics [
  size 10
 type "ellipse"
 fill "#9E9E9E"
-x 11.7277
-y 1.05226
+x -13.7434
+y -3.03905
  ]
  ]
 node [
@@ -1151,8 +1151,8 @@ graphics [
  size 10
 type "ellipse"
 fill "#23A4E5"
-x -6.10218
-y 6.22679
+x -3.83667
+y 12.4375
  ]
  ]
 node [
@@ -1162,8 +1162,8 @@ graphics [
  size 10
 type "ellipse"
 fill "#7380D2"
-x 1.10329
-y -1.40589
+x -2.23494
+y 3.07137
  ]
  ]
 node [
@@ -1173,8 +1173,8 @@ graphics [
  size 10
 type "ellipse"
 fill "#23A4E5"
-x -6.9893
-y 2.99745
+x -5.29475
+y 13.5547
  ]
  ]
 node [
@@ -1184,8 +1184,8 @@ graphics [
  size 10
 type "ellipse"
 fill "#23A4E5"
-x -7.21525
-y 4.94757
+x -5.08098
+y 12.8103
  ]
  ]
 node [
@@ -1195,8 +1195,8 @@ graphics [
  size 10
 type "ellipse"
 fill "#EA933E"
-x 10.0463
-y 0.667338
+x -12.4757
+y -1.76656
  ]
  ]
 node [
@@ -1206,8 +1206,8 @@ graphics [
  size 10
 type "ellipse"
 fill "#7380D2"
-x 0.459941
-y -4.85427
+x -3.60214
+y 0.636028
  ]
  ]
 node [
@@ -1217,8 +1217,8 @@ graphics [
  size 10
 type "ellipse"
 fill "#23A4E5"
-x -6.39914
-y 2.7506
+x -6.17813
+y 13.586
  ]
  ]
 node [
@@ -1228,8 +1228,8 @@ graphics [
  size 10
 type "ellipse"
 fill "#EA933E"
-x 11.4021
-y -3.61899
+x -9.74649
+y -6.08288
  ]
  ]
 node [
@@ -1239,8 +1239,8 @@ graphics [
  size 10
 type "ellipse"
 fill "#7380D2"
-x 1.12947
-y -0.663264
+x 0.437162
+y 3.07038
  ]
  ]
 node [
@@ -1250,8 +1250,8 @@ graphics [
  size 10
 type "ellipse"
 fill "#7380D2"
-x 1.00219
-y -4.17934
+x -5.04229
+y -0.877567
  ]
  ]
 node [
@@ -1261,8 +1261,8 @@ graphics [
  size 10
 type "ellipse"
 fill "#23A4E5"
-x -4.44564
-y 6.67235
+x -4.716
+y 11.4909
  ]
  ]
 node [
@@ -1272,8 +1272,8 @@ graphics [
  size 10
 type "ellipse"
 fill "#7380D2"
-x -2.2913
-y -5.54862
+x -5.4349
+y 1.07478
  ]
  ]
 node [
@@ -1283,8 +1283,8 @@ graphics [
  size 10
 type "ellipse"
 fill "#23A4E5"
-x -6.73371
-y 3.92998
+x -7.45291
+y 12.4167
  ]
  ]
 node [
@@ -1294,8 +1294,8 @@ graphics [
  size 10
 type "ellipse"
 fill "#BC7563"
-x 8.70911
-y 3.65008
+x -14.0269
+y 1.87356
  ]
  ]
 node [
@@ -1305,8 +1305,8 @@ graphics [
  size 10
 type "ellipse"
 fill "#7380D2"
-x -0.501751
-y -3.45611
+x 1.27127
+y 1.0565
  ]
  ]
 node [
@@ -1316,8 +1316,8 @@ graphics [
  size 10
 type "ellipse"
 fill "#26D4E5"
-x -5.93638
-y -6.34132
+x -9.38784
+y 1.83377
  ]
  ]
 node [
@@ -1327,8 +1327,8 @@ graphics [
  size 10
 type "ellipse"
 fill "#7380D2"
-x 2.89721
-y -6.12
+x -0.416355
+y -1.74128
  ]
  ]
 node [
@@ -1338,8 +1338,8 @@ graphics [
  size 10
 type "ellipse"
 fill "#7380D2"
-x 4.70744
-y -4.88748
+x -1.63418
+y -3.70261
  ]
  ]
 node [
@@ -1349,8 +1349,8 @@ graphics [
  size 10
 type "ellipse"
 fill "#7380D2"
-x -1.1376
-y -3.22347
+x 1.07816
+y 0.322997
  ]
  ]
 node [
@@ -1360,8 +1360,8 @@ graphics [
  size 10
 type "ellipse"
 fill "#7380D2"
-x 2.15573
-y -0.56373
+x -0.559574
+y 2.91845
  ]
  ]
 node [
@@ -1371,8 +1371,8 @@ graphics [
  size 10
 type "ellipse"
 fill "#9E9E9E"
-x 3.46624
-y 1.77841
+x 0.342204
+y 5.73378
  ]
  ]
 node [
@@ -1382,8 +1382,8 @@ graphics [
  size 10
 type "ellipse"
 fill "#7380D2"
-x 3.55751
-y -3.7286
+x -0.930448
+y 0.133212
  ]
  ]
 node [
@@ -1393,8 +1393,8 @@ graphics [
  size 10
 type "ellipse"
 fill "#7380D2"
-x -2.90321
-y -4.78876
+x -6.01206
+y 0.490705
  ]
  ]
 node [
@@ -1404,8 +1404,8 @@ graphics [
  size 10
 type "ellipse"
 fill "#7380D2"
-x 0.811962
-y -7.30449
+x -1.69893
+y -2.04934
  ]
  ]
 node [
@@ -1415,8 +1415,8 @@ graphics [
  size 10
 type "ellipse"
 fill "#23A4E5"
-x -1.97846
-y 5.97264
+x -7.46431
+y 9.05212
  ]
  ]
 node [
@@ -1426,8 +1426,8 @@ graphics [
  size 10
 type "ellipse"
 fill "#9E9E9E"
-x 2.40743
-y 1.8204
+x 1.32763
+y 5.58789
  ]
  ]
 node [
@@ -1437,8 +1437,8 @@ graphics [
  size 10
 type "ellipse"
 fill "#26D4E5"
-x -6.4485
-y -5.58508
+x -10.0947
+y 1.42032
  ]
  ]
 node [
@@ -1448,8 +1448,8 @@ graphics [
  size 10
 type "ellipse"
 fill "#7380D2"
-x 3.14355
-y -7.45979
+x -0.115281
+y -3.10289
  ]
  ]
 node [
@@ -1459,8 +1459,8 @@ graphics [
  size 10
 type "ellipse"
 fill "#7380D2"
-x 3.24564
-y -1.57746
+x -4.25505
+y 1.13617
  ]
  ]
 node [
@@ -1470,8 +1470,8 @@ graphics [
  size 10
 type "ellipse"
 fill "#7380D2"
-x -0.440696
-y -5.96753
+x 0.479665
+y -1.20496
  ]
  ]
 node [
@@ -1481,8 +1481,8 @@ graphics [
  size 10
 type "ellipse"
 fill "#7380D2"
-x 1.89762
-y -2.17958
+x -1.2234
+y 2.09078
  ]
  ]
 node [
@@ -1492,8 +1492,8 @@ graphics [
  size 10
 type "ellipse"
 fill "#EA933E"
-x 10.5593
-y -3.08349
+x -9.8842
+y -5.27904
  ]
  ]
 node [
@@ -1503,8 +1503,8 @@ graphics [
  size 10
 type "ellipse"
 fill "#7380D2"
-x 1.24308
-y -6.08174
+x -3.08958
+y -1.11899
  ]
  ]
 node [
@@ -1514,8 +1514,8 @@ graphics [
  size 10
 type "ellipse"
 fill "#7380D2"
-x 0.324196
-y -6.42413
+x -1.59494
+y -1.37808
  ]
  ]
 node [
@@ -1525,8 +1525,8 @@ graphics [
  size 10
 type "ellipse"
 fill "#D5B843"
-x 12.538
-y -4.41366
+x -11.1643
+y -6.99117
  ]
  ]
 node [
@@ -1536,8 +1536,8 @@ graphics [
  size 10
 type "ellipse"
 fill "#7380D2"
-x 0.666699
-y 0.00820449
+x -3.37612
+y 3.77944
  ]
  ]
 node [
@@ -1547,8 +1547,8 @@ graphics [
  size 10
 type "ellipse"
 fill "#7380D2"
-x 3.24936
-y -2.9557
+x -1.35531
+y 1.33688
  ]
  ]
 node [
@@ -1558,8 +1558,8 @@ graphics [
  size 10
 type "ellipse"
 fill "#EA933E"
-x 11.0072
-y -3.16872
+x -9.11879
+y -6.40445
  ]
  ]
 node [
@@ -1569,8 +1569,8 @@ graphics [
  size 10
 type "ellipse"
 fill "#26D4E5"
-x -6.77871
-y -4.97837
+x -10.2145
+y 0.886108
  ]
  ]
 node [
@@ -1580,8 +1580,8 @@ graphics [
  size 10
 type "ellipse"
 fill "#7380D2"
-x -0.948081
-y -6.64592
+x 1.72458
+y -1.14904
  ]
  ]
 node [
@@ -1591,8 +1591,8 @@ graphics [
  size 10
 type "ellipse"
 fill "#7380D2"
-x 2.56981
-y -2.59457
+x -2.02428
+y 1.43994
  ]
  ]
 node [
@@ -1602,8 +1602,8 @@ graphics [
  size 10
 type "ellipse"
 fill "#9E9E9E"
-x -1.32958
-y -11.6872
+x -16.34
+y -2.35833
  ]
  ]
 node [
@@ -1613,8 +1613,8 @@ graphics [
  size 10
 type "ellipse"
 fill "#9E9E9E"
-x -1.4727
-y -12.4046
+x -17.061
+y -3.04226
  ]
  ]
 node [
@@ -1624,8 +1624,8 @@ graphics [
  size 10
 type "ellipse"
 fill "#7380D2"
-x 3.68302
-y -2.1935
+x -1.66914
+y 2.62678
  ]
  ]
 node [
@@ -1635,8 +1635,8 @@ graphics [
  size 10
 type "ellipse"
 fill "#7380D2"
-x 1.388
-y -6.84965
+x -2.96431
+y -2.0451
  ]
  ]
 node [
@@ -1646,8 +1646,8 @@ graphics [
  size 10
 type "ellipse"
 fill "#EA933E"
-x 11.5581
-y -0.938253
+x -12.0246
+y -4.55399
  ]
  ]
 node [
@@ -1657,8 +1657,8 @@ graphics [
  size 10
 type "ellipse"
 fill "#7380D2"
-x 4.38227
-y -5.72204
+x -2.44519
+y -3.27274
  ]
  ]
 node [
@@ -1668,8 +1668,8 @@ graphics [
  size 10
 type "ellipse"
 fill "#7380D2"
-x 0.47411
-y -2.05004
+x 0.0780926
+y 1.62973
  ]
  ]
 node [
@@ -1679,8 +1679,8 @@ graphics [
  size 10
 type "ellipse"
 fill "#9E9E9E"
-x 1.76019
-y 2.15199
+x 1.51527
+y 4.8573
  ]
  ]
 node [
@@ -1690,8 +1690,8 @@ graphics [
  size 10
 type "ellipse"
 fill "#7380D2"
-x -0.177723
-y -2.10779
+x 0.726519
+y 1.50665
  ]
  ]
 node [
@@ -1701,8 +1701,8 @@ graphics [
  size 10
 type "ellipse"
 fill "#EA933E"
-x 9.91739
-y -4.87994
+x -8.53888
+y -6.01464
  ]
  ]
 node [
@@ -1712,8 +1712,8 @@ graphics [
  size 10
 type "ellipse"
 fill "#7380D2"
-x 2.96438
-y -5.38806
+x -3.80175
+y -1.50164
  ]
  ]
 node [
@@ -1723,8 +1723,8 @@ graphics [
  size 10
 type "ellipse"
 fill "#9E9E9E"
-x 0.928886
-y 6.92477
+x -10.1984
+y 8.38192
  ]
  ]
 node [
@@ -1734,8 +1734,8 @@ graphics [
  size 10
 type "ellipse"
 fill "#7380D2"
-x 2.67901
-y -7.62134
+x 0.239916
+y -2.82982
  ]
  ]
 node [
@@ -1745,8 +1745,8 @@ graphics [
  size 10
 type "ellipse"
 fill "#BC7563"
-x 9.74991
-y 6.16437
+x -16.1903
+y 3.38936
  ]
  ]
 node [
@@ -1756,8 +1756,8 @@ graphics [
  size 10
 type "ellipse"
 fill "#D5B843"
-x 12.1213
-y -5.38928
+x -10.9666
+y -7.731
  ]
  ]
 node [
@@ -1767,8 +1767,8 @@ graphics [
  size 10
 type "ellipse"
 fill "#7380D2"
-x 1.65815
-y -7.49125
+x 0.916852
+y -1.90995
  ]
  ]
 node [
@@ -1778,8 +1778,8 @@ graphics [
  size 10
 type "ellipse"
 fill "#7380D2"
-x 0.835426
-y -6.84141
+x -2.37593
+y -2.0243
  ]
  ]
 node [
@@ -1789,8 +1789,8 @@ graphics [
  size 10
 type "ellipse"
 fill "#EA933E"
-x 7.75766
-y -2.19013
+x -7.35192
+y -2.74811
  ]
  ]
 node [
@@ -1800,8 +1800,8 @@ graphics [
  size 10
 type "ellipse"
 fill "#9E9E9E"
-x 0.90267
-y 1.98226
+x 2.34027
+y 4.83734
  ]
  ]
 node [
@@ -1811,8 +1811,8 @@ graphics [
  size 10
 type "ellipse"
 fill "#BC7563"
-x 7.30638
-y 8.24249
+x -13.7701
+y 7.71755
  ]
  ]
 node [
@@ -1822,8 +1822,8 @@ graphics [
  size 10
 type "ellipse"
 fill "#23A4E5"
-x -3.95633
-y 5.80539
+x -5.84749
+y 8.93192
  ]
  ]
 node [
@@ -1833,8 +1833,8 @@ graphics [
  size 10
 type "ellipse"
 fill "#BC7563"
-x 8.23631
-y 6.98896
+x -17.3178
+y 6.1127
  ]
  ]
 node [
@@ -1844,8 +1844,8 @@ graphics [
  size 10
 type "ellipse"
 fill "#BC7563"
-x 5.79244
-y 7.79828
+x -14.5444
+y 8.07534
  ]
  ]
 node [
@@ -1855,8 +1855,8 @@ graphics [
  size 10
 type "ellipse"
 fill "#23A4E5"
-x -3.10096
-y 5.31165
+x -3.89312
+y 9.57086
  ]
  ]
 node [
@@ -1866,8 +1866,8 @@ graphics [
  size 10
 type "ellipse"
 fill "#BC7563"
-x 5.07153
-y 7.95306
+x -16.682
+y 7.21135
  ]
  ]
 node [
@@ -1877,8 +1877,8 @@ graphics [
  size 10
 type "ellipse"
 fill "#23A4E5"
-x -5.7277
-y 2.78437
+x -7.02452
+y 13.4782
  ]
  ]
 node [
@@ -1888,8 +1888,8 @@ graphics [
  size 10
 type "ellipse"
 fill "#7380D2"
-x -1.20564
-y -5.06313
+x 1.94982
+y 0.00653678
  ]
  ]
 node [
@@ -1899,8 +1899,8 @@ graphics [
  size 10
 type "ellipse"
 fill "#7380D2"
-x 3.7306
-y -6.84287
+x -0.806894
+y -3.25966
  ]
  ]
 node [
@@ -1910,8 +1910,8 @@ graphics [
  size 10
 type "ellipse"
 fill "#23A4E5"
-x -4.08614
-y 4.05451
+x -4.42197
+y 10.1673
  ]
  ]
 node [
@@ -1921,8 +1921,8 @@ graphics [
  size 10
 type "ellipse"
 fill "#23A4E5"
-x -4.03724
-y 3.48559
+x -5.09412
+y 9.52531
  ]
  ]
 edge [
