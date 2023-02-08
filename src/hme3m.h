@@ -1,9 +1,14 @@
 #ifndef __hme3m__h_
 #define __hme3m__h_
 #include "init.h"
+#ifndef  USE_FC_LEN_T
+# define USE_FC_LEN_T
+#endif
 #include <R_ext/BLAS.h>
 #include <R_ext/Lapack.h>
-
+#ifndef FCONE
+# define FCONE
+#endif
 
 #define oops(s) { perror((s)); error("Failed to allocate memory"); }
 #define MALLOC(s,t) if(((s) = malloc(t)) == NULL) { oops("error: malloc() "); }

@@ -311,7 +311,6 @@ void irls(double *y,
 {
 	int i,k,iter;
 	int NotConverged = 1;
-	int fclen = 1;
 	double likelihood = 0.0;
 	double NEWlikelihood = 0.0;
 	double tempval = 0.0;
@@ -347,7 +346,7 @@ void irls(double *y,
 	likelihood = 0.0;
 	
 	// ypre = X %*% B
-	F77_NAME(dgemv)(dont_transpose, &nobs, &nx, &double_one, x, &nobs, beta, &int_one, &double_zero, ypre, &int_one, fclen);
+	F77_NAME(dgemv)(dont_transpose, &nobs, &nx, &double_one, x, &nobs, beta, &int_one, &double_zero, ypre, &int_one FCONE);
     
 	for (i = 0;i < nobs;i = i + 1) {
 		tempval = ypre[i]; 
@@ -377,20 +376,20 @@ void irls(double *y,
 		for (i = 0;i < nobs;i = i + 1) rss[i] = w[i]*(y[i] - ypre[i]);
 			
 		// btemp = t(x)*(w*(y - ypre))
-		F77_NAME(dgemv)(transpose, &nobs, &nx, &double_one, x, &nobs, rss, &int_one, &double_zero, btemp, &int_one, fclen);
+		F77_NAME(dgemv)(transpose, &nobs, &nx, &double_one, x, &nobs, rss, &int_one, &double_zero, btemp, &int_one FCONE);
 
     // (t(X) %*% W %*% X)^(-1)
     F77_CALL(dgetrf)(&nx,&nx,cov,&nx,ipiv,&info);
     F77_NAME(dgetri)(&nx,cov,&nx,ipiv,work,&lwork,&info);
 
     // (t(X) %*% W %*% X)^(-1) %*% t(X) %*% W * (y - ypre)
-    F77_NAME(dgemv)(dont_transpose, &nx, &nx, &double_one, cov, &nx, btemp, &int_one, &double_zero, bret, &int_one, fclen);
+    F77_NAME(dgemv)(dont_transpose, &nx, &nx, &double_one, cov, &nx, btemp, &int_one, &double_zero, bret, &int_one FCONE);
 
 		// beta = beta + bupdate
 		for (i = 0;i < nx;i = i + 1) beta[i] = beta[i] + alpha*bret[i];
 
 		// ypre = XB
-		F77_NAME(dgemv)(dont_transpose, &nobs, &nx, &double_one, x, &nobs, beta, &int_one, &double_zero, ypre, &int_one, fclen);
+		F77_NAME(dgemv)(dont_transpose, &nobs, &nx, &double_one, x, &nobs, beta, &int_one, &double_zero, ypre, &int_one FCONE);
 		
 		//Compute the new likelihood
 		NEWlikelihood = 0.0;
