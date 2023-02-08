@@ -197,7 +197,7 @@ jobs:
       - name: Install pkgdown and deps
         if: github.ref == 'refs/heads/master' && env.run_pkgdown == 'true' && runner.os == 'Linux' && matrix.config.r == 'devel'
         run: |
-          remotes::install_cran(c("pkgdown", "widgetframe"))
+          remotes::install_cran("pkgdown")
         shell: Rscript {0}
 
       - name: Session info
@@ -246,9 +246,9 @@ jobs:
           covr::codecov(type="all", commentDontrun=TRUE)
         shell: Rscript {0}
 
-      - name: Install package
-        if: github.ref == 'refs/heads/master' && env.run_pkgdown == 'true' && runner.os == 'Linux' && matrix.config.r == 'devel'
-        run: R CMD INSTALL .
+      # - name: Install package
+      #   if: github.ref == 'refs/heads/master' && env.run_pkgdown == 'true' && runner.os == 'Linux' && matrix.config.r == 'devel'
+      #   run: R CMD INSTALL .
 
       - name: Deploy package
         if: github.ref == 'refs/heads/master' && env.run_pkgdown == 'true' && runner.os == 'Linux' && matrix.config.r == 'devel'
