@@ -16,9 +16,13 @@
 #pragma GCC diagnostic push
 #pragma GCC diagnostic ignored "-Wunused-local-typedefs"
 #pragma GCC diagnostic ignored "-Wdeprecated-declarations"
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wunused-local-typedef"
-#pragma clang diagnostic ignored "-Wdeprecated-declarations"
+
+#pragma GCC diagnostic push 
+#pragma GCC diagnostic ignored "-Wunknown-pragmas"
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wunused-local-typedef"
+  #pragma clang diagnostic ignored "-Wdeprecated-declarations"
+#pragma GCC diagnostic pop
 
 // boost 1.33.1 required
 #include <boost/graph/graph_utility.hpp>
@@ -27,7 +31,11 @@
 #include <boost/pending/indirect_cmp.hpp>
 
 #pragma GCC diagnostic pop
-#pragma clang diagnostic pop
+
+#pragma GCC diagnostic push 
+#pragma GCC diagnostic ignored "-Wunknown-pragmas"
+  #pragma clang diagnostic pop
+#pragma GCC diagnostic pop
 
 #define R_NO_REMAP
 
