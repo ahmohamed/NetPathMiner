@@ -1,3 +1,2 @@
 PKG_CXXFLAGS= -I . @CPPFLAGS@
 PKG_LIBS = @PKG_LIBS@ $(LAPACK_LIBS) $(BLAS_LIBS) $(FLIBS)
-PKG_CFLAGS= -fno-optimize-sibling-calls
