@@ -19,12 +19,15 @@
 #include "init.h"
 
 // Disable warnings in boost header code.
-#pragma GCC diagnostic push 
-#pragma GCC diagnostic ignored "-Wunknown-pragmas"
-  #pragma clang diagnostic push
-  #pragma clang diagnostic ignored "-Wunused-local-typedef"
-  #pragma clang diagnostic ignored "-Wdeprecated-declarations"
-#pragma GCC diagnostic pop
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wunused-local-typedefs"
+#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
+
+#ifdef __clang__
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wunused-local-typedef"
+#pragma clang diagnostic ignored "-Wdeprecated-declarations"
+#endif
 
 
 // boost 1.33.1 required
@@ -35,10 +38,9 @@
 
 #pragma GCC diagnostic pop
 
-#pragma GCC diagnostic push 
-#pragma GCC diagnostic ignored "-Wunknown-pragmas"
-  #pragma clang diagnostic pop
-#pragma GCC diagnostic pop
+#ifdef __clang__
+#pragma clang diagnostic pop
+#endif
 
 
 #define R_NO_REMAP
