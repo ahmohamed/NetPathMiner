@@ -130,8 +130,8 @@ KGML2igraph <- function(filename, parse.as=c("metabolic","signaling"), expand.co
 
     reactions <- V(graph)$name %in% names(zkgml)
     V(graph)$reactions <- reactions
-    V(graph)$shape<- ifelse(V(graph)$type==TRUE, "square", "circle")
-    V(graph)$color <- ifelse(V(graph)$type==TRUE,"red", "skyblue")
+    V(graph)$shape<- ifelse(V(graph)$reactions==TRUE, "square", "circle")
+    V(graph)$color <- ifelse(V(graph)$reactions==TRUE,"red", "skyblue")
 
     V(graph)[reactions]$attr <- zkgml[V(graph)[reactions]$name]
     V(graph)[!reactions]$attr = lapply(V(graph)[!reactions]$name, function(x) list(miriam.kegg.compound=x))

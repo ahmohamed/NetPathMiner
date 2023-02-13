@@ -697,7 +697,7 @@ toGraphNEL<- function(graph, export.attr=""){
     for(i in attr.names){
         new.graph <- set.vertex.attribute(new.graph, i, value=getAttribute(graph, i))
     }
-
+    new.graph <- simplify(new.graph, remove.loops = F)
     return(igraph::igraph.to.graphNEL(new.graph))
 }
 
