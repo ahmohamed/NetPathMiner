@@ -16,15 +16,17 @@ echo -n "* testing xmlParseFile in libxml2 ... "
 if test -f xml_test.out
     then
         echo "success"
-		pkg_cppflags="${pkg_cppflags} -DHAVE_XML ${XML_INCDIR}"
-		pkg_libs="${XML_LIBS} ${pkg_libs}"
+				pkg_cppflags="${pkg_cppflags} -DHAVE_XML ${XML_INCDIR}"
+				pkg_libs="${XML_LIBS} ${pkg_libs}"
         HAVE_XML=true
     else
         echo "failed"
-		echo -n "** Error Message: "
-		echo `${CPP_COMPILER} -o xml_test.out xml_test.cpp ${pkg_cppflags} ${XML_INCDIR} ${XML_LIBS} ${pkg_libs}`
-		echo "** Although libxml2 headers and binaries were found, compiler failed.
-	This may be due to incomplete headers or corrupt library."
+				echo -n "** Command: "
+				echo "${CPP_COMPILER} -o xml_test.out xml_test.cpp ${pkg_cppflags} ${XML_INCDIR} ${XML_LIBS} ${pkg_libs}"
+				echo -n "** Error Message: "
+				echo `${CPP_COMPILER} -o xml_test.out xml_test.cpp ${pkg_cppflags} ${XML_INCDIR} ${XML_LIBS} ${pkg_libs}`
+				echo "** Although libxml2 headers and binaries were found, compiler failed.
+		This may be due to incomplete headers or corrupt library."
 fi;
 
 rm xml_test.*
@@ -47,14 +49,16 @@ echo -n "* testing readSBML, SBMLDocument::getModel in libSBML ... "
 if test -f sbml_test.out
     then
         echo "success"
-		pkg_cppflags="${pkg_cppflags} -DHAVE_SBML ${SBML_INCDIR}"
-		pkg_libs="${SBML_LIBS} ${pkg_libs}"
+				pkg_cppflags="${pkg_cppflags} -DHAVE_SBML ${SBML_INCDIR}"
+				pkg_libs="${SBML_LIBS} ${pkg_libs}"
         HAVE_SBML=true
     else
         echo "failed"
+				echo -n "** Command: "
+				echo "${CPP_COMPILER} -o sbml_test.out sbml_test.cpp ${pkg_cppflags} ${SBML_INCDIR} ${SBML_LIBS} ${pkg_libs}"
         echo -n "** Error Message: "
-		echo `${CPP_COMPILER} -o sbml_test.out sbml_test.cpp ${pkg_cppflags} ${SBML_INCDIR} ${SBML_LIBS} ${pkg_libs}`
-		echo "** Although libSBML headers and binaries were found, compiler failed.
+				echo `${CPP_COMPILER} -o sbml_test.out sbml_test.cpp ${pkg_cppflags} ${SBML_INCDIR} ${SBML_LIBS} ${pkg_libs}`
+				echo "** Although libSBML headers and binaries were found, compiler failed.
 	Please ensure that libSBML is built using GCC compiler."
 	    
 fi;
