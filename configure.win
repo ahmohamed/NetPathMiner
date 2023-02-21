@@ -225,10 +225,10 @@ HAVE_SBML=false
 if test -n "${LIB_XML2}" && test -n "${LIBSBML_PATH}"
 	then
 		echo "* compiling on Bioconductor machines..."
-		XML_INCDIR="-I${LIB_XML2}/${R_ARCH}/include/libxml2"
-		XML_LIBS="-L${LIB_XML2}/${R_ARCH}/lib -lxml2 -lws2_32"
-		SBML_INCDIR="-I${LIBSBML_PATH}/${R_ARCH}/include"
-		SBML_LIBS="-L${LIBSBML_PATH}/${R_ARCH}/bin -lsbml"
+		XML_INCDIR="-I${LIB_XML2}${R_ARCH}/include/libxml2"
+		XML_LIBS="-L${LIB_XML2}${R_ARCH}/lib -lxml2 -lws2_32"
+		SBML_INCDIR="-I${LIBSBML_PATH}${R_ARCH}/include"
+		SBML_LIBS="-L${LIBSBML_PATH}${R_ARCH}/bin -lsbml"
 		test_xml_function;
 		test_sbml_function;
 		makevars_bioC;
