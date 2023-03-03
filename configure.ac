@@ -26,12 +26,18 @@ AC_CHECK_LIB(sbml, readSBML, , [SBML=false])
 
 
 #!/bin/sh
-if test -d ./src/boost.tar.gz;
+if test "$(uname -m)" == "x86_64";
   then
-      echo 'found boost header sources and tar archive;\n using what is there.'
-  else
-      echo "untarring boost include tree...";
-      tar -zxf ./src/boost.tar.gz -C ./src;
+    CPPFLAGS="-I. ${CPPFLAGS}"
+    if test -d ./src/boost;
+      then
+          echo 'found boost header sources and tar archive;\n using what is there.'
+      else
+          echo "untarring boost include tree...";
+          tar -zxf ./src/boost.tar.gz -C ./src;
+      fi
+   else
+      echo "Non x86_64 architecture. Using system-wide boost installation!"
 fi;
 
 AC_DEFUN([CHECK_XML],[
