@@ -86,6 +86,16 @@ jobs:
         with:
           r-version: ${{ matrix.config.r }}
 
+      - name: Install Windows system dependencies
+        if: runner.os == 'Windows'
+        run: |
+          curl -L -o libxml2-2.4.12-1-lib.zip https://sourceforge.net/projects/gnuwin32/files/libxml/2.4.12-1/libxml2-2.4.12-1-lib.zip/download
+          mkdir /__w/_temp/xml
+          tar -xf libxml2-2.4.12-1-lib.zip -C /__w/_temp/xml
+          echo "LIB_XML2=/__w/_temp/xml" >> $GITHUB_ENV
+          echo "LIBSBML_PATH=/__w/_temp/xml" >> $GITHUB_ENV
+        shell: powershell
+
       ## pandoc is already included in the Bioconductor docker images
       - name: Setup pandoc from r-lib
         if: runner.os != 'Linux'
@@ -136,16 +146,6 @@ jobs:
 
           ## For installing usethis's dependency gert
           brew install libgit2
-
-      - name: Install Windows system dependencies
-        if: runner.os == 'Windows'
-        run: |
-          curl -L -o libxml2-2.4.12-1-lib.zip https://sourceforge.net/projects/gnuwin32/files/libxml/2.4.12-1/libxml2-2.4.12-1-lib.zip/download
-          mkdir /__w/_temp/xml
-          tar -xf libxml2-2.4.12-1-lib.zip -C /__w/_temp/xml
-          echo "LIB_XML2=/__w/_temp/xml" >> $GITHUB_ENV
-          echo "LIBSBML_PATH=/__w/_temp/xml" >> $GITHUB_ENV
-        shell: Rscript {0}
 
       - name: Install BiocManager
         run: |
