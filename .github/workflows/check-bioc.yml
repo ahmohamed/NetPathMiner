@@ -79,8 +79,8 @@ jobs:
           mkdir D:\__w\_temp\xml
           Invoke-WebRequest -UserAgent "Wget" -Uri "https://sourceforge.net/projects/gnuwin32/files/libxml/2.4.12-1/libxml2-2.4.12-1-lib.zip/download" -OutFile "libxml2-2.4.12-1-lib.zip"
           Expand-Archive -Path "libxml2-2.4.12-1-lib.zip" -DestinationPath "D:\__w\_temp\xml"
-          echo "LIB_XML2=D:\__w\_temp\xml" >> $GITHUB_ENV
-          echo "LIBSBML_PATH=D:\__w\_temp\xml" >> $GITHUB_ENV
+          echo "LIB_XML2=D:\__w\_temp\xml" >> $env:GITHUB_ENV
+          echo "LIBSBML_PATH=D:\__w\_temp\xml" >> $env:GITHUB_ENV
         shell: powershell
 
       ## Most of these steps are the same as the ones in
