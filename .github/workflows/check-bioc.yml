@@ -77,7 +77,8 @@ jobs:
         if: runner.os == 'Windows'
         run: |
           mkdir /__w/_temp/xml
-          Invoke-WebRequest -Uri "https://sourceforge.net/projects/gnuwin32/files/libxml/2.4.12-1/libxml2-2.4.12-1-lib.zip/download" -OutFile "filename.zip"; Expand-Archive -Path "libxml2-2.4.12-1-lib.zip" -DestinationPath "/__w/_temp/xml"
+          Invoke-WebRequest -Uri "https://sourceforge.net/projects/gnuwin32/files/libxml/2.4.12-1/libxml2-2.4.12-1-lib.zip/download" -OutFile "libxml2-2.4.12-1-lib.zip"
+          Expand-Archive -Path "libxml2-2.4.12-1-lib.zip" -DestinationPath "/__w/_temp/xml"
           echo "LIB_XML2=/__w/_temp/xml" >> $GITHUB_ENV
           echo "LIBSBML_PATH=/__w/_temp/xml" >> $GITHUB_ENV
         shell: powershell
