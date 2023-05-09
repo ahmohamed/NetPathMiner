@@ -33,7 +33,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">NetPathMiner</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.35.7</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.37.0</span>
       </span>
     </div>
 
@@ -80,7 +80,7 @@
 Mohamed</h4>
             <address class="author_afil">
       QIMR Berghofer Medical Research Institute, 300 Herston Road,
-Herston QLD 4006, Australia<br><h4 data-toc-skip class="date">2023-03-03</h4>
+Herston QLD 4006, Australia<br><h4 data-toc-skip class="date">2023-05-09</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/ahmohamed/NetPathMiner/blob/HEAD/vignettes/NPMVignette.Rmd" class="external-link"><code>vignettes/NPMVignette.Rmd</code></a></small>
       <div class="hidden name"><code>NPMVignette.Rmd</code></div>
@@ -94,8 +94,8 @@ Herston QLD 4006, Australia<br><h4 data-toc-skip class="date">2023-03-03</h4>
 <h2 id="version-info">Version Info<a class="anchor" aria-label="anchor" href="#version-info"></a>
 </h2>
 <p>
-<strong>R version</strong>: R Under development (unstable) (2023-02-22
-r83892) <br><strong>Bioconductor version</strong>: 3.17 <br><strong>Package version</strong>: 1.35.7
+<strong>R version</strong>: R version 4.3.0 (2023-04-21) <br><strong>Bioconductor version</strong>: 3.18 <br><strong>Package
+version</strong>: 1.37.0
 </p>
 </div>
 <div class="section level2">
@@ -360,27 +360,27 @@ First, we view vertices and edges using V() and E() functions
 respectively.</p>
 <p>Network vertices:</p>
 <div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span> <span class="fu"><a href="https://rdrr.io/pkg/igraph/man/V.html" class="external-link">V</a></span><span class="op">(</span><span class="va">graph</span><span class="op">)</span> <span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span> <span class="fu"><a href="https://r.igraph.org/reference/V.html" class="external-link">V</a></span><span class="op">(</span><span class="va">graph</span><span class="op">)</span> <span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## + 6/432 vertices, named, from 1981d4c:</span></span>
 <span><span class="co">## [1] reaction_71850   reaction_71496   reaction_2046222 reaction_2162229</span></span>
 <span><span class="co">## [5] reaction_2162226 reaction_70403</span></span></code></pre>
 <p>Edge Vertices:</p>
 <div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span> <span class="fu"><a href="https://rdrr.io/pkg/igraph/man/E.html" class="external-link">E</a></span><span class="op">(</span><span class="va">graph</span><span class="op">)</span> <span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span> <span class="fu"><a href="https://r.igraph.org/reference/E.html" class="external-link">E</a></span><span class="op">(</span><span class="va">graph</span><span class="op">)</span> <span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## + 6/662 edges from 1981d4c (vertex names):</span></span>
 <span><span class="co">## [1] reaction_71850  -&gt;species_113592  reaction_71850  -&gt;species_29728  </span></span>
 <span><span class="co">## [3] reaction_71496  -&gt;species_75970   reaction_71496  -&gt;species_29578  </span></span>
 <span><span class="co">## [5] reaction_2046222-&gt;species_2046166 reaction_2046222-&gt;species_742343</span></span></code></pre>
 <p>Reaction vertices only:</p>
 <div class="sourceCode" id="cb23"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span> <span class="fu"><a href="https://rdrr.io/pkg/igraph/man/V.html" class="external-link">V</a></span><span class="op">(</span><span class="va">graph</span><span class="op">)</span><span class="op">[</span> <span class="va">reactions</span> <span class="op">]</span> <span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span> <span class="fu"><a href="https://r.igraph.org/reference/V.html" class="external-link">V</a></span><span class="op">(</span><span class="va">graph</span><span class="op">)</span><span class="op">[</span> <span class="va">reactions</span> <span class="op">]</span> <span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## + 6/432 vertices, named, from 1981d4c:</span></span>
 <span><span class="co">## [1] reaction_71850   reaction_71496   reaction_2046222 reaction_2162229</span></span>
 <span><span class="co">## [5] reaction_2162226 reaction_70403</span></span></code></pre>
 <p>All vertex annotation attributes are stored in “attr” attribute. To
 view the annotation for a certain vertex, you can index it by name.</p>
 <div class="sourceCode" id="cb25"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/igraph/man/V.html" class="external-link">V</a></span><span class="op">(</span><span class="va">graph</span><span class="op">)</span><span class="op">[</span> <span class="st">"reaction_71850"</span> <span class="op">]</span><span class="op">$</span><span class="va">attr</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="https://r.igraph.org/reference/V.html" class="external-link">V</a></span><span class="op">(</span><span class="va">graph</span><span class="op">)</span><span class="op">[</span> <span class="st">"reaction_71850"</span> <span class="op">]</span><span class="op">$</span><span class="va">attr</span></span></code></pre></div>
 <pre><code><span><span class="co">## [[1]]</span></span>
 <span><span class="co">## [[1]]$name</span></span>
 <span><span class="co">## [1] "1,3-bisphospho-D-glycerate + ADP &lt;=&gt; 3-phospho-D-glycerate + ADP"</span></span>
@@ -489,10 +489,10 @@ annotations needed for gene expression mapping.</p>
 <div class="sourceCode" id="cb32"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">rgraph</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/makeReactionNetwork.html">makeReactionNetwork</a></span><span class="op">(</span><span class="va">graph</span>, simplify<span class="op">=</span><span class="cn">FALSE</span><span class="op">)</span></span>
 <span><span class="va">rgraph</span></span></code></pre></div>
-<pre><code><span><span class="co">## IGRAPH 3087339 DN-- 180 303 -- </span></span>
+<pre><code><span><span class="co">## IGRAPH 6abc56c DN-- 180 303 -- </span></span>
 <span><span class="co">## + attr: source (g/c), type (g/c), name (v/c), attr (v/x), compound</span></span>
 <span><span class="co">## | (e/x), attr (e/x)</span></span>
-<span><span class="co">## + edges from 3087339 (vertex names):</span></span>
+<span><span class="co">## + edges from 6abc56c (vertex names):</span></span>
 <span><span class="co">##  [1] reaction_71850-&gt;reaction_70420  reaction_71850-&gt;reaction_450088</span></span>
 <span><span class="co">##  [3] reaction_71850-&gt;reaction_71541  reaction_71850-&gt;reaction_70467 </span></span>
 <span><span class="co">##  [5] reaction_71850-&gt;reaction_70486  reaction_71850-&gt;reaction_163773</span></span>
@@ -569,7 +569,7 @@ use Leukaemia molecular subtypes as categories.</p>
 <code class="sourceCode R"><span><span class="va">rgraph</span><span class="op">$</span><span class="va">y.labels</span></span></code></pre></div>
 <pre><code><span><span class="co">## [1] "ALL1/AF4" "BCR/ABL"  "E2A/PBX1" "NEG"</span></span></code></pre>
 <div class="sourceCode" id="cb42"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span> <span class="fu"><a href="https://rdrr.io/pkg/igraph/man/E.html" class="external-link">E</a></span><span class="op">(</span><span class="va">rgraph</span><span class="op">)</span><span class="op">$</span><span class="va">edge.weights</span> <span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span> <span class="fu"><a href="https://r.igraph.org/reference/E.html" class="external-link">E</a></span><span class="op">(</span><span class="va">rgraph</span><span class="op">)</span><span class="op">$</span><span class="va">edge.weights</span> <span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## [[1]]</span></span>
 <span><span class="co">## [1] 0.48975367 0.15652908 0.48692055 0.03109587</span></span>
 <span><span class="co">## </span></span>
@@ -616,7 +616,7 @@ path sample can be then provided to the path ranking function. If path
 sample is not provided, random edge sampling is used to estimate the
 distribution.</p>
 <div class="sourceCode" id="cb49"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">pathsample</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/samplePaths.html">samplePaths</a></span><span class="op">(</span><span class="va">rgraph</span>, max.path.length <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/igraph/man/gorder.html" class="external-link">vcount</a></span><span class="op">(</span><span class="va">rgraph</span><span class="op">)</span>,</span>
+<code class="sourceCode R"><span><span class="va">pathsample</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/samplePaths.html">samplePaths</a></span><span class="op">(</span><span class="va">rgraph</span>, max.path.length <span class="op">=</span> <span class="fu"><a href="https://r.igraph.org/reference/gorder.html" class="external-link">vcount</a></span><span class="op">(</span><span class="va">rgraph</span><span class="op">)</span>,</span>
 <span>num.samples <span class="op">=</span> <span class="fl">1000</span>, num.warmup <span class="op">=</span> <span class="fl">10</span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">ranked.p</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/pathRanker.html">pathRanker</a></span><span class="op">(</span><span class="va">rgraph</span>, method <span class="op">=</span> <span class="st">"pvalue"</span>,</span>
