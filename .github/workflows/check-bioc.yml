@@ -89,7 +89,7 @@ jobs:
       - name: Install Windows system dependencies
         if: runner.os == 'Windows'
         run: |
-          curl -L -o libxml2-2.4.12-1-lib.zip https://sourceforge.net/projects/gnuwin32/files/libxml/2.4.12-1/libxml2-2.4.12-1-lib.zip/download
+          curl -o libxml2-2.4.12-1-lib.zip https://sourceforge.net/projects/gnuwin32/files/libxml/2.4.12-1/libxml2-2.4.12-1-lib.zip/download
           mkdir /__w/_temp/xml
           tar -xf libxml2-2.4.12-1-lib.zip -C /__w/_temp/xml
           echo "LIB_XML2=/__w/_temp/xml" >> $GITHUB_ENV
