@@ -67,12 +67,6 @@ jobs:
 
       ## Set the R library to the directory matching the
       ## R packages cache step further below when running on Docker (Linux).
-      - name: Set R Library home on Linux
-        if: runner.os == 'Linux'
-        run: |
-          mkdir /__w/_temp/Library
-          echo ".libPaths('/__w/_temp/Library')" > ~/.Rprofile
-
       - name: Install Windows system dependencies
         if: runner.os == 'Windows'
         run: |
