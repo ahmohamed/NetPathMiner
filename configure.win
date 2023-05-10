@@ -229,6 +229,8 @@ if test -n "${LIB_XML2}" && test -n "${LIBSBML_PATH}"
 		XML_LIBS="-L${LIB_XML2}/lib -lxml2 -lws2_32"
 		SBML_INCDIR="-I${LIBSBML_PATH}/include"
 		SBML_LIBS="-L${LIBSBML_PATH}/bin -lsbml"
+		lib_xml_location="${LIB_XML}"
+		xml_check_header;
 		test_xml_function;
 		test_sbml_function;
 		makevars_bioC;
