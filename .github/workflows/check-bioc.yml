@@ -71,9 +71,9 @@ jobs:
         if: runner.os == 'Windows'
         run: |
           mkdir D:\__w\_temp\xml
-          Invoke-WebRequest -UserAgent "Wget" -Uri "http://xmlsoft.org/sources/win32/libxml2-2.7.8.win32.zip" -OutFile "libxml2-2.7.8.win32.zip"
-          Expand-Archive -Path "libxml2-2.7.8.win32.zip" -DestinationPath "D:\__w\_temp\xml"
-          ls "D:\__w\_temp\xml"
+          Invoke-WebRequest -UserAgent "Wget" -Uri "http://xmlsoft.org/sources/win32/libxml2-2.7.8.win32.zip" -OutFile "xml.zip"
+          Expand-Archive -Path "xml.zip" -DestinationPath "D:\__w\_temp\xml"
+          ls "D:\__w\_temp"
           echo "LIB_XML2=D:\__w\_temp\xml" >> $env:GITHUB_ENV
           echo "LIBSBML_PATH=D:\__w\_temp\xml" >> $env:GITHUB_ENV
         shell: powershell
