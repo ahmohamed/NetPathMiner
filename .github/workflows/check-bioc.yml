@@ -75,7 +75,7 @@ jobs:
           Expand-Archive -Path "xml.zip" -DestinationPath "D:\__w\_temp"
           echo "LIB_XML2=D:\__w\_temp\xml" >> $env:GITHUB_ENV
           echo "LIBSBML_PATH=D:\__w\_temp\xml" >> $env:GITHUB_ENV
-          ls "D:\__w\_temp\xml\"
+          ls "D:\__w\_temp\xml\xml"
         shell: powershell
 
       ## Most of these steps are the same as the ones in
