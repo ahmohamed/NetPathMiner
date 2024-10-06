@@ -28,13 +28,15 @@ This function returns a list of colors for vertices, assigned similar colors if 
 
 }
 \seealso{
-Other Plotting methods: \code{\link{layoutVertexByAttr}},
-  \code{\link{plotAllNetworks}},
-  \code{\link{plotClassifierROC}},
-  \code{\link{plotClusterMatrix}},
-  \code{\link{plotCytoscapeGML}},
-  \code{\link{plotNetwork}},
-  \code{\link{plotPathClassifier}}, \code{\link{plotPaths}}
+Other Plotting methods: 
+\code{\link{layoutVertexByAttr}()},
+\code{\link{plotAllNetworks}()},
+\code{\link{plotClassifierROC}()},
+\code{\link{plotClusterMatrix}()},
+\code{\link{plotCytoscapeGML}()},
+\code{\link{plotNetwork}()},
+\code{\link{plotPathClassifier}()},
+\code{\link{plotPaths}()}
 }
 \author{
 Ahmed Mohamed

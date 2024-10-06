@@ -4,8 +4,12 @@
 \alias{vertexDeleteReconnect}
 \title{Network editing: removing vertices and connecting their neighbours}
 \usage{
-vertexDeleteReconnect(graph, vids, reconnect.threshold = vcount(graph),
-  copy.attr = NULL)
+vertexDeleteReconnect(
+  graph,
+  vids,
+  reconnect.threshold = vcount(graph),
+  copy.attr = NULL
+)
 }
 \arguments{
 \item{graph}{A reaction network.}
@@ -34,12 +38,13 @@ long as the shortest path beween the neighbours are below the \code{reconnect.th
 
 }
 \seealso{
-Other Network processing methods: \code{\link{expandComplexes}},
-  \code{\link{makeMetaboliteNetwork}},
-  \code{\link{makeReactionNetwork}},
-  \code{\link{reindexNetwork}},
-  \code{\link{rmSmallCompounds}},
-  \code{\link{simplifyReactionNetwork}}
+Other Network processing methods: 
+\code{\link{expandComplexes}()},
+\code{\link{makeMetaboliteNetwork}()},
+\code{\link{makeReactionNetwork}()},
+\code{\link{reindexNetwork}()},
+\code{\link{rmSmallCompounds}()},
+\code{\link{simplifyReactionNetwork}()}
 }
 \author{
 Ahmed Mohamed

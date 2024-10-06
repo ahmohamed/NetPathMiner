@@ -44,8 +44,9 @@ edges on a metabolic network).
 
 }
 \seealso{
-Other Path ranking methods: \code{\link{extractPathNetwork}},
-  \code{\link{pathRanker}}, \code{\link{samplePaths}}
+Other Path ranking methods: 
+\code{\link{extractPathNetwork}()},
+\code{\link{pathRanker}()}
 }
 \author{
 Ahmed Mohamed

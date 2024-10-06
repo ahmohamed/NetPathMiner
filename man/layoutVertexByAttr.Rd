@@ -4,8 +4,12 @@
 \alias{layoutVertexByAttr}
 \title{A graph layout function, which groups vertices by attribute.}
 \usage{
-layoutVertexByAttr(graph, attr.name, cluster.strength = 1,
-  layout = layout.auto)
+layoutVertexByAttr(
+  graph,
+  attr.name,
+  cluster.strength = 1,
+  layout = layout.auto
+)
 }
 \arguments{
 \item{graph}{An annotated igraph object.}
@@ -35,13 +39,15 @@ This function generates a layout for igraph objects, keeping vertices with the s
 
 }
 \seealso{
-Other Plotting methods: \code{\link{colorVertexByAttr}},
-  \code{\link{plotAllNetworks}},
-  \code{\link{plotClassifierROC}},
-  \code{\link{plotClusterMatrix}},
-  \code{\link{plotCytoscapeGML}},
-  \code{\link{plotNetwork}},
-  \code{\link{plotPathClassifier}}, \code{\link{plotPaths}}
+Other Plotting methods: 
+\code{\link{colorVertexByAttr}()},
+\code{\link{plotAllNetworks}()},
+\code{\link{plotClassifierROC}()},
+\code{\link{plotClusterMatrix}()},
+\code{\link{plotCytoscapeGML}()},
+\code{\link{plotNetwork}()},
+\code{\link{plotPathClassifier}()},
+\code{\link{plotPaths}()}
 }
 \author{
 Ahmed Mohamed

@@ -4,8 +4,14 @@
 \alias{plotNetwork}
 \title{Plots an annotated igraph object.}
 \usage{
-plotNetwork(graph, vertex.color, col.palette = palette(),
-  layout = layout.auto, legend = TRUE, ...)
+plotNetwork(
+  graph,
+  vertex.color,
+  col.palette = palette(),
+  layout = layout.auto,
+  legend = TRUE,
+  ...
+)
 }
 \arguments{
 \item{graph}{An annotated igraph object.}
@@ -40,13 +46,15 @@ network.
 
 }
 \seealso{
-Other Plotting methods: \code{\link{colorVertexByAttr}},
-  \code{\link{layoutVertexByAttr}},
-  \code{\link{plotAllNetworks}},
-  \code{\link{plotClassifierROC}},
-  \code{\link{plotClusterMatrix}},
-  \code{\link{plotCytoscapeGML}},
-  \code{\link{plotPathClassifier}}, \code{\link{plotPaths}}
+Other Plotting methods: 
+\code{\link{colorVertexByAttr}()},
+\code{\link{layoutVertexByAttr}()},
+\code{\link{plotAllNetworks}()},
+\code{\link{plotClassifierROC}()},
+\code{\link{plotClusterMatrix}()},
+\code{\link{plotCytoscapeGML}()},
+\code{\link{plotPathClassifier}()},
+\code{\link{plotPaths}()}
 }
 \author{
 Ahmed Mohamed

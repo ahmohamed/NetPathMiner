@@ -4,9 +4,18 @@
 \alias{assignEdgeWeights}
 \title{Assigning weights to network edges}
 \usage{
-assignEdgeWeights(microarray, graph, use.attr, y, weight.method = "cor",
-  complex.method = "max", missing.method = "median",
-  same.gene.penalty = "median", bootstrap = 100, verbose = TRUE)
+assignEdgeWeights(
+  microarray,
+  graph,
+  use.attr,
+  y,
+  weight.method = "cor",
+  complex.method = "max",
+  missing.method = "median",
+  same.gene.penalty = "median",
+  bootstrap = 100,
+  verbose = TRUE
+)
 }
 \arguments{
 \item{microarray}{Microarray should be a Dataframe or a matrix, with genes as rownames, and samples as columns.}

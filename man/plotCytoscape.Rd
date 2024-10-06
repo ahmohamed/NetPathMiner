@@ -4,8 +4,16 @@
 \alias{plotCytoscapeGML}
 \title{Plots an annotated igraph object in Cytoscape.}
 \usage{
-plotCytoscapeGML(graph, file, layout = layout.auto, vertex.size,
-  vertex.label, vertex.shape, vertex.color, edge.color)
+plotCytoscapeGML(
+  graph,
+  file,
+  layout = layout.auto,
+  vertex.size,
+  vertex.label,
+  vertex.shape,
+  vertex.color,
+  edge.color
+)
 }
 \arguments{
 \item{graph}{An annotated igraph object.}
@@ -50,13 +58,15 @@ Future plans will use RCy3 for Cytoscape plotting, once RCy3 is supported on Mac
 
 }
 \seealso{
-Other Plotting methods: \code{\link{colorVertexByAttr}},
-  \code{\link{layoutVertexByAttr}},
-  \code{\link{plotAllNetworks}},
-  \code{\link{plotClassifierROC}},
-  \code{\link{plotClusterMatrix}},
-  \code{\link{plotNetwork}},
-  \code{\link{plotPathClassifier}}, \code{\link{plotPaths}}
+Other Plotting methods: 
+\code{\link{colorVertexByAttr}()},
+\code{\link{layoutVertexByAttr}()},
+\code{\link{plotAllNetworks}()},
+\code{\link{plotClassifierROC}()},
+\code{\link{plotClusterMatrix}()},
+\code{\link{plotNetwork}()},
+\code{\link{plotPathClassifier}()},
+\code{\link{plotPaths}()}
 }
 \author{
 Ahmed Mohamed

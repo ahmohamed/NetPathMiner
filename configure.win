@@ -195,16 +195,6 @@ echo "failed"
 }
 CPP_COMPILER=`R CMD config CXX`
 
-cd src;
-echo -n '* searching for boost headers ... '
-if test -d ./boost;
-	then 
-		echo 'found.'
-	else
-		echo "not found. Untarring boost.tar.gz";
-		tar zxf boost.tar.gz;
-fi;
-
 echo -n '* searching for NPM_dependencies file ... '
 if test -f ${R_HOME}/NPM_dependencies.tar.gz;
 	then

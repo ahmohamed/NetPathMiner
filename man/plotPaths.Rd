@@ -4,8 +4,14 @@
 \alias{plotPaths}
 \title{Plots an annotated igraph object higlighting ranked paths.}
 \usage{
-plotPaths(paths, graph, path.clusters = NULL, col.palette = palette(),
-  layout = layout.auto, ...)
+plotPaths(
+  paths,
+  graph,
+  path.clusters = NULL,
+  col.palette = palette(),
+  layout = layout.auto,
+  ...
+)
 }
 \arguments{
 \item{paths}{The result of \code{\link{pathRanker}}.}
@@ -57,14 +63,15 @@ paths in the same cluster are assigned similar colors.
 
 }
 \seealso{
-Other Plotting methods: \code{\link{colorVertexByAttr}},
-  \code{\link{layoutVertexByAttr}},
-  \code{\link{plotAllNetworks}},
-  \code{\link{plotClassifierROC}},
-  \code{\link{plotClusterMatrix}},
-  \code{\link{plotCytoscapeGML}},
-  \code{\link{plotNetwork}},
-  \code{\link{plotPathClassifier}}
+Other Plotting methods: 
+\code{\link{colorVertexByAttr}()},
+\code{\link{layoutVertexByAttr}()},
+\code{\link{plotAllNetworks}()},
+\code{\link{plotClassifierROC}()},
+\code{\link{plotClusterMatrix}()},
+\code{\link{plotCytoscapeGML}()},
+\code{\link{plotNetwork}()},
+\code{\link{plotPathClassifier}()}
 }
 \author{
 Ahmed Mohamed

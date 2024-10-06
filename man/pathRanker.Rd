@@ -4,8 +4,14 @@
 \alias{pathRanker}
 \title{Extracting and ranking paths from a network}
 \usage{
-pathRanker(graph, method = c("prob.shortest.path", "pvalue"), start, end,
-  verbose = TRUE, ...)
+pathRanker(
+  graph,
+  method = "prob.shortest.path",
+  start,
+  end,
+  verbose = TRUE,
+  ...
+)
 }
 \arguments{
 \item{graph}{A weighted igraph object. Weights must be in \code{edge.weights} or \code{weight}
@@ -60,19 +66,7 @@ before extracting the paths. Defaults to TRUE.}
 }
 
 \subsection{P-value method}{
-\code{pathRanker(method="pvalue")} searches all paths between the specified start and end vertices, and if a
-significant path is found it returns it. However, It doesn't search for the best path between the start and
-terminal vertices,  as there could be many paths which lead to the same terminal vertex, and searching through
-all of them is time comsuming.  We just stop when the first significant path is found.
-
-All provided edge weights are recaled from 0-1. Path significance is calculated based on the empirical distribution
-of random paths of the same length. This can be estimated using \code{\link{samplePaths}} and passed as an argument.
-
-The follwing arguments can be passed to \code{pathRanker(method="pvalue")}:
-\describe{
-\item{\code{sampledpaths}}{The emripical results from \code{\link{samplePaths}}.}
-\item{\code{alpha}}{The P value cut-off. Defualts to 0.01}
-}
+\code{pathRanker(method="pvalue")} is deprecated. Please use \code{prob.shortest.path} instead.
 }
 }
 \examples{
@@ -92,21 +86,13 @@ The follwing arguments can be passed to \code{pathRanker(method="pvalue")}:
  ranked.p <- pathRanker(rgraph, method="prob.shortest.path",
 					K=20, minPathSize=6)
 
-	## Get significantly correlated paths using "p-valvue" method.
-	##   First, establish path score distribution by calling "samplePaths"
- pathsample <- samplePaths(rgraph, max.path.length=10,
-                        num.samples=100, num.warmup=10)
-
-	##   Get all significant paths with p<0.1
-	significant.p <- pathRanker(rgraph, method = "pvalue",
-                sampledpaths = pathsample ,alpha=0.1)
-
 }
 \seealso{
 getPathsAsEIDs, extractPathNetwork
 
-Other Path ranking methods: \code{\link{extractPathNetwork}},
-  \code{\link{getPathsAsEIDs}}, \code{\link{samplePaths}}
+Other Path ranking methods: 
+\code{\link{extractPathNetwork}()},
+\code{\link{getPathsAsEIDs}()}
 }
 \author{
 Timothy Hancock, Ichigaku Takigawa, Nicolas Wicker and Ahmed Mohamed

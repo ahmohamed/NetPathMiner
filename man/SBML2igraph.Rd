@@ -4,8 +4,14 @@
 \alias{SBML2igraph}
 \title{Processes SBML files into igraph objects}
 \usage{
-SBML2igraph(filename, parse.as = c("metabolic", "signaling"),
-  miriam.attr = "all", gene.attr, expand.complexes, verbose = TRUE)
+SBML2igraph(
+  filename,
+  parse.as = c("metabolic", "signaling"),
+  miriam.attr = "all",
+  gene.attr,
+  expand.complexes,
+  verbose = TRUE
+)
 }
 \arguments{
 \item{filename}{A character vector containing the SBML files to be processed. If a directory path
@@ -76,8 +82,9 @@ if(is.loaded("readsbmlfile")){ # This is false if libSBML wasn't available at in
 }
 }
 \seealso{
-Other Database extraction methods: \code{\link{KGML2igraph}},
-  \code{\link{biopax2igraph}}
+Other Database extraction methods: 
+\code{\link{KGML2igraph}()},
+\code{\link{biopax2igraph}()}
 }
 \author{
 Ahmed Mohamed

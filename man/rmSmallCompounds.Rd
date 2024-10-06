@@ -4,8 +4,11 @@
 \alias{rmSmallCompounds}
 \title{Remove uniquitous compounds from a metabolic network}
 \usage{
-rmSmallCompounds(graph, method = c("remove", "duplicate"),
-  small.comp.ls = NPMdefaults("small.comp.ls"))
+rmSmallCompounds(
+  graph,
+  method = c("remove", "duplicate"),
+  small.comp.ls = NPMdefaults("small.comp.ls")
+)
 }
 \arguments{
 \item{graph}{A metabolic network.}
@@ -34,12 +37,13 @@ ChEBI and CAS identifiers.
 
 }
 \seealso{
-Other Network processing methods: \code{\link{expandComplexes}},
-  \code{\link{makeMetaboliteNetwork}},
-  \code{\link{makeReactionNetwork}},
-  \code{\link{reindexNetwork}},
-  \code{\link{simplifyReactionNetwork}},
-  \code{\link{vertexDeleteReconnect}}
+Other Network processing methods: 
+\code{\link{expandComplexes}()},
+\code{\link{makeMetaboliteNetwork}()},
+\code{\link{makeReactionNetwork}()},
+\code{\link{reindexNetwork}()},
+\code{\link{simplifyReactionNetwork}()},
+\code{\link{vertexDeleteReconnect}()}
 }
 \author{
 Ahmed Mohamed

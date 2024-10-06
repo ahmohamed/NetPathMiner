@@ -52,14 +52,15 @@ wish to reference.
 
 }
 \seealso{
-Other Path clustering & classification methods: \code{\link{pathClassifier}},
-  \code{\link{pathCluster}},
-  \code{\link{plotClassifierROC}},
-  \code{\link{plotClusterMatrix}},
-  \code{\link{plotPathClassifier}},
-  \code{\link{plotPathCluster}},
-  \code{\link{predictPathClassifier}},
-  \code{\link{predictPathCluster}}
+Other Path clustering & classification methods: 
+\code{\link{pathClassifier}()},
+\code{\link{pathCluster}()},
+\code{\link{plotClassifierROC}()},
+\code{\link{plotClusterMatrix}()},
+\code{\link{plotPathClassifier}()},
+\code{\link{plotPathCluster}()},
+\code{\link{predictPathClassifier}()},
+\code{\link{predictPathCluster}()}
 }
 \author{
 Timothy Hancock and Ichigaku Takigawa

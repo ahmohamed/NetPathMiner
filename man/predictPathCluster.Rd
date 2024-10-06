@@ -46,13 +46,15 @@ Predicts new paths given a pathCluster model.
 
 }
 \seealso{
-Other Path clustering & classification methods: \code{\link{pathClassifier}},
-  \code{\link{pathCluster}}, \code{\link{pathsToBinary}},
-  \code{\link{plotClassifierROC}},
-  \code{\link{plotClusterMatrix}},
-  \code{\link{plotPathClassifier}},
-  \code{\link{plotPathCluster}},
-  \code{\link{predictPathClassifier}}
+Other Path clustering & classification methods: 
+\code{\link{pathClassifier}()},
+\code{\link{pathCluster}()},
+\code{\link{pathsToBinary}()},
+\code{\link{plotClassifierROC}()},
+\code{\link{plotClusterMatrix}()},
+\code{\link{plotPathClassifier}()},
+\code{\link{plotPathCluster}()},
+\code{\link{predictPathClassifier}()}
 }
 \author{
 Ichigaku Takigawa

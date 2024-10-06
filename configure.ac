@@ -25,21 +25,6 @@ AC_CHECK_LIB(xml2, xmlParseFile,, [XML=false])
 AC_CHECK_LIB(sbml, readSBML, , [SBML=false])
 
 
-#!/bin/sh
-if test "$(uname -m)" == "x86_64";
-  then
-    CPPFLAGS="-I. ${CPPFLAGS}"
-    if test -d ./src/boost;
-      then
-          echo 'found boost header sources and tar archive;\n using what is there.'
-      else
-          echo "untarring boost include tree...";
-          tar -zxf ./src/boost.tar.gz -C ./src;
-      fi
-   else
-      echo "Non x86_64 architecture. Using system-wide boost installation!"
-fi;
-
 AC_DEFUN([CHECK_XML],[
   AC_PATH_PROGS(XML_CONFIG, xml2-config)
   LIBXML_INCDIR="-DHAVE_XML `${XML_CONFIG} --cflags`"

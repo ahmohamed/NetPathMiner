@@ -4,8 +4,12 @@
 \alias{KGML2igraph}
 \title{Processes KGML files into igraph objects}
 \usage{
-KGML2igraph(filename, parse.as = c("metabolic", "signaling"),
-  expand.complexes = FALSE, verbose = TRUE)
+KGML2igraph(
+  filename,
+  parse.as = c("metabolic", "signaling"),
+  expand.complexes = FALSE,
+  verbose = TRUE
+)
 }
 \arguments{
 \item{filename}{A character vector containing the KGML files to be processed.
@@ -56,8 +60,9 @@ if(is.loaded("readkgmlfile")){ # This is false if libxml2 wasn't available at in
 
 }
 \seealso{
-Other Database extraction methods: \code{\link{SBML2igraph}},
-  \code{\link{biopax2igraph}}
+Other Database extraction methods: 
+\code{\link{SBML2igraph}()},
+\code{\link{biopax2igraph}()}
 }
 \author{
 Ahmed Mohamed

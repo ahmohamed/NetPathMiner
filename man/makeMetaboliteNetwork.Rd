@@ -23,12 +23,13 @@ network contains metabolite nodes only, where edges indicate that reaction conve
 
 }
 \seealso{
-Other Network processing methods: \code{\link{expandComplexes}},
-  \code{\link{makeReactionNetwork}},
-  \code{\link{reindexNetwork}},
-  \code{\link{rmSmallCompounds}},
-  \code{\link{simplifyReactionNetwork}},
-  \code{\link{vertexDeleteReconnect}}
+Other Network processing methods: 
+\code{\link{expandComplexes}()},
+\code{\link{makeReactionNetwork}()},
+\code{\link{reindexNetwork}()},
+\code{\link{rmSmallCompounds}()},
+\code{\link{simplifyReactionNetwork}()},
+\code{\link{vertexDeleteReconnect}()}
 }
 \author{
 Ahmed Mohamed

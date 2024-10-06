@@ -4,8 +4,16 @@
 \alias{pathClassifier}
 \title{HME3M Markov pathway classifier.}
 \usage{
-pathClassifier(paths, target.class, M, alpha = 1, lambda = 2,
-  hme3miter = 100, plriter = 1, init = "random")
+pathClassifier(
+  paths,
+  target.class,
+  M,
+  alpha = 1,
+  lambda = 2,
+  hme3miter = 100,
+  plriter = 1,
+  init = "random"
+)
 }
 \arguments{
 \item{paths}{The training paths computed by \code{\link{pathsToBinary}}}
@@ -84,14 +92,15 @@ Hancock, Timothy, and Mamitsuka, Hiroshi: A Markov Classification Model for Meta
 Hancock, Timothy, and Mamitsuka, Hiroshi: A Markov Classification Model for Metabolic Pathways, Algorithms for Molecular Biology 2010
 }
 \seealso{
-Other Path clustering & classification methods: \code{\link{pathCluster}},
-  \code{\link{pathsToBinary}},
-  \code{\link{plotClassifierROC}},
-  \code{\link{plotClusterMatrix}},
-  \code{\link{plotPathClassifier}},
-  \code{\link{plotPathCluster}},
-  \code{\link{predictPathClassifier}},
-  \code{\link{predictPathCluster}}
+Other Path clustering & classification methods: 
+\code{\link{pathCluster}()},
+\code{\link{pathsToBinary}()},
+\code{\link{plotClassifierROC}()},
+\code{\link{plotClusterMatrix}()},
+\code{\link{plotPathClassifier}()},
+\code{\link{plotPathCluster}()},
+\code{\link{predictPathClassifier}()},
+\code{\link{predictPathCluster}()}
 }
 \author{
 Timothy Hancock and Ichigaku Takigawa

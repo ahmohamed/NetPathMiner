@@ -28,12 +28,13 @@ by one reaction is consumed by the other.
 
 }
 \seealso{
-Other Network processing methods: \code{\link{expandComplexes}},
-  \code{\link{makeMetaboliteNetwork}},
-  \code{\link{reindexNetwork}},
-  \code{\link{rmSmallCompounds}},
-  \code{\link{simplifyReactionNetwork}},
-  \code{\link{vertexDeleteReconnect}}
+Other Network processing methods: 
+\code{\link{expandComplexes}()},
+\code{\link{makeMetaboliteNetwork}()},
+\code{\link{reindexNetwork}()},
+\code{\link{rmSmallCompounds}()},
+\code{\link{simplifyReactionNetwork}()},
+\code{\link{vertexDeleteReconnect}()}
 }
 \author{
 Ahmed Mohamed

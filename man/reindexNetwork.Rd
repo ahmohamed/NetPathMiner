@@ -47,12 +47,13 @@ reindexing by chemical name will collapse them into one `ATP` vertex.
 
 }
 \seealso{
-Other Network processing methods: \code{\link{expandComplexes}},
-  \code{\link{makeMetaboliteNetwork}},
-  \code{\link{makeReactionNetwork}},
-  \code{\link{rmSmallCompounds}},
-  \code{\link{simplifyReactionNetwork}},
-  \code{\link{vertexDeleteReconnect}}
+Other Network processing methods: 
+\code{\link{expandComplexes}()},
+\code{\link{makeMetaboliteNetwork}()},
+\code{\link{makeReactionNetwork}()},
+\code{\link{rmSmallCompounds}()},
+\code{\link{simplifyReactionNetwork}()},
+\code{\link{vertexDeleteReconnect}()}
 }
 \author{
 Ahmed Mohamed

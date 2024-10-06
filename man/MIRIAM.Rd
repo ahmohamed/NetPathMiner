@@ -7,8 +7,13 @@
 \usage{
 stdAttrNames(graph, return.value = c("matches", "graph"))
 
-fetchAttribute(graph, organism = "Homo sapiens", target.attr,
-  source.attr, bridge.web = NPMdefaults("bridge.web"))
+fetchAttribute(
+  graph,
+  organism = "Homo sapiens",
+  target.attr,
+  source.attr,
+  bridge.web = NPMdefaults("bridge.web")
+)
 }
 \arguments{
 \item{graph}{An annotated igraph object.}
@@ -47,7 +52,8 @@ These functions deals with conforming with MIRIAM annotation guidelines, convers
 
 }
 \seealso{
-Other Attribute handling methods: \code{\link{getAttrStatus}}
+Other Attribute handling methods: 
+\code{\link{getAttrStatus}()}
 }
 \author{
 Ahmed Mohamed

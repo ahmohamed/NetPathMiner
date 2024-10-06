@@ -52,14 +52,15 @@ Mamitsuka, H., Okuno, Y., and Yamaguchi, A. 2003. Mining biologically active pat
 metabolic pathways using microarray expression profiles. SIGKDD Explor. News l. 5, 2 (Dec. 2003), 113-121.
 }
 \seealso{
-Other Path clustering & classification methods: \code{\link{pathClassifier}},
-  \code{\link{pathsToBinary}},
-  \code{\link{plotClassifierROC}},
-  \code{\link{plotClusterMatrix}},
-  \code{\link{plotPathClassifier}},
-  \code{\link{plotPathCluster}},
-  \code{\link{predictPathClassifier}},
-  \code{\link{predictPathCluster}}
+Other Path clustering & classification methods: 
+\code{\link{pathClassifier}()},
+\code{\link{pathsToBinary}()},
+\code{\link{plotClassifierROC}()},
+\code{\link{plotClusterMatrix}()},
+\code{\link{plotPathClassifier}()},
+\code{\link{plotPathCluster}()},
+\code{\link{predictPathClassifier}()},
+\code{\link{predictPathCluster}()}
 }
 \author{
 Ichigaku Takigawa

@@ -6,8 +6,12 @@
 \alias{plotClusters}
 \title{Plots the structure of all path clusters}
 \usage{
-plotClusterMatrix(ybinpaths, clusters, col = rainbow(clusters$params$M),
-  grid = TRUE)
+plotClusterMatrix(
+  ybinpaths,
+  clusters,
+  col = rainbow(clusters$params$M),
+  grid = TRUE
+)
 
 plotClusterProbs(clusters, col = rainbow(clusters$params$M))
 
@@ -59,21 +63,25 @@ Plots the structure of all path clusters
 
 }
 \seealso{
-Other Path clustering & classification methods: \code{\link{pathClassifier}},
-  \code{\link{pathCluster}}, \code{\link{pathsToBinary}},
-  \code{\link{plotClassifierROC}},
-  \code{\link{plotPathClassifier}},
-  \code{\link{plotPathCluster}},
-  \code{\link{predictPathClassifier}},
-  \code{\link{predictPathCluster}}
+Other Path clustering & classification methods: 
+\code{\link{pathClassifier}()},
+\code{\link{pathCluster}()},
+\code{\link{pathsToBinary}()},
+\code{\link{plotClassifierROC}()},
+\code{\link{plotPathClassifier}()},
+\code{\link{plotPathCluster}()},
+\code{\link{predictPathClassifier}()},
+\code{\link{predictPathCluster}()}
 
-Other Plotting methods: \code{\link{colorVertexByAttr}},
-  \code{\link{layoutVertexByAttr}},
-  \code{\link{plotAllNetworks}},
-  \code{\link{plotClassifierROC}},
-  \code{\link{plotCytoscapeGML}},
-  \code{\link{plotNetwork}},
-  \code{\link{plotPathClassifier}}, \code{\link{plotPaths}}
+Other Plotting methods: 
+\code{\link{colorVertexByAttr}()},
+\code{\link{layoutVertexByAttr}()},
+\code{\link{plotAllNetworks}()},
+\code{\link{plotClassifierROC}()},
+\code{\link{plotCytoscapeGML}()},
+\code{\link{plotNetwork}()},
+\code{\link{plotPathClassifier}()},
+\code{\link{plotPaths}()}
 }
 \author{
 Ahmed Mohamed

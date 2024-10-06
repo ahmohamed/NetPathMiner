@@ -1,8 +1,5 @@
 #!/bin/sh
 cd src; 
-echo "removing boost headers..."
-rm -rf boost
-
 echo "restoring handelsegfault file..."
 
 

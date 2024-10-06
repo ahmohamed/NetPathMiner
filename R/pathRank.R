@@ -194,19 +194,7 @@ getPaths <- function(paths, graph, source.net){
 #' }
 #'
 #' \subsection{P-value method}{
-#' \code{pathRanker(method="pvalue")} searches all paths between the specified start and end vertices, and if a
-#' significant path is found it returns it. However, It doesn't search for the best path between the start and
-#' terminal vertices,  as there could be many paths which lead to the same terminal vertex, and searching through
-#' all of them is time comsuming.  We just stop when the first significant path is found.
-#'
-#' All provided edge weights are recaled from 0-1. Path significance is calculated based on the empirical distribution
-#' of random paths of the same length. This can be estimated using \code{\link{samplePaths}} and passed as an argument.
-#'
-#' The follwing arguments can be passed to \code{pathRanker(method="pvalue")}:
-#' \describe{
-#' \item{\code{sampledpaths}}{The emripical results from \code{\link{samplePaths}}.}
-#' \item{\code{alpha}}{The P value cut-off. Defualts to 0.01}
-#' }
+#' \code{pathRanker(method="pvalue")} is deprecated. Please use \code{prob.shortest.path} instead.
 #' }
 #' @param graph A weighted igraph object. Weights must be in \code{edge.weights} or \code{weight}
 #' edge attributes.
@@ -245,16 +233,7 @@ getPaths <- function(paths, graph, source.net){
 #'  ranked.p <- pathRanker(rgraph, method="prob.shortest.path",
 #' 					K=20, minPathSize=6)
 #'
-#' 	## Get significantly correlated paths using "p-valvue" method.
-#' 	##   First, establish path score distribution by calling "samplePaths"
-#'  pathsample <- samplePaths(rgraph, max.path.length=10,
-#'                         num.samples=100, num.warmup=10)
-#'
-#' 	##   Get all significant paths with p<0.1
-#' 	significant.p <- pathRanker(rgraph, method = "pvalue",
-#'                 sampledpaths = pathsample ,alpha=0.1)
-#'
-pathRanker <- function(graph, method=c("prob.shortest.path", "pvalue") ,start, end, verbose=TRUE, ...){
+pathRanker <- function(graph, method="prob.shortest.path" ,start, end, verbose=TRUE, ...){
     # Checking the graph
     if(is.null(E(graph)$edge.weights)){
         if(!is.null(E(graph)$weight))
@@ -263,9 +242,6 @@ pathRanker <- function(graph, method=c("prob.shortest.path", "pvalue") ,start, e
             stop("No edge weights provided.")
         }
     }
-
-    if(length(method)>1 || !method %in% c("prob.shortest.path", "pvalue"))
-        stop("Please specify the ranking method 'prob.shortest.path' or 'pvalue'.")
 
     if(method == "prob.shortest.path")
         return(rankShortestPaths(graph, start=start, end=end, verbose=verbose, ...))
@@ -283,28 +259,30 @@ rankShortestPaths <- function(graph, K=10, minPathSize=1, start, end, normalize 
             else message("Extracting the ",K," most probable paths.")
         }
 
-        # min path size is increased by 2 to include start and end compounds.
-        ps <- .Call("pathranker",
-                pg$nodes,     #nodes
-                pg$edges,                #Edges
-                pg$weights[,i],            #Edge weights
-                K=K,minpathsize = minPathSize+2)    #add 2 nodes to min path length ("s" & "t")
+        # Min path size is increased by 2 to include start and end compounds.
+        # Currently not in use.
+        minpathsize = minPathSize + 2
+        ps <- igraph::k_shortest_paths(pg$graph, from = "s", to = "t", weights = pg$weights[,i], k = K)
+        paths <- list()
+        for (j in 1:length(ps$vpaths)){
+          path <- format_path(pg$graph, ps$epath[[j]], ps$vpath[[j]], pg$weights[,1])
+          paths[[j]] <- path
+        }
 
 
-
-        idx <- which(sapply(ps,is.null))
-        if (length(idx)>0) ps <- ps[-idx]
-        if(length(ps)==0){
+        idx <- which(sapply(paths,is.null))
+        if (length(idx)>0) paths <- paths[-idx]
+        if(length(paths)==0){
             if(ncol(pg$weights) > 1)
                 message("  Warning:Counldn't find paths matching the criteria for ",graph$y.labels[i])
             else message("  Warning:Counldn't find paths matching the criteria.")
         }
 
-        ps <- ps[order(sapply(ps,"[[", "distance"))] #order paths by distance
+        paths <- paths[order(sapply(paths,"[[", "distance"))] #order paths by distance
 
         if (ncol(pg$weights) > 1){
-            zret[[i]] <- ps
-        }else zret <- ps
+            zret[[i]] <- paths
+        }else zret <- paths
     }
 
     if(length(zret)==0)return(NULL)
@@ -318,164 +296,8 @@ rankShortestPaths <- function(graph, K=10, minPathSize=1, start, end, normalize 
 }
 
 rankPvalue <- function(graph, sampledpaths, start, end, alpha = 0.01, verbose) {
-    # Checking the graph
-    if(is.null(E(graph)$edge.weights)){
-        if(!is.null(E(graph)$weight))
-            E(graph)$edge.weights <- E(graph)$weight
-        else{
-            stop("No edge weights provided.")
-        }
-    }
-
-    range <- ifelse(missing(sampledpaths), ecount(graph),
-                    if(length(graph$y.labels)==1)nrow(sampledpaths)-1 else nrow(sampledpaths[[1]])-1)
-
-    # Defining start reactions end their scopes.
-    if(missing(start)){
-        if(verbose) message("Start nodes weren't provided. Using entry nodes as start points.")
-        start <- V(graph)[degree(graph,mode="in")==0]$name
-    }
-    if(missing(end)){
-        end <- V(graph)[ unique(unlist(neighborhood(graph, order=range, nodes=start, mode="out"))) ]
-    }
-
-    pg = processNetwork(graph, start, end, scale="rescale", normalize=FALSE)
-
-    zret=NULL
-    for (i in 1:ncol(pg$weights)) {
-        if(verbose){
-            if (ncol(pg$weights) > 1) message("Extracting non-random path p<",alpha," for ",graph$y.labels[i])
-            else message("Extracting non-random path p<",alpha)
-        }
-
-        p.sample <- if(missing(sampledpaths)) NULL
-                    else if(ncol(pg$weights) > 1) t(sampledpaths[[i]])
-                    else t(sampledpaths)
-
-        ps <- .Call("scope",
-                pg$nodes,
-                pg$edges,
-                pg$weights[,i],    #add column subscript
-                SAMPLEDPATHS = p.sample,
-                ALPHA = alpha,
-                ECHO = as.integer(verbose))
-
-        idx <- which(sapply(ps$paths,is.null))
-        ps$paths <- ps$paths[-idx]
-
-        if(length(ps)==0) stop("couldn't find any significant paths")
-
-        ps$paths <- ps$paths[order(sapply(ps$paths,"[[", "pvalue"))] #order paths by pvalue
-
-        if (ncol(pg$weights) > 1) zret[[i]] <- ps
-        else zret <- ps
-    }
-    if (ncol(pg$weights) > 1)
-        names(zret) <- graph$y.labels
-
-    zret$y.labels=graph$y.labels
-    zret$source.net = graph$type
-
-    return(zret)
-}
-
-#' Creates a set of sample path p-values for each length given a weighted network
-#'
-#' Randomly traverses paths of increasing lengths within a set network to create an
-#' empirical pathway distribution for more accurate determination of path significance.
-#'
-#' Can take a bit of time.
-#'
-#' @param graph A weighted igraph object. Weights must be in \code{edge.weights} or \code{weight}
-#' edge attributes.
-#' @param max.path.length The maxmimum path length.
-#' @param num.samples The numner of paths to sample
-#' @param num.warmup The number of warm up paths to sample.
-#' @param verbose Whether to display the progress of the function.
-#'
-#' @return A matrix where each row is a path length and each column is the number of paths sampled.
-#'
-#' @author Timothy Hancock
-#' @author Ahmed Mohamed
-#' @family Path ranking methods
-#' @export
-#' @examples
-#' 	## Prepare a weighted reaction network.
-#' 	## Conver a metabolic network to a reaction network.
-#'  data(ex_sbml) # bipartite metabolic network of Carbohydrate metabolism.
-#'  rgraph <- makeReactionNetwork(ex_sbml, simplify=TRUE)
-#'
-#' 	## Assign edge weights based on Affymetrix attributes and microarray dataset.
-#'  # Calculate Pearson's correlation.
-#' 	data(ex_microarray)	# Part of ALL dataset.
-#' 	rgraph <- assignEdgeWeights(microarray = ex_microarray, graph = rgraph,
-#' 		weight.method = "cor", use.attr="miriam.uniprot",
-#' 		y=factor(colnames(ex_microarray)), bootstrap = FALSE)
-#'
-#' 	## Get significantly correlated paths using "p-valvue" method.
-#' 	##   First, establish path score distribution by calling "samplePaths"
-#'  pathsample <- samplePaths(rgraph, max.path.length=10,
-#'                         num.samples=100, num.warmup=10)
-#'
-#' 	##   Get all significant paths with p<0.1
-#' 	significant.p <- pathRanker(rgraph, method = "pvalue",
-#'                 sampledpaths = pathsample ,alpha=0.1)
-#'
-samplePaths <- function(graph, max.path.length, num.samples=1000, num.warmup=10, verbose=TRUE){
-    # Checking the graph
-    if(is.null(E(graph)$edge.weights)){
-        if(!is.null(E(graph)$weight))
-            E(graph)$edge.weights <- E(graph)$weight
-        else{
-            stop("No edge weights provided.")
-        }
-    }
-
-    if (max.path.length > vcount(graph)-1) {
-        if(verbose) message("Maximum Path Length is larger than Number of Network Vertices ... setting them to be equal.")
-        max.path.length <-  vcount(graph)-1
-    }
-
-    # Get edge.weights and apply ecdf on each column
-    edge.weights = do.call("rbind", E(graph)$edge.weights)
-    edge.probs <- apply(edge.weights, 2, rescale, c(1,0))
-
-
-    # Prepare edgelist as required by PathRanker method.
-    label = lapply(E(graph)$attr, paste, collapse=' + ')    # For edges annotated with >1 compound, concatenate.
-    edgelist = get.edgelist(graph, names=FALSE)
-    edgelist = data.frame(from=edgelist[,1], to=edgelist[,2], label=unlist(label), stringsAsFactors=FALSE)
-
-    pg = list(nodes=V(graph)$name, edges=edgelist, weights=edge.probs)
-
-    if(ncol(pg$weights) == 1){
-        ps <- .Call("samplepaths",
-                pg$nodes,
-                pg$edges,
-                pg$weights,
-                MAXPATHLENGTH = as.integer(max.path.length),
-                SAMPLEPATHS = as.integer(num.samples),
-                WARMUPSTEPS = as.integer(num.warmup)
-              )
-
-        return( matrix(ps,max.path.length+1,num.samples,byrow = TRUE) )
-    }else{
-        ps <- list()
-        for (i in 1:ncol(pg$weights)) {
-            if(verbose) message("Sampling",num.samples," for",graph$y.labels[i],"\n")
-            p.samplei <- .Call("samplepaths",
-                    pg$nodes,
-                    pg$edges,
-                    pg$weights,
-                    MAXPATHLENGTH = as.integer(max.path.length),
-                    SAMPLEPATHS = as.integer(num.samples),
-                    WARMUPSTEPS = as.integer(num.warmup)
-            )
-            ps[[i]] <- matrix(p.samplei, max.path.length+1, num.samples, byrow = TRUE)
-        }
-        names(ps) <- graph$y.labels
-        return(ps)
-    }
+    msg <- "P-value ranking method is deprecated. Please use 'prob.shortest.path' method instead."
+    .Deprecated(msg=msg)
 }
 
 processNetwork <- function(graph, start, end, scale=c("ecdf", "rescale"), normalize){
@@ -485,7 +307,7 @@ processNetwork <- function(graph, start, end, scale=c("ecdf", "rescale"), normal
     enodes <- enodes[!enodes %in% snodes]
 
     graph <- graph + vertices("s", "t")
-    graph <- add.edges(graph,
+    graph <- add_edges(graph,
             c(rbind("s",snodes),
               rbind(enodes,"t")),
             attr=list(edge.weights=list(rep(1, length(unlist(graph$y.labels)) )),
@@ -516,16 +338,25 @@ processNetwork <- function(graph, start, end, scale=c("ecdf", "rescale"), normal
     if(scale=="ecdf")
         edge.probs <- -log(edge.probs)
 
-    # Prepare edgelist as required by PathRanker method.
-    label = lapply(E(graph)$compound, paste, collapse=' + ')    # For edges annotated with >1 compound, concatenate.
-    edgelist = get.edgelist(graph, names=FALSE)
-    edgelist = data.frame(from=edgelist[,1], to=edgelist[,2], label=unlist(label), stringsAsFactors=FALSE)
-
-
-    return(list(nodes=V(graph)$name, edges=edgelist, weights=edge.probs))
+    # E(graph)$edge.probs <- edge.probs
+    return(list(graph=graph, weights=edge.probs))
 }
 
 #Adapted from scales package
 rescale <- function (x, to = c(0, 1), from = range(x, na.rm = TRUE)){
     (x - from[1])/diff(from) * diff(to) + to[1]
+}
+
+format_path <- function(graph, epath, vpath, edge.probs) {
+    # Remove S and T nodes
+    epath = epath[2: (length(epath)-1)]
+    vpath = vpath[2: (length(vpath)-1)]
+
+    # Apply the edge weights
+    E(graph)$temp.weights = edge.probs
+    
+    compounds = unlist(edge_attr(graph, "compound", epath))
+    weights = edge_attr(graph, "temp.weights", epath)
+    genes = vertex_attr(graph, "name", vpath)
+    return(list(genes=genes, compounds=compounds, weights=weights, distance=sum(weights)))
 }

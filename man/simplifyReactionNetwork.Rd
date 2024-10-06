@@ -4,9 +4,12 @@
 \alias{simplifyReactionNetwork}
 \title{Removes reactions with no gene annotations}
 \usage{
-simplifyReactionNetwork(reaction.graph, gene.attr = "genes",
+simplifyReactionNetwork(
+  reaction.graph,
+  gene.attr = "genes",
   remove.missing.genes = TRUE,
-  reconnect.threshold = vcount(reaction.graph))
+  reconnect.threshold = vcount(reaction.graph)
+)
 }
 \arguments{
 \item{reaction.graph}{A reaction network.}
@@ -36,12 +39,13 @@ which are not catalysed by genes.
 
 }
 \seealso{
-Other Network processing methods: \code{\link{expandComplexes}},
-  \code{\link{makeMetaboliteNetwork}},
-  \code{\link{makeReactionNetwork}},
-  \code{\link{reindexNetwork}},
-  \code{\link{rmSmallCompounds}},
-  \code{\link{vertexDeleteReconnect}}
+Other Network processing methods: 
+\code{\link{expandComplexes}()},
+\code{\link{makeMetaboliteNetwork}()},
+\code{\link{makeReactionNetwork}()},
+\code{\link{reindexNetwork}()},
+\code{\link{rmSmallCompounds}()},
+\code{\link{vertexDeleteReconnect}()}
 }
 \author{
 Ahmed Mohamed

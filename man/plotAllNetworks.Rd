@@ -4,9 +4,17 @@
 \alias{plotAllNetworks}
 \title{Higlighting ranked paths over multiple network representations.}
 \usage{
-plotAllNetworks(paths, metabolic.net = NULL, reaction.net = NULL,
-  gene.net = NULL, path.clusters = NULL, plot.clusters = TRUE,
-  col.palette = palette(), layout = layout.auto, ...)
+plotAllNetworks(
+  paths,
+  metabolic.net = NULL,
+  reaction.net = NULL,
+  gene.net = NULL,
+  path.clusters = NULL,
+  plot.clusters = TRUE,
+  col.palette = palette(),
+  layout = layout.auto,
+  ...
+)
 }
 \arguments{
 \item{paths}{The result of \code{\link{pathRanker}}.}
@@ -56,13 +64,15 @@ plotAllNetworks(ranked.p, metabolic.net = ex_sbml, reaction.net = rgraph,
 
 }
 \seealso{
-Other Plotting methods: \code{\link{colorVertexByAttr}},
-  \code{\link{layoutVertexByAttr}},
-  \code{\link{plotClassifierROC}},
-  \code{\link{plotClusterMatrix}},
-  \code{\link{plotCytoscapeGML}},
-  \code{\link{plotNetwork}},
-  \code{\link{plotPathClassifier}}, \code{\link{plotPaths}}
+Other Plotting methods: 
+\code{\link{colorVertexByAttr}()},
+\code{\link{layoutVertexByAttr}()},
+\code{\link{plotClassifierROC}()},
+\code{\link{plotClusterMatrix}()},
+\code{\link{plotCytoscapeGML}()},
+\code{\link{plotNetwork}()},
+\code{\link{plotPathClassifier}()},
+\code{\link{plotPaths}()}
 }
 \author{
 Ahmed Mohamed

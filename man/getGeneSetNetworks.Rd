@@ -4,8 +4,11 @@
 \alias{getGeneSetNetworks}
 \title{Generate geneset networks from an annotated network.}
 \usage{
-getGeneSetNetworks(graph, use.attr = "pathway", format = c("list",
-  "pathway-class"))
+getGeneSetNetworks(
+  graph,
+  use.attr = "pathway",
+  format = c("list", "pathway-class")
+)
 }
 \arguments{
 \item{graph}{An annotated igraph object..}

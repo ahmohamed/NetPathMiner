@@ -14,9 +14,6 @@ static const R_CallMethodDef callMethods[] = {
 #endif
 
 	ENTRY(expand_complexes, 5),
-	ENTRY(pathranker, 5),
-	ENTRY(scope, 6),
-	ENTRY(samplepaths, 6),
 	{NULL, NULL, 0}
 };
 

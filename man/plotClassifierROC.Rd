@@ -22,21 +22,25 @@ item{Bottom}{The likelihood convergence history for the HME3M model.  If the par
 Diagnostic plots for \code{\link{pathClassifier}}.
 }
 \seealso{
-Other Path clustering & classification methods: \code{\link{pathClassifier}},
-  \code{\link{pathCluster}}, \code{\link{pathsToBinary}},
-  \code{\link{plotClusterMatrix}},
-  \code{\link{plotPathClassifier}},
-  \code{\link{plotPathCluster}},
-  \code{\link{predictPathClassifier}},
-  \code{\link{predictPathCluster}}
+Other Path clustering & classification methods: 
+\code{\link{pathClassifier}()},
+\code{\link{pathCluster}()},
+\code{\link{pathsToBinary}()},
+\code{\link{plotClusterMatrix}()},
+\code{\link{plotPathClassifier}()},
+\code{\link{plotPathCluster}()},
+\code{\link{predictPathClassifier}()},
+\code{\link{predictPathCluster}()}
 
-Other Plotting methods: \code{\link{colorVertexByAttr}},
-  \code{\link{layoutVertexByAttr}},
-  \code{\link{plotAllNetworks}},
-  \code{\link{plotClusterMatrix}},
-  \code{\link{plotCytoscapeGML}},
-  \code{\link{plotNetwork}},
-  \code{\link{plotPathClassifier}}, \code{\link{plotPaths}}
+Other Plotting methods: 
+\code{\link{colorVertexByAttr}()},
+\code{\link{layoutVertexByAttr}()},
+\code{\link{plotAllNetworks}()},
+\code{\link{plotClusterMatrix}()},
+\code{\link{plotCytoscapeGML}()},
+\code{\link{plotNetwork}()},
+\code{\link{plotPathClassifier}()},
+\code{\link{plotPaths}()}
 }
 \author{
 Timothy Hancock and Ichigaku Takigawa

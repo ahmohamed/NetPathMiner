@@ -1,6 +1,5 @@
 #!/bin/sh
-echo "removing boost headers..."
-cd src; rm -rf boost
+cd src
 
 echo "restoring Makevars.in file..."
 mv _Makevars.in_ Makevars.in; 

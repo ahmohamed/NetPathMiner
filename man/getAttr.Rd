@@ -66,7 +66,8 @@ All functions here target NetPathMiner annotations only.
  graph <- rmAttribute(ex_kgml_sig, "miriam.ncbigene")
 }
 \seealso{
-Other Attribute handling methods: \code{\link{stdAttrNames}}
+Other Attribute handling methods: 
+\code{\link{stdAttrNames}()}
 }
 \author{
 Ahmed Mohamed

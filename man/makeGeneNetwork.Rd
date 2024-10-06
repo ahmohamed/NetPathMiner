@@ -5,12 +5,21 @@
 \alias{makeGeneNetwork}
 \title{Expand reactions / complexes into their gene constituents.}
 \usage{
-expandComplexes(graph, v.attr, keep.parent.attr = "^pathway",
+expandComplexes(
+  graph,
+  v.attr,
+  keep.parent.attr = "^pathway",
   expansion.method = c("normal", "duplicate"),
-  missing.method = c("keep", "remove", "reconnect"))
+  missing.method = c("keep", "remove", "reconnect")
+)
 
-makeGeneNetwork(graph, v.attr = "genes", keep.parent.attr = "^pathway",
-  expansion.method = "duplicate", missing.method = "remove")
+makeGeneNetwork(
+  graph,
+  v.attr = "genes",
+  keep.parent.attr = "^pathway",
+  expansion.method = "duplicate",
+  missing.method = "remove"
+)
 }
 \arguments{
 \item{graph}{An annotated igraph object.}
@@ -66,12 +75,13 @@ vertices by "miriam.kegg.compound" attribute.
 
 }
 \seealso{
-Other Network processing methods: \code{\link{makeMetaboliteNetwork}},
-  \code{\link{makeReactionNetwork}},
-  \code{\link{reindexNetwork}},
-  \code{\link{rmSmallCompounds}},
-  \code{\link{simplifyReactionNetwork}},
-  \code{\link{vertexDeleteReconnect}}
+Other Network processing methods: 
+\code{\link{makeMetaboliteNetwork}()},
+\code{\link{makeReactionNetwork}()},
+\code{\link{reindexNetwork}()},
+\code{\link{rmSmallCompounds}()},
+\code{\link{simplifyReactionNetwork}()},
+\code{\link{vertexDeleteReconnect}()}
 }
 \author{
 Ahmed Mohamed
