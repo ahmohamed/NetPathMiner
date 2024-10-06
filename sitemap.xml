@@ -1,147 +1,50 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url>
-    <loc>/404.html</loc>
-  </url>
-  <url>
-    <loc>/articles/NPMVignette.html</loc>
-  </url>
-  <url>
-    <loc>/articles/index.html</loc>
-  </url>
-  <url>
-    <loc>/authors.html</loc>
-  </url>
-  <url>
-    <loc>/index.html</loc>
-  </url>
-  <url>
-    <loc>/reference/KGML2igraph.html</loc>
-  </url>
-  <url>
-    <loc>/reference/MIRIAM.html</loc>
-  </url>
-  <url>
-    <loc>/reference/NPMdefaults.html</loc>
-  </url>
-  <url>
-    <loc>/reference/NetPathMiner-package.html</loc>
-  </url>
-  <url>
-    <loc>/reference/SBML2igraph.html</loc>
-  </url>
-  <url>
-    <loc>/reference/assignEdgeWeights.html</loc>
-  </url>
-  <url>
-    <loc>/reference/biopax2igraph.html</loc>
-  </url>
-  <url>
-    <loc>/reference/colorVertexByAttr.html</loc>
-  </url>
-  <url>
-    <loc>/reference/ex_biopax.html</loc>
-  </url>
-  <url>
-    <loc>/reference/ex_kgml_sig.html</loc>
-  </url>
-  <url>
-    <loc>/reference/ex_microarray.html</loc>
-  </url>
-  <url>
-    <loc>/reference/ex_sbml.html</loc>
-  </url>
-  <url>
-    <loc>/reference/extractPathNetwork.html</loc>
-  </url>
-  <url>
-    <loc>/reference/getAttr.html</loc>
-  </url>
-  <url>
-    <loc>/reference/getGeneSetNetworks.html</loc>
-  </url>
-  <url>
-    <loc>/reference/getGeneSets.html</loc>
-  </url>
-  <url>
-    <loc>/reference/getPathsAsEIDs.html</loc>
-  </url>
-  <url>
-    <loc>/reference/index.html</loc>
-  </url>
-  <url>
-    <loc>/reference/layoutVertexByAttr.html</loc>
-  </url>
-  <url>
-    <loc>/reference/makeGeneNetwork.html</loc>
-  </url>
-  <url>
-    <loc>/reference/makeMetaboliteNetwork.html</loc>
-  </url>
-  <url>
-    <loc>/reference/makeReactionNetwork.html</loc>
-  </url>
-  <url>
-    <loc>/reference/pathClassifier.html</loc>
-  </url>
-  <url>
-    <loc>/reference/pathCluster.html</loc>
-  </url>
-  <url>
-    <loc>/reference/pathRanker.html</loc>
-  </url>
-  <url>
-    <loc>/reference/pathsToBinary.html</loc>
-  </url>
-  <url>
-    <loc>/reference/plotAllNetworks.html</loc>
-  </url>
-  <url>
-    <loc>/reference/plotClassifierROC.html</loc>
-  </url>
-  <url>
-    <loc>/reference/plotClusters.html</loc>
-  </url>
-  <url>
-    <loc>/reference/plotCytoscape.html</loc>
-  </url>
-  <url>
-    <loc>/reference/plotNetwork.html</loc>
-  </url>
-  <url>
-    <loc>/reference/plotPathClassifier.html</loc>
-  </url>
-  <url>
-    <loc>/reference/plotPathCluster.html</loc>
-  </url>
-  <url>
-    <loc>/reference/plotPaths.html</loc>
-  </url>
-  <url>
-    <loc>/reference/predictPathClassifier.html</loc>
-  </url>
-  <url>
-    <loc>/reference/predictPathCluster.html</loc>
-  </url>
-  <url>
-    <loc>/reference/registerMemoryErr.html</loc>
-  </url>
-  <url>
-    <loc>/reference/reindexNetwork.html</loc>
-  </url>
-  <url>
-    <loc>/reference/rmSmallCompounds.html</loc>
-  </url>
-  <url>
-    <loc>/reference/samplePaths.html</loc>
-  </url>
-  <url>
-    <loc>/reference/simplifyReactionNetwork.html</loc>
-  </url>
-  <url>
-    <loc>/reference/toGraphNEL.html</loc>
-  </url>
-  <url>
-    <loc>/reference/vertexDeleteReconnect.html</loc>
-  </url>
+<urlset xmlns = 'http://www.sitemaps.org/schemas/sitemap/0.9'>
+<url><loc>/404.html</loc></url>
+<url><loc>/articles/NPMVignette.html</loc></url>
+<url><loc>/articles/index.html</loc></url>
+<url><loc>/authors.html</loc></url>
+<url><loc>/index.html</loc></url>
+<url><loc>/reference/KGML2igraph.html</loc></url>
+<url><loc>/reference/MIRIAM.html</loc></url>
+<url><loc>/reference/NPMdefaults.html</loc></url>
+<url><loc>/reference/NetPathMiner-package.html</loc></url>
+<url><loc>/reference/SBML2igraph.html</loc></url>
+<url><loc>/reference/assignEdgeWeights.html</loc></url>
+<url><loc>/reference/biopax2igraph.html</loc></url>
+<url><loc>/reference/colorVertexByAttr.html</loc></url>
+<url><loc>/reference/ex_biopax.html</loc></url>
+<url><loc>/reference/ex_kgml_sig.html</loc></url>
+<url><loc>/reference/ex_microarray.html</loc></url>
+<url><loc>/reference/ex_sbml.html</loc></url>
+<url><loc>/reference/extractPathNetwork.html</loc></url>
+<url><loc>/reference/getAttr.html</loc></url>
+<url><loc>/reference/getGeneSetNetworks.html</loc></url>
+<url><loc>/reference/getGeneSets.html</loc></url>
+<url><loc>/reference/getPathsAsEIDs.html</loc></url>
+<url><loc>/reference/index.html</loc></url>
+<url><loc>/reference/layoutVertexByAttr.html</loc></url>
+<url><loc>/reference/makeGeneNetwork.html</loc></url>
+<url><loc>/reference/makeMetaboliteNetwork.html</loc></url>
+<url><loc>/reference/makeReactionNetwork.html</loc></url>
+<url><loc>/reference/pathClassifier.html</loc></url>
+<url><loc>/reference/pathCluster.html</loc></url>
+<url><loc>/reference/pathRanker.html</loc></url>
+<url><loc>/reference/pathsToBinary.html</loc></url>
+<url><loc>/reference/plotAllNetworks.html</loc></url>
+<url><loc>/reference/plotClassifierROC.html</loc></url>
+<url><loc>/reference/plotClusters.html</loc></url>
+<url><loc>/reference/plotCytoscape.html</loc></url>
+<url><loc>/reference/plotNetwork.html</loc></url>
+<url><loc>/reference/plotPathClassifier.html</loc></url>
+<url><loc>/reference/plotPathCluster.html</loc></url>
+<url><loc>/reference/plotPaths.html</loc></url>
+<url><loc>/reference/predictPathClassifier.html</loc></url>
+<url><loc>/reference/predictPathCluster.html</loc></url>
+<url><loc>/reference/registerMemoryErr.html</loc></url>
+<url><loc>/reference/reindexNetwork.html</loc></url>
+<url><loc>/reference/rmSmallCompounds.html</loc></url>
+<url><loc>/reference/simplifyReactionNetwork.html</loc></url>
+<url><loc>/reference/toGraphNEL.html</loc></url>
+<url><loc>/reference/vertexDeleteReconnect.html</loc></url>
 </urlset>
+
