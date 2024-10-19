@@ -15,8 +15,12 @@
 extern "C" {
 #endif
 
+#ifdef HAVE_XML
 void handle_segfault_KGML();
+#endif
+#ifdef HAVE_SBML
 void handle_segfault_SBML();
+#endif
 
 #ifdef __cplusplus
 }
