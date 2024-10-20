@@ -32,7 +32,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">NetPathMiner</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.41.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.41.2</span>
       </span>
     </div>
 
@@ -79,7 +79,7 @@
 Mohamed</h4>
             <address class="author_afil">
       QIMR Berghofer Medical Research Institute, 300 Herston Road,
-Herston QLD 4006, Australia<br><h4 data-toc-skip class="date">2024-10-19</h4>
+Herston QLD 4006, Australia<br><h4 data-toc-skip class="date">2024-10-20</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/ahmohamed/NetPathMiner/blob/master/vignettes/NPMVignette.Rmd" class="external-link"><code>vignettes/NPMVignette.Rmd</code></a></small>
       <div class="hidden name"><code>NPMVignette.Rmd</code></div>
@@ -94,7 +94,7 @@ Herston QLD 4006, Australia<br><h4 data-toc-skip class="date">2024-10-19</h4>
 </h2>
 <p>
 <strong>R version</strong>: R version 4.4.1 (2024-06-14) <br><strong>Bioconductor version</strong>: 3.20 <br><strong>Package
-version</strong>: 1.41.1
+version</strong>: 1.41.2
 </p>
 </div>
 <div class="section level2">
@@ -339,8 +339,8 @@ database.</p>
 <span><span class="va">graph</span> <span class="op">&lt;-</span> <span class="va">ex_sbml</span></span>
 <span><span class="va">graph</span></span></code></pre></div>
 <pre><code><span><span class="co">## This graph was created by an old(er) igraph version.</span></span>
-<span><span class="co">##   Call upgrade_graph() on it to use with the current igraph version</span></span>
-<span><span class="co">##   For now we convert it on the fly...</span></span></code></pre>
+<span><span class="co">## <span style="color: #00BBBB;">ℹ</span> Call `igraph::upgrade_graph()` on it to use with the current igraph version.</span></span>
+<span><span class="co">## For now we convert it on the fly...</span></span></code></pre>
 <pre><code><span><span class="co">## IGRAPH 1981d4c DN-- 432 662 -- </span></span>
 <span><span class="co">## + attr: source (g/c), type (g/c), name (v/c), attr (v/x), reactions</span></span>
 <span><span class="co">## | (v/l), shape (v/c), color (v/c), stoichiometry (e/n)</span></span>
@@ -491,10 +491,10 @@ annotations needed for gene expression mapping.</p>
 <div class="sourceCode" id="cb33"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">rgraph</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/makeReactionNetwork.html">makeReactionNetwork</a></span><span class="op">(</span><span class="va">graph</span>, simplify<span class="op">=</span><span class="cn">FALSE</span><span class="op">)</span></span>
 <span><span class="va">rgraph</span></span></code></pre></div>
-<pre><code><span><span class="co">## IGRAPH ad73f08 DN-- 180 303 -- </span></span>
+<pre><code><span><span class="co">## IGRAPH 56f5c1f DN-- 180 303 -- </span></span>
 <span><span class="co">## + attr: source (g/c), type (g/c), name (v/c), attr (v/x), compound</span></span>
 <span><span class="co">## | (e/x), attr (e/x)</span></span>
-<span><span class="co">## + edges from ad73f08 (vertex names):</span></span>
+<span><span class="co">## + edges from 56f5c1f (vertex names):</span></span>
 <span><span class="co">##  [1] reaction_71850-&gt;reaction_70420  reaction_71850-&gt;reaction_450088</span></span>
 <span><span class="co">##  [3] reaction_71850-&gt;reaction_71541  reaction_71850-&gt;reaction_70467 </span></span>
 <span><span class="co">##  [5] reaction_71850-&gt;reaction_70486  reaction_71850-&gt;reaction_163773</span></span>
