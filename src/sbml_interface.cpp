@@ -41,11 +41,11 @@ SEXP readsbmlfile(SEXP FILENAME, SEXP ATTR_TERMS, SEXP VERBOSE) {
 			message<<"line "<< err->getLine() <<": "<< err->getShortMessage() << "\n";
 			if(err->getErrorId() == NotSchemaConformant ){
 				if(verbose)	Rprintf(": Error.\n");
-				Rf_warningcall(mkChar(filename), message.str().c_str());
+				Rf_warningcall(mkChar(filename), "%s",  message.str().c_str());
 				return(R_NilValue);
 			}
 		}//loop over errors.
-		Rf_warningcall(mkChar(filename), message.str().c_str());
+		Rf_warningcall(mkChar(filename), "%s", message.str().c_str());
 	}
 
 
@@ -366,7 +366,7 @@ SEXP readsbml_sign(SEXP FILENAME, SEXP ATTR_TERMS, SEXP VERBOSE){
 					fatal=true; break;
 				}
 			}//loop over errors.
-			Rf_warningcall(mkChar(filename), message.str().c_str());
+			Rf_warningcall(mkChar(filename), "%s", message.str().c_str());
 		}
 		if(fatal) continue;
 
