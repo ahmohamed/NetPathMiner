@@ -10,7 +10,7 @@
 # define FCONE
 #endif
 
-#define oops(s) { perror((s)); error("Failed to allocate memory"); }
+#define oops(s) { perror((s)); Rf_error("Failed to allocate memory"); }
 #define MALLOC(s,t) if(((s) = malloc(t)) == NULL) { oops("error: malloc() "); }
 
 void hme3m(double * y,

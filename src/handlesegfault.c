@@ -6,14 +6,14 @@
 #ifndef WIN_COMPILE
 #ifdef HAVE_XML
 void segfault_KGML(int signal, siginfo_t *si, void *arg){
-	EVAL(lang2(install("registerMemoryErr"), mkString("KGML2igraph")));
-	error("Critical memory error in KGML2igraph. Please save your work and restart R.");
+	EVAL(Rf_lang2(Rf_install("registerMemoryErr"), Rf_mkString("KGML2igraph")));
+	Rf_error("Critical memory error in KGML2igraph. Please save your work and restart R.");
 }
 #endif
 #ifdef HAVE_SBML
 void segfault_SBML(int signal, siginfo_t *si, void *arg){
-	EVAL(lang2(install("registerMemoryErr"), mkString("SBML2igraph")));
-	error("Critical memory error in SBML2igraph. Please save your work and restart R.");
+	EVAL(Rf_lang2(Rf_install("registerMemoryErr"), Rf_mkString("SBML2igraph")));
+	Rf_error("Critical memory error in SBML2igraph. Please save your work and restart R.");
 }
 #endif
 #endif

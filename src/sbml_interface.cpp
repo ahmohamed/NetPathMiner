@@ -30,7 +30,7 @@ SEXP readsbmlfile(SEXP FILENAME, SEXP ATTR_TERMS, SEXP VERBOSE) {
 	Model *model = document->getModel();
 	if(!model){
 		if(verbose)	Rprintf(": Error.\n");
-		Rf_warningcall(mkChar(filename), "No model in file");
+		Rf_warningcall(Rf_mkChar(filename), "No model in file");
 		return(NEW_LIST(2));
 	}
 
@@ -41,11 +41,11 @@ SEXP readsbmlfile(SEXP FILENAME, SEXP ATTR_TERMS, SEXP VERBOSE) {
 			message<<"line "<< err->getLine() <<": "<< err->getShortMessage() << "\n";
 			if(err->getErrorId() == NotSchemaConformant ){
 				if(verbose)	Rprintf(": Error.\n");
-				Rf_warningcall(mkChar(filename), "%s",  message.str().c_str());
+				Rf_warningcall(Rf_mkChar(filename), "%s",  message.str().c_str());
 				return(R_NilValue);
 			}
 		}//loop over errors.
-		Rf_warningcall(mkChar(filename), "%s", message.str().c_str());
+		Rf_warningcall(Rf_mkChar(filename), "%s", message.str().c_str());
 	}
 
 
@@ -59,10 +59,10 @@ SEXP readsbmlfile(SEXP FILENAME, SEXP ATTR_TERMS, SEXP VERBOSE) {
 	//cout << "C++ returns :|" << endl;
 	PROTECT( OUT = NEW_LIST(2) );
 	PROTECT( NAMES = NEW_STRING(2) );
-	SET_VECTOR_ELT(OUT,0,REACTIONLIST); SET_STRING_ELT(NAMES,0,mkChar("reactions"));
-	SET_VECTOR_ELT(OUT,1,SPECIESFRAME); SET_STRING_ELT(NAMES,1,mkChar("species"));
+	SET_VECTOR_ELT(OUT,0,REACTIONLIST); SET_STRING_ELT(NAMES,0,Rf_mkChar("reactions"));
+	SET_VECTOR_ELT(OUT,1,SPECIESFRAME); SET_STRING_ELT(NAMES,1,Rf_mkChar("species"));
 
-	setAttrib(OUT,R_NamesSymbol,NAMES);
+	Rf_setAttrib(OUT,R_NamesSymbol,NAMES);
 
 	UNPROTECT(4);
 
@@ -77,12 +77,12 @@ SEXP getReactionList(Model *model, const vector<string> &attr_terms, vector<stri
     if(verbose)	Rprintf(": %d reactions found.\n", reactions->size());
     
     SEXP REACTIONLIST,ID;
-    PROTECT(REACTIONLIST = allocVector(VECSXP, reactions->size()));
+    PROTECT(REACTIONLIST = Rf_allocVector(VECSXP, reactions->size()));
     PROTECT(ID = NEW_STRING(reactions->size()));
     
     SEXP PATHWAY;
     PROTECT(PATHWAY = NEW_STRING(1));
-    SET_STRING_ELT(PATHWAY,0, mkChar(model->getName().c_str()) );
+    SET_STRING_ELT(PATHWAY,0, Rf_mkChar(model->getName().c_str()) );
 
     for (unsigned i = 0;i < reactions->size();i++) {
     	Reaction *ri = reactions->get(i);
@@ -99,13 +99,13 @@ SEXP getReactionList(Model *model, const vector<string> &attr_terms, vector<stri
 		comp_attr_terms.push_back("go");
 
 
-		SET_STRING_ELT(ID,i,mkChar(ri->getId().c_str()));
+		SET_STRING_ELT(ID,i,Rf_mkChar(ri->getId().c_str()));
 
         SEXP REACTION,REACTIONNAMES;
         SEXP NAME, REVERSIBLE, REACTANTS, RSTOIC, PRODUCTS, PSTOIC, GENES, KINETICS,KNAMES, COMPARTMENT, COMP_NAME;
 
         PROTECT( NAME = NEW_STRING(1) );
-        SET_STRING_ELT(NAME,0, mkChar(ri->getName().c_str()) );
+        SET_STRING_ELT(NAME,0, Rf_mkChar(ri->getName().c_str()) );
         
         PROTECT( REVERSIBLE = NEW_LOGICAL(1) );
         LOGICAL(REVERSIBLE)[0] = ri->getReversible();
@@ -117,7 +117,7 @@ SEXP getReactionList(Model *model, const vector<string> &attr_terms, vector<stri
         	const string sp = ri->getReactant(r)->getSpecies();
         	add_elem( species, sp );
 
-            SET_STRING_ELT(REACTANTS,r,mkChar(sp.c_str()));
+            SET_STRING_ELT(REACTANTS,r,Rf_mkChar(sp.c_str()));
             REAL(RSTOIC)[r] = ri->getReactant(r)->getStoichiometry();
         }
         //cout << "Reactant level :|" << endl;
@@ -129,7 +129,7 @@ SEXP getReactionList(Model *model, const vector<string> &attr_terms, vector<stri
         	const string sp = ri->getProduct(p)->getSpecies();
 			add_elem( species, sp );
 
-        	SET_STRING_ELT(PRODUCTS,p,mkChar(sp.c_str()));
+        	SET_STRING_ELT(PRODUCTS,p,Rf_mkChar(sp.c_str()));
             REAL(PSTOIC)[p] = ri->getProduct(p)->getStoichiometry();
         } 
         //cout << "Product level :|" << endl;
@@ -145,11 +145,11 @@ SEXP getReactionList(Model *model, const vector<string> &attr_terms, vector<stri
            SEXP value;
            PROTECT( value = NEW_NUMERIC(1) );
            REAL(value)[0] = kinetics->getParameter(k)->getValue();
-           SET_STRING_ELT(KNAMES,k,mkChar(kinetics->getParameter(k)->getId().c_str()));
+           SET_STRING_ELT(KNAMES,k,Rf_mkChar(kinetics->getParameter(k)->getId().c_str()));
            SET_VECTOR_ELT(KINETICS,k,value);
            UNPROTECT(1);
         }
-        setAttrib(KINETICS,R_NamesSymbol,KNAMES);
+        Rf_setAttrib(KINETICS,R_NamesSymbol,KNAMES);
         //cout << "kinetic level :|" << endl;
 
         int numOfModifiers = ri->getNumModifiers();
@@ -163,30 +163,30 @@ SEXP getReactionList(Model *model, const vector<string> &attr_terms, vector<stri
 			get_MIRIAM(comp->getAnnotation(), comp_attr_terms, comp_attr, comp_attr_names);
 			add_elem(compartment, comp->getId());	add_elem(comp_name, comp->getName());
 
-			SET_STRING_ELT(GENES,m,mkChar(sp->getName().c_str()));
+			SET_STRING_ELT(GENES,m,Rf_mkChar(sp->getName().c_str()));
 		}
 
 		PROTECT(COMPARTMENT = NEW_STRING(compartment.size()));
 		PROTECT(COMP_NAME = NEW_STRING(compartment.size()));
 		for(size_t a=0; a< compartment.size(); a++){
-			SET_STRING_ELT(COMPARTMENT,a, mkChar(compartment[a].c_str() ));
-			SET_STRING_ELT(COMP_NAME,a, mkChar(comp_name[a].c_str() ));
+			SET_STRING_ELT(COMPARTMENT,a, Rf_mkChar(compartment[a].c_str() ));
+			SET_STRING_ELT(COMP_NAME,a, Rf_mkChar(comp_name[a].c_str() ));
 		}
 
         PROTECT( REACTION = NEW_LIST(attr.size() + comp_attr.size() + 11) );
         PROTECT( REACTIONNAMES = NEW_STRING(attr.size() + comp_attr.size() + 11) );
 
-        SET_VECTOR_ELT(REACTION,0,NAME); SET_STRING_ELT(REACTIONNAMES,0,mkChar("name"));
-        SET_VECTOR_ELT(REACTION,1,REVERSIBLE); SET_STRING_ELT(REACTIONNAMES,1,mkChar("reversible"));
-        SET_VECTOR_ELT(REACTION,2,REACTANTS); SET_STRING_ELT(REACTIONNAMES,2,mkChar("reactants"));
-        SET_VECTOR_ELT(REACTION,3,RSTOIC);SET_STRING_ELT(REACTIONNAMES,3,mkChar("reactant.stoichiometry"));
-        SET_VECTOR_ELT(REACTION,4,PRODUCTS); SET_STRING_ELT(REACTIONNAMES,4,mkChar("products"));
-        SET_VECTOR_ELT(REACTION,5,PSTOIC);SET_STRING_ELT(REACTIONNAMES,5,mkChar("product.stoichiometry"));
-        SET_VECTOR_ELT(REACTION,6,KINETICS);SET_STRING_ELT(REACTIONNAMES,6,mkChar("kinetics"));
-		SET_VECTOR_ELT(REACTION,7,GENES); SET_STRING_ELT(REACTIONNAMES,7,mkChar("genes"));
-		SET_VECTOR_ELT(REACTION,8,COMPARTMENT); SET_STRING_ELT(REACTIONNAMES,8,mkChar("compartment"));
-		SET_VECTOR_ELT(REACTION,9,COMP_NAME); SET_STRING_ELT(REACTIONNAMES,9,mkChar("compartment.name"));
-		SET_VECTOR_ELT(REACTION,10,PATHWAY); SET_STRING_ELT(REACTIONNAMES,10,mkChar("pathway"));
+        SET_VECTOR_ELT(REACTION,0,NAME); SET_STRING_ELT(REACTIONNAMES,0,Rf_mkChar("name"));
+        SET_VECTOR_ELT(REACTION,1,REVERSIBLE); SET_STRING_ELT(REACTIONNAMES,1,Rf_mkChar("reversible"));
+        SET_VECTOR_ELT(REACTION,2,REACTANTS); SET_STRING_ELT(REACTIONNAMES,2,Rf_mkChar("reactants"));
+        SET_VECTOR_ELT(REACTION,3,RSTOIC);SET_STRING_ELT(REACTIONNAMES,3,Rf_mkChar("reactant.stoichiometry"));
+        SET_VECTOR_ELT(REACTION,4,PRODUCTS); SET_STRING_ELT(REACTIONNAMES,4,Rf_mkChar("products"));
+        SET_VECTOR_ELT(REACTION,5,PSTOIC);SET_STRING_ELT(REACTIONNAMES,5,Rf_mkChar("product.stoichiometry"));
+        SET_VECTOR_ELT(REACTION,6,KINETICS);SET_STRING_ELT(REACTIONNAMES,6,Rf_mkChar("kinetics"));
+		SET_VECTOR_ELT(REACTION,7,GENES); SET_STRING_ELT(REACTIONNAMES,7,Rf_mkChar("genes"));
+		SET_VECTOR_ELT(REACTION,8,COMPARTMENT); SET_STRING_ELT(REACTIONNAMES,8,Rf_mkChar("compartment"));
+		SET_VECTOR_ELT(REACTION,9,COMP_NAME); SET_STRING_ELT(REACTIONNAMES,9,Rf_mkChar("compartment.name"));
+		SET_VECTOR_ELT(REACTION,10,PATHWAY); SET_STRING_ELT(REACTIONNAMES,10,Rf_mkChar("pathway"));
 
 		// Put MIRIAM attributes in the list.
 		int idx = 11;
@@ -194,11 +194,11 @@ SEXP getReactionList(Model *model, const vector<string> &attr_terms, vector<stri
 			SEXP ATTR;
 			PROTECT( ATTR = NEW_STRING(attr[a].size()) );
 			for(size_t a_sub=0; a_sub< attr[a].size(); a_sub++)
-				SET_STRING_ELT(ATTR, a_sub, mkChar( attr[a][a_sub].c_str() ));
+				SET_STRING_ELT(ATTR, a_sub, Rf_mkChar( attr[a][a_sub].c_str() ));
 
 			SET_VECTOR_ELT(REACTION, idx, ATTR);
 			string at_name = ( ((string)"miriam.") + attr_names[a]);
-			SET_STRING_ELT(REACTIONNAMES,idx,mkChar(at_name.c_str()));
+			SET_STRING_ELT(REACTIONNAMES,idx,Rf_mkChar(at_name.c_str()));
 			UNPROTECT(1);
 			idx++;
 		}
@@ -207,23 +207,23 @@ SEXP getReactionList(Model *model, const vector<string> &attr_terms, vector<stri
 			SEXP ATTR;
 			PROTECT( ATTR = NEW_STRING(comp_attr[a].size()) );
 			for(size_t a_sub=0; a_sub< comp_attr[a].size(); a_sub++)
-				SET_STRING_ELT(ATTR, a_sub, mkChar( comp_attr[a][a_sub].c_str() ));
+				SET_STRING_ELT(ATTR, a_sub, Rf_mkChar( comp_attr[a][a_sub].c_str() ));
 
 			SET_VECTOR_ELT(REACTION, idx, ATTR);
 			string at_name = ( ((string)"compartment.miriam.") + comp_attr_names[a]);
-			SET_STRING_ELT(REACTIONNAMES,idx,mkChar( at_name.c_str()));
+			SET_STRING_ELT(REACTIONNAMES,idx,Rf_mkChar( at_name.c_str()));
 			UNPROTECT(1);
 			idx++;
 		}
 		free_vec(attr); free_vec(attr_names);
 		free_vec(comp_attr); free_vec(comp_attr_names); free_vec(comp_attr_terms);
 
-        setAttrib(REACTION,R_NamesSymbol,REACTIONNAMES);
+        Rf_setAttrib(REACTION,R_NamesSymbol,REACTIONNAMES);
         SET_VECTOR_ELT(REACTIONLIST,i,REACTION);
         UNPROTECT(13);
     }
     
-    setAttrib(REACTIONLIST,R_NamesSymbol,ID);
+    Rf_setAttrib(REACTIONLIST,R_NamesSymbol,ID);
     UNPROTECT(3);
     //cout << "RacList returns :|" << endl;
     return(REACTIONLIST);
@@ -238,11 +238,11 @@ SEXP getSpeciesFrame(Model *model, vector<string> species, const vector<string> 
 	PROTECT( ID = NEW_STRING(species.size()) );
 
 	for (size_t i = 0;i < species.size(); i++) {
-		SET_STRING_ELT(ID,i, mkChar(species[i].c_str()));
+		SET_STRING_ELT(ID,i, Rf_mkChar(species[i].c_str()));
 		SET_VECTOR_ELT(SPECIESFRAME, i, get_species_info(model, species[i], attr_terms));
 	}
 
-  setAttrib(SPECIESFRAME,R_NamesSymbol,ID);
+  Rf_setAttrib(SPECIESFRAME,R_NamesSymbol,ID);
 
   UNPROTECT(2);
   return(SPECIESFRAME);
@@ -255,7 +255,7 @@ SEXP get_species_info(Model *model, const string species, const vector<string> &
 	SEXP SP, SPNAMES;
 	SEXP NAME,COMPARTMENT, COMP_NAME, PATHWAY;
 	PROTECT(PATHWAY = NEW_STRING(1));
-	SET_STRING_ELT(PATHWAY,0, mkChar(model->getName().c_str()) );
+	SET_STRING_ELT(PATHWAY,0, Rf_mkChar(model->getName().c_str()) );
 
 	Species *sp = speciesList->get( species );
 
@@ -276,18 +276,18 @@ SEXP get_species_info(Model *model, const string species, const vector<string> &
 	PROTECT(NAME = NEW_STRING(1));
 	PROTECT(COMPARTMENT = NEW_STRING(1));
 	PROTECT(COMP_NAME = NEW_STRING(1));
-	SET_STRING_ELT(NAME,0, mkChar(sp->getName().c_str() ));
-	SET_STRING_ELT(COMPARTMENT,0, mkChar(comp->getId().c_str() ));
-	SET_STRING_ELT(COMP_NAME,0, mkChar(comp->getName().c_str() ));
+	SET_STRING_ELT(NAME,0, Rf_mkChar(sp->getName().c_str() ));
+	SET_STRING_ELT(COMPARTMENT,0, Rf_mkChar(comp->getId().c_str() ));
+	SET_STRING_ELT(COMP_NAME,0, Rf_mkChar(comp->getName().c_str() ));
 
 
 	PROTECT( SP = NEW_LIST(attr.size() + comp_attr.size() + 4) );
 	PROTECT( SPNAMES = NEW_STRING(attr.size() + comp_attr.size() + 4) );
 
-	SET_VECTOR_ELT(SP, 0, NAME); SET_STRING_ELT(SPNAMES, 0, mkChar("name"));
-	SET_VECTOR_ELT(SP, 1, COMPARTMENT); SET_STRING_ELT(SPNAMES, 1, mkChar("compartment"));
-	SET_VECTOR_ELT(SP, 2, COMP_NAME); SET_STRING_ELT(SPNAMES, 2, mkChar("compartment.name"));
-	SET_VECTOR_ELT(SP, 3, PATHWAY); SET_STRING_ELT(SPNAMES, 3, mkChar("pathway"));
+	SET_VECTOR_ELT(SP, 0, NAME); SET_STRING_ELT(SPNAMES, 0, Rf_mkChar("name"));
+	SET_VECTOR_ELT(SP, 1, COMPARTMENT); SET_STRING_ELT(SPNAMES, 1, Rf_mkChar("compartment"));
+	SET_VECTOR_ELT(SP, 2, COMP_NAME); SET_STRING_ELT(SPNAMES, 2, Rf_mkChar("compartment.name"));
+	SET_VECTOR_ELT(SP, 3, PATHWAY); SET_STRING_ELT(SPNAMES, 3, Rf_mkChar("pathway"));
 
 	// Put MIRIAM attributes in the list.
 	int idx = 4;
@@ -295,11 +295,11 @@ SEXP get_species_info(Model *model, const string species, const vector<string> &
 		SEXP ATTR;
 		PROTECT( ATTR = NEW_STRING(attr[a].size()) );
 		for(size_t a_sub=0; a_sub< attr[a].size(); a_sub++)
-			SET_STRING_ELT(ATTR, a_sub, mkChar( attr[a][a_sub].c_str() ));
+			SET_STRING_ELT(ATTR, a_sub, Rf_mkChar( attr[a][a_sub].c_str() ));
 
 		SET_VECTOR_ELT(SP, idx, ATTR);
 		string at_name = ( ((string)"miriam.") + attr_names[a]);
-		SET_STRING_ELT(SPNAMES,idx,mkChar(at_name.c_str()));
+		SET_STRING_ELT(SPNAMES,idx,Rf_mkChar(at_name.c_str()));
 		UNPROTECT(1);
 		idx++;
 	}
@@ -308,11 +308,11 @@ SEXP get_species_info(Model *model, const string species, const vector<string> &
 		SEXP ATTR;
 		PROTECT( ATTR = NEW_STRING(comp_attr[a].size()) );
 		for(size_t a_sub=0; a_sub< comp_attr[a].size(); a_sub++)
-			SET_STRING_ELT(ATTR, a_sub, mkChar( comp_attr[a][a_sub].c_str() ));
+			SET_STRING_ELT(ATTR, a_sub, Rf_mkChar( comp_attr[a][a_sub].c_str() ));
 
 		SET_VECTOR_ELT(SP, idx, ATTR);
 		string at_name = ( ((string)"compartment.miriam.") + comp_attr_names[a]);
-		SET_STRING_ELT(SPNAMES,idx,mkChar( at_name.c_str()));
+		SET_STRING_ELT(SPNAMES,idx,Rf_mkChar( at_name.c_str()));
 		UNPROTECT(1);
 		idx++;
 	}
@@ -320,7 +320,7 @@ SEXP get_species_info(Model *model, const string species, const vector<string> &
 	free_vec(comp_attr); free_vec(comp_attr_names); free_vec(comp_attr_terms);
 
 	//cout<<"species";
-	setAttrib(SP,R_NamesSymbol,SPNAMES);
+	Rf_setAttrib(SP,R_NamesSymbol,SPNAMES);
 	UNPROTECT(6);
 	return(SP);
 }
@@ -351,7 +351,7 @@ SEXP readsbml_sign(SEXP FILENAME, SEXP ATTR_TERMS, SEXP VERBOSE){
 		Model *model = document->getModel();
 		if(!model){
 			if(verbose)	Rprintf(": Error.\n");
-			Rf_warningcall(mkChar(filename), "No model in file");
+			Rf_warningcall(Rf_mkChar(filename), "No model in file");
 			continue;
 		}
 
@@ -366,7 +366,7 @@ SEXP readsbml_sign(SEXP FILENAME, SEXP ATTR_TERMS, SEXP VERBOSE){
 					fatal=true; break;
 				}
 			}//loop over errors.
-			Rf_warningcall(mkChar(filename), "%s", message.str().c_str());
+			Rf_warningcall(Rf_mkChar(filename), "%s", message.str().c_str());
 		}
 		if(fatal) continue;
 
@@ -380,7 +380,7 @@ SEXP readsbml_sign(SEXP FILENAME, SEXP ATTR_TERMS, SEXP VERBOSE){
 	PROTECT( NONG = NEW_INTEGER(non_gene.size()) );
 
 	for(size_t i=0; i<species.size(); i++)
-		SET_STRING_ELT(VERTICES, i, mkChar( species[i].c_str() ));
+		SET_STRING_ELT(VERTICES, i, Rf_mkChar( species[i].c_str() ));
 
 	for(size_t i=0; i<edges.size(); i++)
 		INTEGER(EDGES)[i] = edges[i]+1;
@@ -393,12 +393,12 @@ SEXP readsbml_sign(SEXP FILENAME, SEXP ATTR_TERMS, SEXP VERBOSE){
 
 	PROTECT( OUT = NEW_LIST(4));
 	PROTECT( NAMES = NEW_STRING(4));
-	SET_VECTOR_ELT(OUT, 0, VERTICES); SET_STRING_ELT(NAMES, 0, mkChar("vertices"));
-	SET_VECTOR_ELT(OUT, 1, EDGES);	SET_STRING_ELT(NAMES, 1, mkChar("edges"));
-	SET_VECTOR_ELT(OUT, 2, ATTR);	SET_STRING_ELT(NAMES, 2, mkChar("attr"));
-	SET_VECTOR_ELT(OUT, 3, NONG);	SET_STRING_ELT(NAMES, 3, mkChar("non.gene"));
+	SET_VECTOR_ELT(OUT, 0, VERTICES); SET_STRING_ELT(NAMES, 0, Rf_mkChar("vertices"));
+	SET_VECTOR_ELT(OUT, 1, EDGES);	SET_STRING_ELT(NAMES, 1, Rf_mkChar("edges"));
+	SET_VECTOR_ELT(OUT, 2, ATTR);	SET_STRING_ELT(NAMES, 2, Rf_mkChar("attr"));
+	SET_VECTOR_ELT(OUT, 3, NONG);	SET_STRING_ELT(NAMES, 3, Rf_mkChar("non.gene"));
 
-	setAttrib(OUT,R_NamesSymbol,NAMES);
+	Rf_setAttrib(OUT,R_NamesSymbol,NAMES);
 	UNPROTECT(info.size());
 	UNPROTECT(6);
 	return(OUT);
@@ -463,8 +463,8 @@ void readsbml_sign_int(Model *model, vector<string> &species, vector<size_t> &no
 
 			SEXP INFO, NAME, NAME_;
 			PROTECT( INFO = NEW_LIST(1) ); PROTECT( NAME = NEW_STRING(1) ); PROTECT( NAME_ = NEW_STRING(1) );
-			SET_STRING_ELT(NAME,0, mkChar(ri->getName().c_str()) );
-			SET_STRING_ELT(NAME_,0, mkChar("name") );
+			SET_STRING_ELT(NAME,0, Rf_mkChar(ri->getName().c_str()) );
+			SET_STRING_ELT(NAME_,0, Rf_mkChar("name") );
 			SET_VECTOR_ELT(INFO, 0, NAME); SET_NAMES(INFO, NAME_);
 			info.push_back(INFO);
 			UNPROTECT(2);
@@ -484,7 +484,7 @@ void readsbml_sign_int(Model *model, vector<string> &species, vector<size_t> &no
 }
 
 const char* URL_decode(const char* URL){
-	SEXP x = EVAL(lang2(install("URLdecode"), mkString(URL)));
+	SEXP x = EVAL(Rf_lang2(Rf_install("URLdecode"), Rf_mkString(URL)));
 	return(CHAR(STRING_ELT(x,0)));
 }
 

@@ -175,7 +175,7 @@ SEXP expand_complexes(SEXP ATTR_LS, SEXP EL, SEXP V, SEXP EXPAND, SEXP MISSING){
 	PROTECT( PARENTS = NEW_LIST(parents.size()) );
 
 	for(size_t i=0; i<vertices.size(); i++)
-		SET_STRING_ELT(VERTICES, i, mkChar( vertices[i].c_str() ));
+		SET_STRING_ELT(VERTICES, i, Rf_mkChar( vertices[i].c_str() ));
 
 	for(size_t i=0; i<edges.size(); i++)
 		INTEGER(EDGES)[i] = edges[i]+1;
@@ -198,13 +198,13 @@ SEXP expand_complexes(SEXP ATTR_LS, SEXP EL, SEXP V, SEXP EXPAND, SEXP MISSING){
 
 	PROTECT( OUT = NEW_LIST(5));
 	PROTECT( NAMES = NEW_STRING(5));
-	SET_VECTOR_ELT(OUT, 0, VERTICES); SET_STRING_ELT(NAMES, 0, mkChar("vertices"));
-	SET_VECTOR_ELT(OUT, 1, EDGES);	SET_STRING_ELT(NAMES, 1, mkChar("edges"));
-	SET_VECTOR_ELT(OUT, 2, RECONNECT);	SET_STRING_ELT(NAMES, 2, mkChar("reconnect"));
-	SET_VECTOR_ELT(OUT, 3, PARENTS);	SET_STRING_ELT(NAMES, 3, mkChar("parents"));
-	SET_VECTOR_ELT(OUT, 4, E_PARENTS);	SET_STRING_ELT(NAMES, 4, mkChar("e.parents"));
+	SET_VECTOR_ELT(OUT, 0, VERTICES); SET_STRING_ELT(NAMES, 0, Rf_mkChar("vertices"));
+	SET_VECTOR_ELT(OUT, 1, EDGES);	SET_STRING_ELT(NAMES, 1, Rf_mkChar("edges"));
+	SET_VECTOR_ELT(OUT, 2, RECONNECT);	SET_STRING_ELT(NAMES, 2, Rf_mkChar("reconnect"));
+	SET_VECTOR_ELT(OUT, 3, PARENTS);	SET_STRING_ELT(NAMES, 3, Rf_mkChar("parents"));
+	SET_VECTOR_ELT(OUT, 4, E_PARENTS);	SET_STRING_ELT(NAMES, 4, Rf_mkChar("e.parents"));
 
-	setAttrib(OUT,R_NamesSymbol,NAMES);
+	Rf_setAttrib(OUT,R_NamesSymbol,NAMES);
 	UNPROTECT(7);
 	return(OUT);
 }
